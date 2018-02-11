@@ -1,0 +1,11 @@
+config BR2_PACKAGE_PERL_TEMPLATE_TOOLKIT
+	bool "perl-template-toolkit"
+	depends on !BR2_STATIC_LIBS
+	select BR2_PACKAGE_PERL_APPCONFIG
+	help
+	  comprehensive template processing system
+
+	  https://metacpan.org/release/Template-Toolkit
+
+comment "perl-template-toolkit needs a toolchain w/ dynamic library"
+	depends on BR2_STATIC_LIBS

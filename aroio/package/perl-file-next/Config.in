@@ -1,0 +1,10 @@
+config BR2_PACKAGE_PERL_FILE_NEXT
+	bool "perl-file-next"
+	depends on !BR2_STATIC_LIBS
+	help
+	  File-finding iterator
+
+	  https://metacpan.org/release/File-Next
+
+comment "perl-file-next needs a toolchain w/ dynamic library"
+	depends on BR2_STATIC_LIBS

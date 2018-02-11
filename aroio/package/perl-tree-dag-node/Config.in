@@ -1,0 +1,7 @@
+config BR2_PACKAGE_PERL_TREE_DAG_NODE
+	bool "perl-tree-dag-node"
+	select BR2_PACKAGE_PERL_FILE_SLURP_TINY
+	help
+	  An N-ary tree
+
+	  https://metacpan.org/release/Tree-DAG_Node

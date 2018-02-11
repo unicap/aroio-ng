@@ -1,0 +1,9 @@
+config BR2_PACKAGE_PERL_CLASS_VIRTUAL
+	bool "perl-class-virtual"
+	select BR2_PACKAGE_PERL_CARP_ASSERT
+	select BR2_PACKAGE_PERL_CLASS_DATA_INHERITABLE
+	select BR2_PACKAGE_PERL_CLASS_ISA
+	help
+	  Base class for virtual base classes.
+
+	  https://metacpan.org/release/Class-Virtual

@@ -1,0 +1,10 @@
+config BR2_PACKAGE_PERL_AUDIO_SCAN
+	bool "perl-audio-scan"
+	depends on !BR2_STATIC_LIBS
+	help
+	  Fast C metadata and tag reader for all common audio file formats
+
+	  https://metacpan.org/release/Audio-Scan
+
+comment "perl-audio-scan needs a toolchain w/ dynamic library"
+	depends on BR2_STATIC_LIBS

@@ -1,0 +1,6 @@
+config BR2_PACKAGE_PERL_NETWORK_IPV4ADDR
+	bool "perl-network-ipv4addr"
+	help
+	  Calculates IPv4 elements from an address.
+
+	  https://metacpan.org/release/Network-IPv4Addr

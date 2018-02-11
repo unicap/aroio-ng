@@ -1,0 +1,7 @@
+config BR2_PACKAGE_PERL_HASH_MERGE
+	bool "perl-hash-merge"
+	select BR2_PACKAGE_PERL_CLONE_CHOOSE
+	help
+	  Merges arbitrarily deep hashes into a single hash
+
+	  https://metacpan.org/release/Hash-Merge

@@ -1,0 +1,12 @@
+config BR2_PACKAGE_PERL_JSON_XS
+	bool "perl-json-xs"
+	depends on !BR2_STATIC_LIBS
+	select BR2_PACKAGE_PERL_TYPES_SERIALISER
+	select BR2_PACKAGE_PERL_COMMON_SENSE
+	help
+	  JSON serialising/deserialising, done correctly and fast
+
+	  https://metacpan.org/release/JSON-XS
+
+comment "perl-json-xs needs a toolchain w/ dynamic library"
+	depends on BR2_STATIC_LIBS

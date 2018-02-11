@@ -1,0 +1,7 @@
+config BR2_PACKAGE_PERL_FILE_BOM
+	bool "perl-file-bom"
+	select BR2_PACKAGE_PERL_READONLY
+	help
+	  Utilities for handling Byte Order Marks
+
+	  https://metacpan.org/release/File-BOM

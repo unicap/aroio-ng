@@ -1,0 +1,11 @@
+config BR2_PACKAGE_PERL_IO_AIO
+	bool "perl-io-aio"
+	depends on !BR2_STATIC_LIBS
+	select BR2_PACKAGE_PERL_COMMON_SENSE
+	help
+	  Asynchronous Input/Output
+
+	  https://metacpan.org/release/IO-AIO
+
+comment "perl-io-aio needs a toolchain w/ dynamic library"
+	depends on BR2_STATIC_LIBS

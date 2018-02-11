@@ -1,0 +1,11 @@
+config BR2_PACKAGE_PERL_EV
+	bool "perl-ev"
+	depends on !BR2_STATIC_LIBS
+	select BR2_PACKAGE_PERL_COMMON_SENSE
+	help
+	  perl interface to libev, a high performance full-featured event loop
+
+	  https://metacpan.org/release/EV
+
+comment "perl-ev needs a toolchain w/ dynamic library"
+	depends on BR2_STATIC_LIBS

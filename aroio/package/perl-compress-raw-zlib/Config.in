@@ -1,0 +1,10 @@
+config BR2_PACKAGE_PERL_COMPRESS_RAW_ZLIB
+	bool "perl-compress-raw-zlib"
+	depends on !BR2_STATIC_LIBS
+	help
+	  Basic utilities for writing tests.
+
+	  https://metacpan.org/release/Compress-Raw-Zlib
+
+comment "perl-compress-raw-zlib needs a toolchain w/ dynamic library"
+	depends on BR2_STATIC_LIBS

@@ -1,0 +1,6 @@
+config BR2_PACKAGE_PERL_DATA_DUMPER_CONCISE
+	bool "perl-data-dumper-concise"
+	help
+	  Less indentation and newlines plus sub deparsing
+
+	  https://metacpan.org/release/Data-Dumper-Concise

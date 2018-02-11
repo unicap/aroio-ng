@@ -1,0 +1,10 @@
+config BR2_PACKAGE_PERL_YAML_LIBYAML
+	bool "perl-yaml-libyaml"
+	depends on !BR2_STATIC_LIBS
+	help
+	  Perl YAML Serialization using XS and libyaml
+
+	  https://github.com/ingydotnet/yaml-libyaml-pm
+
+comment "perl-yaml-libyaml needs a toolchain w/ dynamic library"
+	depends on BR2_STATIC_LIBS

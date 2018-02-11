@@ -1,0 +1,6 @@
+config BR2_PACKAGE_PERL_EXTUTILS_CBUILDER
+	bool "perl-extutils-cbuilder"
+	help
+	  Compile and link C code for Perl modules
+
+	  http://search.cpan.org/dist/ExtUtils-CBuilder

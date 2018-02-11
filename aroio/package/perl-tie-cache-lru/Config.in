@@ -1,0 +1,10 @@
+config BR2_PACKAGE_PERL_TIE_CACHE_LRU
+	bool "perl-tie-cache-lru"
+	select BR2_PACKAGE_PERL_CARP_ASSERT
+	select BR2_PACKAGE_PERL_CLASS_DATA_INHERITABLE
+	select BR2_PACKAGE_PERL_CLASS_VIRTUAL
+	select BR2_PACKAGE_PERL_ENUM
+	help
+	  A Least-Recently Used cache
+
+	  https://metacpan.org/release/Tie-Cache-LRU

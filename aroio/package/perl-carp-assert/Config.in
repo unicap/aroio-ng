@@ -1,0 +1,6 @@
+config BR2_PACKAGE_PERL_CARP_ASSERT
+	bool "perl-carp-assert"
+	help
+	  executable comments
+
+	  https://metacpan.org/release/Carp-Assert

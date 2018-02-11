@@ -1,0 +1,6 @@
+config BR2_PACKAGE_PERL_CLONE_CHOOSE
+	bool "perl-clone-choose"
+	help
+	  Choose appropriate clone utility
+
+	  https://metacpan.org/release/Clone-Choose

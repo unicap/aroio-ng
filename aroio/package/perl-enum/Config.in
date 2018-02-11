@@ -1,0 +1,6 @@
+config BR2_PACKAGE_PERL_ENUM
+	bool "perl-enum"
+	help
+	  C style enumerated types and bitmask flags in Perl
+
+	  https://metacpan.org/release/enum

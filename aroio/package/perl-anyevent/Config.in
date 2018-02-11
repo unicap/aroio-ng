@@ -1,0 +1,6 @@
+config BR2_PACKAGE_PERL_ANYEVENT
+	bool "perl-anyevent"
+	help
+	  simpler/faster/newer/cooler AnyEvent API
+
+	  https://metacpan.org/release/AnyEvent

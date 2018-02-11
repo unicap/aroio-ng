@@ -1,0 +1,10 @@
+config BR2_PACKAGE_PERL_FONT_FREETYPE
+	bool "perl-font-freetype"
+	depends on !BR2_STATIC_LIBS
+	help
+	  read font files and render glyphs from Perl using FreeType2
+
+	  https://metacpan.org/release/Font-FreeType
+
+comment "perl-font-freetype needs a toolchain w/ dynamic library"
+	depends on BR2_STATIC_LIBS

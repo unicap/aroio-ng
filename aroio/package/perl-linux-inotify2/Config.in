@@ -1,0 +1,11 @@
+config BR2_PACKAGE_PERL_LINUX_INOTIFY2
+	bool "perl-linux-inotify2"
+	depends on !BR2_STATIC_LIBS
+	select BR2_PACKAGE_PERL_COMMON_SENSE
+	help
+	  scalable directory/file change notification
+
+	  https://metacpan.org/release/Linux-Inotify2
+
+comment "perl-linux-inotify2 needs a toolchain w/ dynamic library"
+	depends on BR2_STATIC_LIBS

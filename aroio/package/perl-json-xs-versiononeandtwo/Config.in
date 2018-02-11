@@ -1,0 +1,11 @@
+config BR2_PACKAGE_PERL_JSON_XS_VERSIONONEANDTWO
+	bool "perl-json-xs-versiononeandtwo"
+	depends on !BR2_STATIC_LIBS
+	select BR2_PACKAGE_PERL_JSON_XS
+	help
+	  Support versions 1 and 2 of JSON::XS
+
+	  https://metacpan.org/release/JSON-XS-VersionOneAndTwo
+
+comment "perl-json-xs-versiononeandtwo needs a toolchain w/ dynamic library"
+	depends on BR2_STATIC_LIBS

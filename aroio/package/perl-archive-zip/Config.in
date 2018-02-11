@@ -1,0 +1,6 @@
+config BR2_PACKAGE_PERL_ARCHIVE_ZIP
+	bool "perl-archive-zip"
+	help
+	  Provide an interface to ZIP archive files.
+
+	  https://metacpan.org/release/Archive-Zip

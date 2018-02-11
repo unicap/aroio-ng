@@ -1,0 +1,13 @@
+config BR2_PACKAGE_PERL_XML_SIMPLE
+	bool "perl-xml-simple"
+	depends on !BR2_STATIC_LIBS
+	select BR2_PACKAGE_PERL_XML_NAMESPACESUPPORT
+	select BR2_PACKAGE_PERL_XML_SAX
+	select BR2_PACKAGE_PERL_XML_SAX_EXPAT
+	help
+	  An API for simple XML files
+
+	  https://metacpan.org/release/XML-Simple
+
+comment "perl-xml-simple needs a toolchain w/ dynamic library"
+	depends on BR2_STATIC_LIBS

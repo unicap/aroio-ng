@@ -1,0 +1,11 @@
+config BR2_PACKAGE_PERL_MP3_CUT_GAPLESS
+	bool "perl-mp3-cut-gapless"
+	depends on !BR2_STATIC_LIBS
+	select BR2_PACKAGE_PERL_AUDIO_CUEFILE_PARSER
+	help
+	  Split an MP3 file without gaps (based on pcutmp3)
+
+	  https://metacpan.org/release/MP3-Cut-Gapless
+
+comment "perl-mp3-cut-gapless needs a toolchain w/ dynamic library"
+	depends on BR2_STATIC_LIBS

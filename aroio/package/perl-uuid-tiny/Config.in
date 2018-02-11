@@ -1,0 +1,6 @@
+config BR2_PACKAGE_PERL_UUID_TINY
+	bool "perl-uuid-tiny"
+	help
+	  Pure Perl UUID Support With Functional Interface
+
+	  https://metacpan.org/release/UUID-Tiny

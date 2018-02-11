@@ -1,0 +1,4 @@
+config BR2_PACKAGE_PERL_AUDIO_CUEFILE_PARSER
+	bool "perl-audio-cuefile-parser"
+	help
+	  https://metacpan.org/release/Audio-Cuefile-Parser

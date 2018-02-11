@@ -1,0 +1,6 @@
+config BR2_PACKAGE_PERL_TEXT_UNIDECODE
+	bool "perl-text-unidecode"
+	help
+	  Provide plain ASCII transliterations of Unicode text
+
+	  https://metacpan.org/release/Text-Unidecode

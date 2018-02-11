@@ -1,0 +1,6 @@
+config BR2_PACKAGE_PERL_CLASS_DATA_INHERITABLE
+	bool "perl-class-data-inheritable"
+	help
+	  Inheritable, overridable class data
+
+	  https://metacpan.org/release/Class-Data-Inheritable

@@ -1,0 +1,6 @@
+config BR2_PACKAGE_PERL_READONLY
+	bool "perl-readonly"
+	help
+	  Facility for creating read-only scalars, arrays, hashes
+
+	  https://github.com/sanko/readonly

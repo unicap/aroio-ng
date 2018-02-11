@@ -1,0 +1,7 @@
+config BR2_PACKAGE_PERL_TYPES_SERIALISER
+	bool "perl-types-serialiser"
+	select BR2_PACKAGE_PERL_COMMON_SENSE
+	help
+	  simple data types for common serialisation formats
+
+	  https://metacpan.org/release/Types-Serialiser

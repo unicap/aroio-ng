@@ -1,0 +1,6 @@
+config BR2_PACKAGE_PERL_DATA_URIENCODE
+	bool "perl-data-uriencode"
+	help
+	  Test the uri_encode funcionality
+
+	  https://metacpan.org/release/Data-URIEncode

@@ -1,0 +1,10 @@
+config BR2_PACKAGE_PERL_CLASS_C3_XS
+	bool "perl-class-c3-xs"
+	depends on !BR2_STATIC_LIBS
+	help
+	  XS speedups for Class::C3
+
+	  https://github.com/moose/Class-C3-XS
+
+comment "perl-class-c3-xs needs a toolchain w/ dynamic library"
+	depends on BR2_STATIC_LIBS

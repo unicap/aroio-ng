@@ -1,0 +1,10 @@
+config BR2_PACKAGE_PERL_SQL_ABSTRACT
+	bool "perl-sql-abstract"
+	select BR2_PACKAGE_PERL_HASH_MERGE
+	select BR2_PACKAGE_PERL_MRO_COMPAT
+	select BR2_PACKAGE_PERL_MOO
+	select BR2_PACKAGE_PERL_SUB_QUOTE
+	help
+	  Generate SQL from Perl data structures
+
+	  https://metacpan.org/release/SQL-Abstract

@@ -1,0 +1,6 @@
+config BR2_PACKAGE_PERL_IO_STRING
+	bool "perl-io-string"
+	help
+	  Emulate file interface for in-core strings
+
+	  https://metacpan.org/release/IO-String

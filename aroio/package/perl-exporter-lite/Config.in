@@ -1,0 +1,6 @@
+config BR2_PACKAGE_PERL_EXPORTER_LITE
+	bool "perl-exporter-lite"
+	help
+	  lightweight exporting of functions and variables
+
+	  https://metacpan.org/release/Exporter-Lite

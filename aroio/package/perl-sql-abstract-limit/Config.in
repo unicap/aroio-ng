@@ -1,0 +1,12 @@
+config BR2_PACKAGE_PERL_SQL_ABSTRACT_LIMIT
+	bool "perl-sql-abstract-limit"
+	depends on !BR2_STATIC_LIBS
+	select BR2_PACKAGE_PERL_DBI
+	select BR2_PACKAGE_PERL_SQL_ABSTRACT
+	help
+	  Helper package for testing generated SQL and bind values
+
+	  https://metacpan.org/release/SQL-Abstract-Limit
+
+comment "perl-sql-abstract-limit needs a toolchain w/ dynamic library"
+	depends on BR2_STATIC_LIBS

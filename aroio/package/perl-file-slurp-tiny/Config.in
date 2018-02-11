@@ -1,0 +1,6 @@
+config BR2_PACKAGE_PERL_FILE_SLURP_TINY
+	bool "perl-file-slurp-tiny"
+	help
+	  A simple, sane and efficient file slurper [DISCOURAGED]
+
+	  https://metacpan.org/release/File-Slurp-Tiny

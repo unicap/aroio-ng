@@ -1,0 +1,11 @@
+config BR2_PACKAGE_PERL_XML_PARSER
+	bool "perl-xml-parser"
+	depends on !BR2_STATIC_LIBS
+	select BR2_PACKAGE_PERL_LIBWWW_PERL
+	help
+	  A perl module for parsing XML documents
+
+	  https://metacpan.org/release/XML-Parser
+
+comment "perl-xml-parser needs a toolchain w/ dynamic library"
+	depends on BR2_STATIC_LIBS

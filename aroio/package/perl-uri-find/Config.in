@@ -1,0 +1,7 @@
+config BR2_PACKAGE_PERL_URI_FIND
+	bool "perl-uri-find"
+	select BR2_PACKAGE_PERL_URI
+	help
+	  Find URIs in arbitrary text
+
+	  http://metacpan.org/release/URI-Find

@@ -1,0 +1,6 @@
+config BR2_PACKAGE_PERL_LOG_LOG4PERL
+	bool "perl-log-log4perl"
+	help
+	  Log4j implementation for Perl
+
+	  https://metacpan.org/release/Log-Log4perl
