@@ -18,3 +18,10 @@ Build image:
 cd /output/aroio
 make
 ```
+
+Save a new defconfig:
+
+```
+cd /output/aroio
+make savedefconfig
+```
