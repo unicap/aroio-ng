@@ -96,3 +96,4 @@ menu "Perl CPAN Packages"
 endmenu
 
 source "$BR2_EXTERNAL_aroio_PATH/package/slimserver/Config.in"
+source "$BR2_EXTERNAL_aroio_PATH/package/squeezelite-jack/Config.in"

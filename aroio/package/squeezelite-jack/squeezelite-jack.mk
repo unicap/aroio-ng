@@ -1,0 +1,42 @@
+################################################################################
+#
+# squeezelite-jack
+#
+################################################################################
+
+SQUEEZELITE_JACK_VERSION = 5c01b6a96e028755a002c0045e08a839256a7a51
+SQUEEZELITE_JACK_SITE = $(call github,unicap,squeezelite,$(SQUEEZELITE_JACK_VERSION))
+SQUEEZELITE_JACK_LICENSE = GPLv3
+SQUEEZELITE_JACK_LICENSE_FILES = LICENSE.txt
+SQUEEZELITE_JACK_DEPENDENCIES = alsa-lib flac libmad libvorbis faad2 mpg123 jack2
+SQUEEZELITE_JACK_MAKE_OPTS = -DLINKALL -DJACK
+
+ifeq ($(BR2_PACKAGE_SQUEEZELITE_JACK_FFMPEG),y)
+SQUEEZELITE_JACK_DEPENDENCIES += ffmpeg
+SQUEEZELITE_JACK_MAKE_OPTS += -DFFMPEG
+endif
+
+ifeq ($(BR2_PACKAGE_SQUEEZELITE_JACK_DSD),y)
+SQUEEZELITE_JACK_MAKE_OPTS += -DDSD
+endif
+
+ifeq ($(BR2_PACKAGE_SQUEEZELITE_JACK_RESAMPLE),y)
+SQUEEZELITE_JACK_DEPENDENCIES += libsoxr
+SQUEEZELITE_JACK_MAKE_OPTS += -DRESAMPLE
+endif
+
+ifeq ($(BR2_PACKAGE_SQUEEZELITE_JACK_VISEXPORT),y)
+SQUEEZELITE_JACK_MAKE_OPTS += -DVISEXPORT
+endif
+
+define SQUEEZELITE_JACK_BUILD_CMDS
+	$(TARGET_MAKE_ENV) $(MAKE) $(TARGET_CONFIGURE_OPTS) \
+		OPTS="$(SQUEEZELITE_JACK_MAKE_OPTS)" -C $(@D) all
+endef
+
+define SQUEEZELITE_JACK_INSTALL_TARGET_CMDS
+	$(INSTALL) -D -m 0755 $(@D)/squeezelite \
+		$(TARGET_DIR)/usr/bin/squeezelite-jack
+endef
+
+$(eval $(generic-package))
