@@ -3,6 +3,8 @@ Aroio Buildroot
 
 To initialize this buildroot:
 
+Note: replace "/output/" with a path of your choice.
+
 ```
 git clone --recurse-submodules git@github.com:unicap/aroio-ng.git
 cd aroio-ng/buildroot
