@@ -1,0 +1,9 @@
+config BR2_PACKAGE_BRUTEFIR
+       bool "brutefir"
+       select BR2_PACKAGE_FFTW
+       select BR2_PACKAGE_FFTW3F
+       select BR2_PACKAGE_JACK2
+       help
+         brutefir convolver
+
+	 http://www.ludd.luth.se/~torger/brutefir.html

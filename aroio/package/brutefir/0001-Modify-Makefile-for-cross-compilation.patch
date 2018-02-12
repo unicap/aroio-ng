@@ -1,0 +1,55 @@
+From 70d30fc9ab458ac17cd2cf12c8371545a85659df Mon Sep 17 00:00:00 2001
+From: Arne Caspari <arne@unicap-imaging.org>
+Date: Thu, 26 Nov 2015 09:48:00 +0100
+Subject: [PATCH] Modify Makefile for cross-compilation
+
+---
+ Makefile | 18 +++++++++---------
+ 1 file changed, 9 insertions(+), 9 deletions(-)
+
+diff --git a/Makefile b/Makefile
+index 68e68dd..7a55b04 100644
+--- a/Makefile
++++ b/Makefile
+@@ -4,8 +4,8 @@ INSTALL_PREFIX	= $(DESTDIR)/usr/local
+ 
+ ###################################
+ # Where to find libraries, and their header files.
+-LIBPATHS	= -L/usr/local/lib
+-INCLUDE		= -I/usr/local/include
++LIBPATHS	?= -L/usr/local/lib
++INCLUDE		?= -I/usr/local/include
+ ifdef FFTW_PATH
+ LIBPATHS	+= -L$(FFTW_PATH)/lib
+ INCLUDE		+= -I$(FFTW_PATH)/include
+@@ -17,10 +17,10 @@ FFTW_LIB	= -lfftw3 -lfftw3f
+ 
+ ###################################
+ # Binaries
+-FLEX	= flex
+-LD	= ld
+-CC	= gcc
+-AS	= as
++FLEX	?= flex
++LD	?= ld
++CC	?= gcc
++AS	?= as
+ 
+ ###################################
+ # Flags
+@@ -57,9 +57,9 @@ LIB_TARGETS	= cli.bflogic eq.bflogic file.bfio
+ ###################################
+ # System-specific settings
+ 
+-UNAME		= $(shell uname)
+-UNAME_P         = $(shell uname -p)
+-UNAME_M         = $(shell uname -m)
++UNAME		?= $(shell uname)
++UNAME_P         ?= $(shell uname -p)
++UNAME_M         ?= $(shell uname -m)
+ 
+ # Linux
+ ifeq ($(UNAME),Linux)
+-- 
+2.6.2
+
