@@ -1,0 +1,50 @@
+# Always show cursor position
+set const
+
+# Use auto-indentation 
+#set autoindent 
+ 
+# Backup files to filename~ 
+#set backup 
+ 
+# Use cut to end of line with ^K by default 
+#set cut 
+ 
+# Enable ~/.nano_history for saving and reading search/replace strings. 
+# set historylog 
+ 
+# Don't convert files from DOS/Mac format 
+#set noconvert 
+ 
+# Don't follow symlinks when writing files 
+# set nofollow 
+ 
+# Don't display the help lists at the bottom of the screen 
+# set nohelp 
+ 
+# Don't wrap text at all 
+set nowrap 
+ 
+# Use smooth scrolling as the default 
+set smooth 
+ 
+# Use this spelling checker instead of the internal one.  This option 
+# does not properly have a default value. 
+#set speller "aspell -c" 
+ 
+# Allow nano to be suspended with ^Z 
+# set suspend 
+ 
+# Use this tab size instead of the default; it must be greater than 0 
+ set tabsize 4
+ 
+# Save automatically on exit, don't prompt 
+# set tempfile 
+ 
+# Enable ~/.nano_history for saving and reading search/replace strings. 
+# set historylog 
+ 
+# Disallow file modification, why would you want this in an rc file? ;) 
+# set view 
+
+include "/usr/share/nano/*.nanorc"

@@ -1,0 +1,72 @@
+#!/bin/sh
+
+[ -e /tmp/dbus-address ] || echo $(dbus-launch) >> /tmp/dbus-address
+export $(cat /tmp/dbus-address)
+
+SAMPLINGRATE="96000"
+
+start_pulse()
+{
+	echo "Starting pulseaudio..."
+	pulseaudio -D --log-target=stderr 
+	sleep 2
+	if ps | grep [j]ackd
+		then
+			echo "Running jackd instance found, loading modules for jack-connectivity"
+			echo "pactl cmd"
+			pactl load-module module-jack-sink channels=2
+			echo "pacmd"
+			pacmd set-default-sink jack_out
+	fi
+}
+
+start_jack()
+{
+	if ps | grep [p]ulseaudio
+	then
+		echo "Pulse running, suspending it..."
+		pacmd suspend true
+	else
+	echo "Starting pulseaudio..."
+	pulseaudio -D --log-target=stderr
+	sleep 2
+	fi
+	ps | grep [j]ackd || jackd -R -d alsa -r "$SAMPLINGRATE" -n 2 &> /var/log/jackd.log &
+	sleep 2
+	echo "Loading pulseaudio modules for jack connectivity"
+	pactl load-module module-jack-sink channels=2
+	pacmd set-default-sink jack_out
+}
+
+stop_jack()
+{
+	echo "Suspending pulseaudio..."
+	pacmd suspend true
+	echo "Stopping jackd"
+	killall jackd
+	echo "Unloading PA modules for jack..."
+	SINKID=$(pactl list | grep -B 1 "Name: module-jack-sink" | grep Module | sed 's/[^0-9]//g')
+	pactl unload-module $SINKID
+	echo "Reactivating pulseaudio..."
+	pacmd suspend false
+}
+
+start_squeezelite()
+{
+	echo "Starting squeezelite"
+	squeezelite -d all=info &> /var/log/squeezelite.log &
+}
+
+case $1 in
+	start_jack)
+	start_jack
+	killall squeezelite
+	sleep 1
+	start_squeezelite
+	;;
+
+	stop_jack)
+	stop_jack
+	ps | grep [s]queezelite || start_squeezelite
+	;;
+esac

@@ -1,0 +1,19 @@
+#!/bin/sh
+
+# Set TERM variable, gives pretty colors in nano and such
+export TERM=xterm
+
+# Disable console-blanking
+echo -ne "\033[9;0]" > /dev/console
+
+# Laden deutsch-tastatur!
+loadkmap < /etc/de.map
+
+# Set the correct timezone
+rm /etc/localtime
+ln -s /usr/share/zoneinfo/Europe/Berlin /etc/localtime
+
+# For testing, start audio here now
+/usr/bin/controlaudio start_jack
+
+exit 0
