@@ -1,0 +1,37 @@
+config BR2_PACKAGE_FFTW3F
+	bool "fftw3f"
+	help
+	  Library for computing Fast Fourier Transforms.
+
+	  This library computes Fast Fourier Transforms (FFT) in one
+	  or more dimensions. It is extremely fast. This package
+	  contains the shared library version of the fftw libraries in
+	  single precision.
+
+	  http://www.fftw.org
+
+if BR2_PACKAGE_FFTW3F
+
+config BR2_PACKAGE_FFTW3F_USE_SSE
+	bool
+
+config BR2_PACKAGE_FFTW3F_USE_SSE2
+	bool
+
+config BR2_PACKAGE_FFTW3F_USE_NEON
+	bool
+
+config BR2_PACKAGE_FFTW3F_FAST
+	bool "optimise for speed over accuracy"
+	help
+	  Optimise for fast math functions, at the expense of accuracy.
+
+	  Say 'y' if you need speed and can live with inaccuracies in
+	  the results. Say 'n' (the default) if accuracy is of utmost
+	  importance.
+
+	  This basically uses gcc's -Ofast optimisation level, which in
+	  turn is basically using gcc's -ffast-math. See the gcc manual
+	  for what this means.
+
+endif
