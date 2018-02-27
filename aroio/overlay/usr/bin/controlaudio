@@ -3,70 +3,83 @@
 [ -e /tmp/dbus-address ] || echo $(dbus-launch) >> /tmp/dbus-address
 export $(cat /tmp/dbus-address)
 
-SAMPLINGRATE="96000"
+RATE="96000"
+JACKBUFFER="8192"
+PERIODS="3"
+HOSTNAME=$(hostname)
+
+# If anything  is running, kill it
+ps | grep [j]ackd && killall jackd
+ps | grep [p]ulseaudio && pacmd exit
+ps | grep [s]queezelite && killall squeezelite
+ps | grep [b]rutefir && killall brutefir
+ps | grep [g]mediarender && killall gmediarender
+
+# Make a clean logfile
+rm /var/log/audio.log
 
 start_pulse()
 {
 	echo "Starting pulseaudio..."
-	pulseaudio -D --log-target=stderr 
-	sleep 2
-	if ps | grep [j]ackd
-		then
-			echo "Running jackd instance found, loading modules for jack-connectivity"
-			echo "pactl cmd"
-			pactl load-module module-jack-sink channels=2
-			echo "pacmd"
-			pacmd set-default-sink jack_out
-	fi
+	pulseaudio -D
+}
+
+stop_pulse()
+{
+	pacmd exit
 }
 
 start_jack()
 {
-	if ps | grep [p]ulseaudio
-	then
-		echo "Pulse running, suspending it..."
-		pacmd suspend true
-	else
 	echo "Starting pulseaudio..."
-	pulseaudio -D --log-target=stderr
+	pulseaudio -D 2>&1 >> /var/log/audio.log
+	# Suspending pulse to release soundcard
+	pacmd suspend 1 && sleep 0.5
+
+	echo "Starting jackd..."
+	jackd -R -d alsa -r "$RATE" -p "$JACKBUFFER" -n "$PERIODS" >> /var/log/audio.log 2>&1 &
 	sleep 2
-	fi
-	ps | grep [j]ackd || jackd -R -d alsa -r "$SAMPLINGRATE" -n 2 &> /var/log/jackd.log &
-	sleep 2
+
 	echo "Loading pulseaudio modules for jack connectivity"
 	pactl load-module module-jack-sink channels=2
 	pacmd set-default-sink jack_out
+
+	echo "Starting brutefir..."
+	brutefir /etc/brutefir_config >> /var/log/audio.log 2>&1 &
 }
 
 stop_jack()
 {
-	echo "Suspending pulseaudio..."
-	pacmd suspend true
+	echo "Stopping pulseaudio..."
+	pacmd exit
 	echo "Stopping jackd"
 	killall jackd
-	echo "Unloading PA modules for jack..."
-	SINKID=$(pactl list | grep -B 1 "Name: module-jack-sink" | grep Module | sed 's/[^0-9]//g')
-	pactl unload-module $SINKID
-	echo "Reactivating pulseaudio..."
-	pacmd suspend false
 }
 
-start_squeezelite()
+start_players()
 {
-	echo "Starting squeezelite"
-	squeezelite -d all=info &> /var/log/squeezelite.log &
+	echo "Starting squeezelite..."
+	squeezelite -d all=info >> /var/log/audio.log 2>&1 &
+	echo "Starting gmrenderer..."
+	gmediarender -f "$HOSTNAME" --logfile=/var/log/audio.log &
+}
+
+stop_squeezelite()
+{
+	killall squeezelite
 }
 
 case $1 in
-	start_jack)
-	start_jack
-	killall squeezelite
-	sleep 1
-	start_squeezelite
+	start)
 	;;
 
-	stop_jack)
-	stop_jack
-	ps | grep [s]queezelite || start_squeezelite
+	start_convolver)
+		start_jack
+		start_players
+	;;
+
+	start_pulse)
+		start_pulse
+		start_players
 	;;
 esac
