@@ -10,8 +10,17 @@ BLUEZ_ALSA_SITE = $(call github,Arkq,bluez-alsa,$(BLUEZ_ALSA_VERSION))
 BLUEZ_ALSA_AUTORECONF = YES
 BLUEZ_ALSA_INSTALL_STAGING = NO
 #BLUEZ_ALSA_INSTALL_TARGET = YES
-BLUEZ_ALSA_CONF_OPTS += --enable-aac
-#--with-alsaplugindir=/usr/lib/alsa-lib
+
+BLUEZ_ALSA_CONF_OPTS += --enable-aac \
+	--with-alsaplugindir=/usr/lib/alsa-lib \
+	--with-alsadatadir=/usr/share/alsa \
+	--prefix=/usr
 BLUEZ_ALSA_DEPENDENCIES = alsa-lib sbc fdk-aac
+
+define BLUEZ_ALSA_PRE_CONFIGURE_FIXUP
+	mkdir -p $(@D)/m4
+endef
+
+BLUEZ_ALSA_PRE_CONFIGURE_HOOKS += BLUEZ_ALSA_PRE_CONFIGURE_FIXUP
 
 $(eval $(autotools-package))
