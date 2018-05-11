@@ -1,0 +1,8 @@
+config BR2_PACKAGE_LADSPA
+       bool "ladspa"
+       select BR2_PACKAGE_FFTW
+       select BR2_PACKAGE_FFTW3F
+       help
+         Steve Harris LADSPA plugins
+
+	 http://plugin.org.uk/
