@@ -13,7 +13,4 @@ loadkmap < /etc/de.map
 rm /etc/localtime
 ln -s /usr/share/zoneinfo/Europe/Berlin /etc/localtime
 
-# For testing, start audio here now
-/usr/bin/controlaudio start_convolver
-
 exit 0
