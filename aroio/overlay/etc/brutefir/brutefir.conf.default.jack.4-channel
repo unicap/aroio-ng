@@ -1,0 +1,122 @@
+## GENERAL ##
+sampling_rate: 48000;
+#filter_length: 65536;
+filter_length: 32763/2;
+overflow_warnings: true;
+show_progress: false;
+max_dither_table_size: 0;
+allow_poll_mode: false;
+powersave: false;
+monitor_rate: false;
+lock_memory: true;
+sdf_length: -1;
+logic: "cli" { port: 3000; };
+
+## FILTER DEFINITIONS ##
+## Set 0
+coeff"left0"{filename:"/tmp/BypassFilterL96.dbl";  format: "FLOAT64_LE"; };
+coeff"right0"{filename:"/tmp/BypassFilterR96.dbl"; format: "FLOAT64_LE"; };
+coeff"sleft0"{filename:"/tmp/BypassFilterL96.dbl";  format: "FLOAT64_LE"; };
+coeff"sright0"{filename:"/tmp/BypassFilterR96.dbl"; format: "FLOAT64_LE"; };
+
+## Set 1
+coeff"left1"{filename:"/tmp/BypassFilterL96.dbl";  format: "FLOAT64_LE"; };
+coeff"right1"{filename:"/tmp/BypassFilterR96.dbl"; format: "FLOAT64_LE"; };
+coeff"sleft1"{filename:"/tmp/BypassFilterL96.dbl";  format: "FLOAT64_LE"; };
+coeff"sright1"{filename:"/tmp/BypassFilterR96.dbl"; format: "FLOAT64_LE"; };
+
+## Set 2
+coeff"left2"{filename:"/tmp/BypassFilterL96.dbl";  format: "FLOAT64_LE"; };
+coeff"right2"{filename:"/tmp/BypassFilterR96.dbl"; format: "FLOAT64_LE"; };
+coeff"sleft2"{filename:"/tmp/BypassFilterL96.dbl";  format: "FLOAT64_LE"; };
+coeff"sright2"{filename:"/tmp/BypassFilterR96.dbl"; format: "FLOAT64_LE"; };
+
+## Set 3
+coeff"left3"{filename:"/tmp/BypassFilterL96.dbl";  format: "FLOAT64_LE"; };
+coeff"right3"{filename:"/tmp/BypassFilterR96.dbl"; format: "FLOAT64_LE"; };
+coeff"sleft3"{filename:"/tmp/BypassFilterL96.dbl";  format: "FLOAT64_LE"; };
+coeff"sright3"{filename:"/tmp/BypassFilterR96.dbl"; format: "FLOAT64_LE"; };
+
+## Set 4
+coeff"left4"{filename:"/tmp/BypassFilterL96.dbl";  format: "FLOAT64_LE"; };
+coeff"right4"{filename:"/tmp/BypassFilterR96.dbl"; format: "FLOAT64_LE"; };
+coeff"sleft4"{filename:"/tmp/BypassFilterL96.dbl";  format: "FLOAT64_LE"; };
+coeff"sright4"{filename:"/tmp/BypassFilterR96.dbl"; format: "FLOAT64_LE"; };
+
+## Set 5
+coeff"left5"{filename:"/tmp/BypassFilterL96.dbl";  format: "FLOAT64_LE"; };
+coeff"right5"{filename:"/tmp/BypassFilterR96.dbl"; format: "FLOAT64_LE"; };
+coeff"sleft5"{filename:"/tmp/BypassFilterL96.dbl";  format: "FLOAT64_LE"; };
+coeff"sright5"{filename:"/tmp/BypassFilterR96.dbl"; format: "FLOAT64_LE"; };
+
+## Set 6
+coeff"left6"{filename:"/tmp/BypassFilterL96.dbl";  format: "FLOAT64_LE"; };
+coeff"right6"{filename:"/tmp/BypassFilterR96.dbl"; format: "FLOAT64_LE"; };
+coeff"sleft6"{filename:"/tmp/BypassFilterL96.dbl";  format: "FLOAT64_LE"; };
+coeff"sright6"{filename:"/tmp/BypassFilterR96.dbl"; format: "FLOAT64_LE"; };
+
+## Set 7
+coeff"left7"{filename:"/tmp/BypassFilterL96.dbl";  format: "FLOAT64_LE"; };
+coeff"right7"{filename:"/tmp/BypassFilterR96.dbl"; format: "FLOAT64_LE"; };
+coeff"sleft7"{filename:"/tmp/BypassFilterL96.dbl";  format: "FLOAT64_LE"; };
+coeff"sright7"{filename:"/tmp/BypassFilterR96.dbl"; format: "FLOAT64_LE"; };
+
+## Set 8
+coeff"left8"{filename:"/tmp/BypassFilterL96.dbl";  format: "FLOAT64_LE"; };
+coeff"right8"{filename:"/tmp/BypassFilterR96.dbl"; format: "FLOAT64_LE"; };
+coeff"sleft8"{filename:"/tmp/BypassFilterL96.dbl";  format: "FLOAT64_LE"; };
+coeff"sright8"{filename:"/tmp/BypassFilterR96.dbl"; format: "FLOAT64_LE"; };
+
+## Set 9
+coeff"left9"{filename:"/tmp/BypassFilterL96.dbl";  format: "FLOAT64_LE"; };
+coeff"right9"{filename:"/tmp/BypassFilterR96.dbl"; format: "FLOAT64_LE"; };
+coeff"sleft9"{filename:"/tmp/BypassFilterL96.dbl";  format: "FLOAT64_LE"; };
+coeff"sright9"{filename:"/tmp/BypassFilterR96.dbl"; format: "FLOAT64_LE"; };
+
+## INPUTS / OUTPUTS ##
+input "left" , "right" , "sleft" , "sright" {
+        device: "jack" { ports: "" , "" , "" , ""; };
+	sample: "AUTO";
+        channels: 4;
+};
+
+output "left" , "right" , "sleft" , "sright" {
+        device: "jack" { ports: "system:playback_1" , "system:playback_2" , "system:playback_3" , "system:playback_4" ; };
+	sample: "AUTO";
+        channels: 4;
+        delay: 0 , 0 , 0 , 0;
+	maxdelay: 8000;
+};
+
+## FILTERS ##
+## L
+filter "left" {
+        from_inputs: "left";
+        to_outputs:"left"/0/1;
+	process: -1;
+	coeff:"left0";
+};
+
+## R
+filter "right" {
+        from_inputs: "right";
+        to_outputs:"right"/0/1;
+	process: -1;
+	coeff:"right0";
+};
+
+## SL
+filter "sleft" {
+        from_inputs: "sleft";
+        to_outputs:"sleft"/0/1;
+	process: -1;
+	coeff:"sleft0";
+};
+
+## SR
+filter "sright" {
+        from_inputs: "sright";
+        to_outputs:"sright"/0/1;
+	process: -1;
+	coeff:"sright0";
+};
