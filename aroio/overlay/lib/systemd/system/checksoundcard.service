@@ -1,0 +1,12 @@
+[Unit]
+Description=Soundcard selection helper
+After=local-fs.target checkuserconfig.service
+Before=audioplayers.target
+Requires=local-fs.target checkuserconfig.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/checksoundcard
+
+[Install]
+RequiredBy=audioplayers.target

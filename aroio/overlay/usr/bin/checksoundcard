@@ -1,0 +1,257 @@
+#!/bin/sh
+
+. /boot/userconfig.txt
+
+CONFIG="/boot/config.txt"
+
+case $SOUNDCARD in
+	'IQAudIO DAC')
+	if ! grep -q iqaudio "$CONFIG"
+	then
+		cardmount rw
+		echo "userconfig and config.txt have different entries for soundcards,"
+		echo "backing up and writing a new config.txt..."
+		cp "$CONFIG" "$CONFIG"_bak
+		cat << EOF > "$CONFIG"
+force_turbo=1
+dtdebug=1
+max_usb_current=1
+disable_splash=1
+kernel=zImage
+dtoverlay=i2s-mmap
+dtoverlay=iqaudio-dac
+dtoverlay=lirc-rpi,gpio_in_pin=25
+disable_overscan=1
+EOF
+
+		if ! mount | grep -q mmcblk0p2
+		then 	echo "initramfs aroioimage.cpio.gz followkernel" >> "$CONFIG"
+		fi
+		cardmount ro
+		reboot
+	fi
+	;;
+
+
+	'HiFiBerry DAC')
+	if ! grep -q hifiberry-dac "$CONFIG"
+	then
+		cardmount rw
+		echo "userconfig and config.txt have different entries for soundcards,"
+		echo "backing up and writing a new config.txt..."
+		cp "$CONFIG" "$CONFIG"-bak
+		cat << EOF > "$CONFIG"
+force_turbo=1
+dtdebug=1
+max_usb_current=1
+disable_splash=1
+kernel=zImage
+dtparam=i2c_arm=on
+dtoverlay=i2s-mmap
+dtoverlay=hifiberry-dac
+dtparam=spi=on
+dtoverlay=lirc-rpi,gpio_in_pin=25
+disable_overscan=1
+EOF
+
+		if ! mount | grep -q mmcblk0p2
+		then	echo "initramfs aroioimage.cpio.gz followkernel" >> "$CONFIG"
+		fi
+		cardmount ro
+		reboot
+	fi
+	;;
+	'HiFiBerry DAC+'|'AroioDAC')
+	echo "HiFiberry DAC+"
+	if ! grep -q hifiberry-dacplus "$CONFIG"
+	then
+		cardmount rw
+		echo "userconfig and config.txt have different entries for soundcards,"
+		echo "backing up and writing a new config.txt..."
+		cp "$CONFIG" "$CONFIG"-bak
+		cat << EOF > "$CONFIG"
+force_turbo=1
+dtdebug=1
+max_usb_current=1
+disable_splash=1
+kernel=zImage
+dtparam=i2c_arm=on
+dtoverlay=i2s-mmap
+dtoverlay=hifiberry-dacplus
+dtparam=spi=on
+dtoverlay=lirc-rpi,gpio_in_pin=25
+disable_overscan=1
+EOF
+
+		if ! mount | grep -q mmcblk0p2
+		then	echo "initramfs aroioimage.cpio.gz followkernel" >> "$CONFIG"
+		fi
+		cardmount ro
+		reboot
+	fi
+	;;
+
+	'HiFiBerry Digi')
+	echo "HiFiBerry Digi"
+	if ! grep -q hifiberry-digi "$CONFIG"
+	then
+		cardmount rw
+		echo "userconfig and config.txt have different entries for soundcards,"
+		echo "backing up and writing a new config.txt..."
+		cp "$CONFIG" "$CONFIG"-bak
+		cat << EOF > "$CONFIG"
+force_turbo=1
+dtdebug=1
+max_usb_current=1
+disable_splash=1
+kernel=zImage
+dtoverlay=i2s-mmap
+dtoverlay=hifiberry-digi
+dtoverlay=lirc-rpi,gpio_in_pin=25
+disable_overscan=1
+EOF
+
+	if ! mount | grep -q mmcblk0p2
+	then	echo "initramfs aroioimage.cpio.gz followkernel" >> "$CONFIG"
+	fi
+	cardmount ro
+	reboot
+	fi
+	;;
+
+	'M-Audio Fast Track Pro')
+	if ! grep -q "#fasttrack_pro" "$CONFIG"
+	then
+		cardmount rw
+		echo "userconfig and config.txt have different entries for soundcards,"
+		echo "backing up and writing a new config.txt..."
+		cp "$CONFIG" "$CONFIG"-bak
+		cat << EOF > "$CONFIG"
+force_turbo=1
+dtdebug=1
+max_usb_current=1
+disable_splash=1
+kernel=zImage
+disable_overscan=1
+dtoverlay=lirc-rpi,gpio_in_pin=25
+#fasttrack_pro
+EOF
+
+		if ! mount | grep -q mmcblk0p2
+		then	echo "initramfs aroioimage.cpio.gz followkernel" >> "$CONFIG"
+		fi
+		cardmount ro
+		reboot
+	fi
+	;;
+
+	'Focusrite Scarlett')
+	if ! grep -q "#fr_scarlett" "$CONFIG"
+	then
+		cardmount rw
+		echo "userconfig and config.txt have different entries for soundcards,"
+		echo "backing up and writing a new config.txt..."
+		cp "$CONFIG" "$CONFIG"-bak
+		cat << EOF > "$CONFIG"
+force_turbo=1
+dtdebug=1
+max_usb_current=1
+disable_splash=1
+kernel=zImage
+disable_overscan=1
+dtoverlay=lirc-rpi,gpio_in_pin=25
+#fr_scarlett
+EOF
+
+		if ! mount | grep -q mmcblk0p2
+		then	echo "initramfs aroioimage.cpio.gz followkernel" >> "$CONFIG"
+		fi
+		cardmount ro
+		reboot
+	fi
+	;;
+
+	'NI Audio 8 DJ')
+	if ! grep -q "#ni_audio8dj" "$CONFIG"
+	then
+		cardmount rw
+		echo "userconfig and config.txt have different entries for soundcards,"
+		echo "backing up and writing a new config.txt..."
+		cp "$CONFIG" "$CONFIG"-bak
+		cat << EOF > "$CONFIG"
+force_turbo=1
+dtdebug=1
+max_usb_current=1
+disable_splash=1
+kernel=zImage
+disable_overscan=1
+dtoverlay=lirc-rpi,gpio_in_pin=25
+#ni_audio8dj
+EOF
+
+		if ! mount | grep -q mmcblk0p2
+		then	echo "initramfs aroioimage.cpio.gz followkernel" >> "$CONFIG"
+		fi
+		cardmount ro
+		reboot
+	fi
+	;;
+
+	'RME Fireface UCX')
+	if ! grep -q "#fireface_ucx" "$CONFIG"
+	then
+		cardmount rw
+		echo "userconfig and config.txt have different entries for soundcards,"
+		echo "backing up and writing a new config.txt..."
+		cp "$CONFIG" "$CONFIG"-bak
+		cat << EOF > "$CONFIG"
+force_turbo=1
+dtdebug=1
+max_usb_current=1
+disable_splash=1
+kernel=zImage
+disable_overscan=1
+dtoverlay=lirc-rpi,gpio_in_pin=25
+#fireface_ucx
+EOF
+
+		if ! mount | grep -q mmcblk0p2
+		then	echo "initramfs aroioimage.cpio.gz followkernel" >> "$CONFIG"
+		fi
+		cardmount ro
+		reboot
+	fi
+	;;
+
+	'NOTAroioDAC')
+	echo "AroioDAC!"
+	if ! grep -q hifiberry-dacplus "$CONFIG"
+	then
+		cardmount rw
+		echo "userconfig and config.txt have different entries for soundcards,"
+		echo "backing up and writing a new config.txt..."
+		cp "$CONFIG" "$CONFIG"-bak
+		cat << EOF > "$CONFIG"
+force_turbo=1
+dtdebug=1
+max_usb_current=1
+disable_splash=1
+kernel=zImage
+dtparam=i2c_arm=on
+dtoverlay=i2s-mmap
+dtoverlay=hifiberry-dacplus
+dtparam=spi=on
+dtoverlay=lirc-rpi,gpio_in_pin=25
+disable_overscan=1
+EOF
+
+		if ! mount | grep -q mmcblk0p2
+		then	echo "initramfs aroioimage.cpio.gz followkernel" >> "$CONFIG"
+		fi
+		cardmount ro
+		reboot
+	fi
+	;;
+
+esac
+#NI Audio 8 DJ
