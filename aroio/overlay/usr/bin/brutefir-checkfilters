@@ -1,0 +1,26 @@
+#!/bin/sh
+
+. /boot/userconfig.txt
+
+SDDIR='/boot/filter'
+RAMDIR='/tmp/filter'
+
+mkdir -p "$SDDIR"
+mkdir -p "$RAMDIR"
+cp -r "$SDDIR"/* "$RAMDIR"
+
+# Mitgelieferte Filter bei Bedarf auspacken
+[ "$LOAD_PREFILTER" = "ON" ] && /bin/zcat /etc/brutefir/filter.tgz | tar -xvf - -C /tmp
+
+# Fälle:
+# 1: Neues File im RAM -> nach SDKarte kopieren.
+# 2: Gelöschtes File im RAM -> von SDKarte löschen
+
+while (true)
+do
+	inotifywait -r -e modify,attrib,close_write,move,create,delete "$RAMDIR"
+	echo "Files changed in "$RAMDIR", will synchronize changes to "$SDDIR"..."
+	cardmount rw
+	rsync -vrlt --delete "$RAMDIR"/ "$SDDIR"
+	cardmount ro
+done

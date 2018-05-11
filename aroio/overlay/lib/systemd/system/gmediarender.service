@@ -1,0 +1,15 @@
+[Unit]
+Description=Gmedia Renderer Audio Player
+After=syslog.target sound.target audioplayers.target network-online.target checkuserconfig.service
+#StopWhenUnneeded=yes
+Requires=network.target
+#Wants=jackd.service
+
+[Service]
+Type=simple
+EnvironmentFile=/boot/userconfig.txt
+ExecStart=/bin/gmediarender -f $PLAYERNAME --gstout-audiosink alsasink --gstout-audiodevice $AUDIO_OUTPUT
+Restart=always
+
+[Install]
+WantedBy=audioplayers.target

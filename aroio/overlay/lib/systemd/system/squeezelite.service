@@ -1,0 +1,13 @@
+[Unit]
+Description=Squeezelite Audio Player
+After=syslog.target sound.target audioplayers.target jackd.service network.target checkuserconfig.service
+Requires=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/squeezelite-starter
+Restart=always
+
+[Install]
+WantedBy=audioplayers.target
+

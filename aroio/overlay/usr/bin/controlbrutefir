@@ -1,0 +1,39 @@
+#!/bin/sh
+
+function chgDelay()
+{
+	`echo 'cod' $1 $2 | nc 127.0.0.1 3000` 2>>/dev/null
+}
+
+function chgFilter()
+{
+	`echo 'cfc' $1 $2 | nc 127.0.0.1 3000` &> /dev/null
+}
+
+function getDelay()
+{
+	echo 'lo' | nc 127.0.0.1 3000 | awk -F\( '/delay: /{print $2}'
+}
+
+function getFilter()
+{
+	echo 'lf' | nc 127.0.0.1 3000 | grep -m 1 'coeff set: [[:digit:]]'
+}
+
+function getVol()
+{
+	#echo 'lf' | nc 127.0.0.1 3000 | awk -F: '/from inputs:[[:space:]]*0\/(-?[[:digit:]]*\.[[digit:]]*)/ {print $2}'
+	echo 'lf' | nc 127.0.0.1 3000 | awk -F: '/from inputs:[[:space:]]*0\/(-?[[:digit:]]*\.[[:digit:]]*)/ {print $2}'
+}
+
+function tgglMute()
+{
+	`echo 'tmo' $1 | nc 127.0.0.1 3000` 2>>/dev/null
+}
+
+function volControl()
+{
+	`echo 'cfia 0 0' $2 ';cfia 1 1' $2| nc 127.0.0.1 3000` 2>>/dev/null
+}
+
+[ "$1" = "" ] && echo "No command! Possible commands: chgDelay chgFilter getDelay getFilter getVol tgglMute volControl" || "$1" "$2" "$3" 

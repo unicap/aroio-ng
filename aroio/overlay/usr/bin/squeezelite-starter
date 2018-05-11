@@ -1,0 +1,15 @@
+#!/bin/sh
+
+. /boot/userconfig.txt
+
+MACADDRESS=$(cat /sys/class/net/eth0/address)
+
+if [ "$SERVERNAME" = "" ]
+then	SERVEROPTS=""
+else	SERVEROPTS="-s $SERVERNAME"
+	[ "$SERVERPORT" != "" ] && SERVEROPTS=""$SERVEROPTS":"$SERVERPORT""
+fi
+
+echo $SERVEROPTS
+
+squeezelite -M "$PLATFORM" -m "$MACADDRESS" "$SERVEROPTS" -n "$PLAYERNAME" -p 90 -a 8192:1024:32:1 -b 1024:8192 -d all=info -o "$AUDIO_OUTPUT"

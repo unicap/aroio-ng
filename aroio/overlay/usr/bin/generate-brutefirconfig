@@ -1,0 +1,121 @@
+#!/bin/sh
+
+. /boot/userconfig.txt
+CHANNELS="2"
+
+case $CHANNELS in
+	2)
+		if [ "$MSCODING" = "ON"  ]
+		then	cp /etc/brutefir/brutefir.conf.default.jack.mscoded /etc/brutefir/brutefir.conf
+		else	cp /etc/brutefir/brutefir.conf.default.jack.stereo /etc/brutefir/brutefir.conf
+		fi
+		;;
+
+	4)
+		cp /etc/brutefir/brutefir.conf.default.jack.4-channel /etc/brutefir/brutefir.conf
+		;;
+esac
+
+counter=-1
+case $CHANNELS in
+	2)
+		for i in $(grep -o "COEFF_NAME[^m]" /boot/userconfig.txt)
+		do
+			COEFF_NAME=$(eval "echo \$$i")
+			counter=$((counter+1))
+			if [ "$COEFF_NAME" = "" ] ; then COEFF_NAME="BypassFilter" ; fi
+			if ! [ -e /tmp/filter/"$COEFF_NAME"L"$(( $RATE / 1000 ))".dbl ]  ; then COEFF_NAME="BypassFilter" ; fi
+			sed -i -- s/"coeff\"left"$counter"\"{filename:\"\/tmp\/filter\/BypassFilterL96.dbl\";"/"coeff\"left"$counter"\"{filename:\"\/tmp\/filter\/"$COEFF_NAME"L"$(( $RATE / 1000 ))".dbl\";"/g /etc/brutefir/brutefir.conf
+			sed -i -- s/"coeff\"right"$counter"\"{filename:\"\/tmp\/filter\/BypassFilterR96.dbl\";"/"coeff\"right"$counter"\"{filename:\"\/tmp\/filter\/"$COEFF_NAME"R"$(( $RATE / 1000 ))".dbl\";"/g /etc/brutefir/brutefir.conf
+			sed -i -- s/"96000"/"$RATE"/g /etc/brutefir/brutefir.conf
+		done
+		;;
+	4)
+		for i in $(grep -o "COEFF_NAME[^m]" /boot/userconfig.txt)
+		do
+			COEFF_NAME=$(eval "echo \$$i")
+			counter=$((counter+1))
+			if [ "$COEFF_NAME" = ""  ] ; then COEFF_NAME="BypassFilter" ; fi
+			if ! [ -e /tmp/"$COEFF_NAME"L"$RATE".dbl ]  ; then COEFF_NAME="BypassFilter" ; fi
+			sed -i -- s/"coeff\"left"$counter"\"{filename:\"\/tmp\/filter\/BypassFilterL96.dbl\";"/"coeff\"left"$counter"\"{filename:\"\/tmp\/filter\/"$COEFF_NAME"L"$(( $RATE / 1000 )).dbl\";"/g /etc/brutefir/brutefir.conf
+			sed -i -- s/"coeff\"right"$counter"\"{filename:\"\/tmp\/filter\/BypassFilterR96.dbl\";"/"coeff\"right"$counter"\"{filename:\"\/tmp\/filter\/"$COEFF_NAME"R"$(( $RATE / 1000 )).dbl\";"/g /etc/brutefir/brutefir.conf
+			sed -i -- s/"coeff\"sleft"$counter"\"{filename:\"\/tmp\/filter\/BypassFilterL96.dbl\";"/"coeff\"sleft"$counter"\"{filename:\"\/tmp\/filter\/"$COEFF_NAME"SL"$(( $RATE / 1000 )).dbl\";"/g /etc/brutefir/brutefir.conf
+			sed -i -- s/"coeff\"sright"$counter"\"{filename:\"\/tmp\/filter\/BypassFilterR96.dbl\";"/"coeff\"sright"$counter"\"{filename:\"\/tmp\/filter\/"$COEFF_NAME"SR"$(( $RATE / 1000 )).dbl\";"/g /etc/brutefir/brutefir.conf
+			sed -i -- s/"96000"/"$RATE"/g /etc/brutefir/brutefir.conf
+		done
+		;;
+esac
+
+##### BIS HIER SOLLTE MULTICHANNEL EINGEBUNDEN SEIN, AB HIER WEITERSCHREIBEN
+##### BISHER SOLLTE STEREO WEITERLAUFEN WIE BISHER, TESTEN!!!!!
+
+## paste together attenuation and phase for default coeff
+ATT="_ATT"
+COEFF="COEFF"
+DEF_COEFF_ATT='$COEFF$ATT$DEF_COEFF'
+eval DEF_COEFF_ATT=$DEF_COEFF_ATT
+DEF_COEFF_ATT=$(eval echo \$$DEF_COEFF_ATT)
+
+PHASE="_PHASE"
+COEFF="COEFF"
+DEF_COEFF_PHASE='$COEFF$PHASE$DEF_COEFF'
+eval DEF_COEFF_PHASE=$DEF_COEFF_PHASE
+DEF_COEFF_PHASE=$(eval echo \$$DEF_COEFF_PHASE)
+
+NAME="_NAME"
+COEFF="COEFF"
+DEF_COEFF_NAME='$COEFF$NAME$DEF_COEFF'
+eval DEF_COEFF_NAME=$DEF_COEFF_NAME
+DEF_COEFF_NAME=$(eval echo \$$DEF_COEFF_NAME)
+
+ATT="_ATT"
+SCOEFF="SCOEFF"
+DEF_SCOEFF_ATT='$SCOEFF$ATT$SDEF_COEFF'
+eval DEF_SCOEFF_ATT=$DEF_SCOEFF_ATT
+DEF_SCOEFF_ATT=$(eval echo \$$DEF_SCOEFF_ATT)
+
+PHASE="_PHASE"
+SCOEFF="SCOEFF"
+DEF_SCOEFF_PHASE='$SCOEFF$PHASE$SDEF_COEFF'
+eval DEF_SCOEFF_PHASE=$DEF_SCOEFF_PHASE
+DEF_SCOEFF_PHASE=$(eval echo \$$DEF_SCOEFF_PHASE)
+
+NAME="_NAME"
+SCOEFF="SCOEFF"
+DEF_SCOEFF_NAME='$SCOEFF$NAME$DEF_SCOEFF'
+eval DEF_SCOEFF_NAME=$DEF_SCOEFF_NAME
+DEF_SCOEFF_NAME=$(eval echo \$$DEF_SCOEFF_NAME)
+
+if [ "$DEF_COEFF" = "" ] ; then DEF_COEFF="0" ; fi
+if [ "$DEF_COEFF_PHASE" = "" ] ; then DEF_COEFF_PHASE="1" ; fi
+if [ "$DEF_COEFF_ATT" = "" ] ; then DEF_COEFF_ATT="0" ; fi
+
+#if [ "$DEF_SCOEFF" = "" ] ; then DEF_COEFF="0" ; fi
+#if [ "$DEF_SCOEFF_PHASE" = "" ] ; then DEF_COEFF_PHASE="1" ; fi
+#if [ "$DEF_SCOEFF_ATT" = "" ] ; then DEF_COEFF_ATT="0" ; fi
+
+case $CHANNELS in
+	2)
+	sed -i -- s/"to_outputs:\"left\"\/0\/0;"/"to_outputs:\"left\"\/"$DEF_COEFF_ATT"\/"$DEF_COEFF_PHASE";"/g /etc/brutefir/brutefir.conf
+	sed -i -- s/"to_outputs:\"right\"\/0\/0;"/"to_outputs:\"right\"\/"$DEF_COEFF_ATT"\/"$DEF_COEFF_PHASE";"/g /etc/brutefir/brutefir.conf
+
+	sed -i -- s/"coeff:\"left0\";"/"coeff:\"left"$DEF_COEFF"\";"/g /etc/brutefir/brutefir.conf
+	sed -i -- s/"coeff:\"right0\";"/"coeff:\"right"$DEF_COEFF"\";"/g /etc/brutefir/brutefir.conf
+	;;
+
+	4)
+	sed -i -- s/"to_outputs:\"left\"\/0\/0;"/"to_outputs:\"left\"\/"$DEF_COEFF_ATT"\/"$DEF_COEFF_PHASE";"/g /etc/brutefir/brutefir.conf
+	sed -i -- s/"to_outputs:\"right\"\/0\/0;"/"to_outputs:\"right\"\/"$DEF_COEFF_ATT"\/"$DEF_COEFF_PHASE";"/g /etc/brutefir/brutefir.conf
+	sed -i -- s/"to_outputs:\"sleft\"\/0\/0;"/"to_outputs:\"sleft\"\/"$DEF_COEFF_ATT"\/"$DEF_COEFF_PHASE";"/g /etc/brutefir/brutefir.conf
+	sed -i -- s/"to_outputs:\"sright\"\/0\/0;"/"to_outputs:\"sright\"\/"$DEF_COEFF_ATT"\/"$DEF_COEFF_PHASE";"/g /etc/brutefir/brutefir.conf
+
+	sed -i -- s/"coeff:\"left0\";"/"coeff:\"left"$DEF_COEFF"\";"/g /etc/brutefir/brutefir.conf
+	sed -i -- s/"coeff:\"right0\";"/"coeff:\"right"$DEF_COEFF"\";"/g /etc/brutefir/brutefir.conf
+	sed -i -- s/"coeff:\"sleft0\";"/"coeff:\"sleft"$DEF_COEFF"\";"/g /etc/brutefir/brutefir.conf
+	sed -i -- s/"coeff:\"sright0\";"/"coeff:\"sright"$DEF_COEFF"\";"/g /etc/brutefir/brutefir.conf
+	;;
+esac
+
+echo "Successfully generated brutefir configuration file in /etc"
+exit 0
+

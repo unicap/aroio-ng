@@ -1,0 +1,11 @@
+[Unit]
+Description=Brutefir filter preparation
+After=local-fs.target checkuserconfig.service
+Before=brutefir-checkfilters.service
+
+[Service]
+Type=oneshot
+ExecStart=/bin/sh -c "/bin/zcat /etc/brutefir/filter.tgz | tar -xvf - -C /tmp"
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,16 @@
+[Unit]
+Description=Brutefir convolution engine
+After=syslog.target sound.target jackd.service
+Before=squeezelite.service gmediarender.service shairport-sync.service bluealsa-aplay.service
+
+[Service]
+TimeoutStartSec=3
+Type=simple
+EnvironmentFile=/boot/userconfig.txt
+ExecStartPre=/usr/bin/generate-brutefirconfig
+ExecStart=/bin/brutefir /etc/brutefir/brutefir.conf
+ExecStartPost=/bin/sh -c 'until jack_lsp ; do sleep 0.2 ; done'
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

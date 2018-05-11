@@ -1,85 +1,80 @@
 #!/bin/sh
 
-[ -e /tmp/dbus-address ] || echo $(dbus-launch) >> /tmp/dbus-address
-export $(cat /tmp/dbus-address)
+. /boot/userconfig.txt
 
-RATE="96000"
-JACKBUFFER="8192"
-PERIODS="3"
-HOSTNAME=$(hostname)
+ACTION="$1"
 
-# If anything  is running, kill it
-ps | grep [j]ackd && killall jackd
-ps | grep [p]ulseaudio && pacmd exit
-ps | grep [s]queezelite && killall squeezelite
-ps | grep [b]rutefir && killall brutefir
-ps | grep [g]mediarender && killall gmediarender
-
-# Make a clean logfile
-rm /var/log/audio.log
-
-start_pulse()
+function Start()
 {
-	echo "Starting pulseaudio..."
-	pulseaudio -D
+	case "$AUDIO_OUTPUT" in
+		i2s)
+			case "$RAW_PLAYER" in
+				squeezelite)
+					systemctl "$ACTION" squeezelite.service
+				;;
+
+				gmediarender)
+					systemctl "$ACTION" gmediarender.service
+				;;
+
+				shairportsync)
+					systemctl "$ACTION" shairport-sync.service
+				;;
+
+				bluealsaaplay)
+					systemctl "$ACTION" bluealsa-aplay.service
+				;;
+			esac
+		;;
+
+		plug-dmixer)
+			[ "$DMIX_SQUEEZELITE"   = "ON" ] && systemctl "$ACTION" squeezelite.service
+			[ "$DMIX_GMEDIARENDER"  = "ON" ] && systemctl "$ACTION" gmediarender.service
+			[ "$DMIX_SHAIRPORTSYNC" = "ON" ] && systemctl "$ACTION" shairport-sync.service
+			[ "$DMIX_BLUEALSAAPLAY" = "ON" ] && systemctl "$ACTION" bluealsa-aplay.service
+		;;
+
+		jack)
+			systemctl "$ACTION" jackd.service
+			#[ "$JACK_NETJACK"      = "ON" ] && systemctl "$ACTION" netjack.service
+			[ "$JACK_SQUEEZELITE"   = "ON" ] && systemctl "$ACTION" squeezelite.service
+			[ "$JACK_GMEDIARENDER"  = "ON" ] && systemctl "$ACTION" gmediarender.service
+			[ "$JACK_SHAIRPORTSYNC" = "ON" ] && systemctl "$ACTION" shairport-sync.service
+			[ "$JACK_BLUEALSAAPLAY" = "ON" ] && systemctl "$ACTION" bluealsa-aplay.service
+		;;
+
+		jack-bf)
+			systemctl "$ACTION" jackd.service
+			systemctl "$ACTION" brutefir.service
+			until jack_lsp | grep brutefir ; do sleep 0.2 ; done
+			#[ "$JACKBF_NETJACK"      = "ON" ] && systemctl "$ACTION" netjack.service
+			[ "$JACKBF_SQUEEZELITE"   = "ON" ] && systemctl "$ACTION" squeezelite.service
+			[ "$JACKBF_GMEDIARENDER"  = "ON" ] && systemctl "$ACTION" gmediarender.service
+			[ "$JACKBF_SHAIRPORTSYNC" = "ON" ] && systemctl "$ACTION" shairport-sync.service
+			[ "$JACKBF_BLUEALSAAPLAY" = "ON" ] && systemctl "$ACTION" bluealsa-aplay.service
+		;;
+	esac
 }
 
-stop_pulse()
+function StopStatus()
 {
-	pacmd exit
+	for SERVICE in squeezelite gmediarender shairport-sync bluealsa-aplay brutefir jackd
+	do
+		systemctl "$1" "$SERVICE".service
+	done
 }
 
-start_jack()
-{
-	echo "Starting pulseaudio..."
-	pulseaudio -D 2>&1 >> /var/log/audio.log
-	# Suspending pulse to release soundcard
-	pacmd suspend 1 && sleep 0.5
+case "$ACTION" in
+	stop|status)
+	StopStatus "$ACTION"
+	;;
 
-	echo "Starting jackd..."
-	jackd -R -d alsa -r "$RATE" -p "$JACKBUFFER" -n "$PERIODS" >> /var/log/audio.log 2>&1 &
-	sleep 2
-
-	echo "Loading pulseaudio modules for jack connectivity"
-	pactl load-module module-jack-sink channels=2
-	pacmd set-default-sink jack_out
-
-	echo "Starting brutefir..."
-	brutefir /etc/brutefir_config >> /var/log/audio.log 2>&1 &
-}
-
-stop_jack()
-{
-	echo "Stopping pulseaudio..."
-	pacmd exit
-	echo "Stopping jackd"
-	killall jackd
-}
-
-start_players()
-{
-	echo "Starting squeezelite..."
-	squeezelite -d all=info >> /var/log/audio.log 2>&1 &
-	echo "Starting gmrenderer..."
-	gmediarender -f "$HOSTNAME" --logfile=/var/log/audio.log &
-}
-
-stop_squeezelite()
-{
-	killall squeezelite
-}
-
-case $1 in
 	start)
+	Start
 	;;
 
-	start_convolver)
-		start_jack
-		start_players
-	;;
-
-	start_pulse)
-		start_pulse
-		start_players
+	restart)
+	StopStatus stop
+	Start
 	;;
 esac

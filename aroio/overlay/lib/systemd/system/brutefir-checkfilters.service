@@ -1,0 +1,10 @@
+[Unit]
+Description=Brutefir filter caretaker
+After=local-fs.target brutefir-filters.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/brutefir-checkfilters
+
+[Install]
+WantedBy=multi-user.target
