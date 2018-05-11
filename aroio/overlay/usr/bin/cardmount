@@ -1,0 +1,13 @@
+#!/bin/sh
+
+case $1 in
+	ro)
+	echo "Cardmount:   Mounting /boot read-only..."
+	mount -o remount,ro /boot
+	;;
+
+	rw)
+	echo "Cardmount:   Mounting /boot read-write..."
+	mount -o remount,rw /boot
+	;;
+esac
