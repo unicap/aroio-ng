@@ -1,0 +1,16 @@
+[Unit]
+Description=BluezAlsa proxy
+Requires=bluetooth.target
+After=bluetooth.target sys-subsystem-bluetooth-devices-hci0.device
+BindsTo=sys-subsystem-bluetooth-devices-hci0.device
+
+[Service]
+Type=simple
+EnvironmentFile=/boot/userconfig.txt
+ExecStartPre=/bin/rm -rf /var/run/bluealsa/
+
+ExecStart=/usr/bin/bluealsa
+Restart=always
+
+[Install]
+WantedBy=bluetooth.target
