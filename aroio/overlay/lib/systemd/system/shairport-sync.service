@@ -1,0 +1,13 @@
+[Unit]
+Description=Shairport-sync Audio Player
+After=syslog.target sound.target jackd.service network.target checkuserconfig.service nss-lookup.target
+
+[Service]
+Type=simple
+EnvironmentFile=/boot/userconfig.txt
+ExecStart=/bin/shairport-sync -v -a $HOSTNAME -o alsa -- -d $AUDIO_OUTPUT
+Restart=always
+RestartSec=2
+
+[Install]
+WantedBy=audioplayers.target
