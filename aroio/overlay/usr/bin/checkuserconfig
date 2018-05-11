@@ -1,0 +1,138 @@
+#!/bin/sh
+
+# Check for userconfig.txt and if none found, create empty one
+if ! [ -e /boot/userconfig.txt  ]
+then
+	echo "ChkUsercfg:  Keine userconfig.txt gefunden, lege eine an..."
+	mount -o remount,rw /boot
+	touch /boot/userconfig.txt
+	mount -o remount,ro /boot
+fi
+
+# Check, if variables are good to go and if not use defaults
+. /boot/userconfig.txt
+[[ "$RATE" != "44100" && "$RATE" != "48000" && "$RATE" != "96000" && RATE != "192000" ]] && RATE="96000"
+[[ "$HOSTNAME" = "" || "$HOSTNAME" = "(none)" ]] && HOSTNAME="AroioOS"
+[[ "$PLAYERNAME" = "" || "$PLAYERNAME" = "(none)" ]] && PLAYERNAME="$HOSTNAME"
+[[ "$DHCP" = "" || "$DHCP" = "OFF" ]] && [[ "$IPADDR" = "" || "$NETMASK" = "" || "$DNSSERV" = "" || "$GATEWAY" = "" ]] && DHCP="ON"
+
+[ "$UPDATESERVER" = "" ] &&			UPDATESERVER="https://www.abacus-electronics.de/aroio-4"
+[ "$SOUNDCARD" = "" ] &&			SOUNDCARD="IQAudIO DAC"
+[ "$USEBETA" = ""  ] &&				USEBETA="OFF"
+[ "$JACKBUFFER" = "" ] &&			JACKBUFFER="8192"
+[ "$DHCP" = "ON" ] &&				IPADDR="" && NETMASK="" && DNSSERV="" && GATEWAY=""
+[ "$PLATFORM" = "" ] &&				PLATFORM="AroioEX"
+[ "$PLAYERNAME" = "" ] &&			PLAYERNAME="$HOSTNAME"
+[ "$BTKEY" = "" ] &&				BTKEY="2107"
+#[ "$BLUEALSAAPLAY" = "" ] &&			BLUEALSAAPLAY="ON"
+#[ "$JACKD" = "" ] &&				JACKD="OFF"
+#[ "$SQUEEZELITE" = "" ] &&			SQUEEZELITE="ON"
+#[ "$GMEDIARENDER" = "" ] &&			GMEDIARENDER="ON"
+#[ "$SHAIRPORTSYNC" = "" ] &&			SHAIRPORTSYNC="ON"
+[ "$MSCODING" = "" ] &&				MSCODING="OFF"
+[ "$VOLUME" = "" ] &&				VOLUME="0 dB"
+[ "$USERPASSWD" = "" ] &&			USERPASSWD="abacus"
+#[ "$BRUTEFIR" = "" ] &&			BRUTEFIR="OFF"
+[ "$CHANNELS" = "" ] &&				CHANNELS="2"
+[ "$DEF_COEFF" = "" ] &&			DEF_COEFF="0"
+[ "$COEFF_ATT0" = "" ] &&			COEFF_ATT="0"
+[ "$COEFF_DELAY0" = "" ] &&			COEFF_DELAY="1"
+#[ "$DEF_SCOEFF" = "" ] &&			DEF_SCOEFF="0"
+#[ "$SCOEFF_ATT0" = "" ]	&&		SCOEFF_ATT="0"
+#[ "$SCOEFF_DELAY0" = "" ] &&			SCOEFF_DELAY="0"
+[ "$LOAD_PREFILTER" = "" ] &&			LOAD_PREFILTER="ON"
+
+[ "$AUDIO_OUTPUT" = "" ] &&			AUDIO_OUTPUT="plug-dmixer"
+
+[ "$RAW_PLAYER" = "" ] &&			RAW_PLAYER="squeezelite"
+
+[ "$DMIX_SQUEEZELITE" = "" ] &&			DMIX_SQUEEZELITE="ON"
+[ "$DMIX_GMEDIARENDER" = "" ] &&		DMIX_GMEDIARENDER="ON"
+[ "$DMIX_SHAIRPORTSYNC" = "" ] &&		DMIX_SHAIRPORTSYNC="ON"
+[ "$DMIX_BLUEALSAAPLAY" = "" ] &&		DMIX_BLUEALSAAPLAY="ON"
+
+[ "$JACK_SQUEEZELITE" = "" ] &&			JACK_SQUEEZELITE="OFF"
+[ "$JACK_GMEDIARENDER" = "" ] &&		JACK_GMEDIARENDER="OFF"
+[ "$JACK_SHAIRPORTSYNC" = "" ] &&		JACK_SHAIRPORTSYNC="OFF"
+[ "$JACK_BLUEALSAAPLAY" = "" ] &&		JACK_BLUEALSAAPLAY="OFF"
+[ "$JACK_NETJACK" = "" ] &&			JACK_NETJACK="OFF"
+
+[ "$JACKBF_SQUEEZELITE" = "" ] &&		JACKBF_SQUEEZELITE="OFF"
+[ "$JACKBF_GMEDIARENDER" = "" ] &&		JACKBF_GMEDIARENDER="OFF"
+[ "$JACKBF_SHAIRPORTSYNC" = "" ] &&		JACKBF_SHAIRPORTSYNC="OFF"
+[ "$JACKBF_BLUEALSAAPLAY" = "" ] &&		JACKBF_BLUEALSAAPLAY="OFF"
+[ "$JACKBF_NETJACK" = "" ] &&			JACKBF_NETJACK="OFF"
+
+#Set Att to 0 if empty
+for seq in $(seq 0 1 9);
+do
+	eval COEFF_ATT='COEFF_ATT$seq'
+	COEFF_ATT=$(eval echo \$$COEFF_ATT)
+
+	if [ "$COEFF_ATT" = "" ] ; then
+		eval COEFF_ATT$seq="0"
+	fi
+
+	eval SCOEFF_ATT='SCOEFF_ATT$seq'
+	SCOEFF_ATT=$(eval echo \$$SCOEFF_ATT)
+
+	if [ "$SCOEFF_ATT" = "" ] ; then
+		eval SCOEFF_ATT$seq="0"
+	fi
+done
+
+#Set delay to 0 if empty
+for seq in $(seq 0 1 9);
+do
+	eval COEFF_DELAY='COEFF_DELAY$seq'
+	COEFF_DELAY=$(eval echo \$$COEFF_DELAY)
+
+	if [ "$COEFF_DELAY" = "" ] ; then
+		eval COEFF_DELAY$seq="0"
+	fi
+
+	eval SCOEFF_DELAY='SCOEFF_DELAY$seq'
+	SCOEFF_DELAY=$(eval echo \$$SCOEFF_DELAY)
+
+	if [ "$SCOEFF_DELAY" = "" ] ; then
+		eval SCOEFF_DELAY$seq="0"
+	fi
+done
+
+## Write everything to a temporary userconfig.txt
+rm /tmp/userconfig.txt &> /dev/null
+for i in UPDATESERVER USEBETA PLATFORM USERPASSWD \
+HOSTNAME DHCP IPADDR NETMASK DNSSERV GATEWAY WLANSSID WLANPWD \
+SERVERNAME SERVERPORT SQUEEZEUSER SQUEEZEPWD PLAYERNAME \
+BTKEY \
+RATE MSCODING VOLUME JACKBUFFER SOUNDCARD DEBUG AUDIO_OUTPUT \
+RAW_PLAYER \
+DMIX_SQUEEZELITE DMIX_GMEDIARENDER DMIX_SHAIRPORTSYNC DMIX_BLUEALSAAPLAY \
+JACK_SQUEEZELITE JACK_GMEDIARENDER JACK_SHAIRPORTSYNC JACK_BLUEALSAAPLAY JACK_NETJACK \
+JACKBF_SQUEEZELITE JACKBF_GMEDIARENDER JACKBF_SHAIRPORTSYNC JACKBF_BLUEALSAAPLAY JACKBF_NETJACK \
+LOAD_PREFILTER DEF_COEFF \
+$(for seq in $(seq 0 1 9); do echo COEFF_NAME$seq;done) \
+$(for seq in $(seq 0 1 9); do echo COEFF_COMMENT$seq;done) \
+$(for seq in $(seq 0 1 9); do echo COEFF_ATT$seq;done) \
+$(for seq in $(seq 0 1 9); do echo COEFF_DELAY$seq;done)
+#$(for seq in $(seq 0 1 9); do echo SCOEFF_NAME$seq;done) \
+#$(for seq in $(seq 0 1 9); do echo SCOEFF_COMMENT$seq;done) \
+#$(for seq in $(seq 0 1 9); do echo SCOEFF_ATT$seq;done) \
+#$(for seq in $(seq 0 1 9); do echo SCOEFF_DELAY$seq;done)
+
+do
+	seq=$((seq+1))
+	echo -n $i"="'"' >> /tmp/userconfig.txt
+	eval echo \$$i'\"'   >> /tmp/userconfig.txt
+done
+
+## Compare the new userconfig.txt with the one on /tmp and copy it over, if it has changed
+if ! diff /tmp/userconfig.txt /boot/userconfig.txt &> /dev/null
+then
+	echo "ChkUsercfg:  Had to make changes to userconfig.txt, writing a new one to disk..."
+	mount -o remount,rw /boot
+	cp /tmp/userconfig.txt /boot
+	mount -o remount,rw /boot
+else
+	echo "ChkUsercfg:  userconfig.txt is good, doing nothing here."
+fi

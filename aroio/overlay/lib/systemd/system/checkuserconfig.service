@@ -1,0 +1,13 @@
+[Unit]
+Description=Userconfig caretaker
+After=local-fs.target
+Requires=local-fs.target
+#Before=audioplayers.target
+#RequiresMountsFor=/boot
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/checkuserconfig
+
+[Install]
+RequiredBy=multi-user.target
