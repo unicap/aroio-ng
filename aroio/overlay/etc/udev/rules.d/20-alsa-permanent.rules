@@ -1,0 +1,6 @@
+SUBSYSTEM!="sound", GOTO="UMIK"
+ACTION!="add", GOTO="UMIK"
+
+ATTRS{idVendor}=="2752", ATTRS{idProduct}=="0007", ATTR{id}="UMIK"
+
+LABEL="UMIK"
