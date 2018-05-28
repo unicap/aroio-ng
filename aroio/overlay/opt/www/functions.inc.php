@@ -367,6 +367,37 @@ function print_txtrelative($file)
 	echo $out;
 }
 
+// Gibt journalctl Rueckgaben in eigenem div aus.
+// $unit gibt zu übergebende unit an.
+function print_journalctl($unit)
+{
+	exec("journalctl -u $unit",$arr_out);
+	$out = '<div class="system">';
+	foreach($arr_out as $line)
+	{
+		$out .= $line.'<br>';
+	}
+	$out .= '<div>';
+	echo $out;
+}
+
+// Gibt Hardware-Parameter des ausgewaehlten Audio Geraetes zurueck.
+function print_audio_hw_params()
+{
+	exec("controlaudio stop");
+	exec("aplay --duration=1 -Dhw:0 --dump-hw-params /dev/zero 2>&1",$arr_out);
+	exec("controlaudio start");
+	$out = '<div class="system">';
+	foreach($arr_out as $line)
+	{
+		$out .= $line.'<br>';
+	}
+	$out .= '<div>';
+	echo $out;
+}
+
+
+
 //Gibt die korrekte Squeezebox Adresse aus
 
 function print_squeezeaddr($port)

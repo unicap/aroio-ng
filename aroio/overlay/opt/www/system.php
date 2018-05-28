@@ -242,7 +242,7 @@ if ($test_wlan == "0"){?>
       <input class="button" type="submit" class="actiongroup" value="squeezelitelog" name="squeezelitelog">
     </td>
     <td>
-      <input class="button" type="submit" class="actiongroup" value="shairportlog" name="shairportlog">
+      <input class="button" type="submit" class="actiongroup" value="Audio-HW-Info" name="Audio-HW-Info">
     </td>
   </tr>
 </table>
@@ -257,9 +257,9 @@ print_cmdout('mount');
 if ( isset($_POST['free']) )
 print_cmdout('free');
 if ( isset($_POST['squeezelitelog']) )
-print_txtrelative('squeezelitelog.txt');
-if ( isset($_POST['shairportlog']) )
-print_txtrelative('shairportlog.txt');
+print_journalctl('squeezelite');
+if ( isset($_POST['Audio-HW-Info']) )
+print_audio_hw_params();
 ?>
 </fieldset>
 </form>
