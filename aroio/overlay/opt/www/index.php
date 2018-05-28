@@ -481,7 +481,7 @@ else
         <span title=""><label for="Soundcard"> <? print ${soundcard._.$lang} ; ?> </label></span></a>
     </td>
     <td>
-        <?$arr_soundcard= array('AroioDAC','IQAudIO DAC','HiFiBerry DAC+','HiFiBerry Digi', 'RME Fireface UCX');
+        <?$arr_soundcard= array('Internal HDMI audio','Internal audio jack','AroioDAC','IQAudIO DAC','HiFiBerry DAC+','HiFiBerry Digi', 'RME Fireface UCX');
         //<?$arr_soundcard= array('IQAudIO DAC','HiFiBerry DAC+','HiFiBerry Digi','M-Audio Fast Track Pro','Lynx Hilo','Focusrite Scarlett','NI Audio 8 DJ');
         print_optgroup("SOUNDCARD",$arr_soundcard,$ini_array["SOUNDCARD"]);
     ?>

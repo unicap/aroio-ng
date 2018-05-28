@@ -3,8 +3,68 @@
 . /boot/userconfig.txt
 
 CONFIG="/boot/config.txt"
+ALIASES="/etc/modprobe.d/aliases.conf"
 
 case $SOUNDCARD in
+	'Internal HDMI audio')
+	if ! grep -q HDMI_AUDIO "$CONFIG"
+	then
+		cardmount rw
+		echo "userconfig and config.txt have different entries for soundcards,"
+		echo "backing up and writing a new config.txt..."
+		cp "$CONFIG" "$CONFIG"_bak
+		cat << EOF > "$CONFIG"
+force_turbo=1
+dtdebug=1
+max_usb_current=1
+disable_splash=1
+kernel=zImage
+dtoverlay=i2s-mmap
+dtparam=audio=on #HDMI_AUDIO
+hdmi_drive=2 #HDMI_AUDIO
+dtoverlay=lirc-rpi,gpio_in_pin=25
+disable_overscan=1
+EOF
+
+		if ! mount | grep -q mmcblk0p2
+		then 	echo "initramfs aroioimage.cpio.gz followkernel" >> "$CONFIG"
+		fi
+		# Also taking care of correct soundcard order
+		sed -i '/options snd slots/c\options snd slots=snd_bcm2835' "$ALIASES"
+		cardmount ro
+		reboot
+	fi
+	;;
+
+	'Internal audio jack')
+	if ! grep -q ONBOARD_AUDIO "$CONFIG"
+	then
+		cardmount rw
+		echo "userconfig and config.txt have different entries for soundcards,"
+		echo "backing up and writing a new config.txt..."
+		cp "$CONFIG" "$CONFIG"_bak
+		cat << EOF > "$CONFIG"
+force_turbo=1
+dtdebug=1
+max_usb_current=1
+disable_splash=1
+kernel=zImage
+dtoverlay=i2s-mmap
+dtparam=audio=on #ONBOARD_AUDIO
+dtoverlay=lirc-rpi,gpio_in_pin=25
+disable_overscan=1
+EOF
+
+		if ! mount | grep -q mmcblk0p2
+		then 	echo "initramfs aroioimage.cpio.gz followkernel" >> "$CONFIG"
+		fi
+		# Also taking care of correct soundcard order
+		sed -i '/options snd slots/c\options snd slots=snd_bcm2835' "$ALIASES"
+		cardmount ro
+		reboot
+	fi
+	;;
+
 	'IQAudIO DAC')
 	if ! grep -q iqaudio "$CONFIG"
 	then
@@ -27,12 +87,14 @@ EOF
 		if ! mount | grep -q mmcblk0p2
 		then 	echo "initramfs aroioimage.cpio.gz followkernel" >> "$CONFIG"
 		fi
+		# Also taking care of correct soundcard order
+		sed -i '/options snd slots/c\options snd slots=snd_soc_iqaudio_dac' "$ALIASES"
 		cardmount ro
 		reboot
 	fi
 	;;
 
-
+	
 	'HiFiBerry DAC')
 	if ! grep -q hifiberry-dac "$CONFIG"
 	then
@@ -57,6 +119,8 @@ EOF
 		if ! mount | grep -q mmcblk0p2
 		then	echo "initramfs aroioimage.cpio.gz followkernel" >> "$CONFIG"
 		fi
+		# Also taking care of correct soundcard order
+		sed -i '/options snd slots/c\options snd slots=snd_soc_hifiberry_dac' "$ALIASES"
 		cardmount ro
 		reboot
 	fi
@@ -86,6 +150,8 @@ EOF
 		if ! mount | grep -q mmcblk0p2
 		then	echo "initramfs aroioimage.cpio.gz followkernel" >> "$CONFIG"
 		fi
+		# Also taking care of correct soundcard order
+		sed -i '/options snd slots/c\options snd slots=snd_soc_hifiberry_dacplus' "$ALIASES"
 		cardmount ro
 		reboot
 	fi
@@ -114,6 +180,8 @@ EOF
 	if ! mount | grep -q mmcblk0p2
 	then	echo "initramfs aroioimage.cpio.gz followkernel" >> "$CONFIG"
 	fi
+	# Also taking care of correct soundcard order
+	sed -i '/options snd slots/c\options snd slots=snd_soc_hifiberry_digi' "$ALIASES"
 	cardmount ro
 	reboot
 	fi
@@ -166,6 +234,8 @@ EOF
 		if ! mount | grep -q mmcblk0p2
 		then	echo "initramfs aroioimage.cpio.gz followkernel" >> "$CONFIG"
 		fi
+		# Also taking care of correct soundcard order
+		sed -i '/options snd slots/c\options snd slots=snd_usb_audio' "$ALIASES"
 		cardmount ro
 		reboot
 	fi
@@ -192,6 +262,8 @@ EOF
 		if ! mount | grep -q mmcblk0p2
 		then	echo "initramfs aroioimage.cpio.gz followkernel" >> "$CONFIG"
 		fi
+		# Also taking care of correct soundcard order
+		sed -i '/options snd slots/c\options snd slots=snd_usb_audio' "$ALIASES"
 		cardmount ro
 		reboot
 	fi
@@ -218,6 +290,8 @@ EOF
 		if ! mount | grep -q mmcblk0p2
 		then	echo "initramfs aroioimage.cpio.gz followkernel" >> "$CONFIG"
 		fi
+		# Also taking care of correct soundcard order
+		sed -i '/options snd slots/c\options snd slots=snd_usb_audio' "$ALIASES"
 		cardmount ro
 		reboot
 	fi

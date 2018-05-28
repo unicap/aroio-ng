@@ -1,9 +1,11 @@
 #!/bin/sh
 
-
 . /boot/userconfig.txt
 
 ACTION="$1"
+
+[ "$SOUNDCARD" = "Internal HDMI audio" ] && amixer cset numid=3 2
+[ "$SOUNDCARD" = "Internal audio jack" ] && amixer cset numid=3 1
 
 function Start()
 {
