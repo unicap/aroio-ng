@@ -1,0 +1,10 @@
+config BR2_PACKAGE_PERL_LIST_MOREUTILS_XS
+	bool "perl-list-moreutils-xs"
+	depends on !BR2_STATIC_LIBS
+	help
+	  Provide the stuff missing in List::Util in XS
+
+	  https://metacpan.org/release/List-MoreUtils-XS
+
+comment "perl-list-moreutils-xs needs a toolchain w/ dynamic library"
+	depends on BR2_STATIC_LIBS
