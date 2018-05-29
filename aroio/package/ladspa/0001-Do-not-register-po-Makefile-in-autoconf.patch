@@ -1,0 +1,22 @@
+From 66bf9061596a1ad77fa43857c6d7b1c195102e80 Mon Sep 17 00:00:00 2001
+From: arne <arne.caspari@gmail.com>
+Date: Tue, 29 May 2018 16:10:58 +0200
+Subject: [PATCH] Do not register po/Makefile in autoconf
+
+---
+ configure.ac | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/configure.ac b/configure.ac
+index 40357ef..f1df97b 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -158,5 +158,4 @@ util/Makefile
+ gsm/Makefile
+ gverb/Makefile
+ metadata/Makefile
+-po/Makefile.in
+ ])
+-- 
+2.17.0
+
