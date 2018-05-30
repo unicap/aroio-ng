@@ -11,3 +11,4 @@ PERL_EXPORTER_TINY_LICENSE = Artistic or GPL-1.0+
 PERL_EXPORTER_TINY_LICENSE_FILES = COPYRIGHT LICENSE
 
 $(eval $(perl-package))
+$(eval $(host-perl-package))
