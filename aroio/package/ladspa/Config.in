@@ -2,6 +2,7 @@ config BR2_PACKAGE_LADSPA
        bool "ladspa"
        select BR2_PACKAGE_FFTW
        select BR2_PACKAGE_FFTW3F
+       select BR2_PACKAGE_PERL_LIST_MOREUTILS
        help
          Steve Harris LADSPA plugins
 

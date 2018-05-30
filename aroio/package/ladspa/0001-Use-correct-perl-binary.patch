@@ -1,0 +1,22 @@
+From 0ec3d516f90997a665b16eaf896fb584b3f1baf0 Mon Sep 17 00:00:00 2001
+From: arne <arne.caspari@gmail.com>
+Date: Wed, 30 May 2018 12:02:06 +0200
+Subject: [PATCH] Use correct perl binary
+
+---
+ makestub.pl | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/makestub.pl b/makestub.pl
+index 897f9be..fe486d7 100755
+--- a/makestub.pl
++++ b/makestub.pl
+@@ -1,4 +1,4 @@
+-#!/usr/bin/perl -w
++#!/usr/bin/env perl
+ 
+ use List::MoreUtils qw(any);
+ use XML::Parser;
+-- 
+2.17.0
+
