@@ -12,3 +12,4 @@ PERL_XML_PARSER_LICENSE = Artistic or GPL-1.0+
 PERL_XML_PARSER_LICENSE_FILES = README
 
 $(eval $(perl-package))
+$(eval $(host-perl-package))

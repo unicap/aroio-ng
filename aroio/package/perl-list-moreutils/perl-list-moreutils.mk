@@ -12,3 +12,4 @@ PERL_LIST_MOREUTILS_LICENSE = Apache-2.0
 PERL_LIST_MOREUTILS_LICENSE_FILES = ARTISTIC-1.0 LICENSE
 
 $(eval $(perl-package))
+$(eval $(host-perl-package))
