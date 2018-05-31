@@ -3,7 +3,7 @@
 . /boot/userconfig.txt
 
 CONFIG="/boot/config.txt"
-ALIASES="/etc/modprobe.d/aliases.conf"
+ALSACONFIG="/etc/modprobe.d/alsa-base.conf"
 
 case $SOUNDCARD in
 	'Internal HDMI audio')
@@ -30,7 +30,7 @@ EOF
 		then 	echo "initramfs aroioimage.cpio.gz followkernel" >> "$CONFIG"
 		fi
 		# Also taking care of correct soundcard order
-		sed -i '/options snd slots/c\options snd slots=snd_bcm2835' "$ALIASES"
+		sed -i '/options snd slots/c\options snd slots=snd_bcm2835' "$ALSACONFIG"
 		cardmount ro
 		reboot
 	fi
@@ -59,7 +59,7 @@ EOF
 		then 	echo "initramfs aroioimage.cpio.gz followkernel" >> "$CONFIG"
 		fi
 		# Also taking care of correct soundcard order
-		sed -i '/options snd slots/c\options snd slots=snd_bcm2835' "$ALIASES"
+		sed -i '/options snd slots/c\options snd slots=snd_bcm2835' "$ALSACONFIG"
 		cardmount ro
 		reboot
 	fi
@@ -88,7 +88,7 @@ EOF
 		then 	echo "initramfs aroioimage.cpio.gz followkernel" >> "$CONFIG"
 		fi
 		# Also taking care of correct soundcard order
-		sed -i '/options snd slots/c\options snd slots=snd_soc_iqaudio_dac' "$ALIASES"
+		sed -i '/options snd slots/c\options snd slots=snd_soc_iqaudio_dac' "$ALSACONFIG"
 		cardmount ro
 		reboot
 	fi
@@ -120,7 +120,7 @@ EOF
 		then	echo "initramfs aroioimage.cpio.gz followkernel" >> "$CONFIG"
 		fi
 		# Also taking care of correct soundcard order
-		sed -i '/options snd slots/c\options snd slots=snd_soc_hifiberry_dac' "$ALIASES"
+		sed -i '/options snd slots/c\options snd slots=snd_soc_hifiberry_dac' "$ALSACONFIG"
 		cardmount ro
 		reboot
 	fi
@@ -151,7 +151,7 @@ EOF
 		then	echo "initramfs aroioimage.cpio.gz followkernel" >> "$CONFIG"
 		fi
 		# Also taking care of correct soundcard order
-		sed -i '/options snd slots/c\options snd slots=snd_soc_hifiberry_dacplus' "$ALIASES"
+		sed -i '/options snd slots/c\options snd slots=snd_soc_hifiberry_dacplus' "$ALSACONFIG"
 		cardmount ro
 		reboot
 	fi
@@ -181,7 +181,7 @@ EOF
 	then	echo "initramfs aroioimage.cpio.gz followkernel" >> "$CONFIG"
 	fi
 	# Also taking care of correct soundcard order
-	sed -i '/options snd slots/c\options snd slots=snd_soc_hifiberry_digi' "$ALIASES"
+	sed -i '/options snd slots/c\options snd slots=snd_soc_hifiberry_digi' "$ALSACONFIG"
 	cardmount ro
 	reboot
 	fi
@@ -235,7 +235,7 @@ EOF
 		then	echo "initramfs aroioimage.cpio.gz followkernel" >> "$CONFIG"
 		fi
 		# Also taking care of correct soundcard order
-		sed -i '/options snd slots/c\options snd slots=snd_usb_audio' "$ALIASES"
+		sed -i '/options snd slots/c\options snd slots=snd_usb_audio' "$ALSACONFIG"
 		cardmount ro
 		reboot
 	fi
@@ -263,7 +263,7 @@ EOF
 		then	echo "initramfs aroioimage.cpio.gz followkernel" >> "$CONFIG"
 		fi
 		# Also taking care of correct soundcard order
-		sed -i '/options snd slots/c\options snd slots=snd_usb_audio' "$ALIASES"
+		sed -i '/options snd slots/c\options snd slots=snd_usb_audio' "$ALSACONFIG"
 		cardmount ro
 		reboot
 	fi
@@ -291,7 +291,7 @@ EOF
 		then	echo "initramfs aroioimage.cpio.gz followkernel" >> "$CONFIG"
 		fi
 		# Also taking care of correct soundcard order
-		sed -i '/options snd slots/c\options snd slots=snd_usb_audio' "$ALIASES"
+		sed -i '/options snd slots/c\options snd slots=snd_usb_audio' "$ALSACONFIG"
 		cardmount ro
 		reboot
 	fi
