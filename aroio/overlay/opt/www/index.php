@@ -62,6 +62,7 @@
         unset($_POST['submit']);
         print '<h1>Configuration saved, will reboot now and redirect you here...</h1>';
         sleep(3);
+        shell_exec('checksoundcard &');
         shell_exec('reboot -d 1 &');
         echo '<meta http-equiv="refresh" content="15">';
     }
@@ -481,7 +482,7 @@ else
         <span title=""><label for="Soundcard"> <? print ${soundcard._.$lang} ; ?> </label></span></a>
     </td>
     <td>
-        <?$arr_soundcard= array('Internal HDMI audio','Internal audio jack','AroioDAC','IQAudIO DAC','HiFiBerry DAC+','HiFiBerry Digi', 'RME Fireface UCX');
+        <?$arr_soundcard= array('Internal HDMI audio','Internal audio jack','AroioDAC','IQAudIO DAC','HiFiBerry DAC+','HiFiBerry Digi', 'RME Fireface UCX','Focusrite Scarlett');
         //<?$arr_soundcard= array('IQAudIO DAC','HiFiBerry DAC+','HiFiBerry Digi','M-Audio Fast Track Pro','Lynx Hilo','Focusrite Scarlett','NI Audio 8 DJ');
         print_optgroup("SOUNDCARD",$arr_soundcard,$ini_array["SOUNDCARD"]);
     ?>
@@ -541,7 +542,9 @@ netjack
 
 <tr>
 <td>
-  <? if ($ini_array["AUDIO_OUTPUT"] == "i2s"){ ?>
+<? if ($ini_array["SOUNDCARD"] != "Focusrite Scarlett"){
+
+   if ($ini_array["AUDIO_OUTPUT"] == "i2s"){ ?>
     <input class="actiongroup" type="radio" name="AUDIO_OUTPUT" value="i2s" checked> i2s
   <?} else {?>
     <input class="actiongroup" type="radio" name="AUDIO_OUTPUT" value="i2s"> i2s
@@ -582,10 +585,14 @@ netjack
 	</tr>
 	<? break;
 	}
+}
 ?>
+
 <tr>
 <td>
-  <? if ($ini_array["AUDIO_OUTPUT"] == "plug-dmixer"){ ?>
+<? if ($ini_array["SOUNDCARD"] != "Internal HDMI audio" && $ini_array["SOUNDCARD"] != "Internal audio jack"){
+
+  if ($ini_array["AUDIO_OUTPUT"] == "plug-dmixer"){ ?>
     <input class="actiongroup" type="radio" name="AUDIO_OUTPUT" value="plug-dmixer" checked> dmix
   <?} else {?>
       <input class="actiongroup" type="radio" name="AUDIO_OUTPUT" value="plug-dmixer"> dmix
@@ -622,7 +629,8 @@ netjack
     <input type="checkbox" name="DMIX_BLUEALSAAPLAY" value="ON" checked>
   <?} else {?>
     <input type="checkbox" name="DMIX_BLUEALSAAPLAY" value="ON">
-  <?}?>
+  <?}
+}?>
 </td>
 <td>
 </td>
