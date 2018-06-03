@@ -12,7 +12,7 @@ LADSPA_GETTEXTIZE = YES
 LADSPA_INSTALL_STAGING = NO
 
 
-LADSPA_DEPENDENCIES = host-gettext $(TARGET_NLS_DEPENDENCIES) host-perl-list-moreutils host-perl-exporter-tiny host-perl-xml-parser
+LADSPA_DEPENDENCIES = host-gettext $(TARGET_NLS_DEPENDENCIES) host-perl-list-moreutils host-perl-exporter-tiny host-libxml-parser-perl
 #LADSPA_CONF_OPTS = --prefix=/usr --disable-nls --disable-rpath
 
 LADSPA_SECTION = audio
