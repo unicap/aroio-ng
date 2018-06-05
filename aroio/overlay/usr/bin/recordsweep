@@ -1,0 +1,51 @@
+#!/bin/sh
+
+. /boot/userconfig.txt
+
+if ! lsusb | grep '2752:0007'
+	then	echo '<img src="/no_mic.png" border="0" style="float: left; width: 32px; margin-right: 4px;"/>No Microphone connected, please connect a <a class="forward" href="https://www.abacus-electronics.de/produkte/streaming/raumkorrektur/minidsp-umik-1.html" title="UMIK-1 ABACUS-Shop" target="_blank">miniDSP UMIK-1</a>.<br>Kein Mikrofon angeschlossen, bitte schließen Sie ein <a class="forward" href="https://www.abacus-electronics.de/produkte/streaming/raumkorrektur/minidsp-umik-1.html" title="UMIK-1 ABACUS-Shop" target="_blank">miniDSP UMIK-1</a> an.<br>' && exit
+	else	echo '<img src="/mic.gif" border="0" style="float: left; width: 32px; margin-right: 4px;"/>Microphone found, continuing with 200 sec measurement...<br>Mikrofon gefunden, Messung läuft...<br>'
+fi
+
+INFILE1='/root/Logsweep/Start.raw'
+INFILE2='/root/Logsweep/Logsweep96.raw.7z'
+INFILE3='/root/Logsweep/End.raw'
+OUTFILE='/tmp/Logsweep48_rec.raw'
+
+echo "Stopping audio processing"
+controlaudio stop
+
+cd /tmp
+
+if [ "$MSCODING" = "ON" ]
+then
+    OUTDEVICE=mscoded
+    echo '<b>ACHTUNG: Der Digitalteil des Cleaners ist eingeschaltet!
+    <br>Die Messung erfolgt nur korrekt, wenn Sie ABACUS Hardware oder andere mit aktivierter MS-Dekodierung verwenden. 
+    <br>WARNING: The digital part of the Cleaner is on! The measurement only works correctly with activated MS-decoding by ABACUS hardware or else.</b>'
+    #		else	OUTPUT="-o stereo"
+else
+    OUTDEVICE=plughw:0
+    echo '<b>ACHTUNG: Ausgabe des Messsignals erfolgt im Stereo-Modus!
+    <br>Falls Sie ABACUS Hardware nutzen stellen Sie sicher, dass der Cleaner dort ausgesachaltet ist. 
+    <br>WARNING: Measurement signal is stereo! If you´re using ABACUS hardware make sure to turn off the Cleaner!</b>'
+fi
+
+if ! [ -e /tmp/Logsweep96.raw ]
+then
+	echo "Logsweep packed, unpacking it, this may take around 20 seconds, but only needs to be done once per boot..."
+	7zr e  $INFILE2
+else
+	echo "Logsweep already unpacked, continuing..."
+fi
+
+aplay -f FLOAT_LE -r 48000 -c1 -D $OUTDEVICE $INFILE1
+arecord -Dplughw:4 -I -d 200 -t raw -r 48000 -f FLOAT_LE -c2 $OUTFILE &
+aplay -v -f FLOAT_LE -r 96000 -c2 -D $OUTDEVICE Logsweep96.raw
+aplay -f FLOAT_LE -r 48000 -c1 -D $OUTDEVICE $INFILE3
+
+rm "$OUTFILE".1
+mv "$OUTFILE".0 $OUTFILE
+echo "Measurement done! You may now further process the recording..."
+echo "Starting audio processing again..."
+controlaudio start
