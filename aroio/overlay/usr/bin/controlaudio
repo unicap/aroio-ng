@@ -30,11 +30,38 @@ function Start()
 			esac
 		;;
 
+		i2s-mscoded)
+			case "$RAW_PLAYERMS" in
+				squeezelite)
+					systemctl "$ACTION" squeezelite.service
+				;;
+
+				gmediarender)
+					systemctl "$ACTION" gmediarender.service
+				;;
+
+				shairportsync)
+					systemctl "$ACTION" shairport-sync.service
+				;;
+
+				bluealsaaplay)
+					systemctl "$ACTION" bluealsa-aplay.service
+				;;
+			esac
+		;;
+
 		plug-dmixer)
 			[ "$DMIX_SQUEEZELITE"   = "ON" ] && systemctl "$ACTION" squeezelite.service
 			[ "$DMIX_GMEDIARENDER"  = "ON" ] && systemctl "$ACTION" gmediarender.service
 			[ "$DMIX_SHAIRPORTSYNC" = "ON" ] && systemctl "$ACTION" shairport-sync.service
 			[ "$DMIX_BLUEALSAAPLAY" = "ON" ] && systemctl "$ACTION" bluealsa-aplay.service
+		;;
+
+		dmixer-mscoded)
+			[ "$DMIXMS_SQUEEZELITE"   = "ON" ] && systemctl "$ACTION" squeezelite.service
+			[ "$DMIXMS_GMEDIARENDER"  = "ON" ] && systemctl "$ACTION" gmediarender.service
+			[ "$DMIXMS_SHAIRPORTSYNC" = "ON" ] && systemctl "$ACTION" shairport-sync.service
+			[ "$DMIXMS_BLUEALSAAPLAY" = "ON" ] && systemctl "$ACTION" bluealsa-aplay.service
 		;;
 
 		jack)
@@ -55,6 +82,17 @@ function Start()
 			[ "$JACKBF_GMEDIARENDER"  = "ON" ] && systemctl "$ACTION" gmediarender.service
 			[ "$JACKBF_SHAIRPORTSYNC" = "ON" ] && systemctl "$ACTION" shairport-sync.service
 			[ "$JACKBF_BLUEALSAAPLAY" = "ON" ] && systemctl "$ACTION" bluealsa-aplay.service
+		;;
+
+		jack-bfms)
+			systemctl "$ACTION" jackd.service
+			systemctl "$ACTION" brutefir.service
+			until jack_lsp | grep brutefir ; do sleep 0.2 ; done
+			#[ "$JACKBFMS_NETJACK"      = "ON" ] && systemctl "$ACTION" netjack.service
+			[ "$JACKBFMS_SQUEEZELITE"   = "ON" ] && systemctl "$ACTION" squeezelite.service
+			[ "$JACKBFMS_GMEDIARENDER"  = "ON" ] && systemctl "$ACTION" gmediarender.service
+			[ "$JACKBFMS_SHAIRPORTSYNC" = "ON" ] && systemctl "$ACTION" shairport-sync.service
+			[ "$JACKBFMS_BLUEALSAAPLAY" = "ON" ] && systemctl "$ACTION" bluealsa-aplay.service
 		;;
 	esac
 }

@@ -128,9 +128,11 @@ function write_config()
 					case "AUDIO_OUTPUT":
 					wrtToUserconfig('AUDIO_OUTPUT',$value);
 					break;
-
 					case "RAW_PLAYER":
 					wrtToUserconfig('RAW_PLAYER',$value);
+					break;
+					case "RAW_PLAYERMS":
+					wrtToUserconfig('RAW_PLAYERMS',$value);
 					break;
 					case "DMIX_SQUEEZELITE":
 					wrtToUserconfig('DMIX_SQUEEZELITE',$value);
@@ -143,6 +145,18 @@ function write_config()
 					break;
 					case "DMIX_BLUEALSAAPLAY":
 					wrtToUserconfig('DMIX_BLUEALSAAPLAY',$value);
+					break;
+					case "DMIXMS_SQUEEZELITE":
+					wrtToUserconfig('DMIXMS_SQUEEZELITE',$value);
+					break;
+					case "DMIXMS_GMEDIARENDER":
+					wrtToUserconfig('DMIXMS_GMEDIARENDER',$value);
+					break;
+					case "DMIXMS_SHAIRPORTSYNC":
+					wrtToUserconfig('DMIXMS_SHAIRPORTSYNC',$value);
+					break;
+					case "DMIXMS_BLUEALSAAPLAY":
+					wrtToUserconfig('DMIXMS_BLUEALSAAPLAY',$value);
 					break;
 					case "JACK_SQUEEZELITE":
 					wrtToUserconfig('JACK_SQUEEZELITE',$value);
@@ -173,6 +187,21 @@ function write_config()
 					break;
 					case "JACKBF_NETJACK":
 					wrtToUserconfig('JACKBF_NETJACK',$value);
+					break;
+					case "JACKBFMS_SQUEEZELITE":
+					wrtToUserconfig('JACKBFMS_SQUEEZELITE',$value);
+					break;
+					case "JACKBFMS_GMEDIARENDER":
+					wrtToUserconfig('JACKBFMS_GMEDIARENDER',$value);
+					break;
+					case "JACKBFMS_SHAIRPORTSYNC":
+					wrtToUserconfig('JACKBFMS_SHAIRPORTSYNC',$value);
+					break;
+					case "JACKBFMS_BLUEALSAAPLAY":
+					wrtToUserconfig('JACKBFMS_BLUEALSAAPLAY',$value);
+					break;
+					case "JACKBFMS_NETJACK":
+					wrtToUserconfig('JACKBFMS_NETJACK',$value);
 					break;
 					case "SOUNDCARD":
 					wrtToUserconfig('SOUNDCARD',$value);

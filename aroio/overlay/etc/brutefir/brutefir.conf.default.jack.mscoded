@@ -13,44 +13,44 @@ logic: "cli" { port: 3000; };
 
 ## FILTER DEFINITIONS ##
 ## Set 0
-coeff"left0"{filename:"/tmp/BypassFilterL96.dbl";  format: "FLOAT64_LE"; };
-coeff"right0"{filename:"/tmp/BypassFilterR96.dbl"; format: "FLOAT64_LE"; };
+coeff"left0"{filename:"/tmp/filter/BypassFilterL96.dbl";  format: "FLOAT64_LE"; };
+coeff"right0"{filename:"/tmp/filter/BypassFilterR96.dbl"; format: "FLOAT64_LE"; };
 
 ## Set 1
-coeff"left1"{filename:"/tmp/BypassFilterL96.dbl";  format: "FLOAT64_LE"; };
-coeff"right1"{filename:"/tmp/BypassFilterR96.dbl"; format: "FLOAT64_LE"; };
+coeff"left1"{filename:"/tmp/filter/BypassFilterL96.dbl";  format: "FLOAT64_LE"; };
+coeff"right1"{filename:"/tmp/filter/BypassFilterR96.dbl"; format: "FLOAT64_LE"; };
 
 ## Set 2
-coeff"left2"{filename:"/tmp/BypassFilterL96.dbl";  format: "FLOAT64_LE"; };
-coeff"right2"{filename:"/tmp/BypassFilterR96.dbl"; format: "FLOAT64_LE"; };
+coeff"left2"{filename:"/tmp/filter/BypassFilterL96.dbl";  format: "FLOAT64_LE"; };
+coeff"right2"{filename:"/tmp/filter/BypassFilterR96.dbl"; format: "FLOAT64_LE"; };
 
 ## Set 3
-coeff"left3"{filename:"/tmp/BypassFilterL96.dbl";  format: "FLOAT64_LE"; };
-coeff"right3"{filename:"/tmp/BypassFilterR96.dbl"; format: "FLOAT64_LE"; };
+coeff"left3"{filename:"/tmp/filter/BypassFilterL96.dbl";  format: "FLOAT64_LE"; };
+coeff"right3"{filename:"/tmp/filter/BypassFilterR96.dbl"; format: "FLOAT64_LE"; };
 
 ## Set 4
-coeff"left4"{filename:"/tmp/BypassFilterL96.dbl";  format: "FLOAT64_LE"; };
-coeff"right4"{filename:"/tmp/BypassFilterR96.dbl"; format: "FLOAT64_LE"; };
+coeff"left4"{filename:"/tmp/filter/BypassFilterL96.dbl";  format: "FLOAT64_LE"; };
+coeff"right4"{filename:"/tmp/filter/BypassFilterR96.dbl"; format: "FLOAT64_LE"; };
 
 ## Set 5
-coeff"left5"{filename:"/tmp/BypassFilterL96.dbl";  format: "FLOAT64_LE"; };
-coeff"right5"{filename:"/tmp/BypassFilterR96.dbl"; format: "FLOAT64_LE"; };
+coeff"left5"{filename:"/tmp/filter/BypassFilterL96.dbl";  format: "FLOAT64_LE"; };
+coeff"right5"{filename:"/tmp/filter/BypassFilterR96.dbl"; format: "FLOAT64_LE"; };
 
 ## Set 6
-coeff"left6"{filename:"/tmp/BypassFilterL96.dbl";  format: "FLOAT64_LE"; };
-coeff"right6"{filename:"/tmp/BypassFilterR96.dbl"; format: "FLOAT64_LE"; };
+coeff"left6"{filename:"/tmp/filter/BypassFilterL96.dbl";  format: "FLOAT64_LE"; };
+coeff"right6"{filename:"/tmp/filter/BypassFilterR96.dbl"; format: "FLOAT64_LE"; };
 
 ## Set 7
-coeff"left7"{filename:"/tmp/BypassFilterL96.dbl";  format: "FLOAT64_LE"; };
-coeff"right7"{filename:"/tmp/BypassFilterR96.dbl"; format: "FLOAT64_LE"; };
+coeff"left7"{filename:"/tmp/filter/BypassFilterL96.dbl";  format: "FLOAT64_LE"; };
+coeff"right7"{filename:"/tmp/filter/BypassFilterR96.dbl"; format: "FLOAT64_LE"; };
 
 ## Set 8
-coeff"left8"{filename:"/tmp/BypassFilterL96.dbl";  format: "FLOAT64_LE"; };
-coeff"right8"{filename:"/tmp/BypassFilterR96.dbl"; format: "FLOAT64_LE"; };
+coeff"left8"{filename:"/tmp/filter/BypassFilterL96.dbl";  format: "FLOAT64_LE"; };
+coeff"right8"{filename:"/tmp/filter/BypassFilterR96.dbl"; format: "FLOAT64_LE"; };
 
 ## Set 9
-coeff"left9"{filename:"/tmp/BypassFilterL96.dbl";  format: "FLOAT64_LE"; };
-coeff"right9"{filename:"/tmp/BypassFilterR96.dbl"; format: "FLOAT64_LE"; };
+coeff"left9"{filename:"/tmp/filter/BypassFilterL96.dbl";  format: "FLOAT64_LE"; };
+coeff"right9"{filename:"/tmp/filter/BypassFilterR96.dbl"; format: "FLOAT64_LE"; };
 
 ## INPUTS / OUTPUTS ##
 input "left", "right" {
