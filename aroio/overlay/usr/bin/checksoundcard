@@ -36,6 +36,8 @@ EOF
 	fi
 	;;
 
+
+
 	'Internal audio jack')
 	if ! grep -q ONBOARD_AUDIO "$CONFIG"
 	then
@@ -65,8 +67,10 @@ EOF
 	fi
 	;;
 
+
+
 	'IQAudIO DAC')
-	if ! grep -q iqaudio "$CONFIG"
+	if ! grep -q iqaudio-dac "$CONFIG"
 	then
 		cardmount rw
 		echo "userconfig and config.txt have different entries for soundcards,"
@@ -94,7 +98,8 @@ EOF
 	fi
 	;;
 
-	
+
+
 	'HiFiBerry DAC')
 	if ! grep -q hifiberry-dac "$CONFIG"
 	then
@@ -125,6 +130,9 @@ EOF
 		reboot
 	fi
 	;;
+
+
+
 	'HiFiBerry DAC+'|'AroioDAC')
 	echo "HiFiberry DAC+"
 	if ! grep -q hifiberry-dacplus "$CONFIG"
@@ -157,6 +165,42 @@ EOF
 	fi
 	;;
 
+
+
+	'HiFiBerry DAC')
+	echo "HiFiberry DAC"
+	if ! grep -q hifiberry-dac "$CONFIG"
+	then
+		cardmount rw
+		echo "userconfig and config.txt have different entries for soundcards,"
+		echo "backing up and writing a new config.txt..."
+		cp "$CONFIG" "$CONFIG"-bak
+		cat << EOF > "$CONFIG"
+force_turbo=1
+dtdebug=1
+max_usb_current=1
+disable_splash=1
+kernel=zImage
+dtparam=i2c_arm=on
+dtoverlay=i2s-mmap
+dtoverlay=hifiberry-dac
+dtparam=spi=on
+dtoverlay=lirc-rpi,gpio_in_pin=25
+disable_overscan=1
+EOF
+
+		if ! mount | grep -q mmcblk0p2
+		then	echo "initramfs aroioimage.cpio.gz followkernel" >> "$CONFIG"
+		fi
+		# Also taking care of correct soundcard order
+		sed -i '/options snd slots/c\options snd slots=snd_soc_hifiberry_dac' "$ALSACONFIG"
+		cardmount ro
+		reboot
+	fi
+	;;
+
+
+
 	'HiFiBerry Digi')
 	echo "HiFiBerry Digi"
 	if ! grep -q hifiberry-digi "$CONFIG"
@@ -187,6 +231,8 @@ EOF
 	fi
 	;;
 
+
+
 	'M-Audio Fast Track Pro')
 	if ! grep -q "#fasttrack_pro" "$CONFIG"
 	then
@@ -208,10 +254,14 @@ EOF
 		if ! mount | grep -q mmcblk0p2
 		then	echo "initramfs aroioimage.cpio.gz followkernel" >> "$CONFIG"
 		fi
+		# Also taking care of correct soundcard order
+		sed -i '/options snd slots/c\options snd slots=snd_usb_audio' "$ALSACONFIG"
 		cardmount ro
 		reboot
 	fi
 	;;
+
+
 
 	'Focusrite Scarlett')
 	if ! grep -q "#fr_scarlett" "$CONFIG"
@@ -241,6 +291,8 @@ EOF
 	fi
 	;;
 
+
+
 	'NI Audio 8 DJ')
 	if ! grep -q "#ni_audio8dj" "$CONFIG"
 	then
@@ -269,6 +321,8 @@ EOF
 	fi
 	;;
 
+
+
 	'RME Fireface UCX')
 	if ! grep -q "#fireface_ucx" "$CONFIG"
 	then
@@ -296,6 +350,37 @@ EOF
 		reboot
 	fi
 	;;
+
+
+	'USB Class Compliant')
+	if ! grep -q "#usb_class_compliant" "$CONFIG"
+	then
+		cardmount rw
+		echo "userconfig and config.txt have different entries for soundcards,"
+		echo "backing up and writing a new config.txt..."
+		cp "$CONFIG" "$CONFIG"-bak
+		cat << EOF > "$CONFIG"
+force_turbo=1
+dtdebug=1
+max_usb_current=1
+disable_splash=1
+kernel=zImage
+disable_overscan=1
+dtoverlay=lirc-rpi,gpio_in_pin=25
+#usb_class_compliant
+EOF
+
+		if ! mount | grep -q mmcblk0p2
+		then	echo "initramfs aroioimage.cpio.gz followkernel" >> "$CONFIG"
+		fi
+		# Also taking care of correct soundcard order
+		sed -i '/options snd slots/c\options snd slots=snd_usb_audio' "$ALSACONFIG"
+		cardmount ro
+		reboot
+	fi
+	;;
+
+
 
 	'NOTAroioDAC')
 	echo "AroioDAC!"
@@ -328,4 +413,3 @@ EOF
 	;;
 
 esac
-#NI Audio 8 DJ

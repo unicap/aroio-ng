@@ -380,15 +380,25 @@ else
   </tr>
   <tr>
     <td>
-    <? if ($ini_array["BRUTEFIR"] == "ON"){ ?>
+    <? if ($ini_array["ADVANCED"] == "ON"){ ?>
         <a style="text-decoration: none href="#" title="<? print ${helptext_jack_buffer._.$lang} ?>"class="tooltip">
         <span title=""><label for="Jackbuffer"> <? print ${jack_buffer._.$lang} ; ?> </label></span></a>
     </td>
     <td>
-        <?$arr_jackbuffer= array(2048,4096,8192);
+        <?$arr_jackbuffer= array(32,64,128,256,512,1024,2048,4096,8192,16384);
         print_optgroup("JACKBUFFER",$arr_jackbuffer,$ini_array["JACKBUFFER"]);?>
     </td>
-    <?}?>
+    <tr>
+    <td>
+        <a style="text-decoration: none href="#" title="<? print ${helptext_jack_period._.$lang} ?>"class="tooltip">
+        <span title=""><label for="Jackperiod"> <? print ${jack_period._.$lang} ; ?> </label></span></a>
+    </td>
+    <td>
+        <?$arr_jackperiod= array(2,3);
+        print_optgroup("JACKPERIOD",$arr_jackperiod,$ini_array["JACKPERIOD"]);?>
+    </td>
+	</tr>
+	<?}?>
   </tr>
   <tr>
     <td>
@@ -396,7 +406,7 @@ else
         <span title=""><label for="Soundcard"> <? print ${soundcard._.$lang} ; ?> </label></span></a>
     </td>
     <td>
-        <?$arr_soundcard= array('Internal HDMI audio','Internal audio jack','AroioDAC','IQAudIO DAC','HiFiBerry DAC+','HiFiBerry Digi','RME Fireface UCX','Focusrite Scarlett','USB Class Compliant device');
+        <?$arr_soundcard= array('Internal HDMI audio','Internal audio jack','AroioDAC','IQAudIO DAC','HiFiBerry DAC','HiFiBerry DAC+','HiFiBerry Digi','RME Fireface UCX','Focusrite Scarlett','M-Audio Fast Track Pro','USB Class Compliant');
         //<?$arr_soundcard= array('IQAudIO DAC','HiFiBerry DAC+','HiFiBerry Digi','M-Audio Fast Track Pro','Lynx Hilo','Focusrite Scarlett','NI Audio 8 DJ');
         print_optgroup("SOUNDCARD",$arr_soundcard,$ini_array["SOUNDCARD"]);
     ?>
@@ -422,27 +432,25 @@ else
         switch ($ini_array["SOUNDCARD"]){
             case "Internal HDMI audio":
             case "Internal audio jack":
-            case "M-Audio Fasttrack Pro":
+            case "M-Audio Fast Track Pro":
                 $arr_rate= array('44100','48000');
-                break;
-
-            case "Platzhalter":
-                $arr_rate= array('44100','48000','88200');
                 break;
 
             case "AudioQuest DragonFly":
             case "AudioQuest Beetle":
-            case "RME FireFace UCX":
-                $arr_rate= array('44100','48000','88200','96000');
-                break;
-
-            case "Platzhalter2":
-                $arr_rate= array('44100','48000','88200','96000','192000');
+            case "RME Fireface UCX":
+            case "Focusrite Scarlett":
+                $arr_rate= array('44100','48000','96000');
                 break;
 
             case "XMOS Evaluation Board":
-            case "USB Class Compliant device":
-                $arr_rate= array('44100','48000','88200','96000','192000','348000');
+            case "USB Class Compliant":
+            case "AroioDAC":
+            case "IQAudIO DAC":
+            case "HiFiBerry Digi":
+            case "HiFiBerry DAC":
+            case "HiFiBerry DAC":
+                $arr_rate= array('44100','48000','96000','192000');
                 break;
             }
         print_optgroup("RATE",$arr_rate,$ini_array["RATE"]);
@@ -475,7 +483,7 @@ shairport
 btalsa
 </td>
 <td>
-netjack
+Line In
 </td>
 </tr>
 
@@ -714,11 +722,11 @@ if ($ini_array["SOUNDCARD"] != "Internal HDMI audio" && $ini_array["SOUNDCARD"] 
   <?}?>
 </td>
 <td>
-	<input type="hidden" name="JACK_NETJACK" value="OFF">
-  <? if ($ini_array["JACK_NETJACK"] == "ON"){ ?>
-    <input type="checkbox" id="jack" name="JACK_NETJACK" value="ON" checked>
+	<input type="hidden" name="JACK_INPUT" value="OFF">
+  <? if ($ini_array["JACK_INPUT"] == "ON"){ ?>
+    <input type="checkbox" id="jack" name="JACK_INPUT" value="ON" checked>
   <?} else {?>
-    <input type="checkbox" id="jack" name="JACK_NETJACK" value="ON">
+    <input type="checkbox" id="jack" name="JACK_INPUT" value="ON">
   <?}?>
 </td>
 </tr>
@@ -765,11 +773,11 @@ if ($ini_array["SOUNDCARD"] != "Internal HDMI audio" && $ini_array["SOUNDCARD"] 
     </td>
 
     <td>
-	    <input type="hidden" name="JACKBF_NETJACK" value="OFF"> <?
-        if ($ini_array["JACKBF_NETJACK"] == "ON")
-            { ?> <input type="checkbox" id="jackbf" name="JACKBF_NETJACK" value="ON" checked> <?}
+	    <input type="hidden" name="JACKBF_INPUT" value="OFF"> <?
+        if ($ini_array["JACKBF_INPUT"] == "ON")
+            { ?> <input type="checkbox" id="jackbf" name="JACKBF_INPUT" value="ON" checked> <?}
         else
-          {?> <input type="checkbox" id="jackbf" name="JACKBF_NETJACK" value="ON"> <?}?>
+          {?> <input type="checkbox" id="jackbf" name="JACKBF_INPUT" value="ON"> <?}?>
     </td>
 </tr>
 
@@ -815,11 +823,11 @@ if ($ini_array["SOUNDCARD"] != "Internal HDMI audio" && $ini_array["SOUNDCARD"] 
     </td>
 
     <td>
-	    <input type="hidden" name="JACKBFMS_NETJACK" value="OFF"> <?
-        if ($ini_array["JACKBFMS_NETJACK"] == "ON")
-            { ?> <input type="checkbox" id="jackbfms" name="JACKBFMS_NETJACK" value="ON" checked> <?}
+	    <input type="hidden" name="JACKBFMS_INPUT" value="OFF"> <?
+        if ($ini_array["JACKBFMS_INPUT"] == "ON")
+            { ?> <input type="checkbox" id="jackbfms" name="JACKBFMS_INPUT" value="ON" checked> <?}
         else
-          {?> <input type="checkbox" id="jackbfms" name="JACKBFMS_NETJACK" value="ON"> <?}?>
+          {?> <input type="checkbox" id="jackbfms" name="JACKBFMS_INPUT" value="ON"> <?}?>
     </td>
 </tr>
 

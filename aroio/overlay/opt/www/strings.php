@@ -197,6 +197,9 @@
     $jack_buffer_en='Jack buffer size';
     $jack_buffer_de='Jack Puffergr&ouml;&szlig;e';
     
+    $jack_period_en='Jack period size';
+    $jack_period_de='Jack Periodengr&ouml;&szlig;e';
+    
     $soundcard_en='Audio card';
     $soundcard_de='Soundkarte';
         //HELPTEXT
@@ -238,6 +241,9 @@
     
     $helptext_jack_buffer_en='Selection of the jack buffer size. The recommended default value is 2048.';
     $helptext_jack_buffer_de='Auswahl der Jack Puffer-Gr&ouml;&szlig;e. Standardm&auml;&szlig;ig wird hier der Wert 2048 empfohlen.';
+    
+    $helptext_jack_period_en='Selection of the jack period size. The recommended default value for USB cards is 3.';
+    $helptext_jack_period_de='Auswahl der Jack Periodengr&ouml;&szlig;e. F&uuml;r USB Interfaces wird der Wert 3 empfohlen.';
     
     $helptext_showpwd_en='Show WLAN key.';
     $helptext_showpwd_de='WLAN-Schlüssel anzeigen';

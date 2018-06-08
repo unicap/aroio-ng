@@ -170,8 +170,8 @@ function write_config()
 					case "JACK_BLUEALSAAPLAY":
 					wrtToUserconfig('JACK_BLUEALSAAPLAY',$value);
 					break;
-					case "JACK_NETJACK":
-					wrtToUserconfig('JACK_NETJACK',$value);
+					case "JACK_INPUT":
+					wrtToUserconfig('JACK_INPUT',$value);
 					break;
 					case "JACKBF_SQUEEZELITE":
 					wrtToUserconfig('JACKBF_SQUEEZELITE',$value);
@@ -185,8 +185,8 @@ function write_config()
 					case "JACKBF_BLUEALSAAPLAY":
 					wrtToUserconfig('JACKBF_BLUEALSAAPLAY',$value);
 					break;
-					case "JACKBF_NETJACK":
-					wrtToUserconfig('JACKBF_NETJACK',$value);
+					case "JACKBF_INPUT":
+					wrtToUserconfig('JACKBF_INPUT',$value);
 					break;
 					case "JACKBFMS_SQUEEZELITE":
 					wrtToUserconfig('JACKBFMS_SQUEEZELITE',$value);
@@ -200,8 +200,8 @@ function write_config()
 					case "JACKBFMS_BLUEALSAAPLAY":
 					wrtToUserconfig('JACKBFMS_BLUEALSAAPLAY',$value);
 					break;
-					case "JACKBFMS_NETJACK":
-					wrtToUserconfig('JACKBFMS_NETJACK',$value);
+					case "JACKBFMS_INPUT":
+					wrtToUserconfig('JACKBFMS_INPUT',$value);
 					break;
 					case "SOUNDCARD":
 					wrtToUserconfig('SOUNDCARD',$value);

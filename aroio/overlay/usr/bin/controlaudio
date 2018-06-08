@@ -9,6 +9,9 @@ ACTION="$1"
 
 function Start()
 {
+
+sed -i "/#SAMPLINGRATE/c\        rate "$RATE" #SAMPLINGRATE" /etc/asound.conf
+
 	case "$AUDIO_OUTPUT" in
 		i2s)
 			case "$RAW_PLAYER" in
@@ -71,6 +74,7 @@ function Start()
 			[ "$JACK_GMEDIARENDER"  = "ON" ] && systemctl "$ACTION" gmediarender.service
 			[ "$JACK_SHAIRPORTSYNC" = "ON" ] && systemctl "$ACTION" shairport-sync.service
 			[ "$JACK_BLUEALSAAPLAY" = "ON" ] && systemctl "$ACTION" bluealsa-aplay.service
+			[ "$JACK_INPUT" = "ON" ] && jack_connect system:capture_1 system:playback_1 && jack_connect system:capture_2 system:playback_2
 		;;
 
 		jack-bf)
@@ -82,6 +86,7 @@ function Start()
 			[ "$JACKBF_GMEDIARENDER"  = "ON" ] && systemctl "$ACTION" gmediarender.service
 			[ "$JACKBF_SHAIRPORTSYNC" = "ON" ] && systemctl "$ACTION" shairport-sync.service
 			[ "$JACKBF_BLUEALSAAPLAY" = "ON" ] && systemctl "$ACTION" bluealsa-aplay.service
+			[ "$JACKBF_INPUT" = "ON" ] && jack_connect system:capture_1 brutefir:input-0 && jack_connect system:capture_2 brutefir:input-1
 		;;
 
 		jack-bfms)
@@ -93,6 +98,7 @@ function Start()
 			[ "$JACKBFMS_GMEDIARENDER"  = "ON" ] && systemctl "$ACTION" gmediarender.service
 			[ "$JACKBFMS_SHAIRPORTSYNC" = "ON" ] && systemctl "$ACTION" shairport-sync.service
 			[ "$JACKBFMS_BLUEALSAAPLAY" = "ON" ] && systemctl "$ACTION" bluealsa-aplay.service
+			[ "$JACKBFMS_INPUT" = "ON" ] && jack_connect system:capture_1 brutefir:input-0 && jack_connect system:capture_2 brutefir:input-1
 		;;
 	esac
 }

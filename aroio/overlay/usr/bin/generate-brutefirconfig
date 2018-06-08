@@ -3,9 +3,10 @@
 . /boot/userconfig.txt
 CHANNELS="2"
 
+
 case $CHANNELS in
 	2)
-		if [ "$MSCODING" = "ON"  ]
+		if [ "$AUDIO_OUTPUT" = "jack-bfms" ]
 		then	cp /etc/brutefir/brutefir.conf.default.jack.mscoded /etc/brutefir/brutefir.conf
 		else	cp /etc/brutefir/brutefir.conf.default.jack.stereo /etc/brutefir/brutefir.conf
 		fi
@@ -15,6 +16,8 @@ case $CHANNELS in
 		cp /etc/brutefir/brutefir.conf.default.jack.4-channel /etc/brutefir/brutefir.conf
 		;;
 esac
+
+sed -i "/samplingrate/c\samplingrate: "$RATE"" /etc/brutefir/brutefir.conf
 
 counter=-1
 case $CHANNELS in
