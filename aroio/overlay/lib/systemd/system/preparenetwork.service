@@ -1,0 +1,15 @@
+[Unit]
+Description=Network preparation unit
+After=local-fs.target
+Requires=local-fs.target
+Before=wpa_supplicant@wlan0.service
+#RequiresMountsFor=/boot
+
+[Service]
+Type=oneshot
+EnvironmentFile=/boot/userconfig.txt
+ExecStartPre=/bin/sh -c '/bin/echo "" > /etc/wpa_supplicant/wpa_supplicant-wlan0.conf'
+ExecStart=-/bin/sh -c '[ "$WLANPWD" != "" ] && /sbin/wpa_passphrase "$WLANSSID" "$WLANPWD" > /etc/wpa_supplicant/wpa_supplicant-wlan0.conf'
+
+[Install]
+RequiredBy=multi-user.target
