@@ -1,8 +1,6 @@
 ## GENERAL ##
 sampling_rate: 96000;
-filter_length: 65536;
-#filter_length: 32768,2;
-#filter_length: 16384,4;
+filter_length: 65535;
 overflow_warnings: true;
 show_progress: false;
 max_dither_table_size: 0;

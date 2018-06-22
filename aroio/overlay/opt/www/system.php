@@ -227,20 +227,37 @@ if ($test_wlan == "0"){?>
     <td>
       <input class="button" type="submit" class="actiongroup" value=" <? print ${button_ifconfig._.$lang} ?> " name="ifconfig">
     </td>
+
     <td>
       <input class="button" type="submit" class="actiongroup" value=" <? print ${button_dmesg._.$lang} ?> " name="dmesg">
     </td>
+
     <td>
       <input class="button" type="submit" class="actiongroup" value=" <? print ${button_mount._.$lang} ?> " name="mount">
     </td>
-  </tr>
-  <tr>
+
     <td>
       <input class="button" type="submit" class="actiongroup" value=" <? print ${button_free._.$lang} ?> " name="free">
     </td>
+  </tr>
+
+  <tr>
     <td>
       <input class="button" type="submit" class="actiongroup" value="squeezelitelog" name="squeezelitelog">
     </td>
+
+    <td>
+      <input class="button" type="submit" class="actiongroup" value="systemlog" name="systemlog">
+    </td>
+
+    <td>
+      <input class="button" type="submit" class="actiongroup" value="jackdlog" name="jackdlog">
+    </td>
+
+    <td>
+      <input class="button" type="submit" class="actiongroup" value="brutefirlog" name="brutefirlog">
+    </td>
+
     <td>
       <input class="button" type="submit" class="actiongroup" value="Audio-HW-Info" name="Audio-HW-Info">
     </td>
@@ -256,10 +273,16 @@ if ( isset($_POST['mount']) )
 print_cmdout('mount');
 if ( isset($_POST['free']) )
 print_cmdout('free');
+if ( isset($_POST['systemlog']) )
+	print_journalctl_boot();
 if ( isset($_POST['squeezelitelog']) )
-print_journalctl('squeezelite');
+	print_journalctl('squeezelite');
+if ( isset($_POST['jackdlog']) )
+	print_journalctl('jackd');
+if ( isset($_POST['brutefirlog']) )
+	print_journalctl('brutefir');
 if ( isset($_POST['Audio-HW-Info']) )
-print_audio_hw_params();
+	print_audio_hw_params();
 ?>
 </fieldset>
 </form>

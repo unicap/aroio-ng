@@ -17,7 +17,10 @@ case $CHANNELS in
 		;;
 esac
 
+[ "$BF_PARTITIONS" != "1" ] && BF_PARTITIONS=$(( 65536 / $BF_PARTITIONS )),"$BF_PARTITIONS" || BF_PARTITIONS='65536'
+
 sed -i "/samplingrate/c\samplingrate: "$RATE"" /etc/brutefir/brutefir.conf
+sed -i "/filter_length/c\filter_length: $BF_PARTITIONS;" /etc/brutefir/brutefir.conf
 
 counter=-1
 case $CHANNELS in

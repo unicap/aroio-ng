@@ -121,10 +121,27 @@ function write_config()
 					case "JACKBUFFER":
 					wrtToUserconfig('JACKBUFFER',$value);
 					break;
+					case "JACKPERIOD":
+					wrtToUserconfig('JACKPERIOD',$value);
+					break;
+					case "SQUEEZE_ALSABUFFER":
+					wrtToUserconfig('SQUEEZE_ALSABUFFER',$value);
+					break;
+					case "SQUEEZE_ALSAPERIOD":
+					wrtToUserconfig('SQUEEZE_ALSAPERIOD',$value);
+					break;
+					case "SQUEEZE_INTBUFFER":
+					wrtToUserconfig('SQUEEZE_INTBUFFER',$value);
+					break;
+					case "SQUEEZE_OUTBUFFER":
+					wrtToUserconfig('SQUEEZE_OUTBUFFER',$value);
+					break;
+					case "BF_PARTITIONS":
+					wrtToUserconfig('BF_PARTITIONS',$value);
+					break;
 					case "AUDIOPLAYER":
 					wrtToUserconfig('PLAYER',$value);
 					break;
-
 					case "AUDIO_OUTPUT":
 					wrtToUserconfig('AUDIO_OUTPUT',$value);
 					break;
@@ -400,7 +417,20 @@ function print_txtrelative($file)
 // $unit gibt zu übergebende unit an.
 function print_journalctl($unit)
 {
-	exec("journalctl -u $unit",$arr_out);
+	exec("journalctl -b -u $unit",$arr_out);
+	$out = '<div class="system">';
+	foreach($arr_out as $line)
+	{
+		$out .= $line.'<br>';
+	}
+	$out .= '<div>';
+	echo $out;
+}
+
+// Gibt journalctl -b in eigenem div aus.
+function print_journalctl_boot()
+{
+	exec("journalctl -b",$arr_out);
 	$out = '<div class="system">';
 	foreach($arr_out as $line)
 	{
