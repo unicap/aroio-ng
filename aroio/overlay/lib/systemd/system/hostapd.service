@@ -1,0 +1,16 @@
+[Unit]
+Description=Hostapd Authenticator
+Wants=network-online.target udhcpd.service
+After=systemd-networkd.service
+After=sys-subsystem-net-devices-wlan.device
+After=udhcpd.service hostapd-preparation.service
+#BindsTo=udhcpd.service
+ConditionPathExists=/tmp/network_unconfigured
+
+[Service]
+Type=forking
+PIDFile=/run/hostapd.pid
+ExecStart=/usr/sbin/hostapd /etc/hostapd/hostapd.conf -P /run/hostapd.pid -B
+
+[Install]
+WantedBy=multi-user.target

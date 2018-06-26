@@ -11,6 +11,7 @@ EnvironmentFile=/boot/userconfig.txt
 ExecStart=/bin/jackd -R -d alsa -r $RATE -p $JACKBUFFER -n $JACKPERIOD
 ExecStartPost=/bin/sh -c 'until jack_lsp ; do sleep 0.2 ; done'
 ExecStopPost=/bin/sh -c 'while jack_lsp ; do sleep 0.2 ; done'
+ExecStop=/bin/kill -9 $MAINPID
 Restart=always
 
 [Install]

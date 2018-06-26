@@ -1,0 +1,13 @@
+[Unit]
+Description=Hostapd preparator
+Wants=network-online.target udhcpd.service
+After=systemd-networkd.service multi-user.target sys-subsystem-net-devices-wlan.device
+Before=udhcpd.service
+
+[Service]
+Type=oneshot
+ExecStartPre=/bin/sleep 10
+ExecStart=/bin/sh -c "ifconfig wlan0 | grep 'inet addr' || ifconfig eth0 | grep 'inet addr' ||  touch /tmp/network_unconfigured "
+
+[Install]
+WantedBy=multi-user.target

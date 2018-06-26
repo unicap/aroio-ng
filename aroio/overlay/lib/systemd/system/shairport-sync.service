@@ -1,6 +1,6 @@
 [Unit]
 Description=Shairport-sync Audio Player
-After=syslog.target sound.target jackd.service network.target checkuserconfig.service nss-lookup.target
+After=syslog.target sound.target jackd.service network-online.target checkuserconfig.service nss-lookup.target
 
 [Service]
 Type=simple

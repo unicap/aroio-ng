@@ -1,9 +1,8 @@
 [Unit]
 Description=Gmedia Renderer Audio Player
 After=syslog.target sound.target audioplayers.target network-online.target checkuserconfig.service
-#StopWhenUnneeded=yes
 Requires=network.target
-#Wants=jackd.service
+Wants=network-online.target
 
 [Service]
 Type=simple

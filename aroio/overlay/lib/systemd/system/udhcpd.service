@@ -1,0 +1,15 @@
+[Unit]
+Description=udhcpd DHCP server
+After=systemd-networkd.service
+After=sys-subsystem-net-devices-wlan.device hostapd-preparation.service
+BindsTo=hostapd.service
+ConditionPathExists=/tmp/network_unconfigured
+
+[Service]
+Type=simple
+ExecStartPre=/sbin/ifconfig wlan0 192.168.99.1 up
+ExecStart=/sbin/udhcpd -f -S -I 192.168.99.1 /etc/udhcpd.conf
+ExecStop=/bin/kill -9 $MAINPID
+
+[Install]
+WantedBy=multi-user.target

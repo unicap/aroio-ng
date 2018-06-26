@@ -125,3 +125,5 @@ case "$ACTION" in
 	Start
 	;;
 esac
+
+exit 0
