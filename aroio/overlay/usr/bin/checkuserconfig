@@ -14,7 +14,8 @@ fi
 [[ "$RATE" != "44100" && "$RATE" != "48000" && "$RATE" != "96000" && RATE != "192000" ]] && RATE="96000"
 [[ "$HOSTNAME" = "" || "$HOSTNAME" = "(none)" ]] && HOSTNAME="AroioOS"
 [[ "$PLAYERNAME" = "" || "$PLAYERNAME" = "(none)" ]] && PLAYERNAME="$HOSTNAME"
-[[ "$DHCP" = "" || "$DHCP" = "OFF" ]] && [[ "$IPADDR" = "" || "$NETMASK" = "" || "$DNSSERV" = "" || "$GATEWAY" = "" ]] && DHCP="ON"
+[[ "$LAN_DHCP" = "" || "$LAN_DHCP" = "OFF" ]] && [[ "$LAN_IPADDR" = "" || "$LAN_NETMASK" = "" || "$LAN_DNSSERV" = "" || "$LAN_GATEWAY" = "" ]] && LAN_DHCP="ON"
+[[ "$WLAN_DHCP" = "" || "$WLAN_DHCP" = "OFF" ]] && [[ "$WLAN_IPADDR" = "" || "$WLAN_NETMASK" = "" || "$WLAN_DNSSERV" = "" || "$WLAN_GATEWAY" = "" ]] && WLAN_DHCP="ON"
 
 [ "$ADVANCED" = "" ] &&					ADVANCED="OFF"
 [ "$UPDATESERVER" = "" ] &&				UPDATESERVER="https://www.abacus-electronics.de/aroio-4"
@@ -31,15 +32,9 @@ fi
 [ "$PLATFORM" = "" ] &&					PLATFORM="AroioEX"
 [ "$PLAYERNAME" = "" ] &&				PLAYERNAME="$HOSTNAME"
 [ "$BTKEY" = "" ] &&					BTKEY="2107"
-#[ "$BLUEALSAAPLAY" = "" ] &&			BLUEALSAAPLAY="ON"
-#[ "$JACKD" = "" ] &&					JACKD="OFF"
-#[ "$SQUEEZELITE" = "" ] &&				SQUEEZELITE="ON"
-#[ "$GMEDIARENDER" = "" ] &&			GMEDIARENDER="ON"
-#[ "$SHAIRPORTSYNC" = "" ] &&			SHAIRPORTSYNC="ON"
 [ "$MSCODING" = "" ] &&					MSCODING="OFF"
-[ "$VOLUME" = "" ] &&					VOLUME="0 dB"
+[ "$VOLUME_START" = "" ] &&				VOLUME_START="0 dB"
 [ "$USERPASSWD" = "" ] &&				USERPASSWD="abacus"
-#[ "$BRUTEFIR" = "" ] &&				BRUTEFIR="OFF"
 [ "$CHANNELS" = "" ] &&					CHANNELS="2"
 [ "$DEF_COEFF" = "" ] &&				DEF_COEFF="0"
 [ "$COEFF_ATT0" = "" ] &&				COEFF_ATT="0"
@@ -49,7 +44,7 @@ fi
 #[ "$SCOEFF_DELAY0" = "" ] &&			SCOEFF_DELAY="0"
 [ "$LOAD_PREFILTER" = "" ] &&			LOAD_PREFILTER="ON"
 
-[ "$AUDIO_OUTPUT" = "" ] &&				AUDIO_OUTPUT="plug-dmixer"
+[ "$AUDIO_OUTPUT" = "" ] &&				AUDIO_OUTPUT="vol-plug"
 
 [ "$RAW_PLAYER" = "" ] &&				RAW_PLAYER="squeezelite"
 [ "$RAW_PLAYERMS" = "" ] &&				RAW_PLAYERMS="squeezelite"
@@ -123,10 +118,12 @@ done
 ## Write everything to a temporary userconfig.txt
 rm /tmp/userconfig.txt &> /dev/null
 for i in UPDATESERVER USEBETA PLATFORM USERPASSWD \
-HOSTNAME DHCP IPADDR NETMASK DNSSERV GATEWAY WLANSSID WLANPWD \
+HOSTNAME \
+LAN_DHCP LAN_IPADDR LAN_NETMASK LAN_DNSSERV LAN_GATEWAY  \
+WLAN_DHCP WLAN_IPADDR WLAN_NETMASK WLAN_DNSSERV WLAN_GATEWAY WLANSSID WLANPWD \
 SERVERNAME SERVERPORT SQUEEZEUSER SQUEEZEPWD PLAYERNAME \
 BTKEY ADVANCED \
-CHANNELS RATE MSCODING VOLUME \
+CHANNELS RATE MSCODING VOLUME_START \
 JACKBUFFER JACKPERIOD SQUEEZE_ALSABUFFER SQUEEZE_ALSAPERIOD SQUEEZE_INTBUFFER SQUEEZE_OUTBUFFER BF_PARTITIONS \
 SOUNDCARD DEBUG AUDIO_OUTPUT \
 RAW_PLAYER RAW_PLAYERMS \

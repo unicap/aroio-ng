@@ -4,6 +4,8 @@
 
 ACTION="$1"
 
+echo "Starting controlaudio..."
+
 [ "$SOUNDCARD" = "Internal HDMI audio" ] && amixer cset numid=3 2
 [ "$SOUNDCARD" = "Internal audio jack" ] && amixer cset numid=3 1
 
@@ -13,7 +15,7 @@ function Start()
 sed -i "/#SAMPLINGRATE/c\        rate "$RATE" #SAMPLINGRATE" /etc/asound.conf
 
 	case "$AUDIO_OUTPUT" in
-		i2s)
+		vol-plug)
 			case "$RAW_PLAYER" in
 				squeezelite)
 					systemctl "$ACTION" squeezelite.service
@@ -33,7 +35,7 @@ sed -i "/#SAMPLINGRATE/c\        rate "$RATE" #SAMPLINGRATE" /etc/asound.conf
 			esac
 		;;
 
-		i2s-mscoded)
+		vol-plug-ms)
 			case "$RAW_PLAYERMS" in
 				squeezelite)
 					systemctl "$ACTION" squeezelite.service
@@ -53,21 +55,21 @@ sed -i "/#SAMPLINGRATE/c\        rate "$RATE" #SAMPLINGRATE" /etc/asound.conf
 			esac
 		;;
 
-		plug-dmixer)
+		vol-plug-dmix)
 			[ "$DMIX_SQUEEZELITE"   = "ON" ] && systemctl "$ACTION" squeezelite.service
 			[ "$DMIX_GMEDIARENDER"  = "ON" ] && systemctl "$ACTION" gmediarender.service
 			[ "$DMIX_SHAIRPORTSYNC" = "ON" ] && systemctl "$ACTION" shairport-sync.service
 			[ "$DMIX_BLUEALSAAPLAY" = "ON" ] && systemctl "$ACTION" bluealsa-aplay.service
 		;;
 
-		dmixer-mscoded)
+		vol-plug-dmix-ms)
 			[ "$DMIXMS_SQUEEZELITE"   = "ON" ] && systemctl "$ACTION" squeezelite.service
 			[ "$DMIXMS_GMEDIARENDER"  = "ON" ] && systemctl "$ACTION" gmediarender.service
 			[ "$DMIXMS_SHAIRPORTSYNC" = "ON" ] && systemctl "$ACTION" shairport-sync.service
 			[ "$DMIXMS_BLUEALSAAPLAY" = "ON" ] && systemctl "$ACTION" bluealsa-aplay.service
 		;;
 
-		jack)
+		vol-jack)
 			systemctl "$ACTION" jackd.service
 			#[ "$JACK_NETJACK"      = "ON" ] && systemctl "$ACTION" netjack.service
 			[ "$JACK_SQUEEZELITE"   = "ON" ] && systemctl "$ACTION" squeezelite.service
@@ -77,7 +79,7 @@ sed -i "/#SAMPLINGRATE/c\        rate "$RATE" #SAMPLINGRATE" /etc/asound.conf
 			[ "$JACK_INPUT" = "ON" ] && sleep 0.2 && jack_connect system:capture_1 system:playback_1 && jack_connect system:capture_2 system:playback_2
 		;;
 
-		jack-bf)
+		vol-jack-bf)
 			systemctl "$ACTION" jackd.service
 			systemctl "$ACTION" brutefir.service
 			until jack_lsp | grep brutefir ; do sleep 0.2 ; done
@@ -89,7 +91,7 @@ sed -i "/#SAMPLINGRATE/c\        rate "$RATE" #SAMPLINGRATE" /etc/asound.conf
 			[ "$JACKBF_INPUT" = "ON" ] && sleep 0.2 && jack_connect system:capture_1 brutefir:input-0 && jack_connect system:capture_2 brutefir:input-1
 		;;
 
-		jack-bfms)
+		vol-jack-bfms)
 			systemctl "$ACTION" jackd.service
 			systemctl "$ACTION" brutefir.service
 			until jack_lsp | grep brutefir ; do sleep 0.2 ; done

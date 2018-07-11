@@ -48,188 +48,9 @@ function validate_input($case,$input)
 
 function write_config()
 {
-	//$shell_exec_ret=shell_exec('cardmount rw');
-	//$handle=fopen("/boot/userconfig.txt","w");
 	foreach($_POST as $key=> $value)
 		{
-			switch($key)
-				{
-					case "LANG":
-					//$string = $key."=".escapeshellarg($value);
-					wrtToUserconfig('LANG',$value);
-					break;
-					case "HOSTNAME":
-					wrtToUserconfig('HOSTNAME',$value);
-					break;
-					case "DHCP":
-					wrtToUserconfig('DHCP',$value);
-					break;
-					case "IPADDR":
-					wrtToUserconfig('IPADDR',$value);
-					break;
-					case "NETMASK":
-					wrtToUserconfig('NETMASK',$value);
-					break;
-					case "DNSSERV":
-					wrtToUserconfig('DNSSERV',$value);
-					break;
-					case "GATEWAY":
-					wrtToUserconfig('GATEWAY',$value);
-					break;
-					case "WLANSSID":
-					wrtToUserconfig('WLANSSID',$value);
-					break;
-					case "WLANPWD":
-					wrtToUserconfig('WLANPWD',$value);
-					break;
-					case "MSCODING":
-					wrtToUserconfig('MSCODING',$value);
-					break;
-					case "PLATFORM":
-					wrtToUserconfig('PLATFORM',$value);
-					break;
-					case "DEBUG":
-					wrtToUserconfig('DEBUG',$value);
-					break;
-					case "SERVERNAME":
-					wrtToUserconfig('SERVERNAME',$value);
-					break;
-					case "SERVERPORT":
-					wrtToUserconfig('SERVERPORT',$value);
-					break;
-					case "SQUEEZEUSER":
-					wrtToUserconfig('SQUEEZEUSER',$value);
-					break;
-					case "SQUEEZEPWD":
-					wrtToUserconfig('SQUEEZEPWD',$value);
-					break;
-					case "PLAYERNAME":
-					wrtToUserconfig('PLAYERNAME',$value);
-					break;
-					case "WLANPWD":
-					wrtToUserconfig('WLANPWD',$value);
-					break;
-					case "VOLUME":
-					wrtToUserconfig('VOLUME',$value);
-					break;
-					case "USERPASSWD":
-					wrtToUserconfig('USERPASSWD',$value);
-					break;
-					case "BRUTEFIR":
-					wrtToUserconfig('BRUTEFIR',$value);
-					break;
-					case "JACKBUFFER":
-					wrtToUserconfig('JACKBUFFER',$value);
-					break;
-					case "JACKPERIOD":
-					wrtToUserconfig('JACKPERIOD',$value);
-					break;
-					case "SQUEEZE_ALSABUFFER":
-					wrtToUserconfig('SQUEEZE_ALSABUFFER',$value);
-					break;
-					case "SQUEEZE_ALSAPERIOD":
-					wrtToUserconfig('SQUEEZE_ALSAPERIOD',$value);
-					break;
-					case "SQUEEZE_INTBUFFER":
-					wrtToUserconfig('SQUEEZE_INTBUFFER',$value);
-					break;
-					case "SQUEEZE_OUTBUFFER":
-					wrtToUserconfig('SQUEEZE_OUTBUFFER',$value);
-					break;
-					case "BF_PARTITIONS":
-					wrtToUserconfig('BF_PARTITIONS',$value);
-					break;
-					case "AUDIOPLAYER":
-					wrtToUserconfig('PLAYER',$value);
-					break;
-					case "AUDIO_OUTPUT":
-					wrtToUserconfig('AUDIO_OUTPUT',$value);
-					break;
-					case "RAW_PLAYER":
-					wrtToUserconfig('RAW_PLAYER',$value);
-					break;
-					case "RAW_PLAYERMS":
-					wrtToUserconfig('RAW_PLAYERMS',$value);
-					break;
-					case "DMIX_SQUEEZELITE":
-					wrtToUserconfig('DMIX_SQUEEZELITE',$value);
-					break;
-					case "DMIX_GMEDIARENDER":
-					wrtToUserconfig('DMIX_GMEDIARENDER',$value);
-					break;
-					case "DMIX_SHAIRPORTSYNC":
-					wrtToUserconfig('DMIX_SHAIRPORTSYNC',$value);
-					break;
-					case "DMIX_BLUEALSAAPLAY":
-					wrtToUserconfig('DMIX_BLUEALSAAPLAY',$value);
-					break;
-					case "DMIXMS_SQUEEZELITE":
-					wrtToUserconfig('DMIXMS_SQUEEZELITE',$value);
-					break;
-					case "DMIXMS_GMEDIARENDER":
-					wrtToUserconfig('DMIXMS_GMEDIARENDER',$value);
-					break;
-					case "DMIXMS_SHAIRPORTSYNC":
-					wrtToUserconfig('DMIXMS_SHAIRPORTSYNC',$value);
-					break;
-					case "DMIXMS_BLUEALSAAPLAY":
-					wrtToUserconfig('DMIXMS_BLUEALSAAPLAY',$value);
-					break;
-					case "JACK_SQUEEZELITE":
-					wrtToUserconfig('JACK_SQUEEZELITE',$value);
-					break;
-					case "JACK_GMEDIARENDER":
-					wrtToUserconfig('JACK_GMEDIARENDER',$value);
-					break;
-					case "JACK_SHAIRPORTSYNC":
-					wrtToUserconfig('JACK_SHAIRPORTSYNC',$value);
-					break;
-					case "JACK_BLUEALSAAPLAY":
-					wrtToUserconfig('JACK_BLUEALSAAPLAY',$value);
-					break;
-					case "JACK_INPUT":
-					wrtToUserconfig('JACK_INPUT',$value);
-					break;
-					case "JACKBF_SQUEEZELITE":
-					wrtToUserconfig('JACKBF_SQUEEZELITE',$value);
-					break;
-					case "JACKBF_GMEDIARENDER":
-					wrtToUserconfig('JACKBF_GMEDIARENDER',$value);
-					break;
-					case "JACKBF_SHAIRPORTSYNC":
-					wrtToUserconfig('JACKBF_SHAIRPORTSYNC',$value);
-					break;
-					case "JACKBF_BLUEALSAAPLAY":
-					wrtToUserconfig('JACKBF_BLUEALSAAPLAY',$value);
-					break;
-					case "JACKBF_INPUT":
-					wrtToUserconfig('JACKBF_INPUT',$value);
-					break;
-					case "JACKBFMS_SQUEEZELITE":
-					wrtToUserconfig('JACKBFMS_SQUEEZELITE',$value);
-					break;
-					case "JACKBFMS_GMEDIARENDER":
-					wrtToUserconfig('JACKBFMS_GMEDIARENDER',$value);
-					break;
-					case "JACKBFMS_SHAIRPORTSYNC":
-					wrtToUserconfig('JACKBFMS_SHAIRPORTSYNC',$value);
-					break;
-					case "JACKBFMS_BLUEALSAAPLAY":
-					wrtToUserconfig('JACKBFMS_BLUEALSAAPLAY',$value);
-					break;
-					case "JACKBFMS_INPUT":
-					wrtToUserconfig('JACKBFMS_INPUT',$value);
-					break;
-					case "SOUNDCARD":
-					wrtToUserconfig('SOUNDCARD',$value);
-					break;
-					case "RATE":
-					wrtToUserconfig('RATE',$value);
-					break;
-                    case "LOAD_PREFILTER":
-                    wrtToUserconfig('LOAD_PREFILTER',$value);
-                    break;
-                }
+			wrtToUserconfig($key,$value);
 		}
 }
 
@@ -341,15 +162,37 @@ function cancel_measurement()
 function print_optgroup($name,$arr_values,$sel_value)
 {
 	$out = '<select name="'.$name.'"class="actiongroup" > \n';
-	$out .= '<option selected>'.$sel_value.'</option> \n';
 	foreach ($arr_values as $option)
 	{
-		$out.='<option>'.$option.'</option> \n';
+		if ($option != $sel_value)
+			{ $out.='<option>'.$option.'</option> \n'; }
+		else
+			{ $out .= '<option selected>'.$sel_value.'</option> \n'; }
 	}
 	$out.='</select>';
 
 	echo $out;
 }
+
+
+function print_optgroup2D($name,$arr_values,$sel_value)
+{
+	$out = '<select name="'.$name.'"class="actiongroup" > \n';
+	foreach ($arr_values as $option)
+	{
+		if($option[0] != $sel_value)
+		{
+			$out.='<option value="'.$option[0].'">'.$option[1].'</option> \n';
+		}
+		else
+		{
+			$out .= '<option selected value="'.$sel_value.'">'.$option[1].'</option> \n';
+		}
+	}
+	$out.='</select>';
+	echo $out;
+}
+
 
 //liest die Filter aus Pfad aus und
 function fltrSelect($id,$ini_array)

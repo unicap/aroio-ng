@@ -18,16 +18,16 @@
     {
         if ($_POST['DHCP'] == "OFF")
         {
-            if ( !validate_input("IPADDR",$_POST['IPADDR']) )
+            if ( !validate_input("IPADDR",$_POST['LAN_IPADDR']) )
                 $error="${error_invalid_ipaddr._.$lang}<br />";
 
-            if ( !validate_input("IPADDR",$_POST['DNSSERV']) )
+            if ( !validate_input("IPADDR",$_POST['LAN_DNSSERV']) )
                 $error.="${error_invalid_dnsserver._.$lang}<br />";
 
-            if ( !validate_input("NETMASK",$_POST['NETMASK']) )
+            if ( !validate_input("NETMASK",$_POST['LAN_NETMASK']) )
                 $error.="${error_invalid_netmask._.$lang}<br />";
 
-            if ( !validate_input("HOSTNAMEORIP",$_POST['GATEWAY']) )
+            if ( !validate_input("HOSTNAMEORIP",$_POST['LAN_GATEWAY']) )
                 $error.="${error_invalid_gateway._.$lang}<br />";
 
             if ( !validate_input("LMS",$_POST['SERVERNAME']) )
@@ -142,17 +142,17 @@
     </td>
     <td>
     <?
-    if ($ini_array["DHCP"] == "OFF" || $_POST["DHCP"] == "OFF")
+    if ($ini_array["LAN_DHCP"] == "OFF" || $_POST["LAN_DHCP"] == "OFF")
     {?>
-        <input class="actiongroup" type="radio" name="DHCP" value="ON"> <?print ${dhcp_on._.$lang}?><br>
-        <input class="actiongroup" type="radio" name="DHCP" value="OFF" checked> <?print ${dhcp_off._.$lang}?>
+        <input class="actiongroup" type="radio" name="LAN_DHCP" value="ON"> <?print ${dhcp_on._.$lang}?><br>
+        <input class="actiongroup" type="radio" name="LAN_DHCP" value="OFF" checked> <?print ${dhcp_off._.$lang}?>
     <?}
     else
     {?>
-        <input class="actiongroup" type="radio" name="DHCP" value="ON" checked> <?print ${dhcp_on._.$lang}?><br>
-        <input class="actiongroup" type="radio" name="DHCP" value="OFF"> <?print ${dhcp_off._.$lang}?>
+        <input class="actiongroup" type="radio" name="LAN_DHCP" value="ON" checked> <?print ${dhcp_on._.$lang}?><br>
+        <input class="actiongroup" type="radio" name="LAN_DHCP" value="OFF"> <?print ${dhcp_off._.$lang}?>
     <?}
-    if ($ini_array["DHCP"] == "OFF" || $_POST['DHCP'] == "OFF")
+    if ($ini_array["LAN_DHCP"] == "OFF" || $_POST['LAN_DHCP'] == "OFF")
     {?>
     </td>
   </tr>
@@ -162,7 +162,7 @@
       <span title=""><label for="IP-address"> <? print ${ipaddr._.$lang} ; ?> </label></span></a>
     </td>
     <td>
-      <input class="actiongroup" <?if ( isset($_POST['submit']) && !validate_input("IPADDR",$_POST['IPADDR']) ){echo 'style="border:2px solid #ff0000"';};?> type="text" name="IPADDR" value="<? if (isset($_POST['submit']))print $_POST['IPADDR']; else print $ini_array["IPADDR"]; ?>">
+      <input class="actiongroup" <?if ( isset($_POST['submit']) && !validate_input("IPADDR",$_POST['LAN_IPADDR']) ){echo 'style="border:2px solid #ff0000"';};?> type="text" name="LAN_IPADDR" value="<? if (isset($_POST['submit']))print $_POST['LAN_IPADDR']; else print $ini_array["LAN_IPADDR"]; ?>">
     </td>
   </tr>
   <tr>
@@ -171,7 +171,7 @@
       <span title=""><label for="Network-mask"> <? print ${netmask._.$lang} ; ?> </label></span></a>
     </td>
     <td>
-      <input class="actiongroup" <?if ( isset($_POST['submit']) && !validate_input("NETMASK",$_POST['NETMASK']) ){echo 'style="border:2px solid #ff0000"';};?> type="text" name="NETMASK" value="<?if (isset($_POST['submit']))print $_POST['NETMASK']; else print $ini_array["NETMASK"]; ?>">
+      <input class="actiongroup" <?if ( isset($_POST['submit']) && !validate_input("NETMASK",$_POST['LAN_NETMASK']) ){echo 'style="border:2px solid #ff0000"';};?> type="text" name="LAN_NETMASK" value="<?if (isset($_POST['submit']))print $_POST['LAN_NETMASK']; else print $ini_array["LAN_NETMASK"]; ?>">
     </td>
   </tr>
   <tr>
@@ -180,7 +180,7 @@
       <span title=""><label for="DNS-server"> <? print ${dnsserv._.$lang} ; ?> </label></span></a>
     </td>
     <td>
-      <input class="actiongroup" <?if ( isset($_POST['submit']) && !validate_input("IPADDR",$_POST['DNSSERV']) ){echo 'style="border:2px solid #ff0000"';};?> type="text" name="DNSSERV" value="<?if (isset($_POST['submit']))print $_POST['DNSSERV']; else print $ini_array["DNSSERV"] ?>">
+      <input class="actiongroup" <?if ( isset($_POST['submit']) && !validate_input("IPADDR",$_POST['LAN_DNSSERV']) ){echo 'style="border:2px solid #ff0000"';};?> type="text" name="LAN_DNSSERV" value="<?if (isset($_POST['submit']))print $_POST['LAN_DNSSERV']; else print $ini_array["LAN_DNSSERV"] ?>">
     </td>
   </tr>
   <tr>
@@ -189,7 +189,7 @@
       <span title=""><label for="Gateway"> <? print ${gateway._.$lang} ; ?> </label></span></a>
     </td>
     <td>
-      <input class="actiongroup" <?if ( isset($_POST['submit']) && !validate_input("HOSTNAMEORIP",$_POST['GATEWAY']) ){echo 'style="border:2px solid #ff0000"';};?> type="text" name="GATEWAY" value="<? if (isset($_POST['submit']))print $_POST['GATEWAY']; else  print $ini_array["GATEWAY"] ?>">
+      <input class="actiongroup" <?if ( isset($_POST['submit']) && !validate_input("HOSTNAMEORIP",$_POST['LAN_GATEWAY']) ){echo 'style="border:2px solid #ff0000"';};?> type="text" name="LAN_GATEWAY" value="<? if (isset($_POST['submit']))print $_POST['LAN_GATEWAY']; else  print $ini_array["LAN_GATEWAY"] ?>">
     </td>
   </tr>
     <?}
@@ -224,7 +224,11 @@
         echo '<option>Aroio-Access-Point</option>';
     }
     //elseif (isset($_POST['WLANSSID'])) echo'<option selected>'.$_POST['WLANSSID'].'</option>';
-    else echo'<option selected>'.$ini_array['WLANSSID'].'</option>';
+    else
+	{
+		echo '<option>WIFI-OFF!</option>';
+		echo'<option selected>'.$ini_array['WLANSSID'].'</option>';
+	}
     echo'</select>';
     ?>
     </td>
@@ -375,7 +379,27 @@ else
       <span title=""><label for="Volume"> <? print ${volume._.$lang} ; ?> </label></span></a>
     </td>
     <td>
-      <? print_optgroup("VOLUME",$arr_volume,$ini_array["VOLUME"]); ?>
+      <?
+	  $arr_volume=array
+          (
+          array(255," 0 dB"),
+          array(204,"-5 dB"),
+          array(162,"-10 dB"),
+          array(132,"-15 dB"),
+          array(108,"-20 dB"),
+          array(84,"-25 dB"),
+          array(66,"-30 dB"),
+          array(51,"-35 dB"),
+          array(36,"-40 dB"),
+          array(24,"-45 dB"),
+          array(18,"-50 dB"),
+          array(9,"-55 dB"),
+          array(6,"-60 dB")
+          );
+
+        print_optgroup2D("VOLUME_START",$arr_volume,$ini_array["VOLUME_START"]);
+        ?>
+      </select>
     </td>
   </tr>
   <tr> <?
@@ -552,10 +576,10 @@ Line In
 if ($ini_array["SOUNDCARD"] != "Focusrite Scarlett")
 {
 
-    if ($ini_array["AUDIO_OUTPUT"] == "i2s"){
-        ?> <tr><td> <input class="actiongroup" type="radio" name="AUDIO_OUTPUT" value="i2s" checked> Direct <?}
+    if ($ini_array["AUDIO_OUTPUT"] == "vol-plug"){
+        ?> <tr><td> <input class="actiongroup" type="radio" name="AUDIO_OUTPUT" value="vol-plug" checked> Direct <?}
     else {
-        ?> <tr><td> <input class="actiongroup" type="radio" name="AUDIO_OUTPUT" value="i2s"> Direct <?}
+        ?> <tr><td> <input class="actiongroup" type="radio" name="AUDIO_OUTPUT" value="vol-plug"> Direct <?}
 
     switch ($ini_array["RAW_PLAYER"]){
 	case "squeezelite":
@@ -599,10 +623,10 @@ if ($ini_array["SOUNDCARD"] != "Focusrite Scarlett")
         break;
     }
 
-    if ($ini_array["AUDIO_OUTPUT"] == "i2s-mscoded"){
-        ?> <tr><td> <input class="actiongroup" type="radio" name="AUDIO_OUTPUT" value="i2s-mscoded" checked> MS-Coded <?}
+    if ($ini_array["AUDIO_OUTPUT"] == "vol-plug-ms"){
+        ?> <tr><td> <input class="actiongroup" type="radio" name="AUDIO_OUTPUT" value="vol-plug-ms" checked> MS-Coded <?}
     else {
-        ?> <tr><td> <input class="actiongroup" type="radio" name="AUDIO_OUTPUT" value="i2s-mscoded"> MS-Coded <?}
+        ?> <tr><td> <input class="actiongroup" type="radio" name="AUDIO_OUTPUT" value="vol-plug-ms"> MS-Coded <?}
 
     switch ($ini_array["RAW_PLAYERMS"]){
 	case "squeezelite":
@@ -652,10 +676,10 @@ if ($ini_array["SOUNDCARD"] != "Focusrite Scarlett")
 if ($ini_array["SOUNDCARD"] != "Internal HDMI audio" && $ini_array["SOUNDCARD"] != "Internal audio jack")
 { ?>
     <td> <?
-        if ($ini_array["AUDIO_OUTPUT"] == "plug-dmixer")
-            { ?> <input class="actiongroup" type="radio" name="AUDIO_OUTPUT" value="plug-dmixer" checked> DMix <?}
+        if ($ini_array["AUDIO_OUTPUT"] == "vol-plug-dmix")
+            { ?> <input class="actiongroup" type="radio" name="AUDIO_OUTPUT" value="vol-plug-dmix" checked> DMix <?}
         else
-            { ?> <input class="actiongroup" type="radio" name="AUDIO_OUTPUT" value="plug-dmixer"> DMix <?}?>
+            { ?> <input class="actiongroup" type="radio" name="AUDIO_OUTPUT" value="vol-plug-dmix"> DMix <?}?>
     </td>
 
     <td>
@@ -694,10 +718,10 @@ if ($ini_array["SOUNDCARD"] != "Internal HDMI audio" && $ini_array["SOUNDCARD"] 
 
 <tr>
     <td><?
-	    if ($ini_array["AUDIO_OUTPUT"] == "dmixer-mscoded"){
-            ?> <input class="actiongroup" type="radio" name="AUDIO_OUTPUT" value="dmixer-mscoded" checked> DMix MS <?}
+	    if ($ini_array["AUDIO_OUTPUT"] == "vol-plug-dmix-ms"){
+            ?> <input class="actiongroup" type="radio" name="AUDIO_OUTPUT" value="vol-plug-dmix-ms" checked> DMix MS <?}
         else {
-            ?> <input class="actiongroup" type="radio" name="AUDIO_OUTPUT" value="dmixer-mscoded"> DMix MS  <?}?>
+            ?> <input class="actiongroup" type="radio" name="AUDIO_OUTPUT" value="vol-plug-dmix-ms"> DMix MS  <?}?>
     </td>
 
     <td>
@@ -742,10 +766,10 @@ if ($ini_array["SOUNDCARD"] != "Internal HDMI audio" && $ini_array["SOUNDCARD"] 
 <tr>
 <td>
 
-  <? if ($ini_array["AUDIO_OUTPUT"] == "jack"){ ?>
-    <input class="actiongroup" type="radio" id="output" name="AUDIO_OUTPUT" value="jack" checked> Jack
+  <? if ($ini_array["AUDIO_OUTPUT"] == "vol-jack"){ ?>
+    <input class="actiongroup" type="radio" id="output" name="AUDIO_OUTPUT" value="vol-jack" checked> Jack
   <?} else {?>
-      <input class="actiongroup" type="radio" id="output" name="AUDIO_OUTPUT" value="jack"> Jack
+      <input class="actiongroup" type="radio" id="output" name="AUDIO_OUTPUT" value="vol-jack"> Jack
   <?}?>
 
 </td>
@@ -794,10 +818,10 @@ if ($ini_array["SOUNDCARD"] != "Internal HDMI audio" && $ini_array["SOUNDCARD"] 
 
 <tr>
     <td><?
-        if ($ini_array["AUDIO_OUTPUT"] == "jack-bf")
-            { ?> <input class="actiongroup" type="radio" name="AUDIO_OUTPUT" value="jack-bf" checked> BruteFIR <?}
+        if ($ini_array["AUDIO_OUTPUT"] == "vol-jack-bf")
+            { ?> <input class="actiongroup" type="radio" name="AUDIO_OUTPUT" value="vol-jack-bf" checked> BruteFIR <?}
         else
-            {?> <input class="actiongroup" type="radio" name="AUDIO_OUTPUT" value="jack-bf"> BruteFIR <?}?>
+            {?> <input class="actiongroup" type="radio" name="AUDIO_OUTPUT" value="vol-jack-bf"> BruteFIR <?}?>
     </td>
 
     <td>
@@ -844,10 +868,10 @@ if ($ini_array["SOUNDCARD"] != "Internal HDMI audio" && $ini_array["SOUNDCARD"] 
 
 <tr>
     <td><?
-        if ($ini_array["AUDIO_OUTPUT"] == "jack-bfms")
-            { ?> <input class="actiongroup" type="radio" name="AUDIO_OUTPUT" value="jack-bfms" checked> BruteFIR MS <?}
+        if ($ini_array["AUDIO_OUTPUT"] == "vol-jack-bfms")
+            { ?> <input class="actiongroup" type="radio" name="AUDIO_OUTPUT" value="vol-jack-bfms" checked> BruteFIR MS <?}
         else
-            {?> <input class="actiongroup" type="radio" name="AUDIO_OUTPUT" value="jack-bfms"> BruteFIR MS <?}?>
+            {?> <input class="actiongroup" type="radio" name="AUDIO_OUTPUT" value="vol-jack-bfms"> BruteFIR MS <?}?>
     </td>
 
     <td>

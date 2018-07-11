@@ -191,8 +191,8 @@
     $convolution_volcontrol_en='Volume Control';
     $convolution_volcontrol_de='Lautst&auml;rkeanpassung';
 
-    $volume_en='Output volume';
-    $volume_de='Ausgabe Lautst&auml;rke';
+    $volume_en='Startup volume';
+    $volume_de='Start-Lautst&auml;rke';
 
     $jack_buffer_en='Jack buffer size';
     $jack_buffer_de='Jack Puffergr&ouml;&szlig;e';
@@ -251,8 +251,8 @@
     $helptext_sitesurvey_en='Use this to scan your available wireless networks into the above pulldown-menu.';
     $helptext_sitesurvey_de='Scannt die verf&uuml;gbaren WLan-Netze und stellt sie in der Drop-down-Liste zur Auswahl bereit.';
 
-    $helptext_volume_en="Output Volume of the device in dB.";
-    $helptext_volume_de="Ausgabelautst&auml;rke des Ger&auml;tes in dB";
+    $helptext_volume_en="Startup output Volume of the device in dB.";
+    $helptext_volume_de="Start-Ausgabelautst&auml;rke des Ger&auml;tes in dB";
 
     $helptext_jack_buffer_en='Selection of the jack buffer size. The recommended default value is 2048.';
     $helptext_jack_buffer_de='Auswahl der Jack Puffer-Gr&ouml;&szlig;e. Standardm&auml;&szlig;ig wird hier der Wert 2048 empfohlen.';

@@ -1,0 +1,10 @@
+[Unit]
+Description=Audio subsystem
+After=syslog.target sound.target network.target bluetooth.target checkuserconfig.service checksoundcard.service 
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/controlaudio start
+
+[Install]
+WantedBy=multi-user.target

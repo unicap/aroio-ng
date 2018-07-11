@@ -13,18 +13,18 @@ case $SOUNDCARD in
 		echo "userconfig and config.txt have different entries for soundcards,"
 		echo "backing up and writing a new config.txt..."
 		cp "$CONFIG" "$CONFIG"_bak
-		cat << EOF > "$CONFIG"
-force_turbo=1
-dtdebug=1
-max_usb_current=1
-disable_splash=1
-kernel=zImage
-dtoverlay=i2s-mmap
-dtparam=audio=on #HDMI_AUDIO
-hdmi_drive=2 #HDMI_AUDIO
-dtoverlay=lirc-rpi,gpio_in_pin=25
-disable_overscan=1
-EOF
+		cat <<-EOF > "$CONFIG"
+			force_turbo=1
+			dtdebug=1
+			max_usb_current=1
+			disable_splash=1
+			kernel=zImage
+			dtoverlay=i2s-mmap
+			dtparam=audio=on #HDMI_AUDIO
+			hdmi_drive=2 #HDMI_AUDIO
+			dtoverlay=lirc-rpi,gpio_in_pin=25
+			disable_overscan=1
+		EOF
 
 		if ! mount | grep -q mmcblk0p2
 		then 	echo "initramfs aroioimage.cpio.gz followkernel" >> "$CONFIG"
@@ -45,17 +45,17 @@ EOF
 		echo "userconfig and config.txt have different entries for soundcards,"
 		echo "backing up and writing a new config.txt..."
 		cp "$CONFIG" "$CONFIG"_bak
-		cat << EOF > "$CONFIG"
-force_turbo=1
-dtdebug=1
-max_usb_current=1
-disable_splash=1
-kernel=zImage
-dtoverlay=i2s-mmap
-dtparam=audio=on #ONBOARD_AUDIO
-dtoverlay=lirc-rpi,gpio_in_pin=25
-disable_overscan=1
-EOF
+		cat <<-EOF > "$CONFIG"
+			force_turbo=1
+			dtdebug=1
+			max_usb_current=1
+			disable_splash=1
+			kernel=zImage
+			dtoverlay=i2s-mmap
+			dtparam=audio=on #ONBOARD_AUDIO
+			dtoverlay=lirc-rpi,gpio_in_pin=25
+			disable_overscan=1
+		EOF
 
 		if ! mount | grep -q mmcblk0p2
 		then 	echo "initramfs aroioimage.cpio.gz followkernel" >> "$CONFIG"
@@ -76,17 +76,17 @@ EOF
 		echo "userconfig and config.txt have different entries for soundcards,"
 		echo "backing up and writing a new config.txt..."
 		cp "$CONFIG" "$CONFIG"_bak
-		cat << EOF > "$CONFIG"
-force_turbo=1
-dtdebug=1
-max_usb_current=1
-disable_splash=1
-kernel=zImage
-dtoverlay=i2s-mmap
-dtoverlay=iqaudio-dac
-dtoverlay=lirc-rpi,gpio_in_pin=25
-disable_overscan=1
-EOF
+		cat <<-EOF > "$CONFIG"
+			force_turbo=1
+			dtdebug=1
+			max_usb_current=1
+			disable_splash=1
+			kernel=zImage
+			dtoverlay=i2s-mmap
+			dtoverlay=iqaudio-dac
+			dtoverlay=lirc-rpi,gpio_in_pin=25
+			disable_overscan=1
+		EOF
 
 		if ! mount | grep -q mmcblk0p2
 		then 	echo "initramfs aroioimage.cpio.gz followkernel" >> "$CONFIG"
@@ -107,19 +107,19 @@ EOF
 		echo "userconfig and config.txt have different entries for soundcards,"
 		echo "backing up and writing a new config.txt..."
 		cp "$CONFIG" "$CONFIG"-bak
-		cat << EOF > "$CONFIG"
-force_turbo=1
-dtdebug=1
-max_usb_current=1
-disable_splash=1
-kernel=zImage
-dtparam=i2c_arm=on
-dtoverlay=i2s-mmap
-dtoverlay=hifiberry-dac
-dtparam=spi=on
-dtoverlay=lirc-rpi,gpio_in_pin=25
-disable_overscan=1
-EOF
+		cat <<-EOF > "$CONFIG"
+			force_turbo=1
+			dtdebug=1
+			max_usb_current=1
+			disable_splash=1
+			kernel=zImage
+			dtparam=i2c_arm=on
+			dtoverlay=i2s-mmap
+			dtoverlay=hifiberry-dac
+			dtparam=spi=on
+			dtoverlay=lirc-rpi,gpio_in_pin=25
+			disable_overscan=1
+		EOF
 
 		if ! mount | grep -q mmcblk0p2
 		then	echo "initramfs aroioimage.cpio.gz followkernel" >> "$CONFIG"
@@ -141,19 +141,19 @@ EOF
 		echo "userconfig and config.txt have different entries for soundcards,"
 		echo "backing up and writing a new config.txt..."
 		cp "$CONFIG" "$CONFIG"-bak
-		cat << EOF > "$CONFIG"
-force_turbo=1
-dtdebug=1
-max_usb_current=1
-disable_splash=1
-kernel=zImage
-dtparam=i2c_arm=on
-dtoverlay=i2s-mmap
-dtoverlay=hifiberry-dacplus
-dtparam=spi=on
-dtoverlay=lirc-rpi,gpio_in_pin=25
-disable_overscan=1
-EOF
+		cat <<-EOF > "$CONFIG"
+			force_turbo=1
+			dtdebug=1
+			max_usb_current=1
+			disable_splash=1
+			kernel=zImage
+			dtparam=i2c_arm=on
+			dtoverlay=i2s-mmap
+			dtoverlay=hifiberry-dacplus
+			dtparam=spi=on
+			dtoverlay=lirc-rpi,gpio_in_pin=25
+			disable_overscan=1
+		EOF
 
 		if ! mount | grep -q mmcblk0p2
 		then	echo "initramfs aroioimage.cpio.gz followkernel" >> "$CONFIG"
@@ -175,19 +175,19 @@ EOF
 		echo "userconfig and config.txt have different entries for soundcards,"
 		echo "backing up and writing a new config.txt..."
 		cp "$CONFIG" "$CONFIG"-bak
-		cat << EOF > "$CONFIG"
-force_turbo=1
-dtdebug=1
-max_usb_current=1
-disable_splash=1
-kernel=zImage
-dtparam=i2c_arm=on
-dtoverlay=i2s-mmap
-dtoverlay=hifiberry-dac
-dtparam=spi=on
-dtoverlay=lirc-rpi,gpio_in_pin=25
-disable_overscan=1
-EOF
+		cat <<-EOF > "$CONFIG"
+			force_turbo=1
+			dtdebug=1
+			max_usb_current=1
+			disable_splash=1
+			kernel=zImage
+			dtparam=i2c_arm=on
+			dtoverlay=i2s-mmap
+			dtoverlay=hifiberry-dac
+			dtparam=spi=on
+			dtoverlay=lirc-rpi,gpio_in_pin=25
+			disable_overscan=1
+		EOF
 
 		if ! mount | grep -q mmcblk0p2
 		then	echo "initramfs aroioimage.cpio.gz followkernel" >> "$CONFIG"
@@ -209,17 +209,17 @@ EOF
 		echo "userconfig and config.txt have different entries for soundcards,"
 		echo "backing up and writing a new config.txt..."
 		cp "$CONFIG" "$CONFIG"-bak
-		cat << EOF > "$CONFIG"
-force_turbo=1
-dtdebug=1
-max_usb_current=1
-disable_splash=1
-kernel=zImage
-dtoverlay=i2s-mmap
-dtoverlay=hifiberry-digi
-dtoverlay=lirc-rpi,gpio_in_pin=25
-disable_overscan=1
-EOF
+		cat <<-EOF > "$CONFIG"
+			force_turbo=1
+			dtdebug=1
+			max_usb_current=1
+			disable_splash=1
+			kernel=zImage
+			dtoverlay=i2s-mmap
+			dtoverlay=hifiberry-digi
+			dtoverlay=lirc-rpi,gpio_in_pin=25
+			disable_overscan=1
+		EOF
 
 	if ! mount | grep -q mmcblk0p2
 	then	echo "initramfs aroioimage.cpio.gz followkernel" >> "$CONFIG"
@@ -240,16 +240,16 @@ EOF
 		echo "userconfig and config.txt have different entries for soundcards,"
 		echo "backing up and writing a new config.txt..."
 		cp "$CONFIG" "$CONFIG"-bak
-		cat << EOF > "$CONFIG"
-force_turbo=1
-dtdebug=1
-max_usb_current=1
-disable_splash=1
-kernel=zImage
-disable_overscan=1
-dtoverlay=lirc-rpi,gpio_in_pin=25
-#fasttrack_pro
-EOF
+		cat <<-EOF > "$CONFIG"
+			force_turbo=1
+			dtdebug=1
+			max_usb_current=1
+			disable_splash=1
+			kernel=zImage
+			disable_overscan=1
+			dtoverlay=lirc-rpi,gpio_in_pin=25
+			#fasttrack_pro
+		EOF
 
 		if ! mount | grep -q mmcblk0p2
 		then	echo "initramfs aroioimage.cpio.gz followkernel" >> "$CONFIG"
@@ -270,16 +270,16 @@ EOF
 		echo "userconfig and config.txt have different entries for soundcards,"
 		echo "backing up and writing a new config.txt..."
 		cp "$CONFIG" "$CONFIG"-bak
-		cat << EOF > "$CONFIG"
-force_turbo=1
-dtdebug=1
-max_usb_current=1
-disable_splash=1
-kernel=zImage
-disable_overscan=1
-dtoverlay=lirc-rpi,gpio_in_pin=25
-#fr_scarlett
-EOF
+		cat <<-EOF > "$CONFIG"
+			force_turbo=1
+			dtdebug=1
+			max_usb_current=1
+			disable_splash=1
+			kernel=zImage
+			disable_overscan=1
+			dtoverlay=lirc-rpi,gpio_in_pin=25
+			#fr_scarlett
+		EOF
 
 		if ! mount | grep -q mmcblk0p2
 		then	echo "initramfs aroioimage.cpio.gz followkernel" >> "$CONFIG"
@@ -300,16 +300,16 @@ EOF
 		echo "userconfig and config.txt have different entries for soundcards,"
 		echo "backing up and writing a new config.txt..."
 		cp "$CONFIG" "$CONFIG"-bak
-		cat << EOF > "$CONFIG"
-force_turbo=1
-dtdebug=1
-max_usb_current=1
-disable_splash=1
-kernel=zImage
-disable_overscan=1
-dtoverlay=lirc-rpi,gpio_in_pin=25
-#ni_audio8dj
-EOF
+		cat <<-EOF > "$CONFIG"
+			force_turbo=1
+			dtdebug=1
+			max_usb_current=1
+			disable_splash=1
+			kernel=zImage
+			disable_overscan=1
+			dtoverlay=lirc-rpi,gpio_in_pin=25
+			#ni_audio8dj
+		EOF
 
 		if ! mount | grep -q mmcblk0p2
 		then	echo "initramfs aroioimage.cpio.gz followkernel" >> "$CONFIG"
@@ -330,16 +330,16 @@ EOF
 		echo "userconfig and config.txt have different entries for soundcards,"
 		echo "backing up and writing a new config.txt..."
 		cp "$CONFIG" "$CONFIG"-bak
-		cat << EOF > "$CONFIG"
-force_turbo=1
-dtdebug=1
-max_usb_current=1
-disable_splash=1
-kernel=zImage
-disable_overscan=1
-dtoverlay=lirc-rpi,gpio_in_pin=25
-#fireface_ucx
-EOF
+		cat <<-EOF > "$CONFIG"
+			force_turbo=1
+			dtdebug=1
+			max_usb_current=1
+			disable_splash=1
+			kernel=zImage
+			disable_overscan=1
+			dtoverlay=lirc-rpi,gpio_in_pin=25
+			#fireface_ucx
+		EOF
 
 		if ! mount | grep -q mmcblk0p2
 		then	echo "initramfs aroioimage.cpio.gz followkernel" >> "$CONFIG"
@@ -359,16 +359,16 @@ EOF
 		echo "userconfig and config.txt have different entries for soundcards,"
 		echo "backing up and writing a new config.txt..."
 		cp "$CONFIG" "$CONFIG"-bak
-		cat << EOF > "$CONFIG"
-force_turbo=1
-dtdebug=1
-max_usb_current=1
-disable_splash=1
-kernel=zImage
-disable_overscan=1
-dtoverlay=lirc-rpi,gpio_in_pin=25
-#usb_class_compliant
-EOF
+		cat <<-EOF > "$CONFIG"
+			force_turbo=1
+			dtdebug=1
+			max_usb_current=1
+			disable_splash=1
+			kernel=zImage
+			disable_overscan=1
+			dtoverlay=lirc-rpi,gpio_in_pin=25
+			#usb_class_compliant
+		EOF
 
 		if ! mount | grep -q mmcblk0p2
 		then	echo "initramfs aroioimage.cpio.gz followkernel" >> "$CONFIG"
@@ -390,19 +390,19 @@ EOF
 		echo "userconfig and config.txt have different entries for soundcards,"
 		echo "backing up and writing a new config.txt..."
 		cp "$CONFIG" "$CONFIG"-bak
-		cat << EOF > "$CONFIG"
-force_turbo=1
-dtdebug=1
-max_usb_current=1
-disable_splash=1
-kernel=zImage
-dtparam=i2c_arm=on
-dtoverlay=i2s-mmap
-dtoverlay=hifiberry-dacplus
-dtparam=spi=on
-dtoverlay=lirc-rpi,gpio_in_pin=25
-disable_overscan=1
-EOF
+		cat <<-EOF > "$CONFIG"
+			force_turbo=1
+			dtdebug=1
+			max_usb_current=1
+			disable_splash=1
+			kernel=zImage
+			dtparam=i2c_arm=on
+			dtoverlay=i2s-mmap
+			dtoverlay=hifiberry-dacplus
+			dtparam=spi=on
+			dtoverlay=lirc-rpi,gpio_in_pin=25
+			disable_overscan=1
+		EOF
 
 		if ! mount | grep -q mmcblk0p2
 		then	echo "initramfs aroioimage.cpio.gz followkernel" >> "$CONFIG"

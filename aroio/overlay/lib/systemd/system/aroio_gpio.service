@@ -1,0 +1,14 @@
+[Unit]
+Description=Aroio GPIO daemon
+After=syslog.target sound.target network.target bluetooth.target checkuserconfig.service checksoundcard.service 
+Before=audioplayers.service
+
+[Service]
+EnvironmentFile=/boot/userconfig.txt
+Type=simple
+ExecStartPre=/bin/sh -c "dd if=/dev/zero bs=1024 count=1 | aplay -D vol-plug-dmix -f cd"
+ExecStartPre=/bin/sh -c "amixer sset Master 0"
+ExecStart=/usr/bin/aroio_gpio
+
+[Install]
+WantedBy=multi-user.target
