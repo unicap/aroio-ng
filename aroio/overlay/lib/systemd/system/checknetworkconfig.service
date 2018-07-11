@@ -1,0 +1,11 @@
+[Unit]
+Description=Network configuration according to userconfig.txt
+After=local-fs.target
+Requires=local-fs.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/checknetworkconfig
+
+[Install]
+RequiredBy=multi-user.target

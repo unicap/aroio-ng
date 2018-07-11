@@ -1,0 +1,64 @@
+#!/bin/sh
+
+. /boot/userconfig.txt
+
+if [ "$LAN_DHCP" = "OFF" ]
+then
+	cat <<-EOF > /etc/systemd/network/20-wired.network
+	[Match]
+	Name=eth0
+
+	[Network]
+	Address=$LAN_IPADDR/24
+	Gateway=$LAN_GATEWAY
+	DNS=$LAN_DNSSERV
+
+	[Route]
+	Metric=10
+	Gateway=$LAN_GATEWAY
+	EOF
+
+else
+	cat <<-EOF > /etc/systemd/network/20-wired.network
+	[Match]
+	Name=eth0
+
+	[Network]
+	DHCP=ipv4
+
+	[DHCP]
+	RouteMetric=10
+	EOF
+fi
+
+if [[ "$WLANSSID" != "" && "$WLANSSID" != "WIFI-OFF!" ]]
+then
+	if [ "WLAN_DHCP" = "OFF" ]
+	then
+		cat <<-EOF > /etc/systemd/network/25-wireless.network
+		[Match]
+		Name=wlan0
+
+		[Network]
+		Address=$WLAN_IPADDR/24
+		Gateway=$WLAN_GATEWAY
+		DNS=$WLAN_DNSSERV
+
+		[Route]
+		Metric=20
+		Gateway=$WLAN_GATEWAY
+		EOF
+	fi
+else
+	cat <<-EOF > /etc/systemd/network/25-wireless.network
+	[Match]
+	Name=wlan0
+
+	[Network]
+	DHCP=ipv4
+
+	[DHCP]
+	RouteMetric=20
+	EOF
+fi
+
