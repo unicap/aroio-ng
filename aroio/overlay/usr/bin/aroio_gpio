@@ -9,6 +9,7 @@ import os
 Enc_A = 0 # Not all aroios have a rotary encoder, so we are disabling it
 Enc_B = 0 #   by initializing it with pin 0
 Btn_Pause = 27
+LED_Net = 22
 
 # Setting up a null device
 FNULL = open(os.devnull, 'w')
@@ -32,15 +33,16 @@ A_LastState = 0
 if str(config["PLATFORM"]) == "AroioLT":
     Enc_A = 23
     Enc_B = 24
+    LED_net = 22
 
 # Initializing our GPIOs
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(Enc_A, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 GPIO.setup(Enc_B, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 GPIO.setup(Btn_Pause, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(LED_Net, GPIO.OUT)
 
-
-# Callback that decodes our rotary encoder
+# Callback function that decodes our rotary encoder
 def rotation_decode(Enc_A):
     global Volume
     global A_LastState
@@ -62,10 +64,18 @@ def rotation_decode(Enc_A):
 
     A_LastState = A_State
 
-# Callback that takes action when Pause button is pressed
-def pause_alert(Btn_Pause):
-    print("Button Pause was pushed!")
+# Callback function that controls our LMS server: pause
+def pause_alert(input):
+    #print("Button Pause was pushed!")
     subprocess.call(["aroio_control_lms", "pause"])
+
+# Callback function that controls our LED
+def control_led(state):
+    print("Turning LED", state)
+    if str(state) == "on":
+        GPIO.output(LED_net, 1)
+    else:
+        GPIO.output(LED_net, 0)
 
 # Attach events to our pins
 GPIO.add_event_detect(Enc_A, GPIO.BOTH, callback=rotation_decode, bouncetime=2)
