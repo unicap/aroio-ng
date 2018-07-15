@@ -566,8 +566,14 @@ shairport
 <td>
 btalsa
 </td>
+<? if ( file_exists("/proc/asound/card0/pcm0c"))
+{ ?>
+	<td>
+		Line In
+	</td> <?
+}?>
 <td>
-Line In
+NetJack
 </td>
 </tr>
 
@@ -805,14 +811,95 @@ if ($ini_array["SOUNDCARD"] != "Internal HDMI audio" && $ini_array["SOUNDCARD"] 
     <input type="checkbox" id="jack" name="JACK_BLUEALSAAPLAY" value="ON">
   <?}?>
 </td>
+
+<? if ( file_exists("/proc/asound/card0/pcm0c"))
+{ ?>
+	<td>
+		<input type="hidden" name="JACK_INPUT" value="OFF">
+	  <? if ($ini_array["JACK_INPUT"] == "ON"){ ?>
+	    <input type="checkbox" id="jack" name="JACK_INPUT" value="ON" checked>
+	  <?} else {?>
+	    <input type="checkbox" id="jack" name="JACK_INPUT" value="ON">
+	  <?}?>
+	</td> <?
+} ?>
+
+<? if ($ini_array["ADVANCED"] == "ON"){ ?>
+	<td>
+	  <input type="hidden" name="JACK_NETJACK" value="OFF">
+ 	  <? if ($ini_array["JACK_NETJACK"] == "ON")
+	  	{ ?> <input type="checkbox" id="jack" name="JACK_NETJACK" value="ON" checked> <?}
+	  else
+		{?> <input type="checkbox" id="jack" name="JACK_NETJACK" value="ON"> <?}?>
+	</td> <?
+} ?>
+</tr>
+
+
 <td>
-	<input type="hidden" name="JACK_INPUT" value="OFF">
-  <? if ($ini_array["JACK_INPUT"] == "ON"){ ?>
-    <input type="checkbox" id="jack" name="JACK_INPUT" value="ON" checked>
+  <? if ($ini_array["AUDIO_OUTPUT"] == "vol-jack-ms"){ ?>
+    <input class="actiongroup" type="radio" id="output" name="AUDIO_OUTPUT" value="vol-jack-ms" checked> Jack MS
   <?} else {?>
-    <input type="checkbox" id="jack" name="JACK_INPUT" value="ON">
+      <input class="actiongroup" type="radio" id="output" name="AUDIO_OUTPUT" value="vol-jack-ms"> Jack MS
+  <?}?>
+
+</td>
+<td>
+	<input type="hidden" name="JACKMS_SQUEEZELITE" value="OFF">
+  	<? if ($ini_array["JACKMS_SQUEEZELITE"] == "ON"){ ?>
+    <input type="checkbox" id="jack-ms" name="JACKMS_SQUEEZELITE" value="ON" checked>
+  	<?} else {?>
+    <input type="checkbox" id="jack" name="JACKMS_SQUEEZELITE" value="ON">
   <?}?>
 </td>
+<td>
+	<input type="hidden" name="JACKMS_GMEDIARENDER" value="OFF">
+  <? if ($ini_array["JACKMS_GMEDIARENDER"] == "ON"){ ?>
+    <input type="checkbox" id="jack-ms" name="JACKMS_GMEDIARENDER" value="ON" checked>
+  <?} else {?>
+    <input type="checkbox" id="jack-ms" name="JACKMS_GMEDIARENDER" value="ON">
+  <?}?>
+</td>
+<td>
+	<input type="hidden" name="JACKMS_SHAIRPORTSYNC" value="OFF">
+  <? if ($ini_array["JACKMS_SHAIRPORTSYNC"] == "ON"){ ?>
+    <input type="checkbox" id="jack-ms"  name="JACKMS_SHAIRPORTSYNC" value="ON" checked>
+  <?} else {?>
+    <input type="checkbox" id="jack-ms" name="JACKMS_SHAIRPORTSYNC" value="ON">
+  <?}?>
+</td>
+<td>
+	<input type="hidden" name="JACKMS_BLUEALSAAPLAY" value="OFF">
+  <? if ($ini_array["JACKMS_BLUEALSAAPLAY"] == "ON"){ ?>
+    <input type="checkbox" id="jack-ms" name="JACKMS_BLUEALSAAPLAY" value="ON" checked>
+  <?} else {?>
+    <input type="checkbox" id="jack-ms" name="JACKMS_BLUEALSAAPLAY" value="ON">
+  <?}?>
+</td>
+
+<? if ( file_exists("/proc/asound/card0/pcm0c"))
+{ ?>
+	<td>
+		<input type="hidden" name="JACKMS_INPUT" value="OFF">
+	  <? if ($ini_array["JACKMS_INPUT"] == "ON"){ ?>
+	    <input type="checkbox" id="jack-ms" name="JACKMS_INPUT" value="ON" checked>
+	  <?} else {?>
+	    <input type="checkbox" id="jack-ms" name="JACKMS_INPUT" value="ON">
+	  <?}?>
+	</td> <?
+}?>
+
+<? if ($ini_array["ADVANCED"] == "ON")
+{ ?>
+	<td>
+		<input type="hidden" name="JACKMS_NETJACK" value="OFF">
+	  <? if ($ini_array["JACKMS_NETJACK"] == "ON"){ ?>
+	    <input type="checkbox" id="jack-ms" name="JACKMS_NETJACK" value="ON" checked>
+	  <?} else {?>
+	    <input type="checkbox" id="jack-ms" name="JACKMS_NETJACK" value="ON">
+	  <?}?>
+	</td> <?
+} ?>
 </tr>
 
 
@@ -856,13 +943,28 @@ if ($ini_array["SOUNDCARD"] != "Internal HDMI audio" && $ini_array["SOUNDCARD"] 
             {?> <input type="checkbox" id="jackbf" name="JACKBF_BLUEALSAAPLAY" value="ON"> <?}?>
     </td>
 
-    <td>
-	    <input type="hidden" name="JACKBF_INPUT" value="OFF"> <?
-        if ($ini_array["JACKBF_INPUT"] == "ON")
-            { ?> <input type="checkbox" id="jackbf" name="JACKBF_INPUT" value="ON" checked> <?}
-        else
-          {?> <input type="checkbox" id="jackbf" name="JACKBF_INPUT" value="ON"> <?}?>
-    </td>
+	<? if ( file_exists("/proc/asound/card0/pcm0c"))
+	{ ?>
+    	<td>
+	    	<input type="hidden" name="JACKBF_INPUT" value="OFF"> <?
+        	if ($ini_array["JACKBF_INPUT"] == "ON")
+            	{ ?> <input type="checkbox" id="jackbf" name="JACKBF_INPUT" value="ON" checked> <?}
+        	else
+          	{?> <input type="checkbox" id="jackbf" name="JACKBF_INPUT" value="ON"> <?}?>
+    	</td> <?
+	}?>
+
+	<? if ($ini_array["ADVANCED"] == "ON")
+	{ ?>
+		<td>
+			<input type="hidden" name="JACKBF_NETJACK" value="OFF">
+		  <? if ($ini_array["JACKBF_NETJACK"] == "ON"){ ?>
+		    <input type="checkbox" id="jack" name="JACKBF_NETJACK" value="ON" checked>
+		  <?} else {?>
+		    <input type="checkbox" id="jack" name="JACKBF_NETJACK" value="ON">
+		  <?}?>
+		</td> <?
+	} ?>
 </tr>
 
 
@@ -906,13 +1008,28 @@ if ($ini_array["SOUNDCARD"] != "Internal HDMI audio" && $ini_array["SOUNDCARD"] 
             {?> <input type="checkbox" id="jackbfms" name="JACKBFMS_BLUEALSAAPLAY" value="ON"> <?}?>
     </td>
 
-    <td>
-	    <input type="hidden" name="JACKBFMS_INPUT" value="OFF"> <?
-        if ($ini_array["JACKBFMS_INPUT"] == "ON")
-            { ?> <input type="checkbox" id="jackbfms" name="JACKBFMS_INPUT" value="ON" checked> <?}
-        else
-          {?> <input type="checkbox" id="jackbfms" name="JACKBFMS_INPUT" value="ON"> <?}?>
-    </td>
+	<? if ( file_exists("/proc/asound/card0/pcm0c"))
+	{ ?>
+	    <td>
+		    <input type="hidden" name="JACKBFMS_INPUT" value="OFF"> <?
+	        if ($ini_array["JACKBFMS_INPUT"] == "ON")
+	            { ?> <input type="checkbox" id="jackbfms" name="JACKBFMS_INPUT" value="ON" checked> <?}
+	        else
+	          {?> <input type="checkbox" id="jackbfms" name="JACKBFMS_INPUT" value="ON"> <?}?>
+	    </td> <?
+	} ?>
+
+	<? if ($ini_array["ADVANCED"] == "ON")
+	{ ?>
+		<td>
+			<input type="hidden" name="JACKBFMS_NETJACK" value="OFF">
+		  <? if ($ini_array["JACKBFMS_NETJACK"] == "ON"){ ?>
+		    <input type="checkbox" id="jack" name="JACKBFMS_NETJACK" value="ON" checked>
+		  <?} else {?>
+		    <input type="checkbox" id="jack" name="JACKBFMS_NETJACK" value="ON">
+		  <?}?>
+		</td> <?
+	} ?>
 </tr>
 
 </table>

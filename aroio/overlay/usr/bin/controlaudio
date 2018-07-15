@@ -4,7 +4,7 @@
 
 ACTION="$1"
 
-echo "Starting controlaudio..."
+echo "Controlaudio "$ACTION" ..."
 
 [ "$SOUNDCARD" = "Internal HDMI audio" ] && amixer cset numid=3 2
 [ "$SOUNDCARD" = "Internal audio jack" ] && amixer cset numid=3 1
@@ -71,7 +71,8 @@ sed -i "/#SAMPLINGRATE/c\        rate "$RATE" #SAMPLINGRATE" /etc/asound.conf
 
 		vol-jack)
 			systemctl "$ACTION" jackd.service
-			#[ "$JACK_NETJACK"      = "ON" ] && systemctl "$ACTION" netjack.service
+			[ "$ACTION" = "start" ] && until jack_lsp ; do sleep 0.1 ; done
+			[[ "$JACK_NETJACK"      = "ON"  && "$ACTION" != "stop" ]] && echo "netmanager start" && jack_load netmanager
 			[ "$JACK_SQUEEZELITE"   = "ON" ] && systemctl "$ACTION" squeezelite.service
 			[ "$JACK_GMEDIARENDER"  = "ON" ] && systemctl "$ACTION" gmediarender.service
 			[ "$JACK_SHAIRPORTSYNC" = "ON" ] && systemctl "$ACTION" shairport-sync.service
@@ -79,11 +80,23 @@ sed -i "/#SAMPLINGRATE/c\        rate "$RATE" #SAMPLINGRATE" /etc/asound.conf
 			[ "$JACK_INPUT" = "ON" ] && sleep 0.2 && jack_connect system:capture_1 system:playback_1 && jack_connect system:capture_2 system:playback_2
 		;;
 
+		vol-jack-ms)
+			systemctl "$ACTION" jackd.service
+			[ "$ACTION" = "start" ] && until jack_lsp ; do sleep 0.1 ; done
+			[[ "$JACKMS_NETJACK"      = "ON"  && "$ACTION" != "stop" ]] &&  jack_load netmanager
+			[ "$JACKMS_SQUEEZELITE"   = "ON" ] && systemctl "$ACTION" squeezelite.service
+			[ "$JACKMS_GMEDIARENDER"  = "ON" ] && systemctl "$ACTION" gmediarender.service
+			[ "$JACKMS_SHAIRPORTSYNC" = "ON" ] && systemctl "$ACTION" shairport-sync.service
+			[ "$JACKMS_BLUEALSAAPLAY" = "ON" ] && systemctl "$ACTION" bluealsa-aplay.service
+			[ "$JACKMS_INPUT" = "ON" ] && sleep 0.2 && jack_connect system:capture_1 system:playback_1 && jack_connect system:capture_2 system:playback_2
+		;;
+
 		vol-jack-bf)
 			systemctl "$ACTION" jackd.service
+			[ "$ACTION" = "start" ] && until jack_lsp ; do sleep 0.1 ; done
 			systemctl "$ACTION" brutefir.service
 			until jack_lsp | grep brutefir ; do sleep 0.2 ; done
-			#[ "$JACKBF_NETJACK"      = "ON" ] && systemctl "$ACTION" netjack.service
+			[[ "$JACKBF_NETJACK"      = "ON"  && "$ACTION" != "stop" ]] && jack_load netmanager
 			[ "$JACKBF_SQUEEZELITE"   = "ON" ] && systemctl "$ACTION" squeezelite.service
 			[ "$JACKBF_GMEDIARENDER"  = "ON" ] && systemctl "$ACTION" gmediarender.service
 			[ "$JACKBF_SHAIRPORTSYNC" = "ON" ] && systemctl "$ACTION" shairport-sync.service
@@ -93,9 +106,10 @@ sed -i "/#SAMPLINGRATE/c\        rate "$RATE" #SAMPLINGRATE" /etc/asound.conf
 
 		vol-jack-bfms)
 			systemctl "$ACTION" jackd.service
+			[ "$ACTION" = "start" ] && until jack_lsp ; do sleep 0.1 ; done
 			systemctl "$ACTION" brutefir.service
 			until jack_lsp | grep brutefir ; do sleep 0.2 ; done
-			#[ "$JACKBFMS_NETJACK"      = "ON" ] && systemctl "$ACTION" netjack.service
+			[[ "$JACKBFMS_NETJACK"      = "ON"  && "$ACTION" != "stop" ]] && jack_load netmanager
 			[ "$JACKBFMS_SQUEEZELITE"   = "ON" ] && systemctl "$ACTION" squeezelite.service
 			[ "$JACKBFMS_GMEDIARENDER"  = "ON" ] && systemctl "$ACTION" gmediarender.service
 			[ "$JACKBFMS_SHAIRPORTSYNC" = "ON" ] && systemctl "$ACTION" shairport-sync.service
