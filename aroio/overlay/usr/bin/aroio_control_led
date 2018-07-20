@@ -1,0 +1,68 @@
+#!/bin/sh
+
+# Kill any other instance of this script before proceeding
+for pid in $(pidof $(basename $0)); do
+    if [ $pid != $$ ]; then
+        kill -9 $pid
+    fi
+done
+
+# Setup our GPIO
+if [ ! -e /sys/class/gpio/gpio22/ ]
+then
+    echo "22" >	 /sys/class/gpio/export
+    chmod 777	 /sys/class/gpio/gpio22/value
+    chmod 777	 /sys/class/gpio/gpio22/direction
+    echo "out" > /sys/class/gpio/gpio22/direction
+#	cat			 /sys/class/gpio/gpio22/direction 
+fi
+
+function led_on()
+{
+    echo "1" > /sys/class/gpio/gpio22/value
+}
+
+function led_off()
+{
+    echo "0" > /sys/class/gpio/gpio22/value
+}
+
+# $1=ON_TIME, $2=OFF_TIME, $3=BLINK_COUNT, $4=LOOP_COUNT, $5=LOOP_PAUSE
+function led_blink()
+{
+    LOOP_COUNT=0
+    while [ "$LOOP_COUNT" -lt "$4" ]
+    do
+        BLINK_COUNT=0
+        while [ "$BLINK_COUNT" -lt "$3" ]
+        do
+            echo "1" > /sys/class/gpio/gpio22/value
+            sleep $1
+            echo "0" > /sys/class/gpio/gpio22/value
+            sleep $2
+            BLINK_COUNT=$((BLINK_COUNT+1))
+        done
+        LOOP_COUNT=$((LOOP_COUNT+1))
+        sleep $5
+	done
+}
+
+case $1 in
+	on)
+		led_on
+	;;
+
+	off)
+		led_off
+	;;
+
+	blink)
+		led_blink $2 $3 $4 $5 $6
+	;;
+
+	*)
+		echo "Arguments: on|off|blink"
+		echo "with blink needing 5 parameters:"
+		echo "ON_TIME (s), OFF_TIME (s), BLINK_COUNT, LOOP_COUNT, LOOP_PAUSE (s)"
+	;;
+esac

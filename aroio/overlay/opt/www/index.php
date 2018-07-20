@@ -572,9 +572,13 @@ btalsa
 		Line In
 	</td> <?
 }?>
-<td>
-NetJack
-</td>
+
+<? if ($ini_array["ADVANCED"] == "ON"){ ?>
+	<td>
+		NetJack
+	</td> <?
+} ?>
+
 </tr>
 
 

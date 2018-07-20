@@ -1,0 +1,11 @@
+[Unit]
+Description=ifplugd - watching network interface carriers
+After=mount.target
+
+[Service]
+Type=simple
+ExecStart=/sbin/ifplugd -n -t 0 -d 0
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

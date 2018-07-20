@@ -1,0 +1,46 @@
+#!/bin/sh
+# $Id: ifplugd.action 99 2004-02-08 20:17:59Z lennart $
+
+# This file is part of ifplugd.
+#
+# ifplugd is free software; you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free
+# Software Foundation; either version 2 of the License, or (at your
+# option) any later version.
+#
+# ifplugd is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+# FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
+# for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with ifplugd; if not, write to the Free Software Foundation,
+# Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.
+
+set -e
+
+if [ -z "$1" ] || [ -z "$2" ] ; then
+	echo "Wrong arguments" > /dev/stderr
+	exit 1
+fi
+
+aroio_control_led blink 0.15 0.15 5 2 0
+
+# Check out the state of our NICs
+ETH0_CARRIER=$(networkctl status eth0 | awk '/State/ {print $2}')
+ETH0_STATE=$(networkctl | awk '/eth0/ {print $5}')
+WLAN0_CARRIER=$(networkctl status wlan0 | awk '/State/ {print $2}')
+WLAN0_STATE=$(networkctl | awk '/wlan0/ {print $5}')
+echo $ETH0_CARRIER
+echo $ETH0_STATE
+echo $WLAN0_CARRIER
+echo $WLAN0_STATE
+
+if [[ "$ETH0_CARRIER" = "routable"  &&  "$ETH0_STATE" = "configured" || "$WLAN0_CARRIER" = "routable"  &&  "$WLAN0_STATE" = "configured" ]]
+then
+	echo "We have a configured network!"
+	echo "Will turn LED on!"
+	aroio_control_led on
+
+fi
+exit 0
