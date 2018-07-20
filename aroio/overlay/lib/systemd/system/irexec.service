@@ -1,0 +1,11 @@
+[Unit]
+Description=Handle events from IR remotes decoded by lircd(8)
+Requires=lircd.service
+After=lircd.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/irexec /etc/lirc/irexec.lircrc
+
+[Install]
+WantedBy=multi-user.target

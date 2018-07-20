@@ -1,0 +1,80 @@
+
+# Please make this file available to others
+# by sending it to <lirc@bartelmus.de>
+#
+# this config file was automatically generated
+# using lirc-0.9.0(default) on Thu Jan 16 17:08:35 2014
+#
+# contributed by 
+#
+# brand:                       urc_9762
+# model no. of remote control: 
+# devices being controlled by this remote:
+#
+
+begin remote
+
+  name  urc_9762
+  bits           13
+  flags RC6|CONST_LENGTH
+  eps            30
+  aeps          100
+
+  header       2692   836
+  one           474   408
+  zero          474   408
+  pre_data_bits   24
+  pre_data       0x1BFF83
+  gap          106501
+  toggle_bit_mask 0x8000
+  rc6_mask    0x100000000
+
+      begin codes
+          1                        0x1BFE
+          2                        0x1BFD
+          3                        0x1BFC
+          4                        0x1BFB
+          5                        0x1BFA
+          6                        0x1BF9
+          7                        0x1BF8
+          8                        0x1BF7
+          9                        0x1BF6
+          0                        0x1BFF
+          av                       0x1BD3
+          ---                      0x1BF4
+          info                     0x1BF0
+          menu                     0x1BF2
+          www                      0x1BC3
+          guide                    0x1BD9
+          mce                      0x1BF2
+          return                     0x1BDC
+          red                      0x1BA4
+          green                    0x1BA3
+          yellow                   0x1BA2
+          blue                     0x1BA1
+          up                       0x1BE1
+          down                     0x1BE0
+          left                     0x1BDF
+          right                    0x1BDE
+          ok                       0x1BDD
+          volumeplus                 0x1BEF
+          volumeminus               0x1BEE
+          mute                     0x1BF1
+          progplus                 0x1BED
+          progminus                0x1BEC
+          play                     0x1BE9
+          pause                    0x1BE7
+          stop                     0x1BE6
+          forward                  0x1BEB
+          reverse                  0x1BEA
+          skipplus                 0x1BE5
+          skipminus                0x1BE4
+          list                     0x1BB7
+          16to9                    0x1BD8
+          power                    0x1BF3
+          rec                      0x1BE8
+      end codes
+
+end remote
+
+

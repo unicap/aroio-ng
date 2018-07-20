@@ -1,0 +1,14 @@
+play
+echo "[MAC address of the squeezelite player] play" | telnet [IP address of the raspi running LMS] 9090
+
+pause/play toggle
+echo "[MAC address of the squeezelite player] pause" | telnet [IP address of the raspi running LMS] 9090
+
+stop
+echo "[MAC address of the squeezelite player] stop" | telnet [IP address of the raspi running LMS] 9090
+
+next
+echo "[MAC address of the squeezelite player] playlist index +1" | telnet [IP address of the raspi running LMS] 9090
+
+previous
+echo "[MAC address of the squeezelite player] playlist index -1" | telnet [IP address of the raspi running LMS] 9090

@@ -1,0 +1,35 @@
+
+# Please take the time to finish this file as described in
+# https://sourceforge.net/p/lirc-remotes/wiki/Checklist/
+# and make it available to others by sending it to
+# <lirc@bartelmus.de>
+#
+# This config file was automatically generated
+# using lirc-0.10.1(default) on Fri Jul 20 11:52:10 2018
+# Command line used: test
+# Kernel version (uname -r): 4.14.34-v7
+#
+# Remote name (as of config file): wewew
+# Brand of remote device, the thing you hold in your hand:
+# Remote device model nr:
+# Remote device info url:
+# Does remote device has a bundled capture device e. g., a
+#     usb dongle? :
+# For bundled USB devices: usb vendor id, product id
+#     and device string (use dmesg or lsusb):
+# Type of device controlled
+#     (TV, VCR, Audio, DVD, Satellite, Cable, HTPC, ...) :
+# Device(s) controlled by this remote:
+
+begin remote
+
+  name  wewew
+  bits           21
+  flags SPACE_ENC|CONST_LENGTH
+  eps            30
+  aeps          100
+
+  header        906   809
+  one             0     0
+  zero            0     0
+  ptr

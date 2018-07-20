@@ -1,0 +1,11 @@
+[Unit]
+Description=Flexible IR remote input/output application support
+After=network.target
+
+[Service]
+Type=forking
+PIDFile=/var/run/lirc/lircd.pid
+ExecStart=/usr/sbin/lircd
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,45 @@
+#play
+#echo "[MAC address of the squeezelite player] play" | telnet [IP address of the raspi running LMS] 9090
+#
+#pause/play toggle
+#echo "[MAC address of the squeezelite player] pause" | telnet [IP address of the raspi running LMS] 9090
+#
+#stop
+#echo "[MAC address of the squeezelite player] stop" | telnet [IP address of the raspi running LMS] 9090
+#
+#next
+#echo "[MAC address of the squeezelite player] playlist index +1" | telnet [IP address of the raspi running LMS] 9090
+#
+#previous
+#echo "[MAC address of the squeezelite player] playlist index -1" | telnet [IP address of the raspi running LMS] 9090
+
+begin
+  prog = irexec
+  button = play
+  config = echo "play" && /usr/bin/aroio_control_lms play
+end
+
+begin
+  prog = irexec
+  button = pause
+  config = echo "pause" && /usr/bin/aroio_control_lms pause
+end
+
+begin
+  prog = irexec
+  button = next
+  config = echo "next" && /usr/bin/aroio_control_lms last
+end
+
+begin
+  prog = irexec
+  button = previous
+  config = echo "previous" && /usr/bin/aroio_control_lms next
+end
+
+begin
+  prog = irexec
+  button = stop
+  config = echo "stop" && /usr/bin/aroio_control_lms stop
+end
+

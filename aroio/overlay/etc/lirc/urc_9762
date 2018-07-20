@@ -1,0 +1,68 @@
+# using lirc-0.9.2a(devinput) on Fri Aug  5 18:05:59 2016
+# Command line used: --disable-namespace -f lircd.conf
+# Kernel version (uname -r): 4.4.11-v7
+#
+# Remote name: OneForAll URC 11-9762 in MCE Setup
+
+begin remote
+
+  name  urc_9762
+  driver devinput
+  bits           64
+  eps            30
+  aeps          100
+
+  one             0     0
+  zero            0     0
+  gap          324
+  toggle_bit_mask 0x0
+
+      begin codes
+          power                    0x03560000010001AE 0x000000007E9E99D1
+          skip_back                0x037C0000010001B2 0x000000007E9E99D1
+          skip_fwd                 0x03790000010001AE 0x000000007E9E99D1
+          pause                    0x037C0000010001B4 0x000000007E9E99D1
+          play                     0x037E0000010001B4 0x000000007E9E99D1
+          stop                     0x03760000010001B2 0x000000007E9E99D1
+          ffwd                     0x036E0000010001B1 0x000000007E9E99D1
+          frew                     0x03790000010001B7 0x000000007E9E99D1
+          record                   0x036E0000010001AF 0x000000007E9E99D1
+          volplus                  0x03780000010001B3 0x000000007E9E99D1
+          volminus                 0x037A0000010001B5 0x000000007E9E99D1
+          mute                     0x037B0000010001B6 0x000000007E9E99D1
+          ok                       0x03720000010001B8 0x000000007E9E99D1
+          up                       0x037B0000010001AB 0x000000007E9E99D1
+          down                     0x03830000010001AD 0x000000007E9E99D1
+          left                     0x03740000010001B2 0x000000007E9E99D1
+          right                    0x035F0000010001C6 0x000000007E9E99D1
+          progplus                 0x037A0000010001B7 0x000000007E9E99D1
+          progminus                0x03840000010001AE 0x000000007E9E99D1
+          exit                     0x03740000010001B5 0x000000007E9E99D1
+          red                      0x03700000010001AE 0x000000007E9E99D1
+          green                    0x03500000010001CE 0x000000007E9E99D1
+          yellow                   0x035C0000010001D1 0x000000007E9E99D1
+          blue                     0x037E0000010001B2 0x000000007E9E99D1
+          info                     0x03780000010001AF 0x000000007E9E99D1
+          menu                     0x037B0000010001B1 0x000000007E9E99D1
+          guide                    0x03750000010001B1 0x000000007E9E99D1
+          mce                      0x03720000010001B4 0x000000007E9E99D1
+          www                      0x03730000010001B7 0x000000007E9E99D1
+          back                     0x03740000010001B4 0x000000007E9E99D1
+          1                        0x036B0000010001AF 0x000000007E9E99D1
+          2                        0x03720000010001B3 0x000000007E9E99D1
+          3                        0x03480000010001BD 0x000000007E9E99D1
+          4                        0x036E0000010001B0 0x000000007E9E99D1
+          5                        0x03540000010001D0 0x000000007E9E99D1
+          6                        0x036E0000010001B3 0x000000007E9E99D1
+          7                        0x03720000010001B2 0x000000007E9E99D1
+          8                        0x036E0000010001B1 0x000000007E9E99D1
+          9                        0x03700000010001B0 0x000000007E9E99D1
+          0                        0x03750000010001B2 0x000000007E9E99D1
+          --                       0x036D0000010001AA 0x000000007E9E99D1
+          av                       0x037D0000010001AA 0x000000007E9E99D1
+          16to9                    0x03740000010001B5 0x000000007E9E99D1
+      end codes
+
+end remote
+
+
