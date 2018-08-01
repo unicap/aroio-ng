@@ -147,7 +147,6 @@ function restart_lms()
 
 function cancel_measurement()
 {
-	shell_exec('killall recordsweep');
 	shell_exec('killall aplay');
 	shell_exec('killall arecord');
 }
@@ -544,8 +543,16 @@ function volControl($ms,$attenuation)
 function measurement()
 {
 	$cmd='/usr/bin/recordsweep';
+
+	while (@ ob_end_flush()); // end all output buffers if any
+
+	$proc = popen($cmd, 'r');
 	echo '<pre>' ;
-        passthru($cmd) ;
+	while (!feof($proc))
+	{
+	    echo fread($proc, 4096);
+	    @ flush();
+	}
     echo '</pre>' ;
 
 }

@@ -13,23 +13,13 @@ INFILE3='/root/Logsweep/End.raw'
 OUTFILE='/tmp/Logsweep48_rec.raw'
 
 echo "Stopping audio processing"
-controlaudio stop
+controlaudio measure
 
 cd /tmp
+rm Logsweep48_rec*
 
-if [ "$MSCODING" = "ON" ]
-then
-    OUTDEVICE=mscoded
-    echo '<b>ACHTUNG: Der Digitalteil des Cleaners ist eingeschaltet!
-    <br>Die Messung erfolgt nur korrekt, wenn Sie ABACUS Hardware oder andere mit aktivierter MS-Dekodierung verwenden. 
-    <br>WARNING: The digital part of the Cleaner is on! The measurement only works correctly with activated MS-decoding by ABACUS hardware or else.</b>'
-    #		else	OUTPUT="-o stereo"
-else
-    OUTDEVICE=plughw:0
-    echo '<b>ACHTUNG: Ausgabe des Messsignals erfolgt im Stereo-Modus!
-    <br>Falls Sie ABACUS Hardware nutzen stellen Sie sicher, dass der Cleaner dort ausgesachaltet ist. 
-    <br>WARNING: Measurement signal is stereo! If you´re using ABACUS hardware make sure to turn off the Cleaner!</b>'
-fi
+echo '<b>Bitte beachten Sie, dass die Audiovero Clean! Funktion am Ger&auml;t entsprechend der Auswahl der Ausgabe eingestellt sein muss!
+<br>Please make sure to set the Audiovero Clean! funktion on the device acording to the chosen output option!</b>'
 
 if ! [ -e /tmp/Logsweep96.raw ]
 then
@@ -39,13 +29,13 @@ else
 	echo "Logsweep already unpacked, continuing..."
 fi
 
-aplay -f FLOAT_LE -r 48000 -c1 -D $OUTDEVICE $INFILE1
+#aplay -f FLOAT_LE -r 48000 -c1 -D $AUDIO_OUTPUT $INFILE1
 arecord -Dplughw:4 -I -d 200 -t raw -r 48000 -f FLOAT_LE -c2 $OUTFILE &
-aplay -v -f FLOAT_LE -r 96000 -c2 -D $OUTDEVICE Logsweep96.raw
-aplay -f FLOAT_LE -r 48000 -c1 -D $OUTDEVICE $INFILE3
+aplay -f S32_LE -r 96000 -c2 -D $AUDIO_OUTPUT Logsweep96.raw
+#aplay -f FLOAT_LE -r 48000 -c1 -D $AUDIO_OUTPUT $INFILE3
 
 rm "$OUTFILE".1
 mv "$OUTFILE".0 $OUTFILE
 echo "Measurement done! You may now further process the recording..."
 echo "Starting audio processing again..."
-controlaudio start
+controlaudio stop && controlaudio start
