@@ -127,6 +127,14 @@ function StopStatus()
 	done
 }
 
+function Measure()
+{
+	for SERVICE in squeezelite gmediarender shairport-sync bluealsa-aplay
+	do
+		systemctl "$1" "$SERVICE".service
+	done
+}
+
 case "$ACTION" in
 	stop|status)
 	StopStatus "$ACTION"
@@ -139,6 +147,10 @@ case "$ACTION" in
 	restart)
 	StopStatus stop
 	Start
+	;;
+
+	measure)
+	Measure stop
 	;;
 esac
 

@@ -542,7 +542,7 @@ function volControl($ms,$attenuation)
 
 function measurement()
 {
-	$cmd='/usr/bin/recordsweep';
+	$cmd='/usr/bin/recordsweep 2>&1';
 
 	while (@ ob_end_flush()); // end all output buffers if any
 
