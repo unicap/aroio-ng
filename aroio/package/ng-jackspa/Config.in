@@ -1,0 +1,13 @@
+config BR2_PACKAGE_NG_JACKSPA
+	bool "ng-jackspa"
+	#depends on BR2_TOOLCHAIN_HAS_THREADS # alsa-lib
+	#select BR2_PACKAGE_ALSA_LIB
+	#select BR2_PACKAGE_ALSA_LIB_MIXER
+	#select BR2_PACKAGE_SBC
+	#select BR2_PACKAGE_BLUEZ5_UTILS
+	#select BR2_PACKAGE_FDK_AAC
+	help
+	  LADSPA command line hostfor jack
+
+	  https://github.com/7890/ng-jackspa
+
