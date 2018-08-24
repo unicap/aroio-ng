@@ -541,6 +541,17 @@ else
     ?>
     </td>
   </tr>
+  <tr>
+    <td>
+        Shairport Samplerate:
+    </td>
+	<td>
+			<?$arr_sprate= array('44100','88200');
+	        print_optgroup("SPRATE",$arr_sprate,$ini_array["SPRATE"]);?>
+	</td>
+
+
+  </tr>
   </table>
 </div>
 

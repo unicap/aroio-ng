@@ -12,7 +12,8 @@ echo "Controlaudio "$ACTION" ..."
 function Start()
 {
 
-sed -i "/#SAMPLINGRATE/c\        rate "$RATE" #SAMPLINGRATE" /etc/asound.conf
+	sed -i "/#SAMPLINGRATE/c\        rate "$RATE" #SAMPLINGRATE" /etc/asound.conf
+	sed -i "/output_rate/c\output_rate = "$SPRATE""  /etc/shairport-sync.conf
 
 	case "$AUDIO_OUTPUT" in
 		vol-plug)
