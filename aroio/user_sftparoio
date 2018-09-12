@@ -1,1 +1,1 @@
-sftparoio -1 users -1 =sftpupload /home/sftparoio /bin/sh -
+sftparoio -1 users -1 =sftpupload /tmp/filter /bin/sh -
