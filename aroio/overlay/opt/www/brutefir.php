@@ -164,13 +164,7 @@
             $ini_array = parse_ini_file("/boot/userconfig.txt", 1);
             echo '<meta http-equiv="refresh"> ';
         }
-        shell_exec('/usr/bin/killall brutefir &> /dev/null' );
-        shell_exec('/usr/bin/killall jackd &> /dev/null' );
-        shell_exec('/usr/bin/killall brutefir_connect_netjackports &> /dev/null' );
-        shell_exec('/usr/bin/stopstreamer');
-        shell_exec('/etc/init.d/brutefir &> /dev/null' );
-        exec('/usr/bin/startstreamer.sh &> /dev/null &');
-        shell_exec('/etc/init.d/amixer &> /dev/null &');
+		shell_exec('/usr/bin/controlaudio restart &> /dev/null' );
     }
     
     include "header.php";?>
