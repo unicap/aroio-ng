@@ -490,7 +490,7 @@ else
         <span title=""><label for="Soundcard"> <? print ${soundcard._.$lang} ; ?> </label></span></a>
     </td>
     <td>
-        <?$arr_soundcard= array('Internal HDMI audio','Internal audio jack','AroioDAC','IQAudIO DAC','HiFiBerry DAC','HiFiBerry DAC+','HiFiBerry Digi','RME Fireface UCX','Focusrite Scarlett','M-Audio Fast Track Pro','USB Class Compliant');
+        <?$arr_soundcard= array('Internal HDMI audio','Internal audio jack','AroioDAC','HiFiBerry DAC','HiFiBerry DAC+','HiFiBerry Digi','IQAudIO DAC','Dr. DAC prime','Focusrite Scarlett','M-Audio Fast Track Pro','RME Fireface UCX','USB Class Compliant');
         //<?$arr_soundcard= array('IQAudIO DAC','HiFiBerry DAC+','HiFiBerry Digi','M-Audio Fast Track Pro','Lynx Hilo','Focusrite Scarlett','NI Audio 8 DJ');
         print_optgroup("SOUNDCARD",$arr_soundcard,$ini_array["SOUNDCARD"]);
     ?>
@@ -524,6 +524,7 @@ else
             case "AudioQuest Beetle":
             case "RME Fireface UCX":
             case "Focusrite Scarlett":
+			case "Dr. DAC prime":
                 $arr_rate= array('44100','48000','96000');
                 break;
 
@@ -541,6 +542,24 @@ else
     ?>
     </td>
   </tr>
+
+  <tr>
+    <td>
+        Resampling Quality:
+    </td>
+	<td>
+			<?$arr_resampling= array
+				(
+				array(speexrate,"low"),
+				array(speexrate_medium,"medium"),
+				array(speexrate_best,"high")
+				);
+
+	        print_optgroup2D("RESAMPLING",$arr_resampling,$ini_array["RESAMPLING"]);?>
+	</td>
+  </tr>
+
+ 
   <tr>
     <td>
         Shairport Samplerate:
@@ -549,8 +568,6 @@ else
 			<?$arr_sprate= array('44100','88200');
 	        print_optgroup("SPRATE",$arr_sprate,$ini_array["SPRATE"]);?>
 	</td>
-
-
   </tr>
   </table>
 </div>

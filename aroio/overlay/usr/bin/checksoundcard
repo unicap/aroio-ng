@@ -351,6 +351,33 @@ case $SOUNDCARD in
 	fi
 	;;
 
+	'Dr. DAC prime')
+	if ! grep -q "#dr_dac_prime" "$CONFIG"
+	then
+		cardmount rw
+		echo "userconfig and config.txt have different entries for soundcards,"
+		echo "backing up and writing a new config.txt..."
+		cp "$CONFIG" "$CONFIG"-bak
+		cat <<-EOF > "$CONFIG"
+			force_turbo=1
+			dtdebug=1
+			max_usb_current=1
+			disable_splash=1
+			kernel=zImage
+			disable_overscan=1
+			dtoverlay=lirc-rpi,gpio_in_pin=25
+			#dr_dac_prime
+		EOF
+
+		if ! mount | grep -q mmcblk0p2
+		then	echo "initramfs aroioimage.cpio.gz followkernel" >> "$CONFIG"
+		fi
+		# Also taking care of correct soundcard order
+		sed -i '/options snd slots/c\options snd slots=snd_usb_audio' "$ALSACONFIG"
+		cardmount ro
+		reboot
+	fi
+	;;
 
 	'USB Class Compliant')
 	if ! grep -q "#usb_class_compliant" "$CONFIG"
