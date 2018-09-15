@@ -662,9 +662,9 @@ if ($ini_array["SOUNDCARD"] != "Focusrite Scarlett")
     }
 
     if ($ini_array["AUDIO_OUTPUT"] == "vol-plug-ms"){
-        ?> <tr><td> <input class="actiongroup" type="radio" name="AUDIO_OUTPUT" value="vol-plug-ms" checked> MS-Coded <?}
+        ?> <tr><td> <input class="actiongroup" type="radio" name="AUDIO_OUTPUT" value="vol-plug-ms" checked> DirectMS <?}
     else {
-        ?> <tr><td> <input class="actiongroup" type="radio" name="AUDIO_OUTPUT" value="vol-plug-ms"> MS-Coded <?}
+        ?> <tr><td> <input class="actiongroup" type="radio" name="AUDIO_OUTPUT" value="vol-plug-ms"> DirectMS <?}
 
     switch ($ini_array["RAW_PLAYERMS"]){
 	case "squeezelite":
@@ -708,8 +708,9 @@ if ($ini_array["SOUNDCARD"] != "Focusrite Scarlett")
         break;
     }
 }
-
 ?>
+
+<?php /* ?>
 <tr> <?
 if ($ini_array["SOUNDCARD"] != "Internal HDMI audio" && $ini_array["SOUNDCARD"] != "Internal audio jack")
 { ?>
@@ -796,6 +797,7 @@ if ($ini_array["SOUNDCARD"] != "Internal HDMI audio" && $ini_array["SOUNDCARD"] 
 
 }
 ?>
+<?php // */ ?>
 
 <td>
 </td>
@@ -803,7 +805,6 @@ if ($ini_array["SOUNDCARD"] != "Internal HDMI audio" && $ini_array["SOUNDCARD"] 
 
 <tr>
 <td>
-
   <? if ($ini_array["AUDIO_OUTPUT"] == "vol-jack"){ ?>
     <input class="actiongroup" type="radio" id="output" name="AUDIO_OUTPUT" value="vol-jack" checked> Jack
   <?} else {?>
