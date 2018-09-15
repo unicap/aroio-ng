@@ -205,11 +205,15 @@ function fltrSelect($id,$ini_array)
 	    }
 	    closedir($handle);*/
 
-		$pattern = "/(\\w*)L|R(\\d*).dbl/";
+		$rate=($ini_array[RATE] / 1000);
+
+		#$pattern = "/(\\w*)L|R(\\d*).dbl/";
+		$pattern = "/(\\w*)(L|R)($rate).dbl/";
 
 		//check if surround
 		if ($ini_array[CHANNELS]==4) {
-			$pattern = "/(\\w*)SL|R(\\d*).dbl/";
+			#$pattern = "/(\\w*)SL|R(\\d*).dbl/";
+			$pattern = "/(\\w*)SL|R48.dbl/";
 		}
 
 		preg_match_all($pattern, $regexString,$banks); // in $banks[1] Coeffset-Name
