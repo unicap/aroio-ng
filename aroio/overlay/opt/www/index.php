@@ -583,16 +583,16 @@ else
 
 </td>
 <td>
-squeeze
+Squeeze
 </td>
 <td>
-gmrender
+UPNP
 </td>
 <td>
-shairport
+Airplay
 </td>
 <td>
-btalsa
+Bluetooth
 </td>
 <? if ( file_exists("/proc/asound/card0/pcm0c"))
 { ?>
@@ -806,9 +806,9 @@ if ($ini_array["SOUNDCARD"] != "Internal HDMI audio" && $ini_array["SOUNDCARD"] 
 <tr>
 <td>
   <? if ($ini_array["AUDIO_OUTPUT"] == "vol-jack"){ ?>
-    <input class="actiongroup" type="radio" id="output" name="AUDIO_OUTPUT" value="vol-jack" checked> Jack
+    <input class="actiongroup" type="radio" id="output" name="AUDIO_OUTPUT" value="vol-jack" checked> Bus
   <?} else {?>
-      <input class="actiongroup" type="radio" id="output" name="AUDIO_OUTPUT" value="vol-jack"> Jack
+      <input class="actiongroup" type="radio" id="output" name="AUDIO_OUTPUT" value="vol-jack"> Bus
   <?}?>
 
 </td>
@@ -871,9 +871,9 @@ if ($ini_array["SOUNDCARD"] != "Internal HDMI audio" && $ini_array["SOUNDCARD"] 
 
 <td>
   <? if ($ini_array["AUDIO_OUTPUT"] == "vol-jack-ms"){ ?>
-    <input class="actiongroup" type="radio" id="output" name="AUDIO_OUTPUT" value="vol-jack-ms" checked> Jack MS
+    <input class="actiongroup" type="radio" id="output" name="AUDIO_OUTPUT" value="vol-jack-ms" checked> Bus MS
   <?} else {?>
-      <input class="actiongroup" type="radio" id="output" name="AUDIO_OUTPUT" value="vol-jack-ms"> Jack MS
+      <input class="actiongroup" type="radio" id="output" name="AUDIO_OUTPUT" value="vol-jack-ms"> Bus MS
   <?}?>
 
 </td>
@@ -939,9 +939,9 @@ if ($ini_array["SOUNDCARD"] != "Internal HDMI audio" && $ini_array["SOUNDCARD"] 
 <tr>
     <td><?
         if ($ini_array["AUDIO_OUTPUT"] == "vol-jack-bf")
-            { ?> <input class="actiongroup" type="radio" name="AUDIO_OUTPUT" value="vol-jack-bf" checked> BruteFIR <?}
+            { ?> <input class="actiongroup" type="radio" name="AUDIO_OUTPUT" value="vol-jack-bf" checked> Convol. <?}
         else
-            {?> <input class="actiongroup" type="radio" name="AUDIO_OUTPUT" value="vol-jack-bf"> BruteFIR <?}?>
+            {?> <input class="actiongroup" type="radio" name="AUDIO_OUTPUT" value="vol-jack-bf"> Convol. <?}?>
     </td>
 
     <td>
@@ -1004,9 +1004,9 @@ if ($ini_array["SOUNDCARD"] != "Internal HDMI audio" && $ini_array["SOUNDCARD"] 
 <tr>
     <td><?
         if ($ini_array["AUDIO_OUTPUT"] == "vol-jack-bfms")
-            { ?> <input class="actiongroup" type="radio" name="AUDIO_OUTPUT" value="vol-jack-bfms" checked> BruteFIR MS <?}
+            { ?> <input class="actiongroup" type="radio" name="AUDIO_OUTPUT" value="vol-jack-bfms" checked> Convol. MS <?}
         else
-            {?> <input class="actiongroup" type="radio" name="AUDIO_OUTPUT" value="vol-jack-bfms"> BruteFIR MS <?}?>
+            {?> <input class="actiongroup" type="radio" name="AUDIO_OUTPUT" value="vol-jack-bfms"> Convol. MS <?}?>
     </td>
 
     <td>
