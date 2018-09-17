@@ -4,7 +4,7 @@
     include('style.css');
     
     if($_GET["lang"] === "en") $lang='en'; else $lang='de';
-    $ini_array = parse_ini_file("/mnt/mmcblk0p1/userconfig.txt", 1);
+    $ini_array = parse_ini_file("/boot/userconfig.txt", 1);
     
     include "header.php";?>
 
