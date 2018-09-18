@@ -205,23 +205,22 @@ function fltrSelect($id,$ini_array)
 	    }
 	    closedir($handle);*/
 
-		$rate=($ini_array[RATE] / 1000);
-
-		#$pattern = "/(\\w*)L|R(\\d*).dbl/";
-		$pattern = "/(\\w*)(L|R)($rate).dbl/";
+		$rate=(int)($ini_array[RATE] / 1000);
+		//$pattern = "/(\\w*)L|R(\\d*).dbl/";
+		$pattern = "/(\\w*)(L|R)".$rate.".dbl/";
 
 		//check if surround
 		if ($ini_array[CHANNELS]==4) {
-			#$pattern = "/(\\w*)SL|R(\\d*).dbl/";
-			$pattern = "/(\\w*)SL|R48.dbl/";
+			$pattern = "/(\\w*)S(L|R)".$rate.".dbl/";
 		}
 
 		preg_match_all($pattern, $regexString,$banks); // in $banks[1] Coeffset-Name
+		$result = array_unique($banks[1]);
 		$out='<select class="filter" name="coeff'.$id.'">';
 		if($ini_array[COEFF_NAME.$id]!="" || !empty($ini_array[COEFF_NAME.$id]))$out .= '<option selected>'.$ini_array[COEFF_NAME.$id].'</option>';
 		else $out.= '<option selected>BypassFilter</option>';
-		for ($i=0; $i < count($banks[1]); $i++) {
-			if(!empty($banks[1][$i])) $out.='<option>'.$banks[1][$i].'</option>';
+		foreach ($result as &$option) {
+			$out.='<option>'.$option.'</option>';
 		}
 		$out.='</select>';
 		return $out;
