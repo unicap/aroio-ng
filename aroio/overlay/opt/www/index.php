@@ -589,7 +589,7 @@ Squeeze
 UPNP
 </td>
 <td>
-Airplay
+AirPlay
 </td>
 <td>
 Bluetooth
