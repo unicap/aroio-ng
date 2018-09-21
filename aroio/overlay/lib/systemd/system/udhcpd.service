@@ -4,7 +4,7 @@ After=systemd-networkd.service
 After=sys-subsystem-net-devices-wlan.device hostapd-preparation.service
 BindsTo=hostapd.service
 ConditionPathExists=/tmp/network_unconfigured
-Conflicts=controlaudio.service
+#Conflicts=controlaudio.service
 
 [Service]
 Type=simple
