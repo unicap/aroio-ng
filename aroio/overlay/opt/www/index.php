@@ -338,22 +338,9 @@
   </tr>
 </table>
 
-<?
-$squeezeserverstate=ping_squeezeserver();
-if ( $squeezeserverstate == "0")
-{?>
-    <a href=<? echo 'http://'.print_squeezeaddr($ini_array["SERVERPORT"]).'' ?> target="_blank">
-    <button type="button" style="padding: 10px 10px; margin: 0px;">LMS Webinterface</button>
-    </a>
-<?}
-else
-{?>
-    <a disabled href=<? echo 'http://'.print_squeezeaddr($ini_array["SERVERPORT"]).'' ?> target="_blank">
-    <button disabled type="button" style="padding: 10px 10px; margin: 0px;">LMS Webinterface</button>
-    </a>
-<?}?>
-
-
+<a href=<? echo 'http://'.print_squeezeaddr($ini_array["SERVERPORT"]).'' ?> target="_blank">
+<button type="button" style="padding: 10px 10px; margin: 0px;">LMS Webinterface</button>
+</a>
 
 </fieldset>
 </div> <!-- Ende LMS -->
