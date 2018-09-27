@@ -128,7 +128,7 @@
 <table>
   <tr>
     <td>
-      <a style="text-decoration: none href="#" title="<? print ${helptext_hostname._.$lang} ?>"class="tooltip">
+      <a title="<? print ${helptext_hostname._.$lang} ?>"class="tooltip">
       <span title=""><label for="Hostname">Hostname</label></span></a>
     </td>
     <td>
@@ -137,7 +137,7 @@
   </tr>
   <tr>
     <td>
-      <a style="text-decoration: none href="#"  title="<? print ${helptext_dhcp._.$lang} ?>"class="tooltip">
+      <a  title="<? print ${helptext_dhcp._.$lang} ?>"class="tooltip">
       <span title=""><label for="DHCP"><? print ${dhcp._.$lang} ; ?></label></span></a>
     </td>
     <td>
@@ -158,7 +158,7 @@
   </tr>
   <tr>
     <td>
-      <a style="text-decoration: none href="#" title="<? print ${helptext_ipaddr._.$lang} ?>"class="tooltip">
+      <a title="<? print ${helptext_ipaddr._.$lang} ?>"class="tooltip">
       <span title=""><label for="IP-address"> <? print ${ipaddr._.$lang} ; ?> </label></span></a>
     </td>
     <td>
@@ -167,7 +167,7 @@
   </tr>
   <tr>
     <td>
-      <a style="text-decoration: none href="#" title="<? print ${helptext_netmask._.$lang} ?>"class="tooltip">
+      <a title="<? print ${helptext_netmask._.$lang} ?>"class="tooltip">
       <span title=""><label for="Network-mask"> <? print ${netmask._.$lang} ; ?> </label></span></a>
     </td>
     <td>
@@ -176,7 +176,7 @@
   </tr>
   <tr>
     <td>
-      <a style="text-decoration: none href="#" title="<? print ${helptext_dnsserv._.$lang} ?>"class="tooltip">
+      <a title="<? print ${helptext_dnsserv._.$lang} ?>"class="tooltip">
       <span title=""><label for="DNS-server"> <? print ${dnsserv._.$lang} ; ?> </label></span></a>
     </td>
     <td>
@@ -185,7 +185,7 @@
   </tr>
   <tr>
     <td>
-      <a style="text-decoration: none href="#" title="<? print ${helptext_gateway._.$lang} ?>"class="tooltip">
+      <a title="<? print ${helptext_gateway._.$lang} ?>"class="tooltip">
       <span title=""><label for="Gateway"> <? print ${gateway._.$lang} ; ?> </label></span></a>
     </td>
     <td>
@@ -198,7 +198,7 @@
     if ($test_wlan == "0"){?>
   <tr>
     <td>
-      <a style="text-decoration: none href="#" title="<? print ${helptext_sitesurvey._.$lang} ?>"class="tooltip">
+      <a title="<? print ${helptext_sitesurvey._.$lang} ?>"class="tooltip">
       <span title=""><label for="Scan"> <? print ${site_survey._.$lang} ; ?> </label></span></a>
     </td>
     <td>
@@ -207,7 +207,7 @@
   </tr>
   <tr>
     <td>
-      <a style="text-decoration: none href="#" title="<? print ${helptext_wlanssid._.$lang} ?>"class="tooltip">
+      <a title="<? print ${helptext_wlanssid._.$lang} ?>"class="tooltip">
       <span title=""><label for="Wireless network"> <? print ${wlanssid._.$lang} ; ?> </label></span></a>
     </td>
     <td>
@@ -235,7 +235,7 @@
   </tr>
   <tr>
     <td>
-      <a style="text-decoration: none href="#" title="<? print ${helptext_wlanpwd._.$lang} ?>"class="tooltip">
+      <a title="<? print ${helptext_wlanpwd._.$lang} ?>"class="tooltip">
       <span title=""><label for="Wireless passphrase"> <? print ${wlanpwd._.$lang} ; ?> </label></span></a>
     </td>
     <td>
@@ -243,7 +243,7 @@
       <script src="showpswd.js"></script>
 
       <input type="password" id="newpass" name="WLANPWD" onkeyup="runPassword(this.value, 'newpass');" value="<? print $ini_array["WLANPWD"] ?>"/>
-      <a style="text-decoration: none href="#" title="<? print ${helptext_showpwd._.$lang} ?>"class="tooltip_check">
+      <a title="<? print ${helptext_showpwd._.$lang} ?>"class="tooltip_check">
       <span title=""></span>
       <input type="checkbox" id="showpwd" onclick="machText(this.checked,this.form)"><label></label>
       </a>
@@ -261,7 +261,7 @@
 <table>
   <tr>
     <td>
-      <a style="text-decoration: none href="#" title="<? print ${helptext_userpwd._.$lang} ?>"class="tooltip">
+      <a title="<? print ${helptext_userpwd._.$lang} ?>"class="tooltip">
       <span title=""><label for="Userpassword"> <? print ${userpwd._.$lang} ; ?> </label></span></a>
     </td>
     <td>
@@ -280,7 +280,7 @@
 <table>
   <tr>
     <td>
-      <a style="text-decoration: none href="#" title="<? print ${helptext_platform._.$lang} ?>"class="tooltip">
+      <a title="<? print ${helptext_platform._.$lang} ?>"class="tooltip">
       <span title=""><label for="Userpassword"> <? print ${platform_form._.$lang} ; ?> </label></span></a>
     </td>
     <td>
@@ -302,7 +302,7 @@
 <table>
   <tr>
     <td>
-      <a style="text-decoration: none href="#" title="<? print ${helptext_servername._.$lang} ?>"class="tooltip">
+      <a title="<? print ${helptext_servername._.$lang} ?>"class="tooltip">
       <span title=""><label for="Address or hostname"> <? print ${squeeze_serv_hostname._.$lang} ; ?> </label></span></a>
     </td>
     <td>
@@ -311,7 +311,7 @@
   </tr>
   <tr>
     <td>
-      <a style="text-decoration: none href="#" title="<? print ${helptext_squeezeuser._.$lang} ?>"class="tooltip">
+      <a title="<? print ${helptext_squeezeuser._.$lang} ?>"class="tooltip">
       <span title=""><label for="Username (if set)"> <? print ${squeeze_serv_user._.$lang} ; ?> </label></span></a>
     </td>
     <td>
@@ -320,7 +320,7 @@
   </tr>
   <tr>
     <td>
-      <a style="text-decoration: none href="#" title="<? print ${helptext_squeezepwd._.$lang} ?>"class="tooltip">
+      <a title="<? print ${helptext_squeezepwd._.$lang} ?>"class="tooltip">
       <span title=""><label for="Password (if set)"> <? print ${squeeze_serv_passwd._.$lang} ; ?> </label></span></a>
     </td>
     <td>
@@ -329,7 +329,7 @@
   </tr>
   <tr>
     <td>
-      <a style="text-decoration: none href="#" title="<? print ${helptext_serverport._.$lang} ?>"class="tooltip">
+      <a title="<? print ${helptext_serverport._.$lang} ?>"class="tooltip">
       <span title=""><label for="Port (default 9000)"> <? print ${squeeze_serv_port._.$lang} ; ?> </label></span></a>
     </td>
     <td>
@@ -338,22 +338,9 @@
   </tr>
 </table>
 
-<?
-$squeezeserverstate=ping_squeezeserver();
-if ( $squeezeserverstate == "0")
-{?>
-    <a href=<? echo 'http://'.print_squeezeaddr($ini_array["SERVERPORT"]).'' ?> target="_blank">
-    <button type="button" style="padding: 10px 10px; margin: 0px;">LMS Webinterface</button>
-    </a>
-<?}
-else
-{?>
-    <a disabled href=<? echo 'http://'.print_squeezeaddr($ini_array["SERVERPORT"]).'' ?> target="_blank">
-    <button disabled type="button" style="padding: 10px 10px; margin: 0px;">LMS Webinterface</button>
-    </a>
-<?}?>
-
-
+<a href=<? echo 'http://'.print_squeezeaddr($ini_array["SERVERPORT"]).'' ?> target="_blank">
+<button type="button" style="padding: 10px 10px; margin: 0px;">LMS Webinterface</button>
+</a>
 
 </fieldset>
 </div> <!-- Ende LMS -->
@@ -365,7 +352,7 @@ else
 <table>
   <tr>
     <td>
-      <a style="text-decoration: none href="#" title="<? print ${helptext_playername._.$lang} ?>"class="tooltip">
+      <a title="<? print ${helptext_playername._.$lang} ?>"class="tooltip">
       <span title=""><label for="Player name"> <? print ${player_name._.$lang} ; ?> </label></span></a>
     </td>
     <td>
@@ -375,7 +362,7 @@ else
   </tr>
   <tr>
     <td>
-      <a style="text-decoration: none href="#" title="<? print ${helptext_volume._.$lang} ?>"class="tooltip">
+      <a title="<? print ${helptext_volume._.$lang} ?>"class="tooltip">
       <span title=""><label for="Volume"> <? print ${volume._.$lang} ; ?> </label></span></a>
     </td>
     <td>
@@ -406,7 +393,7 @@ else
       if ($ini_array["ADVANCED"] == "ON")
           { ?>
               <td>
-                  <a style="text-decoration: none href="#" title="<? print ${helptext_jack_buffer._.$lang} ?>"class="tooltip">
+                  <a title="<? print ${helptext_jack_buffer._.$lang} ?>"class="tooltip">
                   <span title=""><label for="Jackbuffer"> <? print ${jack_buffer._.$lang} ; ?> </label></span></a>
               </td>
               <td>
@@ -415,7 +402,7 @@ else
               </td>
               <tr>
                   <td>
-                      <a style="text-decoration: none href="#" title="<? print ${helptext_jack_period._.$lang} ?>"class="tooltip">
+                      <a title="<? print ${helptext_jack_period._.$lang} ?>"class="tooltip">
                       <span title=""><label for="Jackperiod"> <? print ${jack_period._.$lang} ; ?> </label></span></a>
                   </td>
                   <td>
@@ -426,7 +413,7 @@ else
 
 
               <td>
-                  <a style="text-decoration: none href="#" title="<? print ${helptext_squeeze_alsabuffer._.$lang} ?>"class="tooltip">
+                  <a title="<? print ${helptext_squeeze_alsabuffer._.$lang} ?>"class="tooltip">
                   <span title=""><label for="squeeze_alsabuffer"> <? print ${squeeze_alsabuffer._.$lang} ; ?> </label></span></a>
               </td>
 
@@ -437,7 +424,7 @@ else
 
               <tr>
                   <td>
-                      <a style="text-decoration: none href="#" title="<? print ${helptext_squeeze_alsaperiod._.$lang} ?>"class="tooltip">
+                      <a title="<? print ${helptext_squeeze_alsaperiod._.$lang} ?>"class="tooltip">
                       <span title=""><label for="squeeze_alsaperiod"> <? print ${squeeze_alsaperiod._.$lang} ; ?> </label></span></a>
                   </td>
                   <td>
@@ -448,7 +435,7 @@ else
 
               <tr>
                   <td>
-                      <a style="text-decoration: none href="#" title="<? print ${helptext_squeeze_intbuffer._.$lang} ?>"class="tooltip">
+                      <a title="<? print ${helptext_squeeze_intbuffer._.$lang} ?>"class="tooltip">
                       <span title=""><label for="squeeze_intbuffer"> <? print ${squeeze_intbuffer._.$lang} ; ?> </label></span></a>
                   </td>
                   <td>
@@ -459,7 +446,7 @@ else
 
               <tr>
                   <td>
-                      <a style="text-decoration: none href="#" title="<? print ${helptext_squeeze_outbuffer._.$lang} ?>"class="tooltip">
+                      <a title="<? print ${helptext_squeeze_outbuffer._.$lang} ?>"class="tooltip">
                       <span title=""><label for="squeeze_outbuffer"> <? print ${squeeze_outbuffer._.$lang} ; ?> </label></span></a>
                   </td>
                   <td>
@@ -470,7 +457,7 @@ else
 
               <tr>
                   <td>
-                      <a style="text-decoration: none href="#" title="<? print ${helptext_bf_partitions._.$lang} ?>"class="tooltip">
+                      <a title="<? print ${helptext_bf_partitions._.$lang} ?>"class="tooltip">
                       <span title=""><label for="bf_partitions"> <? print ${bf_partitions._.$lang} ; ?> </label></span></a>
                   </td>
                   <td>
@@ -486,7 +473,7 @@ else
   </tr>
   <tr>
     <td>
-        <a style="text-decoration: none href="#" title="<? print ${helptext_soundcard._.$lang} ?>"class="tooltip">
+        <a title="<? print ${helptext_soundcard._.$lang} ?>"class="tooltip">
         <span title=""><label for="Soundcard"> <? print ${soundcard._.$lang} ; ?> </label></span></a>
     </td>
     <td>

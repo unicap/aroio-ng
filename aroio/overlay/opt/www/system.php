@@ -149,17 +149,7 @@ $carrierstate=echo_carrierstate();
 if ( $carrierstate == '0')
 $carrierstate=${infotext_carrierstate_0._.$lang};
 else $carrierstate=${infotext_carrierstate_1._.$lang};
-$squeezeserverstate=ping_squeezeserver();
-
-if ( $squeezeserverstate == "0")
-{
-    $squeezeserverstate=${infotext_squeezeserverstate_1._.$lang};
-}
-else
-{
-    $squeezeserverstate=${infotext_squeezeserverstate_0._.$lang};
-}?>
-
+?>
 <p>
 <table>
   <tr>
@@ -213,7 +203,7 @@ if ($test_wlan == "0"){?>
 
   </tr>
   <tr>
-    <td><? print ${infotext_squeezeserverstate._.$lang}.$squeezeserverstate; ?>
+    <td>LMS Server Address
     </td>
     <td>
         <? echo '<a class="forward" target="_blank" href="http://'.print_squeezeaddr($ini_array["SERVERPORT"]).'">http://'.print_squeezeaddr($ini_array["SERVERPORT"]).'</a>';?>
