@@ -1,0 +1,8 @@
+config BR2_PACKAGE_JACKCONNECTPERSISTENT
+        bool "jack connect persistent"
+        depends on BR2_INSTALL_LIBSTDCPP
+        select BR2_PACKAGE_JACK2
+        help
+          A client like jack_connect, only persistent.
+
+          https://github.com/worosom/jack_connect_persistent
