@@ -8,7 +8,7 @@ ConditionPathExists=/tmp/network_unconfigured
 
 [Service]
 Type=simple
-ExecStartPre=/sbin/ifconfig wlan0 192.168.99.1 up
+ExecStartPre=/bin/sh -c "ifconfig wlan0 192.168.99.1 up && route add -net 224.0.0.0 netmask 224.0.0.0 wlan0"
 ExecStart=/sbin/udhcpd -f -S -I 192.168.99.1 /etc/udhcpd.conf
 ExecStop=/bin/kill -9 $MAINPID
 

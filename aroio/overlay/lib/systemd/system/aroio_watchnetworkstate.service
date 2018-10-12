@@ -1,0 +1,11 @@
+[Unit]
+Description=watch network state
+After=multi-user.target
+
+[Service]
+Type=oneshot
+ExecStartPre=-/bin/sh -c "sleep 15 && ifconfig wlan0 | grep 'inet addr' || ifconfig eth0 | grep 'inet addr' ||  touch /tmp/network_unconfigured "
+ExecStart=-/bin/sh -c "[ -e /tmp/network_unconfigured ] && systemctl start hostapd.service"
+
+[Install]
+WantedBy=multi-user.target

@@ -221,12 +221,13 @@
             }
             else echo'<option>'.$ssid.'</option>';
         }
-        echo '<option>Aroio-Access-Point</option>';
+        echo '<option>AroioAP</option>';
     }
     //elseif (isset($_POST['WLANSSID'])) echo'<option selected>'.$_POST['WLANSSID'].'</option>';
     else
 	{
 		echo '<option>WIFI-OFF!</option>';
+		echo '<option>AroioAP</option>';
 		echo'<option selected>'.$ini_array['WLANSSID'].'</option>';
 	}
     echo'</select>';

@@ -5,7 +5,6 @@ After=syslog.target sound.target jackd.service network-online.target checkuserco
 [Service]
 Type=simple
 EnvironmentFile=/boot/userconfig.txt
-ExecStartPre=/bin/sh -c "ifconfig wlan0 | grep addr && /sbin/route add -net 224.0.0.0 netmask 224.0.0.0 wlan0"
 ExecStart=/bin/shairport-sync -v -a $HOSTNAME -o alsa -- -d $AUDIO_OUTPUT
 Restart=always
 RestartSec=2

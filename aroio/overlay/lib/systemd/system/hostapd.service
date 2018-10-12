@@ -1,15 +1,16 @@
 [Unit]
 Description=Hostapd Authenticator
-Wants=network-online.target udhcpd.service
+Wants=udhcpd.service
 After=systemd-networkd.service
 After=sys-subsystem-net-devices-wlan.device
 After=udhcpd.service hostapd-preparation.service
-#BindsTo=udhcpd.service
 ConditionPathExists=/tmp/network_unconfigured
+#Conflicts=wpa_supplicant@wlan0.service
 
 [Service]
 Type=forking
 PIDFile=/run/hostapd.pid
+ExecStartPre=-/bin/systemctl stop wpa_supplicant@wlan0.service
 ExecStart=/usr/sbin/hostapd /etc/hostapd/hostapd.conf -P /run/hostapd.pid -B
 
 [Install]
