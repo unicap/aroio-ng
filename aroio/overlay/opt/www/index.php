@@ -51,7 +51,7 @@
                    $_POST[SQUEEZE_ALSAPERIOD]=4;
                    $_POST[SQUEEZE_INTBUFFER]=16384;
                    $_POST[SQUEEZE_OUTBUFFER]=8192;
-                   $_POST[BF_PARTITIONS]=8;
+                   $_POST[BF_PARTITIONS]=4;
                    $_POST[RESAMPLING]=speexrate_medium;
                    break;
 
@@ -62,7 +62,7 @@
                    $_POST[SQUEEZE_ALSAPERIOD]=4;
                    $_POST[SQUEEZE_INTBUFFER]=16384;
                    $_POST[SQUEEZE_OUTBUFFER]=8192;
-                   $_POST[BF_PARTITIONS]=8;
+                   $_POST[BF_PARTITIONS]=4;
                    $_POST[RESAMPLING]=speexrate_medium;
                    break;
 
@@ -73,7 +73,7 @@
                    $_POST[SQUEEZE_ALSAPERIOD]=4;
                    $_POST[SQUEEZE_INTBUFFER]=8192;
                    $_POST[SQUEEZE_OUTBUFFER]=8192;
-                   $_POST[BF_PARTITIONS]=4;
+                   $_POST[BF_PARTITIONS]=2;
                    $_POST[RESAMPLING]=speexrate_medium;
                    break;
 
@@ -84,7 +84,7 @@
                    $_POST[SQUEEZE_ALSAPERIOD]=4;
                    $_POST[SQUEEZE_INTBUFFER]=8192;
                    $_POST[SQUEEZE_OUTBUFFER]=8192;
-                   $_POST[BF_PARTITIONS]=1;
+                   $_POST[BF_PARTITIONS]=2;
                    $_POST[RESAMPLING]=speexrate_medium;
                    break;
             }
