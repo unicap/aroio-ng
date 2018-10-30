@@ -152,6 +152,9 @@
     $player_name_en='Audio player name';
     $player_name_de='Audioplayer Name';
 
+    $advancedsettings_de='Erweiterte Einstellungen';
+    $advancedsettings_en='Advanced settings';
+
     $mscoded_en='AudioVero Clean!<br>(digital part only)';
     $mscoded_de='AudioVero Clean!<br>(nur digitale Seite)';
 

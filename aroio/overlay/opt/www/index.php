@@ -40,6 +40,56 @@
         if ( !validate_input("SERVERPORT",$_POST['SERVERPORT']) )
             $error.="${error_invalid_squeezeport._.$lang}<br />";
 
+        if ($_POST["ADVANCED"] == "OFF")
+        {
+            switch ($_POST["RATE"])
+            {
+                case 44100:
+                   $_POST[JACKBUFFER]=1024;
+                   $_POST[JACKPERIOD]=3;
+                   $_POST[SQUEEZE_ALSABUFFER]=4096;
+                   $_POST[SQUEEZE_ALSAPERIOD]=4;
+                   $_POST[SQUEEZE_INTBUFFER]=16384;
+                   $_POST[SQUEEZE_OUTBUFFER]=8192;
+                   $_POST[BF_PARTITIONS]=8;
+                   $_POST[RESAMPLING]=speexrate_medium;
+                   break;
+
+                case 48000:
+                   $_POST[JACKBUFFER]=1024;
+                   $_POST[JACKPERIOD]=3;
+                   $_POST[SQUEEZE_ALSABUFFER]=4096;
+                   $_POST[SQUEEZE_ALSAPERIOD]=4;
+                   $_POST[SQUEEZE_INTBUFFER]=16384;
+                   $_POST[SQUEEZE_OUTBUFFER]=8192;
+                   $_POST[BF_PARTITIONS]=8;
+                   $_POST[RESAMPLING]=speexrate_medium;
+                   break;
+
+                case 96000:
+                   $_POST[JACKBUFFER]=2048;
+                   $_POST[JACKPERIOD]=3;
+                   $_POST[SQUEEZE_ALSABUFFER]=4096;
+                   $_POST[SQUEEZE_ALSAPERIOD]=4;
+                   $_POST[SQUEEZE_INTBUFFER]=8192;
+                   $_POST[SQUEEZE_OUTBUFFER]=8192;
+                   $_POST[BF_PARTITIONS]=4;
+                   $_POST[RESAMPLING]=speexrate_medium;
+                   break;
+
+                case 192000:
+                   $_POST[JACKBUFFER]=2048;
+                   $_POST[JACKPERIOD]=3;
+                   $_POST[SQUEEZE_ALSABUFFER]=2048;
+                   $_POST[SQUEEZE_ALSAPERIOD]=4;
+                   $_POST[SQUEEZE_INTBUFFER]=8192;
+                   $_POST[SQUEEZE_OUTBUFFER]=8192;
+                   $_POST[BF_PARTITIONS]=1;
+                   $_POST[RESAMPLING]=speexrate_medium;
+                   break;
+            }
+        }
+
         if ( !$error )
         {
             $shell_exec_ret=shell_exec('cardmount rw');
@@ -353,6 +403,18 @@
 <table>
   <tr>
     <td>
+      <a title="<? print ${helptext_advancedsettings._.$lang} ?>"class="tooltip">
+      <span title=""><label for="Advanced settings"> <? print ${advancedsettings._.$lang} ; ?> </label></span></a>
+      <input type="hidden" name="ADVANCED" value="OFF"><?
+      if ($ini_array["ADVANCED"] == "ON")
+        { ?> <input type="checkbox" id="advanced" name="ADVANCED" value="ON" checked> <?}
+      else
+      {?> <input type="checkbox" id="advanced"name="ADVANCED" value="ON"> <?}?>
+    </td>
+  </tr>
+
+  <tr>
+    <td>
       <a title="<? print ${helptext_playername._.$lang} ?>"class="tooltip">
       <span title=""><label for="Player name"> <? print ${player_name._.$lang} ; ?> </label></span></a>
     </td>
@@ -390,6 +452,7 @@
       </select>
     </td>
   </tr>
+
   <tr> <?
       if ($ini_array["ADVANCED"] == "ON")
           { ?>
@@ -478,7 +541,7 @@
         <span title=""><label for="Soundcard"> <? print ${soundcard._.$lang} ; ?> </label></span></a>
     </td>
     <td>
-        <?$arr_soundcard= array('Internal HDMI audio','Internal audio jack','AroioDAC','HiFiBerry DAC','HiFiBerry DAC+','HiFiBerry Digi','IQAudIO DAC','Dr. DAC prime','Focusrite Scarlett','M-Audio Fast Track Pro','RME Fireface UCX','USB Class Compliant');
+        <?$arr_soundcard= array('Internal HDMI audio','Internal audio jack','AroioDAC','JustBoom DAC','HiFiBerry DAC','HiFiBerry DAC+','HiFiBerry Digi','IQAudIO DAC','Dr. DAC prime','Focusrite Scarlett','M-Audio Fast Track Pro','RME Fireface UCX','USB Class Compliant');
         //<?$arr_soundcard= array('IQAudIO DAC','HiFiBerry DAC+','HiFiBerry Digi','M-Audio Fast Track Pro','Lynx Hilo','Focusrite Scarlett','NI Audio 8 DJ');
         print_optgroup("SOUNDCARD",$arr_soundcard,$ini_array["SOUNDCARD"]);
     ?>
@@ -522,7 +585,7 @@
             case "IQAudIO DAC":
             case "HiFiBerry Digi":
             case "HiFiBerry DAC":
-            case "HiFiBerry DAC":
+            case "JustBoom DAC":
                 $arr_rate= array('44100','48000','96000','192000');
                 break;
             }
