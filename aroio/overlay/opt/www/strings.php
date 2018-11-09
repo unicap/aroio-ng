@@ -155,6 +155,9 @@
     $advancedsettings_de='Erweiterte Einstellungen';
     $advancedsettings_en='Advanced settings';
 
+    $display_rotate_de='Bildschirm drehen';
+    $display_rotate_en='Rotate display';
+
     $mscoded_en='AudioVero Clean!<br>(digital part only)';
     $mscoded_de='AudioVero Clean!<br>(nur digitale Seite)';
 
@@ -214,6 +217,9 @@
 
     $squeeze_outbuffer_en='Squeezelite output buffer size';
     $squeeze_outbuffer_de='Squeezelite Ausgabe-Puffergr&ouml;&szlig;e';
+
+    $sp_outbuffer_en='ShAirPlay output buffer size';
+    $sp_outbuffer_de='ShAirPlay Ausgabe-Puffergr&ouml;&szlig;e';
 
     $bf_partitions_en='BruteFIR partitions';
     $bf_partitions_de='BruteFIR Partitionen';

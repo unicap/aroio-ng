@@ -75,13 +75,13 @@ coeff"sright9"{filename:"/tmp/BypassFilterR96.dbl"; format: "FLOAT64_LE"; };
 
 ## INPUTS / OUTPUTS ##
 input "left" , "right" , "sleft" , "sright" {
-        device: "jack" { ports: "" , "" , "" , ""; };
+        device: "jack" { ports: "" , "" , "" , ""; priority: 50 ; };
 	sample: "AUTO";
         channels: 4;
 };
 
 output "left" , "right" , "sleft" , "sright" {
-        device: "jack" { ports: "system:playback_1" , "system:playback_2" , "system:playback_3" , "system:playback_4" ; };
+        device: "jack" { ports: "system:playback_1" , "system:playback_2" , "system:playback_3" , "system:playback_4" ; priority: 50 ; };
 	sample: "AUTO";
         channels: 4;
         delay: 0 , 0 , 0 , 0;

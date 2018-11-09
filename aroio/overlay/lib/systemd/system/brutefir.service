@@ -8,7 +8,7 @@ TimeoutStartSec=3
 Type=simple
 EnvironmentFile=/boot/userconfig.txt
 ExecStartPre=/usr/bin/generate-brutefirconfig
-ExecStart=/bin/brutefir /etc/brutefir/brutefir.conf
+ExecStart=/bin/taskset -c 0,1 /bin/brutefir /etc/brutefir/brutefir.conf
 ExecStartPost=/bin/sh -c 'until jack_lsp ; do sleep 0.2 ; done'
 Restart=always
 

@@ -10,12 +10,5 @@ else	SERVEROPTS="-s $SERVERNAME"
 		[ "$SERVERPORT" != "" ] && SERVEROPTS=""$SERVEROPTS":"$SERVERPORT""
 fi
 
-[[ "$AUDIO_OUTPUT" = "vol-jack" || "$AUDIO_OUTPUT" = "vol-jack-ms" ]] && JACKPORT="system"
-[[ "$AUDIO_OUTPUT" = "vol-jack-bf" || "$AUDIO_OUTPUT" = "vol-jack-bfms" ]] && JACKPORT="brutefir"
+taskset -c 2,3 squeezelite $SERVEROPTS -M "$PLATFORM" -m "$MACADDRESS" -n "$PLAYERNAME" -p 45 -a "$SQUEEZE_ALSABUFFER":"$SQUEEZE_ALSAPERIOD"::1 -b "$SQUEEZE_INTBUFFER":"$SQUEEZE_OUTBUFFER" -d all=info -o "$AUDIO_OUTPUT"
 
-if [[ "$AUDIO_OUTPUT" = "vol-plug" || "$AUDIO_OUTPUT" = "vol-plug-ms" || "$AUDIO_OUTPUT" = "vol-plug-dmix" || "$AUDIO_OUTPUT" = "vol-plug-dmix-ms" ]]
-then
-	squeezelite $SERVEROPTS -M "$PLATFORM" -m "$MACADDRESS" -n "$PLAYERNAME" -p 90 -a "$SQUEEZE_ALSABUFFER":"$SQUEEZE_ALSAPERIOD"::1 -b "$SQUEEZE_INTBUFFER":"$SQUEEZE_OUTBUFFER" -d all=info -o "$AUDIO_OUTPUT"
-else
-	squeezelite-jack $SERVEROPTS -r "$RATE":"$RATE" -u vLs -M "$PLATFORM" -m "$MACADDRESS" -n "$PLAYERNAME" -p 90 -d all=info -a "$JACKPORT"
-fi

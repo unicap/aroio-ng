@@ -54,13 +54,13 @@ coeff"right9"{filename:"/tmp/filter/BypassFilterR96.dbl"; format: "FLOAT64_LE"; 
 
 ## INPUTS / OUTPUTS ##
 input "left", "right" {
-        device: "jack" { ports: "" , "" ; };
+        device: "jack" { ports: "" , "" ; priority: 50 ; };
         sample: "AUTO";
         channels: 2;
 };
 
 output "left", "right" {
-        device: "jack" { ports: "system:playback_1" , "system:playback_2" ; };
+        device: "jack" { ports: "system:playback_1" , "system:playback_2" ; priority: 50 ; };
         sample: "AUTO";
         channels: 2;
         delay: 0 , 0;

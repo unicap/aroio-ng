@@ -45,47 +45,59 @@
             switch ($_POST["RATE"])
             {
                 case 44100:
-                   $_POST[JACKBUFFER]=1024;
+                   $_POST[JACKBUFFER]=2048;
                    $_POST[JACKPERIOD]=3;
-                   $_POST[SQUEEZE_ALSABUFFER]=4096;
+                   $_POST[SQUEEZE_ALSABUFFER]=16384;
                    $_POST[SQUEEZE_ALSAPERIOD]=4;
                    $_POST[SQUEEZE_INTBUFFER]=16384;
                    $_POST[SQUEEZE_OUTBUFFER]=8192;
-                   $_POST[BF_PARTITIONS]=4;
+                   $_POST[SP_OUTBUFFER]=16384;
+                   $_POST[SP_PERIOD]=2;
+                   $_POST[BF_PARTITIONS]=2;
                    $_POST[RESAMPLING]=speexrate_medium;
+                   $_POST[SPRATE]=44100;
                    break;
 
                 case 48000:
-                   $_POST[JACKBUFFER]=1024;
+                   $_POST[JACKBUFFER]=2048;
                    $_POST[JACKPERIOD]=3;
-                   $_POST[SQUEEZE_ALSABUFFER]=4096;
+                   $_POST[SQUEEZE_ALSABUFFER]=16384;
                    $_POST[SQUEEZE_ALSAPERIOD]=4;
-                   $_POST[SQUEEZE_INTBUFFER]=16384;
+                   $_POST[SQUEEZE_INTBUFFER]=8192;
                    $_POST[SQUEEZE_OUTBUFFER]=8192;
+                   $_POST[SP_OUTBUFFER]=16384;
+                   $_POST[SP_PERIOD]=2;
                    $_POST[BF_PARTITIONS]=4;
                    $_POST[RESAMPLING]=speexrate_medium;
+                   $_POST[SPRATE]=44100;
                    break;
 
                 case 96000:
                    $_POST[JACKBUFFER]=2048;
                    $_POST[JACKPERIOD]=3;
-                   $_POST[SQUEEZE_ALSABUFFER]=4096;
+                   $_POST[SQUEEZE_ALSABUFFER]=8192;
                    $_POST[SQUEEZE_ALSAPERIOD]=4;
-                   $_POST[SQUEEZE_INTBUFFER]=8192;
-                   $_POST[SQUEEZE_OUTBUFFER]=8192;
+                   $_POST[SQUEEZE_INTBUFFER]=4096;
+                   $_POST[SQUEEZE_OUTBUFFER]=4096;
+                   $_POST[SP_OUTBUFFER]=16384;
+                   $_POST[SP_PERIOD]=2;
                    $_POST[BF_PARTITIONS]=2;
                    $_POST[RESAMPLING]=speexrate_medium;
+                   $_POST[SPRATE]=88200;
                    break;
 
                 case 192000:
                    $_POST[JACKBUFFER]=2048;
                    $_POST[JACKPERIOD]=3;
-                   $_POST[SQUEEZE_ALSABUFFER]=2048;
+                   $_POST[SQUEEZE_ALSABUFFER]=4096;
                    $_POST[SQUEEZE_ALSAPERIOD]=4;
-                   $_POST[SQUEEZE_INTBUFFER]=8192;
-                   $_POST[SQUEEZE_OUTBUFFER]=8192;
-                   $_POST[BF_PARTITIONS]=2;
+                   $_POST[SQUEEZE_INTBUFFER]=4096;
+                   $_POST[SQUEEZE_OUTBUFFER]=4096;
+                   $_POST[SP_OUTBUFFER]=16384;
+                   $_POST[SP_PERIOD]=2;
+                   $_POST[BF_PARTITIONS]=1;
                    $_POST[RESAMPLING]=speexrate_medium;
+                   $_POST[SPRATE]=44100;
                    break;
             }
         }
@@ -456,14 +468,26 @@
   <tr> <?
       if ($ini_array["ADVANCED"] == "ON")
           { ?>
+    <tr><td>
+      <a title="<? print ${helptext_display_rotate._.$lang} ?>"class="tooltip">
+      <span title=""><label for="display_rotate"> <? print ${display_rotate._.$lang} ; ?> </label></span></a>
+      <input type="hidden" name="DISPLAY_ROTATE" value="OFF"><?
+      if ($ini_array["DISPLAY_ROTATE"] == "ON")
+        { ?> <input type="checkbox" id="display_rotate" name="DISPLAY_ROTATE" value="ON" checked> <?}
+      else
+      {?> <input type="checkbox" id="display_rotate"name="DISPLAY_ROTATE" value="ON"> <?}?>
+    </td></tr>
+
               <td>
                   <a title="<? print ${helptext_jack_buffer._.$lang} ?>"class="tooltip">
                   <span title=""><label for="Jackbuffer"> <? print ${jack_buffer._.$lang} ; ?> </label></span></a>
               </td>
+
               <td>
                   <?$arr_jackbuffer= array(32,64,128,256,512,1024,2048,4096,8192,16384);
                   print_optgroup("JACKBUFFER",$arr_jackbuffer,$ini_array["JACKBUFFER"]);?>
               </td>
+
               <tr>
                   <td>
                       <a title="<? print ${helptext_jack_period._.$lang} ?>"class="tooltip">
@@ -521,6 +545,17 @@
 
               <tr>
                   <td>
+                      <a title="<? print ${helptext_sp_outbuffer._.$lang} ?>"class="tooltip">
+                      <span title=""><label for="sp_outbuffer"> <? print ${sp_outbuffer._.$lang} ; ?> </label></span></a>
+                  </td>
+                  <td>
+                      <?$arr_sp_outbuffer= array(512,1024,2048,4096,8192,16384,32768,65536,131072,262144,524288,1048576);
+                      print_optgroup("SP_OUTBUFFER",$arr_sp_outbuffer,$ini_array["SP_OUTBUFFER"]);?>
+                  </td>
+              </tr>
+
+              <tr>
+                  <td>
                       <a title="<? print ${helptext_bf_partitions._.$lang} ?>"class="tooltip">
                       <span title=""><label for="bf_partitions"> <? print ${bf_partitions._.$lang} ; ?> </label></span></a>
                   </td>
@@ -529,12 +564,9 @@
                       print_optgroup("BF_PARTITIONS",$arr_bf_partitions,$ini_array["BF_PARTITIONS"]);?>
                   </td>
               </tr><?
-
-
-
-
           }?>
   </tr>
+
   <tr>
     <td>
         <a title="<? print ${helptext_soundcard._.$lang} ?>"class="tooltip">
@@ -593,35 +625,27 @@
     ?>
     </td>
   </tr>
-
-  <tr>
-    <td>
-        Resampling Quality:
-    </td>
-	<td>
-			<?$arr_resampling= array
-				(
-				array(speexrate,"low"),
-				array(speexrate_medium,"medium"),
-				array(speexrate_best,"high")
-				);
-
-	        print_optgroup2D("RESAMPLING",$arr_resampling,$ini_array["RESAMPLING"]);?>
-	</td>
-  </tr>
-
- 
-  <tr>
-    <td>
-        Shairport Samplerate:
-    </td>
-	<td>
-			<?$arr_sprate= array('44100','88200');
-	        print_optgroup("SPRATE",$arr_sprate,$ini_array["SPRATE"]);?>
-	</td>
-  </tr>
   </table>
 </div>
+
+
+<?if ($ini_array["ADVANCED"] == "ON")
+    {?>
+        <div class="content">
+            <table>
+                <tr>
+                    <td>
+                        Shairport Samplerate:
+                    </td>
+                    <td>
+                        <?$arr_sprate= array('44100','88200');
+                        print_optgroup("SPRATE",$arr_sprate,$ini_array["SPRATE"]);?>
+                    </td>
+                </tr>
+            </table>
+        </div><?
+    }?>
+
 
 
 <div class="content">
@@ -640,7 +664,7 @@ Squeeze
 UPNP
 </td>
 <td>
-AirPlay
+ShAirPlay
 </td>
 <td>
 Bluetooth
@@ -1128,10 +1152,9 @@ if ($ini_array["SOUNDCARD"] != "Internal HDMI audio" && $ini_array["SOUNDCARD"] 
 </fieldset>
 </div> <!-- Ende Audio Einstellungen -->
 
-
 <div class="content"> <!-- Content zentrieren -->
-<input class="button" type="submit" value=" <? print ${button_submit._.$lang} ?> " name="submit">
-<input class="button" type="submit" value=" <? print ${button_reboot._.$lang} ?> " name="reboot">
+  <input class="button" type="submit" value=" <? print ${button_submit._.$lang} ?> " name="submit">
+  <input class="button" type="submit" value=" <? print ${button_reboot._.$lang} ?> " name="reboot">
 </div>
 
 </form>

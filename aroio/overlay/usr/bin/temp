@@ -1,0 +1,5 @@
+#!/bin/sh
+
+TEMPRAW=$(cat /sys/class/thermal/thermal_zone0/temp)
+TEMP=$(($TEMPRAW/1000))
+echo "Our temperature is currently "$TEMP"°"
