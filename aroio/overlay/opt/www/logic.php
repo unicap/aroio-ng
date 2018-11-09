@@ -1,14 +1,3 @@
-<?php
-  //ini_set('display_errors', 1);
-  //ini_set('display_startup_errors', 1);
-  //error_reporting(E_ALL & ~E_NOTICE);
-  //print_r($_POST);
-  //print_r($ini_array);
-
-  include('strings.php');
-  include('functions.inc.php');
-  include('style.css');
-  
   if($_GET["lang"] === "en") $lang='en';
   else $lang='de';
 
@@ -145,34 +134,3 @@
       shell_exec('/usr/bin/controlaudio restart &> /dev/null' );
   }
   
-  include "header.php";
-  include "nav.php";
-  include "network.php";
-  include "webui.php";
-  include "hardware.php";
-  include "lms.php";
-  include "audio.php"; 
-  
-  
-
-unset($_POST['submit']);
-
-include "footer.php";
-
-?>
-<script>
-  $(document).ready(function () {
-    $('input[id="raw"]').prop('checked', false);
-    $('input[id="raw"]:first').prop('checked', true)
-
-    $('input[id="raw"]').click(function (event) {
-      $('input[id="raw"]').prop('checked', false);
-      $(this).prop('checked', true);
-    }) ;
-
-    $('input[id="raw"]').click(function (event) {
-      $('input[id="output"]').prop('checked', false);
-      $(this).prop('checked', true);
-    }) ;
-  }) ;
-</script>
