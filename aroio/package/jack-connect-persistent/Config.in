@@ -1,4 +1,4 @@
-config BR2_PACKAGE_JACKCONNECTPERSISTENT
+config BR2_PACKAGE_JACK_CONNECT_PERSISTENT
         bool "jack connect persistent"
         depends on BR2_INSTALL_LIBSTDCPP
         select BR2_PACKAGE_JACK2
