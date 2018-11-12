@@ -60,7 +60,7 @@ input "left", "right" {
 };
 
 output "left", "right" {
-        device: "jack" { ports: "system:playback_1" , "system:playback_2" ; priority: 50 ; };
+        device: "jack" { ports: "jackmixer:in1_left" , "jackmixer:in1_right" ; priority: 50 ; };
         sample: "AUTO";
         channels: 2;
         delay: 0 , 0;

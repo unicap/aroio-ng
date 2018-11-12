@@ -87,7 +87,7 @@
         break;
 
         case 192000:
-          $_POST[JACKBUFFER]=2048;
+          $_POST[JACKBUFFER]=4096;
           $_POST[JACKPERIOD]=3;
           $_POST[SQUEEZE_ALSABUFFER]=4096;
           $_POST[SQUEEZE_ALSAPERIOD]=4;

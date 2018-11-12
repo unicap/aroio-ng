@@ -1,5 +1,5 @@
 [Unit]
-Description=Jack Daemon
+Description=Jack mixer
 After=syslog.target sound.target checkuserconfig.service brutefir-checkfilters.service
 Before=squeezelite.service gmediarender.service shairport-sync.service bluealsa-aplay.service brutefir.service
 #Requires=audioplayers.target
@@ -8,9 +8,10 @@ Before=squeezelite.service gmediarender.service shairport-sync.service bluealsa-
 TimeoutStartSec=3
 Type=simple
 EnvironmentFile=/boot/userconfig.txt
-ExecStart=/bin/taskset -c 0,1 /bin/jackd -R -P 50 -d alsa -r $RATE -p $JACKBUFFER -n $JACKPERIOD
-ExecStartPost=/bin/sh -c 'until jack_lsp ; do sleep 0.2 ; done'
-ExecStopPost=/bin/sh -c 'while jack_lsp ; do sleep 0.2 ; done'
+ExecStart=/bin/taskset -c 0,1 /bin/jackminimix -l system:playback_1 -r system:playback_2 -v -p 13239 -c 1 -n jackmixer
+ExecStartPost=/bin/sh -c 'until jack_lsp | grep jackmixer ; do sleep 0.2 ; done'
+#ExecStartPost=/bin/sh -c 'echo $(/bin/ps | awk "/[j]ackminimix/{print $1}")'
+ExecStartPost=/bin/sh -c '/bin/chrt -f -a -v -p 60 $(pgrep jackminimix)'
 ExecStop=/bin/kill -9 $MAINPID
 Restart=always
 
