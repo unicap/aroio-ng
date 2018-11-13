@@ -2,18 +2,18 @@
   //ini_set('display_errors', 1);
   //ini_set('display_startup_errors', 1);
   //error_reporting(E_ALL & ~E_NOTICE);
-  //print_r($_POST);
-  //print_r($ini_array);
+  print_r($_POST);
 
   include('strings.php');
   include('functions.inc.php');
   include('style.css');
-  
+
   if($_GET["lang"] === "en") $lang='en';
   else $lang='de';
 
   $ini_array = parse_ini_file("/boot/userconfig.txt", 1);
-  
+//  print_r($ini_array);
+
   if ( isset($_POST['submit']) || isset($_POST['audiosettings_submit']) )
   {
     if ($_POST['DHCP'] == "OFF")
@@ -147,11 +147,13 @@
   
   include "header.php";
   include "nav.php";
+?><form id="Audio settings" Name="Audio settings" action="" method="post"><?
   include "network.php";
   include "webui.php";
   include "hardware.php";
   include "lms.php";
   include "audio.php"; 
+?></form><?
   
   
 

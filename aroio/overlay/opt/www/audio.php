@@ -1,4 +1,3 @@
-<form id="Audio settings" Name="Audio settings" action="" method="post">
   <div class="content">
     <fieldset>
       <legend><? print ${audio_form._.$lang};?></legend>
@@ -123,4 +122,3 @@
     <input class="button" type="submit" value=" <? print ${button_submit._.$lang} ?> " name="submit">
     <input class="button" type="submit" value=" <? print ${button_reboot._.$lang} ?> " name="reboot">
   </div>
-</form>

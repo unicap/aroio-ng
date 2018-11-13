@@ -1,5 +1,4 @@
 <!-- Einstellungen Netzwerk -->
-<form id="Network settings" Name="Network settings" action="" method="post">
   <div class="content">
     <fieldset>
       <legend>
@@ -138,4 +137,3 @@
         </table>
     </fieldset>
   </div>
-</form>
