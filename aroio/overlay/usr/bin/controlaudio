@@ -75,7 +75,6 @@ function Start()
 
 		jack)
 			systemctl "$ACTION" jackd.service
-			systemctl "$ACTION" jackminimix.service
 			[[ "$JACK_NETJACK"      = "ON"  && "$ACTION" != "stop" ]] && echo "netmanager start" && jack_load netmanager
 			[ "$JACK_SQUEEZELITE"   = "ON" ] && systemctl "$ACTION" squeezelite.service
 			[ "$JACK_GMEDIARENDER"  = "ON" ] && systemctl "$ACTION" gmediarender.service
@@ -86,7 +85,6 @@ function Start()
 
 		jack-ms)
 			systemctl "$ACTION" jackd.service
-			systemctl "$ACTION" jackminimix.service
 			[[ "$JACKMS_NETJACK"      = "ON"  && "$ACTION" != "stop" ]] &&  jack_load netmanager
 			[ "$JACKMS_SQUEEZELITE"   = "ON" ] && systemctl "$ACTION" squeezelite.service
 			[ "$JACKMS_GMEDIARENDER"  = "ON" ] && systemctl "$ACTION" gmediarender.service
@@ -97,7 +95,6 @@ function Start()
 
 		jack-bf)
 			systemctl "$ACTION" jackd.service
-			systemctl "$ACTION" jackminimix.service
 			systemctl "$ACTION" brutefir.service
 			until jack_lsp | grep brutefir ; do sleep 0.2 ; done
 			[[ "$JACKBF_NETJACK"      = "ON"  && "$ACTION" != "stop" ]] && jack_load netmanager
@@ -110,7 +107,6 @@ function Start()
 
 		jack-bfms)
 			systemctl "$ACTION" jackd.service
-			systemctl "$ACTION" jackminimix.service
 			systemctl "$ACTION" brutefir.service
 			until jack_lsp | grep brutefir ; do sleep 0.2 ; done
 			[[ "$JACKBFMS_NETJACK"      = "ON"  && "$ACTION" != "stop" ]] && jack_load netmanager
@@ -126,7 +122,7 @@ function Start()
 function StopStatus()
 {
 	[ "$1" = "stop" ] && volumecontrol -120 && sleep 0.5
-	for SERVICE in squeezelite gmediarender shairport-sync bluealsa-aplay brutefir jackminimix jackd
+	for SERVICE in squeezelite gmediarender shairport-sync bluealsa-aplay brutefir jackd
 	do
 		systemctl "$1" "$SERVICE".service
 	done
