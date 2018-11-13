@@ -52,15 +52,15 @@ def rotation_decode(Enc_A):
 
     if A_State != A_LastState:
         if A_State != B_State:
-            Volume -= 4
+            Volume -= 3
         else:
-            Volume += 4
+            Volume += 3
 
-    if Volume < 1:
+    if Volume > -1:
         Volume = 0
 
-    if Volume > 254:
-        Volume = 255
+    if Volume < -80:
+        Volume = -80
 
     A_LastState = A_State
 
@@ -86,8 +86,12 @@ try:
     while True:
         sleep(0.01)
         if Volume != oldVolume:
-            threading.Thread(target=lambda ctr: subprocess.call(["amixer", "sset", "'Master'", str(ctr)], stdout=FNULL, stderr=subprocess.STDOUT), args=(Volume,)).start()
-            oldVolume = Volume
+            if (str(config["AUDIO_OUTPUT"]) == "vol-plug") or (str(config["AUDIO_OUTPUT"]) == "vol-plug-ms"):
+                threading.Thread(target=lambda ctr: subprocess.call(["amixer", "sset", "'Master'", str(ctr)], stdout=FNULL, stderr=subprocess.STDOUT), args=(Volume,)).start()
+                oldVolume = Volume
+            else:
+                threading.Thread(target=lambda ctr: subprocess.call(["volumecontrol", str(ctr)], stdout=FNULL, stderr=subprocess.STDOUT), args=(Volume,)).start()
+                oldVolume = Volume
 
 # Try to exit clean
 except KeyboardInterrupt:

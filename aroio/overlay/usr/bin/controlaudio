@@ -73,7 +73,7 @@ function Start()
 			[ "$DMIXMS_BLUEALSAAPLAY" = "ON" ] && systemctl "$ACTION" bluealsa-aplay.service
 		;;
 
-		vol-jack)
+		jack)
 			systemctl "$ACTION" jackd.service
 			systemctl "$ACTION" jackminimix.service
 			[[ "$JACK_NETJACK"      = "ON"  && "$ACTION" != "stop" ]] && echo "netmanager start" && jack_load netmanager
@@ -84,7 +84,7 @@ function Start()
 			[ "$JACK_INPUT" = "ON" ] && sleep 0.2 && jack_connect system:capture_1 system:playback_1 && jack_connect system:capture_2 system:playback_2
 		;;
 
-		vol-jack-ms)
+		jack-ms)
 			systemctl "$ACTION" jackd.service
 			systemctl "$ACTION" jackminimix.service
 			[[ "$JACKMS_NETJACK"      = "ON"  && "$ACTION" != "stop" ]] &&  jack_load netmanager
@@ -95,7 +95,7 @@ function Start()
 			[ "$JACKMS_INPUT" = "ON" ] && sleep 0.2 && jack_connect system:capture_1 system:playback_1 && jack_connect system:capture_2 system:playback_2
 		;;
 
-		vol-jack-bf)
+		jack-bf)
 			systemctl "$ACTION" jackd.service
 			systemctl "$ACTION" jackminimix.service
 			systemctl "$ACTION" brutefir.service
@@ -108,7 +108,7 @@ function Start()
 			[ "$JACKBF_INPUT" = "ON" ] && sleep 0.2 && jack_connect system:capture_1 brutefir:input-0 && jack_connect system:capture_2 brutefir:input-1
 		;;
 
-		vol-jack-bfms)
+		jack-bfms)
 			systemctl "$ACTION" jackd.service
 			systemctl "$ACTION" jackminimix.service
 			systemctl "$ACTION" brutefir.service

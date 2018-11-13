@@ -38,7 +38,7 @@ fi
 [ "$PLAYERNAME" = "" ] &&				PLAYERNAME="$HOSTNAME"
 [ "$BTKEY" = "" ] &&					BTKEY="2107"
 [ "$MSCODING" = "" ] &&					MSCODING="OFF"
-[ "$VOLUME_START" = "" ] &&				VOLUME_START="36"
+[ "$VOLUME_START" = "" ] &&				VOLUME_START="-15"
 [ "$USERPASSWD" = "" ] &&				USERPASSWD="abacus"
 [ "$CHANNELS" = "" ] &&					CHANNELS="2"
 [ "$DEF_COEFF" = "" ] &&				DEF_COEFF="0"

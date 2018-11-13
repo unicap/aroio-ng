@@ -131,13 +131,13 @@
 
     <tr> <!-- Output JACK (BUS)---------------------------------------------------------------------------------------->
       <td> <?
-        if ($ini_array["AUDIO_OUTPUT"] == "vol-jack")
+        if ($ini_array["AUDIO_OUTPUT"] == "jack")
         { ?>
-          <input class="actiongroup" type="radio" id="output" name="AUDIO_OUTPUT" value="vol-jack" checked> Bus <?
+          <input class="actiongroup" type="radio" id="output" name="AUDIO_OUTPUT" value="jack" checked> Bus <?
         }
         else
         { ?>
-          <input class="actiongroup" type="radio" id="output" name="AUDIO_OUTPUT" value="vol-jack"> Bus <?
+          <input class="actiongroup" type="radio" id="output" name="AUDIO_OUTPUT" value="jack"> Bus <?
         } ?>
       </td>
 
@@ -215,13 +215,13 @@
 
     <td> <?
       ?> <!-- Output JACK MS (BUS MS) -----------------------------------------------------------------------------------> <?
-      if ($ini_array["AUDIO_OUTPUT"] == "vol-jack-ms")
+      if ($ini_array["AUDIO_OUTPUT"] == "jack-ms")
       { ?>
-        <input class="actiongroup" type="radio" id="output" name="AUDIO_OUTPUT" value="vol-jack-ms" checked> Bus MS <?
+        <input class="actiongroup" type="radio" id="output" name="AUDIO_OUTPUT" value="jack-ms" checked> Bus MS <?
       }
       else
       { ?>
-        <input class="actiongroup" type="radio" id="output" name="AUDIO_OUTPUT" value="vol-jack-ms"> Bus MS <?
+        <input class="actiongroup" type="radio" id="output" name="AUDIO_OUTPUT" value="jack-ms"> Bus MS <?
       } ?>
     </td>
 
@@ -298,13 +298,13 @@
     <tr>
       <td> <?
         ?> <!-- Output BRUTEFIR (CONVOL.) -------------------------------------------------------------------------------> <?
-        if ($ini_array["AUDIO_OUTPUT"] == "vol-jack-bf")
+        if ($ini_array["AUDIO_OUTPUT"] == "jack-bf")
         { ?>
-          <input class="actiongroup" type="radio" name="AUDIO_OUTPUT" value="vol-jack-bf" checked> Convol. <?
+          <input class="actiongroup" type="radio" name="AUDIO_OUTPUT" value="jack-bf" checked> Convol. <?
         }
         else
         { ?>
-          <input class="actiongroup" type="radio" name="AUDIO_OUTPUT" value="vol-jack-bf"> Convol. <? } ?>
+          <input class="actiongroup" type="radio" name="AUDIO_OUTPUT" value="jack-bf"> Convol. <? } ?>
       </td>
 
       <td>
@@ -382,13 +382,13 @@
     <tr>
       <td> <?
         ?> <!-- Output BRUTEFIR MS (CONVOL. MS) -------------------------------------------------------------------------> <?
-        if ($ini_array["AUDIO_OUTPUT"] == "vol-jack-bfms")
+        if ($ini_array["AUDIO_OUTPUT"] == "jack-bfms")
         { ?>
-          <input class="actiongroup" type="radio" name="AUDIO_OUTPUT" value="vol-jack-bfms" checked> Convol. MS <?
+          <input class="actiongroup" type="radio" name="AUDIO_OUTPUT" value="jack-bfms" checked> Convol. MS <?
         }
         else
         { ?>
-          <input class="actiongroup" type="radio" name="AUDIO_OUTPUT" value="vol-jack-bfms"> Convol. MS <? 
+          <input class="actiongroup" type="radio" name="AUDIO_OUTPUT" value="jack-bfms"> Convol. MS <? 
         } ?>
       </td>
 

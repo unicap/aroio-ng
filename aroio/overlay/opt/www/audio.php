@@ -37,21 +37,21 @@
           <td> <?
       	    $arr_volume=array
             (
-              array(255," 0 dB"),
-              array(204,"-5 dB"),
-              array(162,"-10 dB"),
-              array(132,"-15 dB"),
-              array(108,"-20 dB"),
-              array(84,"-25 dB"),
-              array(66,"-30 dB"),
-              array(51,"-35 dB"),
-              array(36,"-40 dB"),
-              array(24,"-45 dB"),
-              array(18,"-50 dB"),
-              array(9,"-55 dB"),
-              array(6,"-60 dB")
+              array(0," 0 dB"),
+              array(-5,"-5 dB"),
+              array(-10,"-10 dB"),
+              array(-15,"-15 dB"),
+              array(-20,"-20 dB"),
+              array(-25,"-25 dB"),
+              array(-30,"-30 dB"),
+              array(-35,"-35 dB"),
+              array(-40,"-40 dB"),
+              array(-45,"-45 dB"),
+              array(-50,"-50 dB"),
+              array(-55,"-55 dB"),
+              array(-60,"-60 dB")
             );
-            
+
             print_optgroup2D("VOLUME_START",$arr_volume,$ini_array["VOLUME_START"]); ?>
           </select>
           </td>
@@ -111,13 +111,13 @@
       </div>
     </fieldset>
   </div> <?
-      
+
   include "audio_matrix.php"; ?>
 
   <br>
   <input class="button" type="submit" value=" <? print ${button_submit_audiosettings._.$lang} ?> " name="audiosettings_submit">
   <br>
-  
+
   <div class="content">
     <input class="button" type="submit" value=" <? print ${button_submit._.$lang} ?> " name="submit">
     <input class="button" type="submit" value=" <? print ${button_reboot._.$lang} ?> " name="reboot">
