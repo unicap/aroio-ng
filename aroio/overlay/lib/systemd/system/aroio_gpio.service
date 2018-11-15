@@ -7,7 +7,7 @@ Before=audioplayers.service
 EnvironmentFile=/boot/userconfig.txt
 Type=simple
 ExecStartPre=/bin/sh -c "dd if=/dev/zero bs=1024 count=1 | aplay -D vol-plug-dmix -f cd"
-ExecStartPre=/bin/sh -c "amixer sset Master 0"
+ExecStartPre=/bin/sh -c 'amixer sset Master $(( $VOLUME_START * ( 32 / 10 ) + 255 ))'
 ExecStart=/usr/bin/aroio_gpio
 
 [Install]
