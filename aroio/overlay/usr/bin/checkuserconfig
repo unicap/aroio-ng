@@ -23,7 +23,7 @@ fi
 [ "$ADVANCED" = "" ] &&					ADVANCED="OFF"
 [ "$DISPLAY_ROTATE" = "" ] &&			DISPLAY_ROTATE="ON"
 [ "$UPDATESERVER" = "" ] &&				UPDATESERVER="https://www.abacus-electronics.de/aroio-4"
-[ "$SOUNDCARD" = "" ] &&				SOUNDCARD="IQAudIO DAC"
+[ "$SOUNDCARD" = "" ] &&				SOUNDCARD="AroioDAC"
 [ "$USEBETA" = ""  ] &&					USEBETA="OFF"
 [ "$JACKBUFFER" = "" ] &&				JACKBUFFER="512"
 [ "$JACKPERIOD" = "" ] &&				JACKPERIOD="3"
