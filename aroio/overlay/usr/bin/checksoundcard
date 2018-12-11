@@ -30,13 +30,14 @@ case $SOUNDCARD in
 		EOF
 
 		if ! mount | grep -q mmcblk0p2
-		then 	echo "initramfs aroioimage.cpio.gz followkernel" >> "$CONFIG"
+		then 	echo "initramfs rootfs.cpio.gz" >> "$CONFIG"
 		fi
-		# Also taking care of correct soundcard order
-		sed -i '/options snd slots/c\options snd slots=snd_bcm2835' "$ALSACONFIG"
+		
 		cardmount ro
 		reboot
 	fi
+	# Taking care of correct soundcard order
+	sed -i '/options snd slots/c\options snd slots=snd_bcm2835' "$ALSACONFIG"
 	;;
 
 
@@ -62,13 +63,13 @@ case $SOUNDCARD in
 		EOF
 
 		if ! mount | grep -q mmcblk0p2
-		then 	echo "initramfs aroioimage.cpio.gz followkernel" >> "$CONFIG"
+		then 	echo "initramfs rootfs.cpio.gz" >> "$CONFIG"
 		fi
-		# Also taking care of correct soundcard order
-		sed -i '/options snd slots/c\options snd slots=snd_bcm2835' "$ALSACONFIG"
 		cardmount ro
 		reboot
 	fi
+	# Taking care of correct soundcard order
+	sed -i '/options snd slots/c\options snd slots=snd_bcm2835' "$ALSACONFIG"
 	;;
 
 
@@ -93,13 +94,13 @@ case $SOUNDCARD in
 		EOF
 
 		if ! mount | grep -q mmcblk0p2
-		then 	echo "initramfs aroioimage.cpio.gz followkernel" >> "$CONFIG"
+		then 	echo "initramfs rootfs.cpio.gz" >> "$CONFIG"
 		fi
-		# Also taking care of correct soundcard order
-		sed -i '/options snd slots/c\options snd slots=snd_soc_iqaudio_dac' "$ALSACONFIG"
 		cardmount ro
 		reboot
 	fi
+	# Taking care of correct soundcard order
+	sed -i '/options snd slots/c\options snd slots=snd_soc_justboom_dac' "$ALSACONFIG"
 	;;
 
 
@@ -124,13 +125,13 @@ case $SOUNDCARD in
 		EOF
 
 		if ! mount | grep -q mmcblk0p2
-		then 	echo "initramfs aroioimage.cpio.gz followkernel" >> "$CONFIG"
+		then 	echo "initramfs rootfs.cpio.gz" >> "$CONFIG"
 		fi
-		# Also taking care of correct soundcard order
-		sed -i '/options snd slots/c\options snd slots=snd_soc_iqaudio_dac' "$ALSACONFIG"
 		cardmount ro
 		reboot
 	fi
+	# Taking care of correct soundcard order
+	sed -i '/options snd slots/c\options snd slots=snd_soc_iqaudio_dac' "$ALSACONFIG"
 	;;
 
 
@@ -158,13 +159,13 @@ case $SOUNDCARD in
 		EOF
 
 		if ! mount | grep -q mmcblk0p2
-		then	echo "initramfs aroioimage.cpio.gz followkernel" >> "$CONFIG"
+		then	echo "initramfs rootfs.cpio.gz" >> "$CONFIG"
 		fi
-		# Also taking care of correct soundcard order
-		sed -i '/options snd slots/c\options snd slots=snd_soc_hifiberry_dac' "$ALSACONFIG"
 		cardmount ro
 		reboot
 	fi
+	# Taking care of correct soundcard order
+	sed -i '/options snd slots/c\options snd slots=snd_soc_hifiberry_dac' "$ALSACONFIG"
 	;;
 
 
@@ -193,13 +194,13 @@ case $SOUNDCARD in
 		EOF
 
 		if ! mount | grep -q mmcblk0p2
-		then	echo "initramfs aroioimage.cpio.gz followkernel" >> "$CONFIG"
+		then	echo "initramfs rootfs.cpio.gz" >> "$CONFIG"
 		fi
-		# Also taking care of correct soundcard order
-		sed -i '/options snd slots/c\options snd slots=snd_soc_hifiberry_dacplus' "$ALSACONFIG"
 		cardmount ro
 		reboot
 	fi
+	# Taking care of correct soundcard order
+	sed -i '/options snd slots/c\options snd slots=snd_soc_hifiberry_dacplus' "$ALSACONFIG"
 	;;
 
 
@@ -228,13 +229,13 @@ case $SOUNDCARD in
 		EOF
 
 		if ! mount | grep -q mmcblk0p2
-		then	echo "initramfs aroioimage.cpio.gz followkernel" >> "$CONFIG"
+		then	echo "initramfs rootfs.cpio.gz" >> "$CONFIG"
 		fi
-		# Also taking care of correct soundcard order
-		sed -i '/options snd slots/c\options snd slots=snd_soc_hifiberry_dac' "$ALSACONFIG"
 		cardmount ro
 		reboot
 	fi
+	# Taking care of correct soundcard order
+	sed -i '/options snd slots/c\options snd slots=snd_soc_hifiberry_dac' "$ALSACONFIG"
 	;;
 
 
@@ -261,13 +262,13 @@ case $SOUNDCARD in
 		EOF
 
 	if ! mount | grep -q mmcblk0p2
-	then	echo "initramfs aroioimage.cpio.gz followkernel" >> "$CONFIG"
+	then	echo "initramfs rootfs.cpio.gz" >> "$CONFIG"
 	fi
-	# Also taking care of correct soundcard order
-	sed -i '/options snd slots/c\options snd slots=snd_soc_hifiberry_digi' "$ALSACONFIG"
 	cardmount ro
 	reboot
 	fi
+	# Taking care of correct soundcard order
+	sed -i '/options snd slots/c\options snd slots=snd_soc_hifiberry_digi' "$ALSACONFIG"
 	;;
 
 
@@ -292,13 +293,13 @@ case $SOUNDCARD in
 		EOF
 
 		if ! mount | grep -q mmcblk0p2
-		then	echo "initramfs aroioimage.cpio.gz followkernel" >> "$CONFIG"
+		then	echo "initramfs rootfs.cpio.gz" >> "$CONFIG"
 		fi
-		# Also taking care of correct soundcard order
-		sed -i '/options snd slots/c\options snd slots=snd_usb_audio' "$ALSACONFIG"
 		cardmount ro
 		reboot
 	fi
+	# Taking care of correct soundcard order
+	sed -i '/options snd slots/c\options snd slots=snd_usb_audio' "$ALSACONFIG"
 	;;
 
 
@@ -323,13 +324,13 @@ case $SOUNDCARD in
 		EOF
 
 		if ! mount | grep -q mmcblk0p2
-		then	echo "initramfs aroioimage.cpio.gz followkernel" >> "$CONFIG"
+		then	echo "initramfs rootfs.cpio.gz" >> "$CONFIG"
 		fi
-		# Also taking care of correct soundcard order
-		sed -i '/options snd slots/c\options snd slots=snd_usb_audio' "$ALSACONFIG"
 		cardmount ro
 		reboot
 	fi
+	# Taking care of correct soundcard order
+	sed -i '/options snd slots/c\options snd slots=snd_usb_audio' "$ALSACONFIG"
 	;;
 
 
@@ -354,13 +355,13 @@ case $SOUNDCARD in
 		EOF
 
 		if ! mount | grep -q mmcblk0p2
-		then	echo "initramfs aroioimage.cpio.gz followkernel" >> "$CONFIG"
+		then	echo "initramfs rootfs.cpio.gz" >> "$CONFIG"
 		fi
-		# Also taking care of correct soundcard order
-		sed -i '/options snd slots/c\options snd slots=snd_usb_audio' "$ALSACONFIG"
 		cardmount ro
 		reboot
 	fi
+	# Taking care of correct soundcard order
+	sed -i '/options snd slots/c\options snd slots=snd_usb_audio' "$ALSACONFIG"
 	;;
 
 
@@ -385,13 +386,13 @@ case $SOUNDCARD in
 		EOF
 
 		if ! mount | grep -q mmcblk0p2
-		then	echo "initramfs aroioimage.cpio.gz followkernel" >> "$CONFIG"
+		then	echo "initramfs rootfs.cpio.gz" >> "$CONFIG"
 		fi
-		# Also taking care of correct soundcard order
-		sed -i '/options snd slots/c\options snd slots=snd_usb_audio' "$ALSACONFIG"
 		cardmount ro
 		reboot
 	fi
+	# Taking care of correct soundcard order
+	sed -i '/options snd slots/c\options snd slots=snd_usb_audio' "$ALSACONFIG"
 	;;
 
 	'Dr. DAC prime')
@@ -414,13 +415,13 @@ case $SOUNDCARD in
 		EOF
 
 		if ! mount | grep -q mmcblk0p2
-		then	echo "initramfs aroioimage.cpio.gz followkernel" >> "$CONFIG"
+		then	echo "initramfs rootfs.cpio.gz" >> "$CONFIG"
 		fi
-		# Also taking care of correct soundcard order
-		sed -i '/options snd slots/c\options snd slots=snd_usb_audio' "$ALSACONFIG"
 		cardmount ro
 		reboot
 	fi
+	# Taking care of correct soundcard order
+	sed -i '/options snd slots/c\options snd slots=snd_usb_audio' "$ALSACONFIG"
 	;;
 
 	'USB Class Compliant')
@@ -443,13 +444,13 @@ case $SOUNDCARD in
 		EOF
 
 		if ! mount | grep -q mmcblk0p2
-		then	echo "initramfs aroioimage.cpio.gz followkernel" >> "$CONFIG"
+		then	echo "initramfs rootfs.cpio.gz" >> "$CONFIG"
 		fi
-		# Also taking care of correct soundcard order
-		sed -i '/options snd slots/c\options snd slots=snd_usb_audio' "$ALSACONFIG"
 		cardmount ro
 		reboot
 	fi
+	# Taking care of correct soundcard order
+	sed -i '/options snd slots/c\options snd slots=snd_usb_audio' "$ALSACONFIG"
 	;;
 
 
@@ -478,7 +479,7 @@ case $SOUNDCARD in
 		EOF
 
 		if ! mount | grep -q mmcblk0p2
-		then	echo "initramfs aroioimage.cpio.gz followkernel" >> "$CONFIG"
+		then	echo "initramfs rootfs.cpio.gz" >> "$CONFIG"
 		fi
 		cardmount ro
 		reboot
