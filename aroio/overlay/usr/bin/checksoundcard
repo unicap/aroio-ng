@@ -30,7 +30,7 @@ case $SOUNDCARD in
 		EOF
 
 		if ! mount | grep -q mmcblk0p2
-		then 	echo "initramfs rootfs.cpio.gz" >> "$CONFIG"
+		then 	echo "initramfs rootfs.cpio" >> "$CONFIG"
 		fi
 		
 		cardmount ro
@@ -63,7 +63,7 @@ case $SOUNDCARD in
 		EOF
 
 		if ! mount | grep -q mmcblk0p2
-		then 	echo "initramfs rootfs.cpio.gz" >> "$CONFIG"
+		then 	echo "initramfs rootfs.cpio" >> "$CONFIG"
 		fi
 		cardmount ro
 		reboot
@@ -94,7 +94,7 @@ case $SOUNDCARD in
 		EOF
 
 		if ! mount | grep -q mmcblk0p2
-		then 	echo "initramfs rootfs.cpio.gz" >> "$CONFIG"
+		then 	echo "initramfs rootfs.cpio" >> "$CONFIG"
 		fi
 		cardmount ro
 		reboot
@@ -125,7 +125,7 @@ case $SOUNDCARD in
 		EOF
 
 		if ! mount | grep -q mmcblk0p2
-		then 	echo "initramfs rootfs.cpio.gz" >> "$CONFIG"
+		then 	echo "initramfs rootfs.cpio" >> "$CONFIG"
 		fi
 		cardmount ro
 		reboot
@@ -159,7 +159,7 @@ case $SOUNDCARD in
 		EOF
 
 		if ! mount | grep -q mmcblk0p2
-		then	echo "initramfs rootfs.cpio.gz" >> "$CONFIG"
+		then	echo "initramfs rootfs.cpio" >> "$CONFIG"
 		fi
 		cardmount ro
 		reboot
@@ -194,7 +194,7 @@ case $SOUNDCARD in
 		EOF
 
 		if ! mount | grep -q mmcblk0p2
-		then	echo "initramfs rootfs.cpio.gz" >> "$CONFIG"
+		then	echo "initramfs rootfs.cpio" >> "$CONFIG"
 		fi
 		cardmount ro
 		reboot
@@ -229,7 +229,7 @@ case $SOUNDCARD in
 		EOF
 
 		if ! mount | grep -q mmcblk0p2
-		then	echo "initramfs rootfs.cpio.gz" >> "$CONFIG"
+		then	echo "initramfs rootfs.cpio" >> "$CONFIG"
 		fi
 		cardmount ro
 		reboot
@@ -262,13 +262,141 @@ case $SOUNDCARD in
 		EOF
 
 	if ! mount | grep -q mmcblk0p2
-	then	echo "initramfs rootfs.cpio.gz" >> "$CONFIG"
+	then	echo "initramfs rootfs.cpio" >> "$CONFIG"
 	fi
 	cardmount ro
 	reboot
 	fi
 	# Taking care of correct soundcard order
 	sed -i '/options snd slots/c\options snd slots=snd_soc_hifiberry_digi' "$ALSACONFIG"
+	;;
+
+
+
+	'Allo Piano DAC')
+	if ! grep -q allo-piano-dac-pcm512x-audio "$CONFIG"
+	then
+		cardmount rw
+		echo "userconfig and config.txt have different entries for soundcards,"
+		echo "backing up and writing a new config.txt..."
+		cp "$CONFIG" "$CONFIG"_bak
+		cat <<-EOF > "$CONFIG"
+			$DISPLAY_ROTATE
+			force_turbo=1
+			dtdebug=1
+			max_usb_current=1
+			disable_splash=1
+			kernel=zImage
+			dtoverlay=i2s-mmap
+			dtoverlay=allo-piano-dac-pcm512x-audio
+			dtoverlay=lirc-rpi,gpio_in_pin=25
+			disable_overscan=1
+		EOF
+
+		if ! mount | grep -q mmcblk0p2
+		then 	echo "initramfs rootfs.cpio" >> "$CONFIG"
+		fi
+		cardmount ro
+		reboot
+	fi
+	# Taking care of correct soundcard order
+	sed -i '/options snd slots/c\options snd slots=snd_soc_allo_piano_dac' "$ALSACONFIG"
+	;;
+
+
+
+	'Allo Piano 2.1 DAC')
+	if ! grep -q allo-piano-dac-plus-pcm512x-audio "$CONFIG"
+	then
+		cardmount rw
+		echo "userconfig and config.txt have different entries for soundcards,"
+		echo "backing up and writing a new config.txt..."
+		cp "$CONFIG" "$CONFIG"_bak
+		cat <<-EOF > "$CONFIG"
+			$DISPLAY_ROTATE
+			force_turbo=1
+			dtdebug=1
+			max_usb_current=1
+			disable_splash=1
+			kernel=zImage
+			dtoverlay=i2s-mmap
+			dtoverlay=allo-piano-dac-plus-pcm512x-audio
+			dtoverlay=lirc-rpi,gpio_in_pin=25
+			disable_overscan=1
+		EOF
+
+		if ! mount | grep -q mmcblk0p2
+		then 	echo "initramfs rootfs.cpio" >> "$CONFIG"
+		fi
+		cardmount ro
+		reboot
+	fi
+	# Taking care of correct soundcard order
+	sed -i '/options snd slots/c\options snd slots=snd_soc_allo_piano_dacplus' "$ALSACONFIG"
+	;;
+
+
+
+	'Allo Boss DAC')
+	if ! grep -q allo-boss-dac-pcm512x-audio "$CONFIG"
+	then
+		cardmount rw
+		echo "userconfig and config.txt have different entries for soundcards,"
+		echo "backing up and writing a new config.txt..."
+		cp "$CONFIG" "$CONFIG"_bak
+		cat <<-EOF > "$CONFIG"
+			$DISPLAY_ROTATE
+			force_turbo=1
+			dtdebug=1
+			max_usb_current=1
+			disable_splash=1
+			kernel=zImage
+			dtoverlay=i2s-mmap
+			dtoverlay=allo-boss-dac-pcm512x-audio
+			dtoverlay=lirc-rpi,gpio_in_pin=25
+			disable_overscan=1
+		EOF
+
+		if ! mount | grep -q mmcblk0p2
+		then 	echo "initramfs rootfs.cpio" >> "$CONFIG"
+		fi
+		cardmount ro
+		reboot
+	fi
+	# Taking care of correct soundcard order
+	sed -i '/options snd slots/c\options snd slots=snd_soc_allo_boss_dac' "$ALSACONFIG"
+	;;
+
+
+
+	'Allo DigiOne')
+	if ! grep -q allo-digione "$CONFIG"
+	then
+		cardmount rw
+		echo "userconfig and config.txt have different entries for soundcards,"
+		echo "backing up and writing a new config.txt..."
+		cp "$CONFIG" "$CONFIG"_bak
+		cat <<-EOF > "$CONFIG"
+			$DISPLAY_ROTATE
+			force_turbo=1
+			dtdebug=1
+			max_usb_current=1
+			disable_splash=1
+			kernel=zImage
+			dtoverlay=i2s-mmap
+			dtoverlay=allo-digione
+			dtoverlay=lirc-rpi,gpio_in_pin=25
+			disable_overscan=1
+		EOF
+
+		if ! mount | grep -q mmcblk0p2
+		then 	echo "initramfs rootfs.cpio" >> "$CONFIG"
+		fi
+		cardmount ro
+		reboot
+	fi
+	# Taking care of correct soundcard order
+	sed -i '/options snd slots/c\options snd slots=snd_soc_allo_digione' "$ALSACONFIG"
 	;;
 
 
@@ -293,7 +421,7 @@ case $SOUNDCARD in
 		EOF
 
 		if ! mount | grep -q mmcblk0p2
-		then	echo "initramfs rootfs.cpio.gz" >> "$CONFIG"
+		then	echo "initramfs rootfs.cpio" >> "$CONFIG"
 		fi
 		cardmount ro
 		reboot
@@ -324,7 +452,7 @@ case $SOUNDCARD in
 		EOF
 
 		if ! mount | grep -q mmcblk0p2
-		then	echo "initramfs rootfs.cpio.gz" >> "$CONFIG"
+		then	echo "initramfs rootfs.cpio" >> "$CONFIG"
 		fi
 		cardmount ro
 		reboot
@@ -355,7 +483,7 @@ case $SOUNDCARD in
 		EOF
 
 		if ! mount | grep -q mmcblk0p2
-		then	echo "initramfs rootfs.cpio.gz" >> "$CONFIG"
+		then	echo "initramfs rootfs.cpio" >> "$CONFIG"
 		fi
 		cardmount ro
 		reboot
@@ -386,7 +514,7 @@ case $SOUNDCARD in
 		EOF
 
 		if ! mount | grep -q mmcblk0p2
-		then	echo "initramfs rootfs.cpio.gz" >> "$CONFIG"
+		then	echo "initramfs rootfs.cpio" >> "$CONFIG"
 		fi
 		cardmount ro
 		reboot
@@ -415,7 +543,7 @@ case $SOUNDCARD in
 		EOF
 
 		if ! mount | grep -q mmcblk0p2
-		then	echo "initramfs rootfs.cpio.gz" >> "$CONFIG"
+		then	echo "initramfs rootfs.cpio" >> "$CONFIG"
 		fi
 		cardmount ro
 		reboot
@@ -444,7 +572,7 @@ case $SOUNDCARD in
 		EOF
 
 		if ! mount | grep -q mmcblk0p2
-		then	echo "initramfs rootfs.cpio.gz" >> "$CONFIG"
+		then	echo "initramfs rootfs.cpio" >> "$CONFIG"
 		fi
 		cardmount ro
 		reboot
@@ -479,7 +607,7 @@ case $SOUNDCARD in
 		EOF
 
 		if ! mount | grep -q mmcblk0p2
-		then	echo "initramfs rootfs.cpio.gz" >> "$CONFIG"
+		then	echo "initramfs rootfs.cpio" >> "$CONFIG"
 		fi
 		cardmount ro
 		reboot
