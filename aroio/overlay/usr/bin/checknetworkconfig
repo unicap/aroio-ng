@@ -31,11 +31,12 @@ else
 	DHCP=ipv4
 
 	[DHCP]
+	ClientIdentifier=mac
 	RouteMetric=10
 	EOF
 fi
 
-if [[ "$WLANSSID" != "" && "$WLANSSID" != "WIFI-OFF!" ]]
+if [[ "$WLANSSID" != "" && "$WLANSSID" != "WIFI-OFF!" ]] && [ -e /sys/class/net/wlan0 ]
 then
 	if [ "WLAN_DHCP" = "OFF" ]
 	then
@@ -58,6 +59,7 @@ then
 		Name=wlan0
 
 		[Network]
+		ClientIdentifier=mac
 		DHCP=ipv4
 
 		[DHCP]

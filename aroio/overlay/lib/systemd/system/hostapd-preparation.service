@@ -7,7 +7,7 @@ Before=udhcpd.service preparenetwork.service
 [Service]
 Type=oneshot
 EnvironmentFile=/boot/userconfig.txt
-ExecStart=-/bin/sh -c "[ $WLANSSID = AroioAP ] && touch /tmp/network_unconfigured"
+ExecStart=-/bin/sh -c "[ "$WLANSSID" = "AroioAP" ] && touch /tmp/network_unconfigured"
 #ExecStart=/bin/sh -c "ifconfig wlan0 | grep 'inet addr' || ifconfig eth0 | grep 'inet addr' ||  touch /tmp/network_unconfigured "
 
 [Install]

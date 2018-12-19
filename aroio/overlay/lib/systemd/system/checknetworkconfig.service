@@ -1,6 +1,6 @@
 [Unit]
 Description=Network configuration according to userconfig.txt
-After=local-fs.target
+After=local-fs.target checkuserconfig.service
 Requires=local-fs.target
 
 [Service]
