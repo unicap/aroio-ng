@@ -1,0 +1,10 @@
+#!/bin/sh
+
+CHANNEL_NUMBER=2
+SOURCE_PORT_1=".*:from_slave_1"
+SOURCE_PORT_2=".*:from_slave_2"
+TARGET_PORT_1="jackmixer:in1_left"
+TARGET_PORT_2="jackmixer:in1_right"
+
+jack_persistent_client "$SOURCE_PORT_1" "$TARGET_PORT_1" &
+jack_persistent_client "$SOURCE_PORT_2" "$TARGET_PORT_2" &

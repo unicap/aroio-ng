@@ -75,7 +75,7 @@ function Start()
 
 		jack)
 			systemctl "$ACTION" jackd.service
-			[[ "$JACK_NETJACK"      = "ON"  && "$ACTION" != "stop" ]] && echo "netmanager start" && jack_load netmanager
+			[[ "$JACK_NETJACK"      = "ON"  && "$ACTION" != "stop" ]] && echo "netmanager start" && jack_load netmanager && connect_netjackports
 			[ "$JACK_SQUEEZELITE"   = "ON" ] && systemctl "$ACTION" squeezelite.service
 			[ "$JACK_GMEDIARENDER"  = "ON" ] && systemctl "$ACTION" gmediarender.service
 			[ "$JACK_SHAIRPORTSYNC" = "ON" ] && systemctl "$ACTION" shairport-sync.service
@@ -85,7 +85,7 @@ function Start()
 
 		jack-ms)
 			systemctl "$ACTION" jackd.service
-			[[ "$JACKMS_NETJACK"      = "ON"  && "$ACTION" != "stop" ]] &&  jack_load netmanager
+			[[ "$JACKMS_NETJACK"      = "ON"  && "$ACTION" != "stop" ]] &&  jack_load netmanager && connect_netjackports
 			[ "$JACKMS_SQUEEZELITE"   = "ON" ] && systemctl "$ACTION" squeezelite.service
 			[ "$JACKMS_GMEDIARENDER"  = "ON" ] && systemctl "$ACTION" gmediarender.service
 			[ "$JACKMS_SHAIRPORTSYNC" = "ON" ] && systemctl "$ACTION" shairport-sync.service
@@ -97,7 +97,7 @@ function Start()
 			systemctl "$ACTION" jackd.service
 			systemctl "$ACTION" brutefir.service
 			until jack_lsp | grep brutefir ; do sleep 0.2 ; done
-			[[ "$JACKBF_NETJACK"      = "ON"  && "$ACTION" != "stop" ]] && jack_load netmanager
+			[[ "$JACKBF_NETJACK"      = "ON"  && "$ACTION" != "stop" ]] && jack_load netmanager && connect_netjackports
 			[ "$JACKBF_SQUEEZELITE"   = "ON" ] && systemctl "$ACTION" squeezelite.service
 			[ "$JACKBF_GMEDIARENDER"  = "ON" ] && systemctl "$ACTION" gmediarender.service
 			[ "$JACKBF_SHAIRPORTSYNC" = "ON" ] && systemctl "$ACTION" shairport-sync.service
@@ -109,7 +109,7 @@ function Start()
 			systemctl "$ACTION" jackd.service
 			systemctl "$ACTION" brutefir.service
 			until jack_lsp | grep brutefir ; do sleep 0.2 ; done
-			[[ "$JACKBFMS_NETJACK"      = "ON"  && "$ACTION" != "stop" ]] && jack_load netmanager
+			[[ "$JACKBFMS_NETJACK"      = "ON"  && "$ACTION" != "stop" ]] && jack_load netmanager && connect_netjackports
 			[ "$JACKBFMS_SQUEEZELITE"   = "ON" ] && systemctl "$ACTION" squeezelite.service
 			[ "$JACKBFMS_GMEDIARENDER"  = "ON" ] && systemctl "$ACTION" gmediarender.service
 			[ "$JACKBFMS_SHAIRPORTSYNC" = "ON" ] && systemctl "$ACTION" shairport-sync.service
@@ -121,7 +121,7 @@ function Start()
 
 function StopStatus()
 {
-	[ "$1" = "stop" ] && volumecontrol -120 && sleep 0.5
+	[ "$1" = "stop" ] && volumecontrol -120 && sleep 0.5 && killall jack_persistent_client
 	for SERVICE in squeezelite gmediarender shairport-sync bluealsa-aplay brutefir jackd
 	do
 		systemctl "$1" "$SERVICE".service
