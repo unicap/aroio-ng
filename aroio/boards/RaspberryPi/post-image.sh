@@ -15,7 +15,7 @@ echo "Writing a config.txt with aroio specific options."
 cat << __EOF__ > "${BINARIES_DIR}/rpi-firmware/config.txt"
 
 kernel=zImage
-initramfs rootfs.cpio.gz
+initramfs rootfs.cpio
 display_rotate=1
 force_turbo=1
 dtdebug=1
