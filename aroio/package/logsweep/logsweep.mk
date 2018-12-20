@@ -5,8 +5,9 @@
 ################################################################################
 
 LOGSWEEP_VERSION = 1.0
-LOGSWEEP_SOURCE = Logsweep-$(LOGSWEEP_VERSION).tar.xz
-LOGSWEEP_SITE = /home/nicola/workspace/aroio-ng/aroio/Logsweep
+LOGSWEEP_SOURCE = Logsweep-$(LOGSWEEP_VERSION).tar.gz
+#LOGSWEEP_SITE = file:///home/nicola/workspace/aroio-ng/aroio/Logsweep
+LOGSWEEP_SITE = file://$(BR2_EXTRENAL_aroio_PATH)/Logsweep
 LOGSWEEP_SITE_METHOD = file
 LOGSWEEP_LICENSE = none
 LOGSWEEP_INSTALL_IMAGES = YES
