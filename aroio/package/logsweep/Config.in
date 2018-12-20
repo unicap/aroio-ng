@@ -1,0 +1,6 @@
+config BR2_PACKAGE_LOGSWEEP
+       bool "logsweep"
+       help
+         Logsweeps for Measurement recording
+
+	 http://www.audiovero.de

@@ -98,6 +98,7 @@ menu "Perl CPAN Packages"
 endmenu
 
 
+source "$BR2_EXTERNAL_aroio_PATH/package/logsweep/Config.in"
 source "$BR2_EXTERNAL_aroio_PATH/package/ladspa/Config.in"
 source "$BR2_EXTERNAL_aroio_PATH/package/bluez-alsa/Config.in"
 source "$BR2_EXTERNAL_aroio_PATH/package/alsa-plugins/Config.in"

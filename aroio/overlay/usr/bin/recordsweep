@@ -7,9 +7,9 @@ if ! lsusb | grep '2752:0007'
 	else	echo '<img src="/mic.gif" border="0" style="float: left; width: 32px; margin-right: 4px;"/>Microphone found, continuing with 200 sec measurement...<br>Mikrofon gefunden, Messung läuft...<br>'
 fi
 
-INFILE1='/root/Logsweep/Start.raw'
-INFILE2='/root/Logsweep/Logsweep96.raw.7z'
-INFILE3='/root/Logsweep/End.raw'
+INFILE1='/boot/Logsweep/Start.wav'
+INFILE2='/boot/Logsweep/Logsweep96.raw.7z'
+INFILE3='/boot/Logsweep/End.wav'
 OUTFILE='/tmp/Logsweep48_rec.raw'
 
 echo "Stopping audio processing"
@@ -29,10 +29,10 @@ else
 	echo "Logsweep already unpacked, continuing..."
 fi
 
-#aplay -f FLOAT_LE -r 48000 -c1 -D $AUDIO_OUTPUT $INFILE1
+aplay -D "$AUDIO_OUTPUT" -c1 -D $AUDIO_OUTPUT $INFILE1
 arecord -Dplughw:4 -I -d 200 -t raw -r 48000 -f FLOAT_LE -c2 $OUTFILE &
-aplay -f S32_LE -r 96000 -c2 -D $AUDIO_OUTPUT Logsweep96.raw
-#aplay -f FLOAT_LE -r 48000 -c1 -D $AUDIO_OUTPUT $INFILE3
+aplay -D "$AUDIO_OUTPUT" -f S32_LE -r 96000 -c2 -D $AUDIO_OUTPUT Logsweep96.raw
+aplay -D "$AUDIO_OUTPUT" -c1 -D $AUDIO_OUTPUT $INFILE3
 
 rm "$OUTFILE".1
 mv "$OUTFILE".0 $OUTFILE
