@@ -2,7 +2,11 @@
 
 . /boot/userconfig.txt
 
+#SERVER_RESAMPL="ON"
+
 MACADDRESS=$(cat /sys/class/net/eth0/address)
+
+[ "$SERVER_RESAMPL" = "ON" ] && SERVER_RESAMPL=" -r "$RATE"-"$RATE""
 
 if [ "$SERVERNAME" = "" ]
 then	SERVEROPTS=""
@@ -10,5 +14,4 @@ else	SERVEROPTS="-s $SERVERNAME"
 		[ "$SERVERPORT" != "" ] && SERVEROPTS=""$SERVEROPTS":"$SERVERPORT""
 fi
 
-taskset -c 2,3 squeezelite $SERVEROPTS -M "$PLATFORM" -m "$MACADDRESS" -n "$PLAYERNAME" -p 45 -a "$SQUEEZE_ALSABUFFER":"$SQUEEZE_ALSAPERIOD"::1 -b "$SQUEEZE_INTBUFFER":"$SQUEEZE_OUTBUFFER" -d all=info -o "$AUDIO_OUTPUT"
-
+taskset -c 2,3 squeezelite $SERVEROPTS $SERVER_RESAMPL -M "$PLATFORM" -m "$MACADDRESS" -n "$PLAYERNAME" -p 45 -a "$SQUEEZE_ALSABUFFER":"$SQUEEZE_ALSAPERIOD"::1 -b "$SQUEEZE_INTBUFFER":"$SQUEEZE_OUTBUFFER" -d all=info -o "$AUDIO_OUTPUT"

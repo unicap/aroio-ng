@@ -1,0 +1,33 @@
+#!/bin/sh
+
+. /boot/userconfig.txt
+
+case "$AUDIO_OUTPUT" in
+	jack)
+		if [ "$JACK_INPUT" = "ON" ]
+		then	taskset -c 0,1 /bin/jackd -R -P 50 -d alsa -r $RATE -p $JACKBUFFER -n $JACKPERIOD
+		else	taskset -c 0,1 /bin/jackd -R -P 50 -d alsa -P -r $RATE -p $JACKBUFFER -n $JACKPERIOD
+		fi
+	;;
+
+	jack-ms)
+		if [ "$JACKMS_INPUT" = "ON" ]
+		then	taskset -c 0,1 /bin/jackd -R -P 50 -d alsa -r $RATE -p $JACKBUFFER -n $JACKPERIOD
+		else	taskset -c 0,1 /bin/jackd -R -P 50 -d alsa -P -r $RATE -p $JACKBUFFER -n $JACKPERIOD
+		fi
+	;;
+
+	jack-bf)
+		if [ "$JACKBF_INPUT" = "ON" ]
+		then	taskset -c 0,1 /bin/jackd -R -P 50 -d alsa -r $RATE -p $JACKBUFFER -n $JACKPERIOD
+		else	taskset -c 0,1 /bin/jackd -R -P 50 -d alsa -P -r $RATE -p $JACKBUFFER -n $JACKPERIOD
+		fi
+	;;
+
+	jack-bfms)
+		if [ "$JACKBFMS_INPUT" = "ON" ]
+		then	taskset -c 0,1 /bin/jackd -R -P 50 -d alsa -r $RATE -p $JACKBUFFER -n $JACKPERIOD
+		else	taskset -c 0,1 /bin/jackd -R -P 50 -d alsa -P -r $RATE -p $JACKBUFFER -n $JACKPERIOD
+		fi
+	;;
+esac

@@ -33,6 +33,7 @@ else
 	[DHCP]
 	ClientIdentifier=mac
 	RouteMetric=10
+	UseNTP=false
 	EOF
 fi
 
@@ -59,11 +60,12 @@ then
 		Name=wlan0
 
 		[Network]
-		ClientIdentifier=mac
 		DHCP=ipv4
 
 		[DHCP]
+		ClientIdentifier=mac
 		RouteMetric=20
+		UseNTP=false
 		EOF
 	fi
 fi

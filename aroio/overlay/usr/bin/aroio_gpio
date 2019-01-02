@@ -25,11 +25,10 @@ with open("/boot/userconfig.txt") as f:
         config[key] = value[1:-1]
 
 # Set initial volume to prevent jump upon first usage of rotary encoder
-
 Volume = int(config["VOLUME_START"])
 
-#AmixerVolume = int(subprocess.Popen(["amixer sget Master | awk '/Left:/ { print $3 }'"], shell=True,stdout=subprocess.PIPE).communicate()[0].decode('utf-8'))
-#print (AmixerVolume)
+# AmixerVolume = int(subprocess.Popen(["amixer sget Master | awk '/Left:/ { print $3 }'"], shell=True,stdout=subprocess.PIPE).communicate()[0].decode('utf-8'))
+# print (AmixerVolume)
 
 # VOLalsa = (VOLjack*3,1875)+255
 
@@ -37,7 +36,7 @@ oldVolume = 0
 A_LastState = 0
 
 # Check if platform has a rotary encoder and assign GPIOs
-if str(config["PLATFORM"]) == "AroioLT":
+if (str(config["PLATFORM"]) == "AroioLT"):
     Enc_A = 23
     Enc_B = 24
     LED_net = 22

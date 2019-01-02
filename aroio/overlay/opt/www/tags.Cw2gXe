@@ -1,0 +1,642 @@
+lang	measurement.php	/^        $lang='en';$/;"	v
+lang	measurement.php	/^        $lang='de';$/;"	v
+ini_array	measurement.php	/^    $ini_array = parse_ini_file("\/boot\/userconfig.txt", 1);$/;"	v
+measurement_done	measurement.php	/^    		$measurement_done="true";$/;"	v
+scanwifi	functions.inc.php	/^function scanwifi()$/;"	f
+validate_input	functions.inc.php	/^function validate_input($case,$input)$/;"	f
+write_config	functions.inc.php	/^function write_config()$/;"	f
+print_cmdout	functions.inc.php	/^function print_cmdout($command)$/;"	f
+echo_uptime	functions.inc.php	/^function echo_uptime()$/;"	f
+echo_ps	functions.inc.php	/^function echo_ps()$/;"	f
+echo_iwlist	functions.inc.php	/^function echo_iwlist()$/;"	f
+echo_carrierstate	functions.inc.php	/^function echo_carrierstate()$/;"	f
+echo_mac_lan	functions.inc.php	/^function echo_mac_lan()$/;"	f
+echo_mac_wlan	functions.inc.php	/^function echo_mac_wlan()$/;"	f
+ping_squeezeserver	functions.inc.php	/^function ping_squeezeserver()$/;"	f
+get_ipaddr_lan	functions.inc.php	/^function get_ipaddr_lan()$/;"	f
+get_ipaddr_wlan	functions.inc.php	/^function get_ipaddr_wlan()$/;"	f
+test_wlan	functions.inc.php	/^function test_wlan()$/;"	f
+test_bt	functions.inc.php	/^function test_bt()$/;"	f
+test_input	functions.inc.php	/^function test_input()$/;"	f
+restart_lms	functions.inc.php	/^function restart_lms()$/;"	f
+cancel_measurement	functions.inc.php	/^function cancel_measurement()$/;"	f
+print_optgroup	functions.inc.php	/^function print_optgroup($name,$arr_values,$sel_value)$/;"	f
+print_optgroup2D	functions.inc.php	/^function print_optgroup2D($name,$arr_values,$sel_value)$/;"	f
+fltrSelect	functions.inc.php	/^function fltrSelect($id,$ini_array)$/;"	f
+browseDirectory	functions.inc.php	/^function browseDirectory($directory)$/;"	f
+print_txtrelative	functions.inc.php	/^function print_txtrelative($file)$/;"	f
+print_journalctl	functions.inc.php	/^function print_journalctl($unit)$/;"	f
+print_journalctl_boot	functions.inc.php	/^function print_journalctl_boot()$/;"	f
+print_audio_hw_params	functions.inc.php	/^function print_audio_hw_params()$/;"	f
+print_squeezeaddr	functions.inc.php	/^function print_squeezeaddr($port)$/;"	f
+activeFilter	functions.inc.php	/^function activeFilter()$/;"	f
+print_filterset	functions.inc.php	/^function print_filterset($count,$ini_array)$/;"	f
+validateAndSave	functions.inc.php	/^function validateAndSave($size,$arr)$/;"	f
+wrtToUserconfig	functions.inc.php	/^function wrtToUserconfig($varName,$value)$/;"	f
+readCoeffNamesFromBrutefir	functions.inc.php	/^function readCoeffNamesFromBrutefir($sets)$/;"	f
+switchFilter	functions.inc.php	/^function switchFilter($fltrBank)$/;"	f
+getFilter	functions.inc.php	/^function getFilter()$/;"	f
+getVol	functions.inc.php	/^function getVol()$/;"	f
+getDelay	functions.inc.php	/^ function getDelay()$/;"	f
+chgDelay	functions.inc.php	/^function chgDelay($fltrBank,$delay)$/;"	f
+tgglMute	functions.inc.php	/^function tgglMute($channel)$/;"	f
+isMuted	functions.inc.php	/^function isMuted()$/;"	f
+volControl	functions.inc.php	/^function volControl($ms,$attenuation)$/;"	f
+measurement	functions.inc.php	/^function measurement()$/;"	f
+update	functions.inc.php	/^function update($beta)$/;"	f
+upload_measurement	functions.inc.php	/^function upload_measurement()$/;"	f
+arr_volume	audio.php	/^      	    $arr_volume=array$/;"	v
+arr_soundcard	audio.php	/^            <?$arr_soundcard= array('Internal HDMI audio','Internal audio jack','AroioDAC','Just/;"	v
+arr_rate	audio.php	/^                    $arr_rate= array('44100','48000');$/;"	v
+arr_rate	audio.php	/^                  $arr_rate= array('44100','48000','96000');$/;"	v
+arr_rate	audio.php	/^                  $arr_rate= array('44100','48000','96000','192000');$/;"	v
+lang	brutefir.php	/^			$lang='en';$/;"	v
+lang	brutefir.php	/^			$lang='de';$/;"	v
+savedbank	brutefir.php	/^			$savedbank=$_POST[savedbank];$/;"	v
+shell_exec_ret	brutefir.php	/^            $shell_exec_ret=shell_exec('cardmount rw');$/;"	v
+shell_exec_ret	brutefir.php	/^            $shell_exec_ret=shell_exec('cardmount ro');$/;"	v
+savedbank	brutefir.php	/^			$savedbank=$_POST[savedbank];$/;"	v
+shell_exec_ret	brutefir.php	/^            $shell_exec_ret=shell_exec('cardmount rw');$/;"	v
+shell_exec_ret	brutefir.php	/^            $shell_exec_ret=shell_exec('cardmount ro');$/;"	v
+ini_array	brutefir.php	/^    $ini_array = parse_ini_file("\/boot\/userconfig.txt", 1);$/;"	v
+bank_test	brutefir.php	/^    $bank_test= $_POST[bank];$/;"	v
+activeFilter	brutefir.php	/^    $activeFilter=getFilter();$/;"	v
+activeFilter	brutefir.php	/^        $activeFilter = $_POST[bank];$/;"	v
+shell_exec_ret	brutefir.php	/^        $shell_exec_ret=shell_exec('cardmount rw');$/;"	v
+shell_exec_ret	brutefir.php	/^        $shell_exec_ret=shell_exec('cardmount ro');$/;"	v
+activeFilter	brutefir.php	/^        $activeFilter = getFilter();$/;"	v
+actVol	brutefir.php	/^			$actVol=getVol();$/;"	v
+actVol	brutefir.php	/^			$actVol=getVol(); \/\/auslesen$/;"	v
+ini_array	brutefir.php	/^    $ini_array = parse_ini_file("\/boot\/userconfig.txt", 1);$/;"	v
+shell_exec_ret	brutefir.php	/^            $shell_exec_ret=shell_exec('cardmount rw');$/;"	v
+shell_exec_ret	brutefir.php	/^            $shell_exec_ret=shell_exec('cardmount ro');$/;"	v
+ini_array	brutefir.php	/^            $ini_array = parse_ini_file("\/boot\/userconfig.txt", 1);$/;"	v
+lang	credits.php	/^    if($_GET["lang"] === "en") $lang='en'; else $lang='de';$/;"	v
+lang	credits.php	/^    if($_GET["lang"] === "en") $lang='en'; else $lang='de';$/;"	v
+ini_array	credits.php	/^    $ini_array = parse_ini_file("\/boot\/userconfig.txt", 1);$/;"	v
+linktext_configuration_en	strings.php	/^    $linktext_configuration_en='&nbsp Configuration &nbsp';$/;"	v
+linktext_configuration_de	strings.php	/^    $linktext_configuration_de='&nbsp Konfiguration &nbsp';$/;"	v
+linktext_system_en	strings.php	/^    $linktext_system_en='&nbsp System &nbsp';$/;"	v
+linktext_system_de	strings.php	/^    $linktext_system_de='&nbsp System &nbsp';$/;"	v
+linktext_measurement_de	strings.php	/^    $linktext_measurement_de='&nbsp Messung &nbsp';$/;"	v
+linktext_measurement_en	strings.php	/^    $linktext_measurement_en='&nbsp Measure &nbsp';$/;"	v
+linktext_credits_en	strings.php	/^    $linktext_credits_en='&nbsp Credits &nbsp';$/;"	v
+linktext_credits_de	strings.php	/^    $linktext_credits_de='&nbsp Credits &nbsp';$/;"	v
+linktext_brutefir_en	strings.php	/^    $linktext_brutefir_en='&nbsp Convolver &nbsp';$/;"	v
+linktext_brutefir_de	strings.php	/^    $linktext_brutefir_de='&nbsp Convolver &nbsp';$/;"	v
+on_en	strings.php	/^    $on_en='on';$/;"	v
+on_de	strings.php	/^    $on_de='an';$/;"	v
+off_en	strings.php	/^    $off_en='off';$/;"	v
+off_de	strings.php	/^    $off_de='aus';$/;"	v
+page_title_main_en	strings.php	/^    $page_title_main_en='Configuration ';$/;"	v
+page_title_main_de	strings.php	/^    $page_title_main_de='Konfiguration ';$/;"	v
+title_main_en	strings.php	/^    $title_main_en=$page_title_main_en;$/;"	v
+title_main_de	strings.php	/^    $title_main_de=$page_title_main_de;$/;"	v
+network_form_en	strings.php	/^    $network_form_en='Network settings';$/;"	v
+network_form_de	strings.php	/^    $network_form_de='Einstellungen Netzwerk';$/;"	v
+dhcp_en	strings.php	/^    $dhcp_en='Network address settings';$/;"	v
+dhcp_de	strings.php	/^    $dhcp_de='Netzwerkadresse beziehen';$/;"	v
+dhcp_on_en	strings.php	/^    $dhcp_on_en='DHCP (auto)';$/;"	v
+dhcp_on_de	strings.php	/^    $dhcp_on_de='DHCP (automatisch)';$/;"	v
+dhcp_off_en	strings.php	/^    $dhcp_off_en='fixed (manual)';$/;"	v
+dhcp_off_de	strings.php	/^    $dhcp_off_de='fest (manuell)';$/;"	v
+ipaddr_en	strings.php	/^    $ipaddr_en='IP-Adress';$/;"	v
+ipaddr_de	strings.php	/^    $ipaddr_de='IP-Adresse';$/;"	v
+netmask_en	strings.php	/^    $netmask_en='Network Mask';$/;"	v
+netmask_de	strings.php	/^    $netmask_de='Netzwerk-Maske';$/;"	v
+dnsserv_en	strings.php	/^    $dnsserv_en='DNS-server';$/;"	v
+dnsserv_de	strings.php	/^    $dnsserv_de='DNS-Server';$/;"	v
+gateway_en	strings.php	/^    $gateway_en='Gateway';$/;"	v
+gateway_de	strings.php	/^    $gateway_de='Gateway';$/;"	v
+wlanssid_en	strings.php	/^    $wlanssid_en='Wireless Network (SSID)';$/;"	v
+wlanssid_de	strings.php	/^    $wlanssid_de='WLAN Name (SSID)';$/;"	v
+site_survey_en	strings.php	/^    $site_survey_en='Scan for WLANs';$/;"	v
+site_survey_de	strings.php	/^    $site_survey_de='Nach WLANs suchen';$/;"	v
+scan_networks_en	strings.php	/^    $scan_networks_en='Scan for WLANs';$/;"	v
+scan_networks_de	strings.php	/^    $scan_networks_de='Nach WLANs suchen';$/;"	v
+wlanpwd_en	strings.php	/^    $wlanpwd_en='Wireless passphrase';$/;"	v
+wlanpwd_de	strings.php	/^    $wlanpwd_de='WLAN Schl&uuml;ssel';$/;"	v
+showpwd_en	strings.php	/^    $showpwd_en='Show password';$/;"	v
+showpwd_de	strings.php	/^    $showpwd_de='Passwort anzeigen';$/;"	v
+helptext_hostname_en	strings.php	/^    $helptext_hostname_en='24 characters (a-Z), digits (0-9) and the minus sign (-). No blank or/;"	v
+helptext_hostname_de	strings.php	/^    $helptext_hostname_de='24 alphanumerische Zeichen (a-Z), (0-9) und\/oder das Minus-Zeichen -/;"	v
+helptext_dhcp_en	strings.php	/^    $helptext_dhcp_en='DHCP automatically sets network parameters according to your network, if /;"	v
+helptext_dhcp_de	strings.php	/^    $helptext_dhcp_de='DHCP richtet automatisch die dem Netzwerk entsprechenden Verbindungsparam/;"	v
+helptext_ipaddr_en	strings.php	/^    $helptext_ipaddr_en='A valid IP address must be in the form of xxx.xxx.xxx.xxx where xxx is /;"	v
+helptext_ipaddr_de	strings.php	/^    $helptext_ipaddr_de='Eine g&uuml;ltige IP-Adresse hat die Form xxx.xxx.xxx.xxx wobei xxx f&u/;"	v
+helptext_netmask_en	strings.php	/^    $helptext_netmask_en='The most common netmask for home-use is 255.255.255.0. Unless you KNOW/;"	v
+helptext_netmask_de	strings.php	/^    $helptext_netmask_de='Die im privaten Bereich meist gebr&auml;uchliche Netzwerkmaske ist die/;"	v
+helptext_dnsserv_en	strings.php	/^    $helptext_dnsserv_en='Here you enter your dns-server\\'s ip-address. In most home-use scenar/;"	v
+helptext_dnsserv_de	strings.php	/^    $helptext_dnsserv_de='Eingabefeld f&uuml;r die IP-Adresse des DNS-Servers. In den meisten F&/;"	v
+helptext_gateway_en	strings.php	/^    $helptext_gateway_en='Here you enter the ip-address or hostname of your gateway\/router.';$/;"	v
+helptext_gateway_de	strings.php	/^    $helptext_gateway_de='Eingabefeld f&uuml;r die IP-Adresse oder den Hostnamen des Gateways\/R/;"	v
+helptext_wlanssid_en	strings.php	/^    $helptext_wlanssid_en='Here you enter the name of your wireless netword (SSID). You can use /;"	v
+helptext_wlanssid_de	strings.php	/^    $helptext_wlanssid_de='Eingabefeld f&uuml;r den Namen des WLAN-Netzes. Mit dem [jetzt suchen/;"	v
+helptext_wlanpwd_en	strings.php	/^    $helptext_wlanpwd_en='Here you enter your wireless passphrase.';$/;"	v
+helptext_wlanpwd_de	strings.php	/^    $helptext_wlanpwd_de='Eingabefeld f&uuml;r den WLAN-Schl&uuml;ssel.';$/;"	v
+webinterface_form_en	strings.php	/^    $webinterface_form_en='Webinterface settings';$/;"	v
+webinterface_form_de	strings.php	/^    $webinterface_form_de='Einstellungen Webinterface';$/;"	v
+userpwd_en	strings.php	/^    $userpwd_en='Configuration password';$/;"	v
+userpwd_de	strings.php	/^    $userpwd_de='Konfigurations-Passwort';$/;"	v
+helptext_userpwd_en	strings.php	/^    $helptext_userpwd_en='Here you enter the password for the configuration web-gui. The usernam/;"	v
+helptext_userpwd_de	strings.php	/^    $helptext_userpwd_de='Eingabefeld f&uuml;r das Passwort der Weboberfl&auml;che. Der Benutzer/;"	v
+hardware_form_en	strings.php	/^	$hardware_form_en='Hardware settings';$/;"	v
+hardware_form_de	strings.php	/^    $hardware_form_de='Einstellungen Hardware';$/;"	v
+platform_form_en	strings.php	/^	$platform_form_en='Hardware platform settings';$/;"	v
+platform_form_de	strings.php	/^	$platform_form_de='Auswahl der Hardware-Plattform';$/;"	v
+helptext_platform_en	strings.php	/^	$helptext_platform_en='Choose your hardware platform here. Reboot required. Wrong settings may /;"	v
+helptext_platform_de	strings.php	/^    $helptext_platform_de='Auswahl der Hardware-Plattform. Erfordert Neustart. Eine falsche Ausw/;"	v
+squeeze_serv_form_en	strings.php	/^    $squeeze_serv_form_en='Logitech Media server';$/;"	v
+squeeze_serv_form_de	strings.php	/^    $squeeze_serv_form_de='Logitech Media Server';$/;"	v
+squeeze_serv_hostname_en	strings.php	/^    $squeeze_serv_hostname_en='Address or hostname';$/;"	v
+squeeze_serv_hostname_de	strings.php	/^    $squeeze_serv_hostname_de='Adresse oder Hostname';$/;"	v
+squeeze_serv_user_en	strings.php	/^    $squeeze_serv_user_en='Username (if set)';$/;"	v
+squeeze_serv_user_de	strings.php	/^    $squeeze_serv_user_de='Benutzer (falls gesetzt)';$/;"	v
+squeeze_serv_passwd_en	strings.php	/^    $squeeze_serv_passwd_en='Password (if set)';$/;"	v
+squeeze_serv_passwd_de	strings.php	/^    $squeeze_serv_passwd_de='Passwort (falls gesetzt)';$/;"	v
+squeeze_serv_port_en	strings.php	/^    $squeeze_serv_port_en='Port (default is 3483)';$/;"	v
+squeeze_serv_port_de	strings.php	/^    $squeeze_serv_port_de='Port (Standard ist 3483)';$/;"	v
+helptext_servername_en	strings.php	/^    $helptext_servername_en='Here you enter the name or address of the LM-server you want to con/;"	v
+helptext_servername_de	strings.php	/^    $helptext_servername_de='Eingabefeld f&uuml;r Namen oder Adresse des LM-Servers, der verwend/;"	v
+helptext_squeezeuser_en	strings.php	/^    $helptext_squeezeuser_en='If you enabled security with username and password on your LM-serv/;"	v
+helptext_squeezeuser_de	strings.php	/^    $helptext_squeezeuser_de='Sofern der LM-Server auf Abfrage von Benutzernamen und Passwort ko/;"	v
+helptext_squeezepwd_en	strings.php	/^    $helptext_squeezepwd_en='If you enabled security with username and password on your LM-serve/;"	v
+helptext_squeezepwd_de	strings.php	/^    $helptext_squeezepwd_de='Sofern der LM-Server auf Abfrage von Benutzernamen und Passwort kon/;"	v
+helptext_serverport_en	strings.php	/^    $helptext_serverport_en='If you set up you LM-server to use a non-standard port (which is 90/;"	v
+helptext_serverport_de	strings.php	/^    $helptext_serverport_de='Sollte der LM-Server auf einen vom Standard-Port abweichenden Port /;"	v
+audio_form_en	strings.php	/^    $audio_form_en='Audio settings';$/;"	v
+audio_form_de	strings.php	/^    $audio_form_de='Audio-Einstellungen';$/;"	v
+player_name_en	strings.php	/^    $player_name_en='Audio player name';$/;"	v
+player_name_de	strings.php	/^    $player_name_de='Audioplayer Name';$/;"	v
+advancedsettings_de	strings.php	/^    $advancedsettings_de='Erweiterte Einstellungen';$/;"	v
+advancedsettings_en	strings.php	/^    $advancedsettings_en='Advanced settings';$/;"	v
+display_rotate_de	strings.php	/^    $display_rotate_de='Bildschirm drehen';$/;"	v
+display_rotate_en	strings.php	/^    $display_rotate_en='Rotate display';$/;"	v
+mscoded_en	strings.php	/^    $mscoded_en='AudioVero Clean!<br>(digital part only)';$/;"	v
+mscoded_de	strings.php	/^    $mscoded_de='AudioVero Clean!<br>(nur digitale Seite)';$/;"	v
+convolution_en	strings.php	/^    $convolution_en='Audio convolution<br>(room correction)';$/;"	v
+convolution_de	strings.php	/^    $convolution_de='Audio Convolution<br>(Raumkorrektur)';$/;"	v
+netjack_en	strings.php	/^    $netjack_en='Netjack' ;$/;"	v
+netjack_de	strings.php	/^    $netjack_de='Netjack' ;$/;"	v
+netjack_on_en	strings.php	/^    $netjack_on_en='on' ;$/;"	v
+netjack_on_de	strings.php	/^    $netjack_on_de='an' ;$/;"	v
+squeezelite_only_en	strings.php	/^    $squeezelite_only_en='none';$/;"	v
+squeezelite_only_de	strings.php	/^    $squeezelite_only_de='keiner';$/;"	v
+squeezelite_and_upnp_en	strings.php	/^    $squeezelite_and_upnp_en='UPNP player';$/;"	v
+squeezelite_and_upnp_de	strings.php	/^    $squeezelite_and_upnp_de='UPNP-Player';$/;"	v
+squeezelite_and_netjack_en	strings.php	/^    $squeezelite_and_netjack_en='netjack';$/;"	v
+squeezelite_and_netjack_de	strings.php	/^    $squeezelite_and_netjack_de='Netjack';$/;"	v
+netjack_off_en	strings.php	/^    $netjack_off_en='off' ;$/;"	v
+netjack_off_de	strings.php	/^    $netjack_off_de='aus' ;$/;"	v
+audioplayer_en	strings.php	/^    $audioplayer_en='Audio player' ;$/;"	v
+audioplayer_de	strings.php	/^    $audioplayer_de='Audio-Player' ;$/;"	v
+audioplayer_convolution_en	strings.php	/^    $audioplayer_convolution_en='Additional audio player' ;$/;"	v
+audioplayer_convolution_de	strings.php	/^    $audioplayer_convolution_de='Weiterer Audio-Player' ;$/;"	v
+audioplayer_squeezelite_en	strings.php	/^    $audioplayer_squeezelite_en='Squeezelite' ;$/;"	v
+audioplayer_squeezelite_de	strings.php	/^    $audioplayer_squeezelite_de='Squeezelite' ;$/;"	v
+audioplayer_gmediarender_en	strings.php	/^    $audioplayer_gmediarender_en='UPNP-Player' ;$/;"	v
+audioplayer_gmediarender_de	strings.php	/^    $audioplayer_gmediarender_de='UPNP-Player' ;$/;"	v
+convolution_volcontrol_en	strings.php	/^    $convolution_volcontrol_en='Volume Control';$/;"	v
+convolution_volcontrol_de	strings.php	/^    $convolution_volcontrol_de='Lautst&auml;rkeanpassung';$/;"	v
+volume_en	strings.php	/^    $volume_en='Startup volume';$/;"	v
+volume_de	strings.php	/^    $volume_de='Start-Lautst&auml;rke';$/;"	v
+jack_buffer_en	strings.php	/^    $jack_buffer_en='Jack buffer size';$/;"	v
+jack_buffer_de	strings.php	/^    $jack_buffer_de='Jack Puffergr&ouml;&szlig;e';$/;"	v
+jack_period_en	strings.php	/^    $jack_period_en='Jack period size';$/;"	v
+jack_period_de	strings.php	/^    $jack_period_de='Jack Periodengr&ouml;&szlig;e';$/;"	v
+squeeze_alsabuffer_en	strings.php	/^    $squeeze_alsabuffer_en='Squeezelite ALSA buffer size';$/;"	v
+squeeze_alsabuffer_de	strings.php	/^    $squeeze_alsabuffer_de='Squeezelite ALSA Puffergrö&szlig;e';$/;"	v
+squeeze_alsaperiod_en	strings.php	/^    $squeeze_alsaperiod_en='Squeezelite ALSA period number';$/;"	v
+squeeze_alsaperiod_de	strings.php	/^    $squeeze_alsaperiod_de='Squeezelite ALSA Periodenanzahl';$/;"	v
+squeeze_intbuffer_en	strings.php	/^    $squeeze_intbuffer_en='Squeezelite internal buffer size';$/;"	v
+squeeze_intbuffer_de	strings.php	/^    $squeeze_intbuffer_de='Squeezelite interne Puffergr&ouml;&szlig;e';$/;"	v
+squeeze_outbuffer_en	strings.php	/^    $squeeze_outbuffer_en='Squeezelite output buffer size';$/;"	v
+squeeze_outbuffer_de	strings.php	/^    $squeeze_outbuffer_de='Squeezelite Ausgabe-Puffergr&ouml;&szlig;e';$/;"	v
+sp_outbuffer_en	strings.php	/^    $sp_outbuffer_en='ShAirPlay output buffer size';$/;"	v
+sp_outbuffer_de	strings.php	/^    $sp_outbuffer_de='ShAirPlay Ausgabe-Puffergr&ouml;&szlig;e';$/;"	v
+bf_partitions_en	strings.php	/^    $bf_partitions_en='BruteFIR partitions';$/;"	v
+bf_partitions_de	strings.php	/^    $bf_partitions_de='BruteFIR Partitionen';$/;"	v
+soundcard_en	strings.php	/^    $soundcard_en='Audio card';$/;"	v
+soundcard_de	strings.php	/^    $soundcard_de='Soundkarte';$/;"	v
+helptext_playername_en	strings.php	/^    $helptext_playername_en='Here you enter the desired name for the audio players. If you leave/;"	v
+helptext_playername_de	strings.php	/^    $helptext_playername_de='Gew&uuml;nschter Name der Audio-Player. Bleibt dieses Feld leer, wi/;"	v
+helptext_mscoding_en	strings.php	/^    $helptext_mscoding_en='Encodes the audio signal into mid- and sidebands before D\/A-conversi/;"	v
+helptext_mscoding_de	strings.php	/^    $helptext_mscoding_de='Das Signal wird vor der DA-Wandlung M\/S-codiert. Erfordert hardwares/;"	v
+helptext_convolution_en	strings.php	/^    $helptext_convolution_en='Sends the audio signal through a convolution engine.';$/;"	v
+helptext_convolution_de	strings.php	/^    $helptext_convolution_de='Das Signal wird vor der Ausgabe durch eine Convolution Engine aufb/;"	v
+helptext_audioplayer_en	strings.php	/^    $helptext_audioplayer_en='Selection of the audio-player. Without convolution the sampling fr/;"	v
+helptext_audioplayer_de	strings.php	/^    $helptext_audioplayer_de='Auswahl der Audio-Players. Ohne Convolution folgt die Samplingfreq/;"	v
+helptext_alsaoutbuff_en	strings.php	/^    $helptext_alsaoutbuff_en='Output buffer size of the Squeezeplayer. Only change this, if you /;"	v
+helptext_alsaoutbuff_de	strings.php	/^    $helptext_alsaoutbuff_de='Ausgangs-Puffergr&ouml;&szlig;e des Squeeze-Players. Diesen Wert n/;"	v
+helptext_alsaperiod_en	strings.php	/^    $helptext_alsaperiod_en='Period size of the Squeezeplayer. Only change this, if you know wha/;"	v
+helptext_alsaperiod_de	strings.php	/^    $helptext_alsaperiod_de='ALSA Period size des Squeeze-Players. Diesen Wert nicht leichtferti/;"	v
+helptext_alsasamplefmt_en	strings.php	/^    $helptext_alsasamplefmt_en='Sample format of the Squeezeplayer. Only change this, if you kno/;"	v
+helptext_alsasamplefmt_de	strings.php	/^    $helptext_alsasamplefmt_de='Sample-Format des Squeeze-Players. Diesen Wert nicht leichtferti/;"	v
+helptext_alsammap_en	strings.php	/^    $helptext_alsammap_en='Use MMAP? Highly hardware-dependant, only change this, if you know wh/;"	v
+helptext_alsammap_de	strings.php	/^    $helptext_alsammap_de='MMAP verwenden? Hardware-abh&aumlngig, diesen Wert nicht leichtfertig/;"	v
+helptext_streambuff_en	strings.php	/^    $helptext_streambuff_en='Size of the streambuffer of the Squeezeplayer. Only change this, if/;"	v
+helptext_streambuff_de	strings.php	/^    $helptext_streambuff_de='Gr&ouml;&szlig;e des Stream-Puffers des Squeeze-Players. Diesen Wer/;"	v
+helptext_debug_en	strings.php	/^    $helptext_debug_en='Enable Debugging of the player? You will normally not need this and it s/;"	v
+helptext_debug_de	strings.php	/^    $helptext_debug_de='Debugging-Modus aktivieren?  Diesen Wert nicht leichtfertig &auml;ndern!/;"	v
+helptext_sitesurvey_en	strings.php	/^    $helptext_sitesurvey_en='Use this to scan your available wireless networks into the above pu/;"	v
+helptext_sitesurvey_de	strings.php	/^    $helptext_sitesurvey_de='Scannt die verf&uuml;gbaren WLan-Netze und stellt sie in der Drop-d/;"	v
+helptext_volume_en	strings.php	/^    $helptext_volume_en="Startup output Volume of the device in dB.";$/;"	v
+helptext_volume_de	strings.php	/^    $helptext_volume_de="Start-Ausgabelautst&auml;rke des Ger&auml;tes in dB";$/;"	v
+helptext_jack_buffer_en	strings.php	/^    $helptext_jack_buffer_en='Selection of the jack buffer size. The recommended default value i/;"	v
+helptext_jack_buffer_de	strings.php	/^    $helptext_jack_buffer_de='Auswahl der Jack Puffer-Gr&ouml;&szlig;e. Standardm&auml;&szlig;ig/;"	v
+helptext_jack_period_en	strings.php	/^    $helptext_jack_period_en='Selection of the jack period size. The recommended default value f/;"	v
+helptext_jack_period_de	strings.php	/^    $helptext_jack_period_de='Auswahl der Jack Periodengr&ouml;&szlig;e. F&uuml;r USB Interfaces/;"	v
+helptext_squeeze_alsabuffer_en	strings.php	/^    $helptext_squeeze_alsabuffer_en='Buffer used when opening the audio device in KBytes.';$/;"	v
+helptext_squeeze_alsabuffer_de	strings.php	/^    $helptext_squeeze_alsabuffer_de='Puffer beim &Ouml;ffnen der Audio Schnittstelle in KByte.';$/;"	v
+helptext_squeeze_alsaperiod_en	strings.php	/^    $helptext_squeeze_alsaperiod_en='Number of periods used when opening the audio device.';$/;"	v
+helptext_squeeze_alsaperiod_de	strings.php	/^    $helptext_squeeze_alsaperiod_de='Anzahl der beim &Ouml;ffnen der Audio Schnittstelle verwend/;"	v
+helptext_squeeze_intbuffer_en	strings.php	/^    $helptext_squeeze_intbuffer_en='Size of internal audio buffer in KBytes.';$/;"	v
+helptext_squeeze_intbuffer_de	strings.php	/^    $helptext_squeeze_intbuffer_de='Gr&ouml;&szlig;e des internen Puffers in KByte.';$/;"	v
+helptext_squeeze_outbuffer_en	strings.php	/^    $helptext_squeeze_outbuffer_en='Size of audio output buffer in KBytes.';$/;"	v
+helptext_squeeze_outbuffer_de	strings.php	/^    $helptext_squeeze_outbuffer_de='Gr&ouml;&szlig;e des AUdio Ausgabe-Puffers in KByte.';$/;"	v
+helptext_bf_partitions_en	strings.php	/^    $helptext_bf_partitions_en='Number of BruteFIR partitions to process in parallel.';$/;"	v
+helptext_bf_partitions_de	strings.php	/^    $helptext_bf_partitions_de='Anzahl parallel abzuarbeitender BruteFIR Partitionen.';$/;"	v
+helptext_showpwd_en	strings.php	/^    $helptext_showpwd_en='Show WLAN key.';$/;"	v
+helptext_showpwd_de	strings.php	/^    $helptext_showpwd_de='WLAN-Schlüssel anzeigen';$/;"	v
+helptext_soundcard_en	strings.php	/^    $helptext_soundcard_en='Selection of the installed audio card. A chenge here requires restar/;"	v
+helptext_soundcard_de	strings.php	/^    $helptext_soundcard_de='Auswahl der verwendeten Soundkarte. Eine &Auml;nderung erfordert ein/;"	v
+button_submit_audiosettings_de	strings.php	/^    $button_submit_audiosettings_de='Anwenden';$/;"	v
+button_submit_audiosettings_en	strings.php	/^    $button_submit_audiosettings_en='Apply';$/;"	v
+button_submit_en	strings.php	/^    $button_submit_en='Save';$/;"	v
+button_submit_de	strings.php	/^    $button_submit_de='Speichern';$/;"	v
+button_reboot_en	strings.php	/^    $button_reboot_en='Reboot';$/;"	v
+button_reboot_de	strings.php	/^    $button_reboot_de='Neustart';$/;"	v
+page_title_system_en	strings.php	/^    $page_title_system_en='System ';$/;"	v
+page_title_system_de	strings.php	/^    $page_title_system_de='System ';$/;"	v
+title_system_en	strings.php	/^    $title_system_en=$page_title_system_en;$/;"	v
+title_system_de	strings.php	/^    $title_system_de=$page_title_system_de;$/;"	v
+update_form_en	strings.php	/^    $update_form_en='Update';$/;"	v
+update_form_de	strings.php	/^    $update_form_de='Update';$/;"	v
+update_info1_en	strings.php	/^    $update_info1_en='Information about the current Aroio version at: ';$/;"	v
+update_info1_de	strings.php	/^    $update_info1_de='Informationen zur aktuellen Aroio-Version unter: ';$/;"	v
+update_info2_en	strings.php	/^    $update_info2_en='<br><b>Look for information there before updating!<\/b>';$/;"	v
+update_info2_de	strings.php	/^    $update_info2_de='<br><b>Dortige Hinweise ggf. vor dem Update beachten!<\/b>';$/;"	v
+checkbeta_en	strings.php	/^    $checkbeta_en='Check for beta-version';$/;"	v
+checkbeta_de	strings.php	/^    $checkbeta_de='Nach beta-version suchen';$/;"	v
+beta_en	strings.php	/^    $beta_en='Also beta-versions?';$/;"	v
+beta_de	strings.php	/^    $beta_de='Beta-Version suchen?';$/;"	v
+use_beta_on_en	strings.php	/^    $use_beta_on_en='yes';$/;"	v
+use_beta_on_de	strings.php	/^    $use_beta_on_de='ja';$/;"	v
+use_beta_off_en	strings.php	/^    $use_beta_off_en='no';$/;"	v
+use_beta_off_de	strings.php	/^    $use_beta_off_de='nein';$/;"	v
+button_check_update_en	strings.php	/^    $button_check_update_en='Check for update';$/;"	v
+button_check_update_de	strings.php	/^    $button_check_update_de='Update suchen';$/;"	v
+local_version_en	strings.php	/^    $local_version_en='Installed version: ';$/;"	v
+local_version_de	strings.php	/^    $local_version_de='Installierte Version: ';$/;"	v
+remote_version_en	strings.php	/^    $remote_version_en='Remotely available version: ';$/;"	v
+remote_version_de	strings.php	/^    $remote_version_de='Verf&uuml;gbare Version: ';$/;"	v
+button_update_en	strings.php	/^    $button_update_en='Update';$/;"	v
+button_update_de	strings.php	/^    $button_update_de='Update';$/;"	v
+infotext_update_available_en	strings.php	/^    $infotext_update_available_en='There is a newer Aroio-version available!';$/;"	v
+infotext_update_available_de	strings.php	/^    $infotext_update_available_de='Es ist eine neuere Aroio-Version verf&uuml;gbar!';$/;"	v
+infotext_update_unchanged_en	strings.php	/^    $infotext_update_unchanged_en='There is no newer Version available at the moment, but you ma/;"	v
+infotext_update_unchanged_de	strings.php	/^    $infotext_update_unchanged_de='Es ist derzeit keine neuere Version verf&uuml;gbar. <br>Es ka/;"	v
+infotext_update_running_en	strings.php	/^    $infotext_update_running_en='Update in progress, please stand by until you see a new message/;"	v
+infotext_update_running_de	strings.php	/^    $infotext_update_running_de='Update l&auml;uft, bitte warten bis in diesem Ausgabefenster ei/;"	v
+sysinfo_form_en	strings.php	/^    $sysinfo_form_en='System Information';$/;"	v
+sysinfo_form_de	strings.php	/^    $sysinfo_form_de='System-Informationen';$/;"	v
+infotext_uptime_en	strings.php	/^    $infotext_uptime_en='System uptime: ';$/;"	v
+infotext_uptime_de	strings.php	/^    $infotext_uptime_de='Das System l&auml;uft seit: ';$/;"	v
+infotext_macaddr_lan_en	strings.php	/^    $infotext_macaddr_lan_en='Mac-address of wired network: ';$/;"	v
+infotext_macaddr_lan_de	strings.php	/^    $infotext_macaddr_lan_de='Mac-Adresse des kabelgebundenen Netzwerks: ';$/;"	v
+infotext_macaddr_wlan_en	strings.php	/^    $infotext_macaddr_wlan_en='Mac-address of wireless network: ';$/;"	v
+infotext_macaddr_wlan_de	strings.php	/^    $infotext_macaddr_wlan_de='Mac-Adresse des WLans: ';$/;"	v
+infotext_ipaddr_lan_en	strings.php	/^    $infotext_ipaddr_lan_en='IP-address of wired network: ';$/;"	v
+infotext_ipaddr_lan_de	strings.php	/^    $infotext_ipaddr_lan_de='IP-Adresse des kabelgebundenen Netzwerks: ';$/;"	v
+infotext_ipaddr_wlan_en	strings.php	/^    $infotext_ipaddr_wlan_en='IP-address of wireless network: ';$/;"	v
+infotext_ipaddr_wlan_de	strings.php	/^    $infotext_ipaddr_wlan_de='IP-Adresse des WLans: ';$/;"	v
+infotext_wlan_unconfigured_en	strings.php	/^    $infotext_wlan_unconfigured_en="The wireless interface is unconfigured.";$/;"	v
+infotext_wlan_unconfigured_de	strings.php	/^    $infotext_wlan_unconfigured_de="Das WLAN-Modul ist nicht konfiguriert.";$/;"	v
+infotext_wlan_not_present_en	strings.php	/^    $infotext_wlan_not_present_en="There is no wireless interface present in the system.";$/;"	v
+infotext_wlan_not_present_de	strings.php	/^    $infotext_wlan_not_present_de="Es ist kein WLAN-Modul eingesteckt.";$/;"	v
+infotext_carrierstate_en	strings.php	/^    $infotext_carrierstate_en='The network cable is  ';$/;"	v
+infotext_carrierstate_de	strings.php	/^    $infotext_carrierstate_de='Das Netzwerk-Kabel ist  ';$/;"	v
+infotext_carrierstate_0_en	strings.php	/^    $infotext_carrierstate_0_en='not connected';$/;"	v
+infotext_carrierstate_0_de	strings.php	/^    $infotext_carrierstate_0_de='nicht gesteckt';$/;"	v
+infotext_carrierstate_1_en	strings.php	/^    $infotext_carrierstate_1_en='connected';$/;"	v
+infotext_carrierstate_1_de	strings.php	/^    $infotext_carrierstate_1_de='gesteckt';$/;"	v
+infotext_squeezeserverstate_en	strings.php	/^    $infotext_squeezeserverstate_en='The Squeezeserver is ';$/;"	v
+infotext_squeezeserverstate_de	strings.php	/^    $infotext_squeezeserverstate_de='Der Squeezeserver ist ';$/;"	v
+infotext_squeezeserverstate_0_en	strings.php	/^    $infotext_squeezeserverstate_0_en='not available';$/;"	v
+infotext_squeezeserverstate_0_de	strings.php	/^    $infotext_squeezeserverstate_0_de='nicht erreichbar';$/;"	v
+infotext_squeezeserverstate_1_en	strings.php	/^    $infotext_squeezeserverstate_1_en='available at ';$/;"	v
+infotext_squeezeserverstate_1_de	strings.php	/^    $infotext_squeezeserverstate_1_de='erreichbar unter ';$/;"	v
+button_ifconfig_en	strings.php	/^    $button_ifconfig_en='Network-settings';$/;"	v
+button_ifconfig_de	strings.php	/^    $button_ifconfig_de='Netzwerk-&Uuml;bersicht';$/;"	v
+button_dmesg_en	strings.php	/^    $button_dmesg_en='Kernel log';$/;"	v
+button_dmesg_de	strings.php	/^    $button_dmesg_de='Kernel Log';$/;"	v
+button_mount_en	strings.php	/^    $button_mount_en='File systems';$/;"	v
+button_mount_de	strings.php	/^    $button_mount_de='Dateisysteme';$/;"	v
+button_free_en	strings.php	/^    $button_free_en='Memory usage';$/;"	v
+button_free_de	strings.php	/^    $button_free_de='Speicher-Verbrauch';$/;"	v
+helptext_beta_de	strings.php	/^    $helptext_beta_de='Ist dieses Feld gesetzt, wird ausschliesslich nach verf&uuml;gbaren Entwi/;"	v
+helptext_beta_en	strings.php	/^    $helptext_beta_en='If set, Aroio will look excusively for development versions. These may co/;"	v
+page_title_measurement_en	strings.php	/^    $page_title_measurement_en='Measurement ';$/;"	v
+page_title_measurement_de	strings.php	/^    $page_title_measurement_de='Messung ';$/;"	v
+title_measurement_en	strings.php	/^    $title_measurement_en=$page_title_measurement_en;$/;"	v
+title_measurement_de	strings.php	/^    $title_measurement_de=$page_title_measurement_de;$/;"	v
+measurement_form_en	strings.php	/^    $measurement_form_en='Room Correction Measurement';$/;"	v
+measurement_form_de	strings.php	/^    $measurement_form_de='Raumkorrekturmessung';$/;"	v
+measurement_warning_en	strings.php	/^    $measurement_warning_en='For the measurement you need a <a class="forward" href="https:\/\/w/;"	v
+measurement_warning_de	strings.php	/^    $measurement_warning_de='Zur Messung wird ein <a class="forward" href="https:\/\/www.abacus-/;"	v
+measurement_runs_en	strings.php	/^    $measurement_runs_en='Measurement is running. <br> Please wait...';$/;"	v
+measurement_runs_de	strings.php	/^    $measurement_runs_de='Messung läuft, Signal ertönt links, rechts und nochmals links. <br> /;"	v
+measurement_upload_form_en	strings.php	/^    $measurement_upload_form_en='Upload measurement';$/;"	v
+measurement_upload_form_de	strings.php	/^    $measurement_upload_form_de='Upload der Messung';$/;"	v
+start_measurement_en	strings.php	/^    $start_measurement_en='Measure';$/;"	v
+start_measurement_de	strings.php	/^    $start_measurement_de='Messung';$/;"	v
+cancel_measurement_en	strings.php	/^    $cancel_measurement_en='Cancel';$/;"	v
+cancel_measurement_de	strings.php	/^    $cancel_measurement_de='Abbruch';$/;"	v
+upload_measurement_en	strings.php	/^    $upload_measurement_en='Upload';$/;"	v
+upload_measurement_de	strings.php	/^    $upload_measurement_de='Upload';$/;"	v
+measurement_analysis_form_en	strings.php	/^    $measurement_analysis_form_en='Analysis of the measurement';$/;"	v
+measurement_analysis_form_de	strings.php	/^    $measurement_analysis_form_de='Auswertung der Messung';$/;"	v
+measurement_analysis_text_en	strings.php	/^    $measurement_analysis_text_en='After a succesful measurement the result can be imported from/;"	v
+measurement_analysis_text_de	strings.php	/^    $measurement_analysis_text_de='Nach erfolgreicher Messung kann das Ergebnis mit AudioVero Ac/;"	v
+page_title_convolver_en	strings.php	/^    $page_title_convolver_en='Convolver ';$/;"	v
+page_title_convolver_de	strings.php	/^    $page_title_convolver_de='Convolver ';$/;"	v
+title_brutefir_en	strings.php	/^    $title_brutefir_en=$page_title_convolver_en;$/;"	v
+title_brutefir_de	strings.php	/^    $title_brutefir_de=$page_title_convolver_de;$/;"	v
+convolution_legend_en	strings.php	/^    $convolution_legend_en='Convolver Module';$/;"	v
+convolution_legend_de	strings.php	/^    $convolution_legend_de='Convolver Modul';$/;"	v
+prefilter_en	strings.php	/^    $prefilter_en='Load prefilter on start-up (Beta)';$/;"	v
+prefilter_de	strings.php	/^    $prefilter_de='Pre-Filter beim Booten laden (Beta)';$/;"	v
+convolution_filterselection_en	strings.php	/^    $convolution_filterselection_en='Filter Selection';$/;"	v
+convolution_filterselection_de	strings.php	/^    $convolution_filterselection_de='Filterauswahl';$/;"	v
+button_savefilter_en	strings.php	/^    $button_savefilter_en='Save and reload';$/;"	v
+button_savefilter_de	strings.php	/^    $button_savefilter_de='Speichern und neu laden';$/;"	v
+button_setcoeffs_en	strings.php	/^    $button_setcoeffs_en='Set parameters';$/;"	v
+button_setcoeffs_de	strings.php	/^    $button_setcoeffs_de='Setze Parameter';$/;"	v
+button_mute_en	strings.php	/^    $button_mute_en='Mute';$/;"	v
+button_mute_de	strings.php	/^    $button_mute_de='Stumm';$/;"	v
+helptext_convolver_en	strings.php	/^    $helptext_convolver_en='Explanatory notes to the Convolution-module';$/;"	v
+helptext_convolver_de	strings.php	/^    $helptext_convolver_de='Erl&aumluterungen zum Convolver-Modul';$/;"	v
+helptext_prefilter_en	strings.php	/^    $helptext_prefilter_en='Presets are loaded for ABACUS products';$/;"	v
+helptext_prefilter_de	strings.php	/^    $helptext_prefilter_de='Voreingestellte Filter für ABACUS Produkte werden geladen.';$/;"	v
+helptext_bf_de	strings.php	/^    $helptext_bf_de='<br><b>Filterb&aumlnke:<\/b><br> Per Klick auf den Pfeil im Dropdown-Men&uu/;"	v
+helptext_bf_en	strings.php	/^    $helptext_bf_en='<b>Filter banks:<\/b><br>Clicking the arrow in the drop down menu will sele/;"	v
+page_title_credits_en	strings.php	/^    $page_title_credits_en='Credits ';$/;"	v
+page_title_credits_de	strings.php	/^    $page_title_credits_de='Credits ';$/;"	v
+title_credits_en	strings.php	/^    $title_credits_en=$page_title_credits_en;$/;"	v
+title_credits_de	strings.php	/^    $title_credits_de=$page_title_credits_de;$/;"	v
+aroioos_form_en	strings.php	/^    $aroioos_form_en='Aroio - Information and Links';$/;"	v
+aroioos_form_de	strings.php	/^    $aroioos_form_de='Aroio - Infos und Links';$/;"	v
+aroio_infos_text_en	strings.php	/^    $aroio_infos_text_en='$/;"	v
+aroio_infos_text_de	strings.php	/^    $aroio_infos_text_de='$/;"	v
+opensource_modules_form_en	strings.php	/^    $opensource_modules_form_en='Open Source Modules used by Aroio';$/;"	v
+opensource_modules_form_de	strings.php	/^    $opensource_modules_form_de='Verwendete Open Source Module';$/;"	v
+opensource_moduls_infos_text_en	strings.php	/^    $opensource_moduls_infos_text_en='$/;"	v
+opensource_moduls_infos_text_de	strings.php	/^    $opensource_moduls_infos_text_de='$/;"	v
+arr_volume	strings.php	/^    $arr_volume = array('0 dB','-1 dB','-2 dB','-3 dB','-4 dB','-5 dB','-6 dB','-12 dB');$/;"	v
+arr_alsa	strings.php	/^    $arr_alsa = array(64,128,256,512,1024,2048,4096,8192,16384,32768);$/;"	v
+arr_samplingres	strings.php	/^    $arr_samplingres = array(16,24,'24_3',32);$/;"	v
+error_invalid_ipaddr_en	strings.php	/^    $error_invalid_ipaddr_en="Invalid format used in field \\"IP-address!\\"";$/;"	v
+error_invalid_ipaddr_de	strings.php	/^    $error_invalid_ipaddr_de="Ung&uuml;ltiges Format im Feld \\"IP-Addresse!\\"";$/;"	v
+error_invalid_dnsserver_en	strings.php	/^    $error_invalid_dnsserver_en="Invalid format used in field \\"DNS-server!\\"";$/;"	v
+error_invalid_dnsserver_de	strings.php	/^    $error_invalid_dnsserver_de="Ung&uuml;ltiges Format im Feld \\"DNS-Server!\\"";$/;"	v
+error_invalid_hostname_en	strings.php	/^    $error_invalid_hostname_en="Invalid format used in field \\"Hostname!\\"";$/;"	v
+error_invalid_hostname_de	strings.php	/^    $error_invalid_hostname_de="Ung&uuml;ltiges Format im Feld \\"Hostname!\\"";$/;"	v
+error_invalid_netmask_en	strings.php	/^    $error_invalid_netmask_en="Invalid format used in field \\"Network mask!\\"";$/;"	v
+error_invalid_netmask_de	strings.php	/^    $error_invalid_netmask_de="Ung&uuml;ltiges Format im Feld \\"Netzwerk-Maske!\\"";$/;"	v
+error_invalid_gateway_en	strings.php	/^    $error_invalid_gateway_en="Invalid format used in field \\"Gateway!\\"";$/;"	v
+error_invalid_gateway_de	strings.php	/^    $error_invalid_gateway_de="Ung&uuml;ltiges Format im Feld \\"Gateway!\\"";$/;"	v
+error_invalid_servername_en	strings.php	/^    $error_invalid_servername_en="Invalid format used in field \\"Address or hostname of the Squ/;"	v
+error_invalid_servername_de	strings.php	/^    $error_invalid_servername_de="Ung&uuml;ltiges Format im Feld \\"Adresse oder Hostname des Sq/;"	v
+error_invalid_squeezeport_en	strings.php	/^    $error_invalid_squeezeport_en="Invalid format used in field \\"LM-server Port!\\"";$/;"	v
+error_invalid_squeezeport_de	strings.php	/^    $error_invalid_squeezeport_de="Ung&uuml;ltiges Format im Feld \\"LM-Server Port!\\"";$/;"	v
+error_invalid_delay_en	strings.php	/^    $error_invalid_delay_en='Value not numerical';$/;"	v
+error_invalid_delay_de	strings.php	/^    $error_invalid_delay_de='Wert nicht numerisch';$/;"	v
+button_scan_en	strings.php	/^$button_scan_en='scan now';$/;"	v
+button_scan_de	strings.php	/^$button_scan_de='jetzt suchen';$/;"	v
+button_applyfilter_en	strings.php	/^$button_applyfilter_en='Apply Filter';$/;"	v
+button_applyfilter_de	strings.php	/^$button_applyfilter_de='Filter &Uuml;bernehmen';$/;"	v
+button_invphase_en	strings.php	/^$button_invphase_en='Invert Phase';$/;"	v
+button_invphase_de	strings.php	/^$button_invphase_de='Phase invertieren';$/;"	v
+button_setdelay_en	strings.php	/^$button_setdelay_en='Set Delay';$/;"	v
+button_setdelay_de	strings.php	/^$button_setdelay_de='Delay setzen';$/;"	v
+hostname_en	strings.php	/^$hostname_en='Hostname';$/;"	v
+hostname_de	strings.php	/^$hostname_de='Hostname';$/;"	v
+alsaoutbuff_en	strings.php	/^$alsaoutbuff_en='Output buffer in KB';$/;"	v
+alsaoutbuff_de	strings.php	/^$alsaoutbuff_de='Ausgabe-Puffer in KB';$/;"	v
+alsaperiod_en	strings.php	/^$alsaperiod_en='Period size';$/;"	v
+alsaperiod_de	strings.php	/^$alsaperiod_de='ALSA Period size';$/;"	v
+alsasamplefmt_en	strings.php	/^$alsasamplefmt_en='Sample format';$/;"	v
+alsasamplefmt_de	strings.php	/^$alsasamplefmt_de='Sample-Format';$/;"	v
+alsammap_en	strings.php	/^$alsammap_en='Use MMAP';$/;"	v
+alsammap_de	strings.php	/^$alsammap_de='MMAP benutzen';$/;"	v
+alsammap_on_en	strings.php	/^$alsammap_on_en='on';$/;"	v
+alsammap_on_de	strings.php	/^$alsammap_on_de='an';$/;"	v
+alsammap_off_en	strings.php	/^$alsammap_off_en='off';$/;"	v
+alsammap_off_de	strings.php	/^$alsammap_off_de='aus';$/;"	v
+alsastreambuff_en	strings.php	/^$alsastreambuff_en='Streambuffer size in KB';$/;"	v
+alsastreambuff_de	strings.php	/^$alsastreambuff_de='Stream-Puffer Gr&ouml;&szlig;e in KB';$/;"	v
+debugging_en	strings.php	/^$debugging_en='Debugging';$/;"	v
+debugging_de	strings.php	/^$debugging_de='Debugging';$/;"	v
+debugging_on_en	strings.php	/^$debugging_on_en='on';$/;"	v
+debugging_on_de	strings.php	/^$debugging_on_de='an';$/;"	v
+debugging_off_en	strings.php	/^$debugging_off_en='off';$/;"	v
+debugging_off_de	strings.php	/^$debugging_off_de='aus';$/;"	v
+helptext_filter_selection_de	strings.php	/^$helptext_filter_selection_de="Verwaltung der Filter. Filter k&ouml;nnen mit der Software Acoura/;"	v
+helptext_filter_selection_en	strings.php	/^$helptext_filter_selection_en="Filter management. Filters can be uploaded directly to AroioEX us/;"	v
+lang	system.php	/^    if($_GET["lang"] === "en") $lang='en'; else $lang='de';$/;"	v
+lang	system.php	/^    if($_GET["lang"] === "en") $lang='en'; else $lang='de';$/;"	v
+update_message	system.php	/^            if ($remote[0] > $local[0]) $update_message="<h1>${infotext_update_available._.$lang/;"	v
+update_message	system.php	/^            $update_message="<h1>${infotext_update_available._.$lang}<\/h1>";$/;"	v
+update_message	system.php	/^            $update_message="<b>${infotext_update_unchanged._.$lang}<\/b>";$/;"	v
+ini_array	system.php	/^    $ini_array = parse_ini_file("\/boot\/userconfig.txt", 1);$/;"	v
+update	system.php	/^        $update=true;$/;"	v
+proc	system.php	/^          $proc = popen('\/usr\/bin\/update -u beta -m', 'r');$/;"	v
+proc	system.php	/^          $proc = popen('\/usr\/bin\/update -m', 'r');$/;"	v
+uptime	system.php	/^$uptime=echo_uptime();$/;"	v
+mac_addr_lan	system.php	/^$mac_addr_lan=echo_mac_lan();$/;"	v
+ip_addr_lan	system.php	/^$ip_addr_lan=get_ipaddr_lan();$/;"	v
+mac_addr_wlan	system.php	/^$mac_addr_wlan=echo_mac_wlan();$/;"	v
+ip_addr_wlan	system.php	/^$ip_addr_wlan=get_ipaddr_wlan();$/;"	v
+carrierstate	system.php	/^$carrierstate=echo_carrierstate();$/;"	v
+carrierstate	system.php	/^$carrierstate=${infotext_carrierstate_0._.$lang};$/;"	v
+carrierstate	system.php	/^else $carrierstate=${infotext_carrierstate_1._.$lang};$/;"	v
+test_wlan	system.php	/^    <? $test_wlan=test_wlan();$/;"	v
+path	header.php	/^      <? $path = $_SERVER['REQUEST_URI'];$/;"	v
+lang	index.php	/^  if($_GET["lang"] === "en") $lang='en';$/;"	v
+lang	index.php	/^  else $lang='de';$/;"	v
+ini_array	index.php	/^  $ini_array = parse_ini_file("\/boot\/userconfig.txt", 1);$/;"	v
+error	index.php	/^        $error="${error_invalid_ipaddr._.$lang}<br \/>";$/;"	v
+shell_exec_ret	index.php	/^      $shell_exec_ret=shell_exec('cardmount rw');$/;"	v
+shell_exec_ret	index.php	/^      $shell_exec_ret=shell_exec('cardmount ro');$/;"	v
+ini_array	index.php	/^      $ini_array = parse_ini_file("\/boot\/userconfig.txt", 1);$/;"	v
+shell_exec_ret	index.php	/^    $shell_exec_ret=shell_exec('cardmount rw');$/;"	v
+shell_exec_ret	index.php	/^    $shell_exec_ret=shell_exec('cardmount ro');$/;"	v
+wifilist	index.php	/^    $wifilist=scanwifi();$/;"	v
+shell_exec_ret	index.php	/^      $shell_exec_ret=shell_exec('cardmount rw');$/;"	v
+shell_exec_ret	index.php	/^      $shell_exec_ret=shell_exec('cardmount ro');$/;"	v
+ini_array	index.php	/^      $ini_array = parse_ini_file("\/boot\/userconfig.txt", 1);$/;"	v
+arr_jackbuffer	audio_adv.php	/^            <?$arr_jackbuffer= array(32,64,128,256,512,1024,2048,4096,8192,16384);$/;"	v
+arr_jackperiod	audio_adv.php	/^              <?$arr_jackperiod= array(2,3);$/;"	v
+arr_squeeze_alsabuffer	audio_adv.php	/^            <?$arr_squeeze_alsabuffer= array(512,1024,2048,4096,8192,16384,32768,65536,131072,26/;"	v
+arr_squeeze_alsaperiod	audio_adv.php	/^              <?$arr_squeeze_alsaperiod= array(2,3,4,8,16,32);$/;"	v
+arr_squeeze_intbuffer	audio_adv.php	/^              <?$arr_squeeze_intbuffer= array(512,1024,2048,4096,8192,16384,32768,65536,131072,2/;"	v
+arr_squeeze_outbuffer	audio_adv.php	/^              <?$arr_squeeze_outbuffer= array(512,1024,2048,4096,8192,16384,32768,65536,131072,2/;"	v
+arr_sp_outbuffer	audio_adv.php	/^              <?$arr_sp_outbuffer= array(512,1024,2048,4096,8192,16384,32768,65536,131072,262144/;"	v
+arr_bf_partitions	audio_adv.php	/^              <?$arr_bf_partitions= array(1,2,4,8,16,32);$/;"	v
+arr_sprate	audio_adv.php	/^              <?$arr_sprate= array('44100','88200');$/;"	v
+test_wlan	network.php	/^          $test_wlan=test_wlan();$/;"	v
+body	abacus-style.css	/^body {$/;"	s
+#outerbox	abacus-style.css	/^#outerbox {$/;"	i
+#header	abacus-style.css	/^#header {$/;"	i
+#header #back	abacus-style.css	/^#header #back {$/;"	i
+#header #logo	abacus-style.css	/^#header #logo {$/;"	i
+#header #motto	abacus-style.css	/^#header #motto{$/;"	i
+#header #language	abacus-style.css	/^#header #language {$/;"	i
+#header #information	abacus-style.css	/^#header #information {$/;"	i
+#header #information a	abacus-style.css	/^#header #information a{$/;"	s
+#header #symbol	abacus-style.css	/^#header #symbol {$/;"	i
+#header #kontakt	abacus-style.css	/^#header #kontakt {$/;"	i
+#nav-header	abacus-style.css	/^#nav-header {$/;"	i
+#nav-header a	abacus-style.css	/^#nav-header a {$/;"	s
+#footer	abacus-style.css	/^#footer {$/;"	i
+img	abacus-style.css	/^img {$/;"	s
+.clear	abacus-style.css	/^.clear {$/;"	c
+#content	abacus-style.css	/^#content {$/;"	i
+#content #main	abacus-style.css	/^#content #main {$/;"	i
+#content .floatLeft	abacus-style.css	/^#content .floatLeft {$/;"	c
+#content .floatRight	abacus-style.css	/^#content .floatRight {$/;"	c
+#content h1	abacus-style.css	/^#content h1 {$/;"	s
+#content h2	abacus-style.css	/^#content h2 {$/;"	s
+#content h3	abacus-style.css	/^#content h3 {$/;"	s
+#content #breadcrumb	abacus-style.css	/^#content #breadcrumb {$/;"	i
+#content p	abacus-style.css	/^#content p {$/;"	s
+#content ul li	abacus-style.css	/^#content ul li {$/;"	s
+#content table.rahmen	abacus-style.css	/^#content table.rahmen, #content table.rahmen td {$/;"	c
+#content table.rahmen td	abacus-style.css	/^#content table.rahmen, #content table.rahmen td {$/;"	s
+#content .produkt	abacus-style.css	/^#content .produkt {$/;"	c
+#nav-header ul	abacus-style.css	/^#nav-header ul {$/;"	s
+#nav-header > ul > li	abacus-style.css	/^#nav-header > ul > li, #nav-header > ul > li > ul > li{$/;"	s
+#nav-header > ul > li > ul > li	abacus-style.css	/^#nav-header > ul > li, #nav-header > ul > li > ul > li{$/;"	s
+#nav-header ul li	abacus-style.css	/^#nav-header ul li {$/;"	s
+#nav-header ul ul li	abacus-style.css	/^#nav-header ul ul li {$/;"	s
+#nav-header ul ul li:hover	abacus-style.css	/^#nav-header ul ul li:hover {$/;"	s
+#nav-header ul ul	abacus-style.css	/^#nav-header ul ul, #nav-header ul li:hover ul ul, #nav-header ul ul li:hover ul ul {$/;"	s
+#nav-header ul li:hover ul ul	abacus-style.css	/^#nav-header ul ul, #nav-header ul li:hover ul ul, #nav-header ul ul li:hover ul ul {$/;"	s
+#nav-header ul ul li:hover ul ul	abacus-style.css	/^#nav-header ul ul, #nav-header ul li:hover ul ul, #nav-header ul ul li:hover ul ul {$/;"	s
+#nav-header ul li:hover ul	abacus-style.css	/^#nav-header ul li:hover ul, #nav-header ul ul li:hover ul, #nav-header ul ul ul li:hover ul {$/;"	s
+#nav-header ul ul li:hover ul	abacus-style.css	/^#nav-header ul li:hover ul, #nav-header ul ul li:hover ul, #nav-header ul ul ul li:hover ul {$/;"	s
+#nav-header ul ul ul li:hover ul	abacus-style.css	/^#nav-header ul li:hover ul, #nav-header ul ul li:hover ul, #nav-header ul ul ul li:hover ul {$/;"	s
+#nav-header ul ul ul	abacus-style.css	/^#nav-header ul ul ul, #nav-header ul ul ul ul { $/;"	s
+#nav-header ul ul ul ul	abacus-style.css	/^#nav-header ul ul ul, #nav-header ul ul ul ul { $/;"	s
+#nav-header ul ul ul li	abacus-style.css	/^#nav-header ul ul ul li, #nav-header ul ul ul ul li  {$/;"	s
+#nav-header ul ul ul ul li	abacus-style.css	/^#nav-header ul ul ul li, #nav-header ul ul ul ul li  {$/;"	s
+#nav-header ul > li > ul > li > ul > li> ul > li	abacus-style.css	/^#nav-header ul > li > ul > li > ul > li> ul > li {$/;"	s
+.galerie .thickbox	abacus-style.css	/^.galerie .thickbox {$/;"	c
+.formgen label	abacus-style.css	/^.formgen label {$/;"	s
+.formgen form	abacus-style.css	/^.formgen form {$/;"	s
+.formgen .formblock	abacus-style.css	/^.formgen .formblock {$/;"	c
+.formgen input	abacus-style.css	/^.formgen input {$/;"	s
+.formgen .formtextfield	abacus-style.css	/^.formgen .formtextfield {$/;"	c
+.formgen .formsubmit	abacus-style.css	/^.formgen .formsubmit {$/;"	c
+.formgen .formerror	abacus-style.css	/^.formgen .formerror {$/;"	c
+.formgen .formcaptcha	abacus-style.css	/^.formgen .formcaptcha {$/;"	c
+#warenkorb	abacus-style.css	/^#warenkorb {$/;"	i
+#warenkorb ul	abacus-style.css	/^#warenkorb ul{$/;"	s
+#warenkorb fieldset	abacus-style.css	/^#warenkorb fieldset {$/;"	s
+#warenkorb fieldset legend	abacus-style.css	/^#warenkorb fieldset legend{$/;"	s
+#warenkorb ul li	abacus-style.css	/^#warenkorb ul  li{$/;"	s
+#warenkorb ul li label	abacus-style.css	/^#warenkorb ul  li label, #warenkorb  .data div{$/;"	s
+#warenkorb .data div	abacus-style.css	/^#warenkorb ul  li label, #warenkorb  .data div{$/;"	s
+#warenkorb ul li input	abacus-style.css	/^#warenkorb ul  li input{$/;"	s
+#warenkorb .submit	abacus-style.css	/^#warenkorb .submit {$/;"	c
+#warenkorb .warenkorb_form	abacus-style.css	/^#warenkorb .warenkorb_form {$/;"	c
+#warenkorb .right	abacus-style.css	/^#warenkorb .right {$/;"	c
+#warenkorb .artikel	abacus-style.css	/^#warenkorb .artikel {$/;"	c
+#warenkorb .preis	abacus-style.css	/^#warenkorb .preis, #warenkorb .gesamt {$/;"	c
+#warenkorb .gesamt	abacus-style.css	/^#warenkorb .preis, #warenkorb .gesamt {$/;"	c
+#warenkorb .anzahl	abacus-style.css	/^#warenkorb .anzahl {$/;"	c
+#warenkorb .sum li:first-child	abacus-style.css	/^#warenkorb .sum li:first-child {$/;"	s
+#warenkorb .anzahl input	abacus-style.css	/^#warenkorb .anzahl input {$/;"	s
+#warenkorb .simpleshop_list li:first-child	abacus-style.css	/^#warenkorb .simpleshop_list li:first-child {$/;"	s
+#warenkorb ul.data li	abacus-style.css	/^#warenkorb ul.data li{$/;"	s
+p	showpswd.js	/^    var p=frm.newpass;$/;"	v
+val	showpswd.js	/^        var val=p.value;$/;"	v
+neuInp	showpswd.js	/^        var neuInp=document.createElement('input');$/;"	v
+style type	style.css	/^<style type="text\/css">$/;"	s
+>	style.css	/^<style type="text\/css">$/;"	s
+.header	style.css	/^    .header{$/;"	c
+.content	style.css	/^    .content{$/;"	c
+.header	style.css	/^    .header{$/;"	c
+.content	style.css	/^    .content{$/;"	c
+a	style.css	/^a$/;"	s
+a.forward	style.css	/^a.forward$/;"	c
+a.forward:hover	style.css	/^a.forward:hover$/;"	c
+a.select	style.css	/^a.select {$/;"	c
+a.cantselect	style.css	/^a.cantselect {$/;"	c
+a.footer	style.css	/^a.footer$/;"	c
+ul	style.css	/^ul {$/;"	s
+li	style.css	/^li {$/;"	s
+li a	style.css	/^li a {$/;"	s
+li a:hover:not(.active)	style.css	/^li a:hover:not(.active) {$/;"	c
+.header	style.css	/^.header{$/;"	c
+html	style.css	/^html, body$/;"	s
+body	style.css	/^html, body$/;"	s
+.content	style.css	/^.content \/* Zentrierung und Breite der Konfigurationen *\/$/;"	c
+#wrapper	style.css	/^#wrapper$/;"	i
+#content	style.css	/^#content$/;"	i
+#footer	style.css	/^#footer$/;"	i
+.footer-top	style.css	/^.footer-top$/;"	c
+.footer-bottom	style.css	/^.footer-bottom$/;"	c
+.footer-inner	style.css	/^.footer-inner$/;"	c
+table	style.css	/^table$/;"	s
+thead	style.css	/^thead{$/;"	s
+thead.footer	style.css	/^thead.footer$/;"	c
+table.footer	style.css	/^table.footer{$/;"	c
+td	style.css	/^td$/;"	s
+td.convolve	style.css	/^td.convolve        \/* TableData der brutefir.php *\/$/;"	c
+td.foot	style.css	/^td.foot$/;"	c
+tr	style.css	/^tr$/;"	s
+tr:hover	style.css	/^tr:hover{$/;"	s
+label	style.css	/^label$/;"	s
+label.audio	style.css	/^label.audio{$/;"	c
+legend	style.css	/^legend$/;"	s
+input[type=radio]	style.css	/^input[type=radio]$/;"	s
+input[type='radio'] :after	style.css	/^input[type='radio']:after$/;"	s
+input[type='radio'] :hover:after	style.css	/^input[type='radio']:hover:after$/;"	s
+input[type='radio'] :checked:after	style.css	/^input[type='radio']:checked:after$/;"	s
+input[type=text]	style.css	/^input[type=text], input[type=password] {$/;"	s
+input[type=password]	style.css	/^input[type=text], input[type=password] {$/;"	s
+select	style.css	/^select{$/;"	s
+select:hover	style.css	/^select:hover{$/;"	s
+input.button	style.css	/^input.button{$/;"	c
+input.button:hover	style.css	/^input.button:hover{$/;"	c
+button	style.css	/^button{$/;"	s
+button:hover	style.css	/^button:hover{$/;"	s
+input[type='radio'] :disabled	style.css	/^input[type='radio']:disabled, select:disabled, input.button:disabled, button:disabled{$/;"	s
+select:disabled	style.css	/^input[type='radio']:disabled, select:disabled, input.button:disabled, button:disabled{$/;"	s
+input.button:disabled	style.css	/^input[type='radio']:disabled, select:disabled, input.button:disabled, button:disabled{$/;"	c
+button:disabled	style.css	/^input[type='radio']:disabled, select:disabled, input.button:disabled, button:disabled{$/;"	s
+tr:disabled:hover	style.css	/^tr:disabled:hover{$/;"	s
+.button_tooltip	style.css	/^.button_tooltip$/;"	c
+.button_tooltip:hover:after	style.css	/^.button_tooltip:hover:after$/;"	c
+.button_tooltip:hover:before	style.css	/^.button_tooltip:hover:before$/;"	c
+img.top	style.css	/^img.top{$/;"	c
+img.link	style.css	/^img.link$/;"	c
+img.link:hover	style.css	/^img.link:hover$/;"	c
+img.logo	style.css	/^img.logo$/;"	c
+fieldset	style.css	/^fieldset$/;"	s
+fieldset:disabled	style.css	/^fieldset:disabled{$/;"	s
+h1	style.css	/^h1$/;"	s
+hr.top	style.css	/^hr.top{$/;"	c
+select.filter	style.css	/^select.filter$/;"	c
+.volume	style.css	/^.volume$/;"	c
+.system	style.css	/^.system$/;"	c
+.tooltip	style.css	/^.tooltip$/;"	c
+.tooltip:hover::after	style.css	/^.tooltip:hover::after$/;"	c
+.tooltip:hover::before	style.css	/^.tooltip:hover::before$/;"	c
+.tooltip_check	style.css	/^.tooltip_check$/;"	c
+.tooltip_check:hover::after	style.css	/^.tooltip_check:hover::after$/;"	c
+.tooltip_check:hover::before	style.css	/^.tooltip_check:hover::before$/;"	c
+.clearfix	style.css	/^.clearfix$/;"	c
+style>	style.css	/^<\/style>$/;"	s
+arr_platform	hardware.php	/^            <? $arr_platform=array('AroioEX','AroioSU','AroioLT','RaspberryPi');$/;"	v

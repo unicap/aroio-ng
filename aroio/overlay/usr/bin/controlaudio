@@ -75,6 +75,8 @@ function Start()
 
 		jack)
 			systemctl "$ACTION" jackd.service
+			until jack_lsp | grep jackmixer ; do sleep 0.1 ; done
+			sleep 1
 			[[ "$JACK_NETJACK"      = "ON"  && "$ACTION" != "stop" ]] && echo "netmanager start" && jack_load netmanager && connect_netjackports
 			[ "$JACK_SQUEEZELITE"   = "ON" ] && systemctl "$ACTION" squeezelite.service
 			[ "$JACK_GMEDIARENDER"  = "ON" ] && systemctl "$ACTION" gmediarender.service
@@ -85,6 +87,7 @@ function Start()
 
 		jack-ms)
 			systemctl "$ACTION" jackd.service
+			until jack_lsp | grep jackmixer ; do sleep 0.1 ; done
 			[[ "$JACKMS_NETJACK"      = "ON"  && "$ACTION" != "stop" ]] &&  jack_load netmanager && connect_netjackports
 			[ "$JACKMS_SQUEEZELITE"   = "ON" ] && systemctl "$ACTION" squeezelite.service
 			[ "$JACKMS_GMEDIARENDER"  = "ON" ] && systemctl "$ACTION" gmediarender.service
@@ -95,6 +98,7 @@ function Start()
 
 		jack-bf)
 			systemctl "$ACTION" jackd.service
+			until jack_lsp | grep jackmixer ; do sleep 0.1 ; done
 			systemctl "$ACTION" brutefir.service
 			until jack_lsp | grep brutefir ; do sleep 0.2 ; done
 			[[ "$JACKBF_NETJACK"      = "ON"  && "$ACTION" != "stop" ]] && jack_load netmanager && connect_netjackports
@@ -107,6 +111,7 @@ function Start()
 
 		jack-bfms)
 			systemctl "$ACTION" jackd.service
+			until jack_lsp | grep jackmixer ; do sleep 0.1 ; done
 			systemctl "$ACTION" brutefir.service
 			until jack_lsp | grep brutefir ; do sleep 0.2 ; done
 			[[ "$JACKBFMS_NETJACK"      = "ON"  && "$ACTION" != "stop" ]] && jack_load netmanager && connect_netjackports

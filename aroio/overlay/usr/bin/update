@@ -1,5 +1,7 @@
 #!/bin/sh
 
+. /boot/userconfig.txt
+
 # Execute getopt on the arguments passed
 PARSED_OPTIONS=$(getopt -n "$0"  -o cdhp:mtu:v:x -l "check,download,help,manual,path:,test,update,version:,user:"  -- "$@")
 
@@ -93,7 +95,8 @@ update(){
 	echo "Update started..."
 
 	# Stop daemons that might write to the SDcard before updating
-	#systemctl stop whateverwritestodisk!
+	controlaudio stop
+	systemctl stop brutefir-checkfilters.service
 
 	cd "$USRPATH"
 		[ $? != 0 ] 2>/dev/null && echo "Invalid path given, exiting!" && exit 5
@@ -110,11 +113,12 @@ update(){
 	[ "$REMOTE_VERSION" = "" ] && REMOTE_VERSION=$(ls aroio-* | awk -F'[-|.]' {'print $2"."$3'})
 
 	echo "Backing up user configuration"
-		mount -o remount,rw /boot
+		cardmount rw
 		mkdir -p "$USRPATH"/save
 		cd /boot
 		cp -r /boot/userconfig.txt "$USRPATH"/save
 		cp -r /boot/config.txt "$USRPATH"/save
+		cp -r /boot/filter "$USRPATH"/save
 	echo "Unmounting SD-Card..."
 		cd /
 		umount /boot
@@ -125,9 +129,10 @@ update(){
 	echo "Mounting updated partition..."
 		mount /dev/mmcblk0p1 /boot
 		sleep 1
-	echo "Restoring user configuration file..."
+	echo "Restoring user files..."
 		cp -r "$USRPATH"/save/userconfig.txt /boot
-		cp -r "$USRPATH"save//config.txt /boot
+		cp -r "$USRPATH"/save/config.txt /boot
+		cp -r "$USRPATH"/save/filter /boot
 	echo "Writing version file to boot partition..."
 	echo "$REMOTE_VERSION" > /boot/version
 	echo "Everything done, will reboot now. Please wait 20 seconds and DO NOT refresh page. Click System or Configuration link above."
