@@ -570,6 +570,27 @@ function measurement()
 
 }
 
+function update($beta)
+{
+	if ($beta == "beta")
+	{
+		$cmd='/usr/bin/update -m -u beta 2>&1';
+	}
+	else
+	{
+		$cmd='/usr/bin/update -m -u beta 2>&1';
+	}
+	while (@ ob_end_flush()); // end all output buffers if any
+		$proc = popen($cmd, 'r');
+		echo '<pre>' ;
+		while (!feof($proc))
+		{
+			echo fread($proc, 4096);
+			@ flush();
+		}
+    		echo '</pre>' ;
+}
+
 function upload_measurement()
 {
 	$cmd='/usr/bin/scp /root/measurement.wav root:toor@127.0.0.1:/tmp/measurement.wav';

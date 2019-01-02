@@ -2,16 +2,18 @@
     include('strings.php');
     include('functions.inc.php');
     include('style.css');
-    
-    
-    
+//    print_r($_POST);
+
     if($_GET["lang"] === "en") $lang='en'; else $lang='de';
-    
+
     if ( isset($_POST['check_update']) )
     {
         //$shell_exec_ret=shell_exec('chmod 750 /usr/bin/update check');
         wrtToUserconfig('USEBETA',$_POST['USEBETA']);
-        exec ( "/usr/bin/update -c" , $ausgabe , $return_var  );
+        if ($_POST['USEBETA'] == "ON"){
+            exec ( "/usr/bin/update -c -u beta" , $ausgabe , $return_var  );}
+        else{
+            exec ( "/usr/bin/update -c" , $ausgabe , $return_var  );}
         list($remote[0], $remote[1]) = explode(".", $ausgabe[0]);
         list($local[0], $local[1]) = explode(".", $ausgabe[1]);
         if (is_numeric("$remote[0]")){
@@ -28,9 +30,9 @@
         }
         unset($_POST['submit']);
     }
-    
+
     $ini_array = parse_ini_file("/boot/userconfig.txt", 1);
-    
+
     if ( isset($_POST['update']) )
     {
         $update=true;
@@ -67,70 +69,101 @@
 <fieldset> <!-- Afang Update -->
 <legend><? print ${update_form._.$lang};?></legend>
 
-<? if ($update == false){ ?>
+<?
+if ($update == false){ ?>
+  <fieldset style="border-style: dotted">
+      <? print "${update_info1._.$lang}" ; ?>
+      <a href="https://www.abacus-electronics.de/produkte/streaming/aroioos.html#aroionews" target="_blank">
+      <input type="button" class="button" value="Aroio News"/></a>
+
+      <div style="text-align: center">
+         <? print "${update_info2._.$lang}" ; ?>
+      </div>
+  </fieldset>
+
+  <table>
+    <tr>
+      <td>
+        <a style="text-decoration: none href="#" title="<? print ${helptext_beta._.$lang} ?>"class="tooltip">
+        <span title=""><label for="Use beta"> <? print ${beta._.$lang} ; ?> </label></span></a>
+
+        <? if ($ini_array['USEBETA'] == "ON"){ ?>
+          <input class="actiongroup" type="radio" name="USEBETA" value="OFF"> <? print ${use_beta_off._.$lang} ; ?>
+          <input class="actiongroup" type="radio" name="USEBETA" value="ON" checked> <? print ${use_beta_on._.$lang} ; ?>
+        <? }
+        else
+        { ?>
+          <input class="actiongroup" type="radio" name="USEBETA" value="OFF" checked> <? print ${use_beta_off._.$lang} ; ?>
+          <input class="actiongroup" type="radio" name="USEBETA" value="ON"> <? print ${use_beta_on._.$lang} ;
+        } ?>
+      <td>
+        <input class="button" type="submit" value=" <? print ${button_check_update._.$lang} ?> " name="check_update">
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <? print ${local_version._.$lang};?>
+        <b><? echo $local[0].".".$local[1]; ?></b>
+        <br>
+        <? print ${remote_version._.$lang};?>
+        <b><? echo $remote[0].".".$remote[1]; ?></b>
+      </td>
+    </tr>
+  </table>
+
+  <?
+  if ($update_message != "")
+  { ?>
     <fieldset style="border-style: dotted">
-        <? print "${update_info1._.$lang}" ; ?>
-        <a href="https://www.abacus-electronics.de/produkte/streaming/aroioos.html#aroionews" target="_blank">
-        <input type="button" class="button" value="Aroio News"/></a>
-    
-        <div style="text-align: center">
-            <? print "${update_info2._.$lang}" ; ?>
-        </div>
-    </fieldset>
-    
-    <table>
-      <tr>
-        <td>
-          <a style="text-decoration: none href="#" title="<? print ${helptext_beta._.$lang} ?>"class="tooltip">
-          <span title=""><label for="Use beta"> <? print ${beta._.$lang} ; ?> </label></span></a>
-    
-          <? if ($ini_array['USEBETA'] == "ON"){ ?>
-            <input class="actiongroup" type="radio" name="USEBETA" value="OFF"> <? print ${use_beta_off._.$lang} ; ?>
-            <input class="actiongroup" type="radio" name="USEBETA" value="ON" checked> <? print ${use_beta_on._.$lang} ; ?>
-          <? }
-          else
-          { ?>
-            <input class="actiongroup" type="radio" name="USEBETA" value="OFF" checked> <? print ${use_beta_off._.$lang} ; ?>
-            <input class="actiongroup" type="radio" name="USEBETA" value="ON"> <? print ${use_beta_on._.$lang} ; ?>
-          <? } ?>
-        <td>
-          <input class="button" type="submit" value=" <? print ${button_check_update._.$lang} ?> " name="check_update">
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <? print ${local_version._.$lang};?>
-          <b><? echo $local[0].".".$local[1]; ?></b>
-          <br>
-          <? print ${remote_version._.$lang};?>
-          <b><? echo $remote[0].".".$remote[1]; ?></b>
-        </td>
-      </tr>
-    </table>
-    
-    <? if ($update_message != ""){?>
-        <fieldset style="border-style: dotted">
-        <div style="text-align: center; margin-top: 15px">
-            <? print $update_message; ?>
-            <br>
-            <input class="button" type="submit" value=" <? print ${button_update._.$lang} ?> " name="update">
-        </div>
-        </fieldset>
-    <?}
+      <div style="text-align: center; margin-top: 15px">
+        <? print $update_message; ?>
+        <br>
+        <input class="button" type="submit" value=" <? print ${button_update._.$lang} ?> " name="update">
+      </div>
+    </fieldset> <?
+  }
 }
-else{
-    print ${infotext_update_running._.$lang}; ?>
-    <br>
-    <fieldset style="border-style: dotted">
-    <? echo '<pre>';
-    system('/usr/bin/update update');
+else
+{
+  print ${infotext_update_running._.$lang}; ?>
+  <br>
+  <fieldset style="border-style: dotted"> <?
+    echo '<pre>';
+      if ($_POST['USEBETA'] == "ON")
+      {
+        while (@ ob_end_flush()); // end all output buffers if any
+          $proc = popen('/usr/bin/update -u beta -m', 'r');
+          echo '<pre>' ;
+            while (!feof($proc))
+            {
+              echo fread($proc, 4096);
+              @ flush();
+            }
+          echo '</pre>' ;
+      }
+      else
+      {
+        while (@ ob_end_flush()); // end all output buffers if any
+          $proc = popen('/usr/bin/update -m', 'r');
+          echo '<pre>' ;
+            while (!feof($proc))
+            {
+              echo fread($proc, 4096);
+              @ flush();
+            }
+          echo '</pre>' ;
+      }
     echo '</pre>'; ?>
-    </fieldset>
-    <br>
-    <?
-    print_r($update_output);
-}
-?>
+  </fieldset>
+  <br>  <?
+  print_r($update_output);
+} ?>
+
+
+
+
+
+
 
 </table>
 </fieldset> <!-- Ende Update -->

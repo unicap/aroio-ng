@@ -40,6 +40,12 @@
     if ( !validate_input("SERVERPORT",$_POST['SERVERPORT']) )
       $error.="${error_invalid_squeezeport._.$lang}<br />";
 
+    if ($_POST["PLATFORM"] == "AroioSU" || $_POST["PLATFORM"] == "AroioEX")
+    {
+     $_POST[VOLUME_START]=0;
+    }
+
+
     if ($_POST["ADVANCED"] == "OFF")
     {
       switch ($_POST["RATE"])

@@ -29,33 +29,36 @@
             <input class="actiongroup" type="text" name="PLAYERNAME" value="<? print $ini_array["PLAYERNAME"] ?>">
           </td>
         </tr>
-        <tr>
-          <td>
-            <a title="<? print ${helptext_volume._.$lang} ?>"class="tooltip">
-            <span title=""><label for="Volume"> <? print ${volume._.$lang} ; ?> </label></span></a>
-          </td>
-          <td> <?
-      	    $arr_volume=array
-            (
-              array(0," 0 dB"),
-              array(-5,"-5 dB"),
-              array(-10,"-10 dB"),
-              array(-15,"-15 dB"),
-              array(-20,"-20 dB"),
-              array(-25,"-25 dB"),
-              array(-30,"-30 dB"),
-              array(-35,"-35 dB"),
-              array(-40,"-40 dB"),
-              array(-45,"-45 dB"),
-              array(-50,"-50 dB"),
-              array(-55,"-55 dB"),
-              array(-60,"-60 dB")
-            );
-
-            print_optgroup2D("VOLUME_START",$arr_volume,$ini_array["VOLUME_START"]); ?>
-          </select>
-          </td>
-        </tr>
+        <?
+        if ($_POST["PLATFORM"] != "AroioSU" && $_POST["PLATFORM"] != "AroioEX") // Depending on theese, values are set in index.php!
+        { ?>
+          <tr>
+            <td>
+              <a title="<? print ${helptext_volume._.$lang} ?>"class="tooltip">
+              <span title=""><label for="Volume"> <? print ${volume._.$lang} ; ?> </label></span></a>
+            </td>
+            <td> <?
+              $arr_volume=array
+              (
+                array(0," 0 dB"),
+                array(-5,"-5 dB"),
+                array(-10,"-10 dB"),
+                array(-15,"-15 dB"),
+                array(-20,"-20 dB"),
+                array(-25,"-25 dB"),
+                array(-30,"-30 dB"),
+                array(-35,"-35 dB"),
+                array(-40,"-40 dB"),
+                array(-45,"-45 dB"),
+                array(-50,"-50 dB"),
+                array(-55,"-55 dB"),
+                array(-60,"-60 dB")
+              );
+              print_optgroup2D("VOLUME_START",$arr_volume,$ini_array["VOLUME_START"]); ?>
+            </select>
+            </td>
+          </tr> <?
+        } ?>
 
         <tr>
           <td>
