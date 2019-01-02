@@ -1,7 +1,7 @@
 [Unit]
 Description=Brutefir filter preparation
 After=local-fs.target checkuserconfig.service
-Before=brutefir-checkfilters.service
+Before=brutefir-checkfilters.service audioplayers.service
 
 [Service]
 Type=oneshot

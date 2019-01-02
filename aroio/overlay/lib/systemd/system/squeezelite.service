@@ -1,6 +1,6 @@
 [Unit]
 Description=Squeezelite Audio Player
-After=syslog.target sound.target audioplayers.target jackd.service network.target checkuserconfig.service
+After=syslog.target sound.target audioplayers.target brutefir-filters.service brutefir-checkfilters.service jackd.service jackminimix.service network.target checkuserconfig.service
 Requires=network.target
 
 [Service]
