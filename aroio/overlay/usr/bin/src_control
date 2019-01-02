@@ -1,0 +1,23 @@
+#!/bin/sh
+
+if ! lsmod | grep -q i2c_dev ; then modprobe i2c_dev ; fi
+
+case $1 in
+	reset_coax)
+		echo "Resetting, restarting and switching to coax input..."
+		i2cset -y 1 0x70 0x7f 0x00 # Page auswählen
+		i2cset -y 1 0x70 0x80 0x00 # Alles aus(?!)
+		i2cset -y 1 0x70 0x1B 0x01 # Coax-LED ON
+		i2cset -y 1 0x70 0x1C 0x00 # Opt. LED OFF
+		i2cset -y 1 0x70 0x0d 0x08 # Receiver Reference Clock is MCLK, RXBTD is enabled, Input is RX1 (coax)
+		i2cset -y 1 0x70 0x03 0x31 # SDOUTA is output, Source is SRC, Slave Mode, 3 Bit hinten: 24-Bit Philips I2S
+		i2cset -y 1 0x70 0x2d 0x02 # Outp. Att. Track. Disab., Unmuted, Ref. Clock Source=MCLK, Source=Digital Input Receiver
+		i2cset -y 1 0x70 0x01 0x3f # Alle Module am SRC einschalten (?)
+		echo "Done!"
+	;;
+
+	*)
+	echo "You did not enter anything recognizeable as argument, please enter somethin valid!"
+	;;
+
+esac
