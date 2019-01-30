@@ -131,7 +131,7 @@ update(){
 		sleep 1
 	echo "Restoring user files..."
 		cp -r "$USRPATH"/save/userconfig.txt /boot
-		cp -r "$USRPATH"/save/config.txt /boot
+		[ "$REMOTE_VERSION" != "3.50" ] && cp -r "$USRPATH"/save/config.txt /boot
 		cp -r "$USRPATH"/save/filter /boot
 	echo "Writing version file to boot partition..."
 	echo "$REMOTE_VERSION" > /boot/version
