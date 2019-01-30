@@ -77,7 +77,8 @@
         <table>
           <tr>
             <td>
-              Samplerate:
+              <a title="<? print ${helptext_samplerate._.$lang} ?>"class="tooltip">
+              <? print ${samplerate._.$lang} ; ?>
             </td>
             <td> <?
               switch ($ini_array["SOUNDCARD"])

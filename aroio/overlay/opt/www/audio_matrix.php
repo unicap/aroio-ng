@@ -30,13 +30,15 @@
         { ?>
           <tr>
             <td>
-              <input class="actiongroup" type="radio" name="AUDIO_OUTPUT" value="vol-plug" checked> Direct <?
+              <input class="actiongroup" type="radio" name="AUDIO_OUTPUT" value="vol-plug" checked>
+              <a title="<? print ${helptext_audio_out_direct._.$lang} ?>"class="tooltip"> Direct <?
         }
         else
         { ?>
           <tr>
             <td>
-                <input class="actiongroup" type="radio" name="AUDIO_OUTPUT" value="vol-plug"> Direct <?
+                <input class="actiongroup" type="radio" name="AUDIO_OUTPUT" value="vol-plug">
+                <a title="<? print ${helptext_audio_out_direct._.$lang} ?>"class="tooltip"> Direct <?
         }
 
         switch ($ini_array["RAW_PLAYER"])
@@ -81,11 +83,13 @@
           ?> <!-- Output DIRECT MS---------------------------------------------------------------------------------------> <?
           if ($ini_array["AUDIO_OUTPUT"] == "vol-plug-ms") { ?>
             <tr>
-              <td> <input class="actiongroup" type="radio" name="AUDIO_OUTPUT" value="vol-plug-ms" checked> DirectMS <?
+              <td> <input class="actiongroup" type="radio" name="AUDIO_OUTPUT" value="vol-plug-ms" checked>
+              <a title="<? print ${helptext_audio_out_direct_ms._.$lang} ?>"class="tooltip"> DirectMS <?
           }
           else { ?>
             <tr>
-              <td> <input class="actiongroup" type="radio" name="AUDIO_OUTPUT" value="vol-plug-ms"> DirectMS <?
+              <td> <input class="actiongroup" type="radio" name="AUDIO_OUTPUT" value="vol-plug-ms">
+              <a title="<? print ${helptext_audio_out_direct_ms._.$lang} ?>"class="tooltip"> DirectMS <?
           }
 
           switch ($ini_array["RAW_PLAYERMS"]){
@@ -133,11 +137,13 @@
       <td> <?
         if ($ini_array["AUDIO_OUTPUT"] == "jack")
         { ?>
-          <input class="actiongroup" type="radio" id="output" name="AUDIO_OUTPUT" value="jack" checked> Bus <?
+          <input class="actiongroup" type="radio" id="output" name="AUDIO_OUTPUT" value="jack" checked>
+          <a title="<? print ${helptext_audio_out_bus._.$lang} ?>"class="tooltip"> Bus <?
         }
         else
         { ?>
-          <input class="actiongroup" type="radio" id="output" name="AUDIO_OUTPUT" value="jack"> Bus <?
+          <input class="actiongroup" type="radio" id="output" name="AUDIO_OUTPUT" value="jack">
+          <a title="<? print ${helptext_audio_out_bus._.$lang} ?>"class="tooltip"> Bus <?
         } ?>
       </td>
 
@@ -175,8 +181,8 @@
         { ?>
           <input type="checkbox" id="jack" name="JACK_SHAIRPORTSYNC" value="ON"> <?
         } ?>
-      </td> 
-      
+      </td>
+
       <td>
         <input type="hidden" name="JACK_BLUEALSAAPLAY" value="OFF" <? test_bt() ?> > <?
         if ($ini_array["JACK_BLUEALSAAPLAY"] == "ON")
@@ -187,7 +193,7 @@
         { ?>
           <input type="checkbox" id="jack" name="JACK_BLUEALSAAPLAY" value="ON" <? test_bt() ?> > <?
         } ?>
-      </td>     
+      </td>
 
       <td>
         <input type="hidden" name="JACK_INPUT" value="OFF" <? test_input() ?> > <?
@@ -217,11 +223,13 @@
       ?> <!-- Output JACK MS (BUS MS) -----------------------------------------------------------------------------------> <?
       if ($ini_array["AUDIO_OUTPUT"] == "jack-ms")
       { ?>
-        <input class="actiongroup" type="radio" id="output" name="AUDIO_OUTPUT" value="jack-ms" checked> Bus MS <?
+        <input class="actiongroup" type="radio" id="output" name="AUDIO_OUTPUT" value="jack-ms" checked>
+        <a title="<? print ${helptext_audio_out_bus_ms._.$lang} ?>"class="tooltip"> Bus MS <?
       }
       else
       { ?>
-        <input class="actiongroup" type="radio" id="output" name="AUDIO_OUTPUT" value="jack-ms"> Bus MS <?
+        <input class="actiongroup" type="radio" id="output" name="AUDIO_OUTPUT" value="jack-ms">
+        <a title="<? print ${helptext_audio_out_bus_ms._.$lang} ?>"class="tooltip"> Bus MS <?
       } ?>
     </td>
 
@@ -270,8 +278,8 @@
       { ?>
         <input type="checkbox" id="jack-ms" name="JACKMS_BLUEALSAAPLAY" value="ON" <? test_bt() ?> > <?
       } ?>
-    </td> 
-    
+    </td>
+
     <td>
       <input type="hidden" name="JACKMS_INPUT" value="OFF" <? test_input() ?> > <?
       if ($ini_array["JACKMS_INPUT"] == "ON")
@@ -300,11 +308,13 @@
         ?> <!-- Output BRUTEFIR (CONVOL.) -------------------------------------------------------------------------------> <?
         if ($ini_array["AUDIO_OUTPUT"] == "jack-bf")
         { ?>
-          <input class="actiongroup" type="radio" name="AUDIO_OUTPUT" value="jack-bf" checked> Convol. <?
+          <input class="actiongroup" type="radio" name="AUDIO_OUTPUT" value="jack-bf" checked>
+          <a title="<? print ${helptext_audio_out_convol._.$lang} ?>"class="tooltip"> Convol. <?
         }
         else
         { ?>
-          <input class="actiongroup" type="radio" name="AUDIO_OUTPUT" value="jack-bf"> Convol. <? } ?>
+          <input class="actiongroup" type="radio" name="AUDIO_OUTPUT" value="jack-bf">
+          <a title="<? print ${helptext_audio_out_convol._.$lang} ?>"class="tooltip"> Convol. <? } ?>
       </td>
 
       <td>
@@ -384,11 +394,13 @@
         ?> <!-- Output BRUTEFIR MS (CONVOL. MS) -------------------------------------------------------------------------> <?
         if ($ini_array["AUDIO_OUTPUT"] == "jack-bfms")
         { ?>
-          <input class="actiongroup" type="radio" name="AUDIO_OUTPUT" value="jack-bfms" checked> Convol. MS <?
+          <input class="actiongroup" type="radio" name="AUDIO_OUTPUT" value="jack-bfms" checked>
+          <a title="<? print ${helptext_audio_out_convol_ms._.$lang} ?>"class="tooltip"> Convol. MS <?
         }
         else
         { ?>
-          <input class="actiongroup" type="radio" name="AUDIO_OUTPUT" value="jack-bfms"> Convol. MS <? 
+          <input class="actiongroup" type="radio" name="AUDIO_OUTPUT" value="jack-bfms">
+          <a title="<? print ${helptext_audio_out_convol_ms._.$lang} ?>"class="tooltip"> Convol. MS <? 
         } ?>
       </td>
 

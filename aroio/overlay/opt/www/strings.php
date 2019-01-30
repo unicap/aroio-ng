@@ -130,8 +130,8 @@
     $squeeze_serv_passwd_en='Password (if set)';
     $squeeze_serv_passwd_de='Passwort (falls gesetzt)';
 
-    $squeeze_serv_port_en='Port (default is 3483)';
-    $squeeze_serv_port_de='Port (Standard ist 3483)';
+    $squeeze_serv_port_en='Port (default is 9000)';
+    $squeeze_serv_port_de='Port (Standard ist 9000)';
         //HELPTEXT
     $helptext_servername_en='Here you enter the name or address of the LM-server you want to connect to. If this field stays blank, the network will be scanned for a server. If the server is the device itself, you can enter either localhost, the ip-address of the device or 127.0.0.1.';
     $helptext_servername_de='Eingabefeld f&uuml;r Namen oder Adresse des LM-Servers, der verwendet werden soll. Wird das Feld leer gelassen, wird das Netzwerk automatisch nach einem Server gescannt. L&auml;uft der Server auf dem Ger&auml;t selber, kann hier entweder localhost, die IP-Adresse des Ger&auml;tes oder 127.0.0.1 eingetragen werden.';
@@ -142,8 +142,8 @@
     $helptext_squeezepwd_en='If you enabled security with username and password on your LM-server, you enter the password to be used here.';
     $helptext_squeezepwd_de='Sofern der LM-Server auf Abfrage von Benutzernamen und Passwort konfiguriert ist, ist das Passwort hier einzutragen.';
 
-    $helptext_serverport_en='If you set up you LM-server to use a non-standard port (which is 9000), you enter this number right here. If you leave the field blank, the default-port will be used.';
-    $helptext_serverport_de='Sollte der LM-Server auf einen vom Standard-Port abweichenden Port konfiguriert sein (Standard ist 9000), diesen bitte hier eintragen. Bleibt das Feld leer, wird der Standard-Port verwendet.';
+    $helptext_serverport_en='If you set up you LM-server to use a non-standard port for its webinterface (some NAS use 9001 or 9002), you enter this number right here. If you leave the field blank, the default-port will be used.';
+    $helptext_serverport_de='Sollte der LM-Server auf einen vom Standard-Port abweichenden Port konfiguriert sein (einige NAS nutzen 9001 oder 9002), diesen bitte hier eintragen. Bleibt das Feld leer, wird der Standard-Port verwendet.';
     //Audio-Einstellungen
         //
     $audio_form_en='Audio settings';
@@ -221,12 +221,21 @@
     $sp_outbuffer_en='ShAirPlay output buffer size';
     $sp_outbuffer_de='ShAirPlay Ausgabe-Puffergr&ouml;&szlig;e';
 
+    $sp_samplerate_en='ShAirPlay samplerate';
+    $sp_samplerate_de='ShAirPlay Samplingfrequenz';
+
     $bf_partitions_en='BruteFIR partitions';
     $bf_partitions_de='BruteFIR Partitionen';
 
     $soundcard_en='Audio card';
     $soundcard_de='Soundkarte';
+
+    $samplerate_en='Samplerate';
+    $samplerate_de='Sampling-Frequenz';
         //HELPTEXT
+    $helptext_advancedsettings_en='Advanced settings. Only use when needed or asked to do so by ABACUS!';
+    $helptext_advancedsettings_de='Erweiterte Einstellungen. Nur benutzen, wenn ben&ouml;tigt oder von ABACUS dazu aufgefordert!';
+
     $helptext_playername_en='Here you enter the desired name for the audio players. If you leave this field empty, the hostname will be used.';
     $helptext_playername_de='Gew&uuml;nschter Name der Audio-Player. Bleibt dieses Feld leer, wird der Rechnername (Hostname) verwendet.';
 
@@ -238,6 +247,15 @@
 
     $helptext_audioplayer_en='Selection of the audio-player. Without convolution the sampling frequency of the D/A converter follows the audio input. Therefore only one audio player can be active at a time. With enabled convolution the audio is resampled, which enables the use of multiple players simultaniously. Netjack can be used to output the audio of an openelec media center through Aroio by using the netjack-plugin. Openelec can compensate the large delay introduced by the convolution.' ;
     $helptext_audioplayer_de='Auswahl der Audio-Players. Ohne Convolution folgt die Samplingfrequenz des D/A-Wandlers dem Audio-Material. Daher kann immer nur ein Audio-Player aktiv sein. Mit aktivierter Convolution wird das Audio-Signal geresampled, so dass mehrere Player parallel laufen &ouml;nnen, allerdings nicht uneingeschr&auml;nkt. Netjack eignet sich hervorragend, um die Audio-Ausgabe eines Openelec Media-Centers auf Aroio erfolgen zu lassen. Dies ben&ouml;tigt das Netjack-Plugin. Openelec ist in der Lage, die Audio-Verz&ouml;gerung, die die Convolution mit sich bringt, auszugleichen.' ;
+
+    $helptext_soundcard_en='Selection of the installed audio card. A chenge here requires restarting the system.';
+    $helptext_soundcard_de='Auswahl der verwendeten Soundkarte. Eine &Auml;nderung erfordert einen Neustart.';
+
+    $helptext_samplerate_en='Selection of the system samplerate. Does not ally for the mode \'Direct\'';
+    $helptext_samplerate_de='Auswahl der System-Sampling-Frequenz. Bezieht sich nicht auf den Modus \'Direct\'';
+
+    $helptext_display_rotate_en='Rotation of the HDMI output signal for 90°';
+    $helptext_display_rotate_de='Drehung des an den HDMI-Ausgangssignals um 90°';
 
     $helptext_alsaoutbuff_en='Output buffer size of the Squeezeplayer. Only change this, if you know what you are doing!';
     $helptext_alsaoutbuff_de='Ausgangs-Puffergr&ouml;&szlig;e des Squeeze-Players. Diesen Wert nicht leichtfertig &auml;ndern!';
@@ -263,8 +281,8 @@
     $helptext_volume_en="Startup output Volume of the device in dB.";
     $helptext_volume_de="Start-Ausgabelautst&auml;rke des Ger&auml;tes in dB";
 
-    $helptext_jack_buffer_en='Selection of the jack buffer size. The recommended default value is 2048.';
-    $helptext_jack_buffer_de='Auswahl der Jack Puffer-Gr&ouml;&szlig;e. Standardm&auml;&szlig;ig wird hier der Wert 2048 empfohlen.';
+    $helptext_jack_buffer_en='Selection of the jack buffer size.';
+    $helptext_jack_buffer_de='Auswahl der Jack Puffer-Gr&ouml;&szlig;e.';
 
     $helptext_jack_period_en='Selection of the jack period size. The recommended default value for USB cards is 3.';
     $helptext_jack_period_de='Auswahl der Jack Periodengr&ouml;&szlig;e. F&uuml;r USB Interfaces wird der Wert 3 empfohlen.';
@@ -284,12 +302,37 @@
     $helptext_bf_partitions_en='Number of BruteFIR partitions to process in parallel.';
     $helptext_bf_partitions_de='Anzahl parallel abzuarbeitender BruteFIR Partitionen.';
 
+    $helptext_sp_outbuffer_en='Size of the shairplay buffer.';
+    $helptext_sp_outbuffer_de='Gr&ouml;&szlig;e des Shairplay-Puffers.';
+
+    $helptext_sp_samplerate_en='Target samplingrate of the ShAirPlay module.';
+    $helptext_sp_samplerate_de='Ziel Resamplingfrequenz des ShAirPlay Moduls.';
 
     $helptext_showpwd_en='Show WLAN key.';
     $helptext_showpwd_de='WLAN-Schlüssel anzeigen';
 
-    $helptext_soundcard_en='Selection of the installed audio card. A chenge here requires restarting the system.';
-    $helptext_soundcard_de='Auswahl der verwendeten Soundkarte. Eine &Auml;nderung erfordert einen Neustart.';
+    //Audio_matrix
+    $helptext_audio_out_direct_en='Direct output mode: The samplingrate of the DAC follows the Audio-Stream. If the DAC does not support the rate, the signal will be resampled.';
+    $helptext_audio_out_direct_de='Direkter Ausgabemodus: Die Samplingfrequenz der Wandler folgt dem zugespielten Musiksignal, es sei denn, die Wandler beherrschen diese nicht, dann wird geresampelt.';
+
+    $helptext_audio_out_direct_ms_en='Same as \'Direct\' but with MS-coding.';
+    $helptext_audio_out_direct_ms_de='Wie \'Direct\', zus&auml;tzlich mit MS-Kodierung.';
+
+    $helptext_audio_out_bus_en='Bus mode: All audio signal are being routed to a bus (jackd). Multiple players can be used simultaniously. Fixed sampling rate. If other rates than the selected target rate are played, the signal will be resampled';
+    $helptext_audio_out_bus_de='Bus-Modus: S&auml;mtliche Audio-Signale laufen auf einem Bus (jackd) zusammen. Es k&ouml;nnen mehrere Player gleichzeitig aktiv sein. Feste Samplingfrequenz mit Resampling, wenn andere Raten als die eingestellte zugespielt werden.';
+
+    $helptext_audio_out_bus_ms_en='Same as \'Bus\' but with MS-coding.';
+    $helptext_audio_out_bus_ms_de='Wie \'Bus\', zus&auml;tzlich mit MS-Kodierung.';
+
+    $helptext_audio_out_convol_en='Convolution mode: Bus mode with convolution.';
+    $helptext_audio_out_convol_de='Convolution Modus: Bus-Modus mit anschlie&szlig;ender Convolution.';
+
+    $helptext_audio_out_convol_ms_en='Same as \'Convolution\', but with MS-coding.';
+    $helptext_audio_out_convol_ms_de='Wie \'Convolution\', zus&auml;tzlich mit MS-Kodierung.';
+
+    $helptext_audio_out_en='';
+    $helptext_audio_out_de='';
+
     //Button
     $button_submit_audiosettings_de='Anwenden';
     $button_submit_audiosettings_en='Apply';
