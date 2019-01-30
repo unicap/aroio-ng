@@ -10,7 +10,31 @@ powersave: false;
 monitor_rate: false;
 lock_memory: true;
 sdf_length: -1;
-logic: "cli" { port: 3000; };
+
+logic:
+    ## Command line interface
+    "cli" { port: 3000; };
+
+#logic:
+#    ## Command line interface
+#    "cli" { port: 3000; },
+#    ## Equalizer definition
+#    "eq" {
+#            {
+#                coeff: "equalizer";
+#                #bands: 20, 40, 60, 100, 800, 1000, 2000, 3000, 4000, 5000, 6000, 70$
+#                bands: "ISO 1/3 octave";
+#                #magnitude: 20/0.0, 40/5.0, 60/5.0, 100/5.0, 800/0.0, 1000/0.0, 2000$
+#            };
+#        };
+#
+### Coeff definition to make use of the equalizer
+#coeff "equalizer" {
+#    filename: "dirac pulse";
+#    shared_mem: true;
+##   blocks: 4;
+#};
+
 
 ## FILTER DEFINITIONS ##
 ## Set 0
