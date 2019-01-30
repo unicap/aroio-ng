@@ -3,10 +3,12 @@
 . /boot/userconfig.txt
 
 SDDIR='/boot/filter'
+OLDSDDIR="/boot/brutefir"
 RAMDIR='/tmp/filter'
 
 mkdir -p "$SDDIR"
 mkdir -p "$RAMDIR"
+[ -e /boot/brutefir ] && mv /boot/brutefir /boot/filter
 cp -r "$SDDIR"/* "$RAMDIR"
 
 # Mitgelieferte Filter bei Bedarf auspacken
