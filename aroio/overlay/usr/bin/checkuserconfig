@@ -12,6 +12,14 @@ fi
 # Check, if variables are good to go and if not use defaults
 . /boot/userconfig.txt
 
+# If coming from 3.x we need to adjust the network parameters
+[ "$IPADDR" != "" ] && LAN_IPADDR="$IPADDR"
+[ "$NETMASK" != "" ] && LAN_NETMASK="$NETMASK"
+[ "$GATEWAY" != "" ] && LAN_GATEWAY="$GATEWAY"
+[ "$DNSSERV" != "" ] && LAN_DNSSERV="$DNSSERV"
+[ "$DHCP" != "" ] && LAN_DHCP="$DHCP"
+
+[[ "$UPDATESERVER" = "" || "$UPDATESERVER" = "www.abacus-electronics.de/aroio2" ]] && UPDATESERVER="http://www.abacus-electronics.de/aroio-4"
 [[ "$RATE" != "44100" && "$RATE" != "48000" && "$RATE" != "96000" && "$RATE" != "192000" ]] && RATE="96000"
 [[ "$SPRATE" != "88200" && "$SPRATE" != "44100" ]] && SPRATE="44100"
 [[ "$RESAMPLING" != "speexrate" && "$RESAMPLING" != "speexrate_medium" && "$RESAMPLING" != "speexrate_best" ]] && RESAMPLING="speexrate_medium"
@@ -26,7 +34,6 @@ fi
 [ "$VOLUME_START" = "" ] &&				VOLUME_START="-15"
 [ "$ADVANCED" = "" ] &&					ADVANCED="OFF"
 [ "$DISPLAY_ROTATE" = "" ] &&			DISPLAY_ROTATE="ON"
-[ "$UPDATESERVER" = "" ] &&				UPDATESERVER="http://www.abacus-electronics.de/aroio-4"
 [ "$SOUNDCARD" = "" ] &&				SOUNDCARD="AroioDAC"
 [ "$USEBETA" = ""  ] &&					USEBETA="OFF"
 [ "$JACKBUFFER" = "" ] &&				JACKBUFFER="512"
