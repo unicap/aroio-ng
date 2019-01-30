@@ -75,27 +75,28 @@
     $ini_array = parse_ini_file("/boot/userconfig.txt", 1);
     
     // Switch filter bank
-    
+
     $bank_test= $_POST[bank];
     $activeFilter=getFilter();
 
     if(isset($_POST['bank']))
     {
-        switchFilter($_POST[bank]);
         $activeFilter = $_POST[bank];
         validateAndSave(10,$_POST);
-        
+
         $shell_exec_ret=shell_exec('cardmount rw');
         wrtToUserconfig('DEF_COEFF',$activeFilter);
         $shell_exec_ret=shell_exec('cardmount ro');
-        
+        switchFilter($_POST[bank]);
+
         // Check if MSCODING is on
-        if ($ini_array[MSCODING]=='ON') {
+/*        if ($ini_array[MSCODING]=='ON') {
             volControl(1,$ini_array[COEFF_ATT.$activeFilter]);
         }
         else {
             volControl(0,$ini_array[COEFF_ATT.$activeFilter]);
         }
+*/
     }
     else
     {
@@ -109,7 +110,7 @@
             }
         }
     }
-    
+
     // Mute channels
     if(isset($_POST[mute]))
 		{

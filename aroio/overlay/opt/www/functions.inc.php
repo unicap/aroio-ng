@@ -311,15 +311,14 @@ function print_audio_hw_params()
 }
 
 
-
 //Gibt die korrekte Squeezebox Adresse aus
-
 function print_squeezeaddr($port)
 {
 	if ($port=="") $port="9000";
 	$out = exec("netstat -n -t | grep -o -E '\b([0-9]{1,3}\.){3}[0-9]{1,3}\b':3483 | grep -oE '\b([0-9]{1,3}\.){3}[0-9]{1,3}\b'");
 	return $out .= ":".$port;
 }
+
 
 // PHP aktiver Filter für Filterset
 function activeFilter()
@@ -334,6 +333,8 @@ function activeFilter()
 		return $activeFilter = getFilter();
 	}
 }
+
+
 //Filter-Control
 function print_filterset($count,$ini_array)
 {
@@ -476,17 +477,18 @@ function switchFilter($fltrBank)
 	$coeffSet2=2*$fltrBank+2;
 	$coeffSet3=2*$fltrBank+3;
 
- 	//Channel 0
-	shell_exec($cmd.' 0 '.$coeffSet0);
-	//Channel 1
-	shell_exec($cmd.' 1 '.$coeffSet1);
-	if ($regexString=browseDirectory($directory)) {
+	$ch_1=" 0 ";
+	$ch_2=" 1 ";
+	shell_exec($cmd.$ch_1.$coeffSet0.$ch_2.$coeffSet1);
+
+/*	if ($regexString=browseDirectory($directory)) {
 		$pattern = "/".$fltrBank."S[L]|[R](\\d*).dbl/";
 		if(preg_match_all($pattern, $regexString)>0){
 			shell_exec($cmd.' 2 '.$coeffSet2);
 			shell_exec($cmd.' 3 '.$coeffSet3);
 		}
 	}
+*/
 }
 
 //returns active filter set
