@@ -3,6 +3,12 @@
 if ! lsmod | grep -q i2c_dev ; then modprobe i2c_dev ; fi
 
 case $1 in
+	pll_48)
+		i2cset -y 1 0x70 0x0f 0x22
+		i2cset -y 1 0x70 0x10 0x00
+		i2cset -y 1 0x70 0x11 0x00
+	;;	
+
 	reset_coax)
 		echo "Resetting, restarting and switching to coax input..."
 		i2cset -y 1 0x70 0x7f 0x00 # Page auswählen
