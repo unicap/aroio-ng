@@ -28,13 +28,13 @@ end
 begin
   prog = irexec
   button = next
-  config = echo "next" && /usr/bin/aroio_control_lms last
+  config = echo "next" && /usr/bin/aroio_control_lms next
 end
 
 begin
   prog = irexec
   button = previous
-  config = echo "previous" && /usr/bin/aroio_control_lms next
+  config = echo "previous" && /usr/bin/aroio_control_lms last
 end
 
 begin
