@@ -173,8 +173,8 @@
     $squeezelite_only_en='none';
     $squeezelite_only_de='keiner';
 
-    $squeezelite_and_upnp_en='UPNP player';
-    $squeezelite_and_upnp_de='UPNP-Player';
+    $squeezelite_and_upnp_en='UPnP player';
+    $squeezelite_and_upnp_de='UPnP-Player';
 
     $squeezelite_and_netjack_en='netjack';
     $squeezelite_and_netjack_de='Netjack';
@@ -191,8 +191,8 @@
     $audioplayer_squeezelite_en='Squeezelite' ;
     $audioplayer_squeezelite_de='Squeezelite' ;
 
-    $audioplayer_gmediarender_en='UPNP-Player' ;
-    $audioplayer_gmediarender_de='UPNP-Player' ;
+    $audioplayer_gmediarender_en='UPnP-Player' ;
+    $audioplayer_gmediarender_de='UPnP-Player' ;
 
     $convolution_volcontrol_en='Volume Control';
     $convolution_volcontrol_de='Lautst&auml;rkeanpassung';

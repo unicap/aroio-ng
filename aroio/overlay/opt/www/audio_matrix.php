@@ -7,14 +7,14 @@
           Squeeze
         </td>
         <td>
-          UPNP
+          UPnP
         </td>
         <td>
           ShAirPlay
         </td>
         <td>
           Bluetooth
-        </td> 
+        </td>
         <td>
           Line In
         </td>
@@ -24,7 +24,7 @@
       </tr> <?
 
       ?> <!-- Output DIRECT ---------------------------------------------------------------------------------------------> <?
-      if ($ini_array["SOUNDCARD"] != "Focusrite Scarlett") 
+      if ($ini_array["SOUNDCARD"] != "Focusrite Scarlett")
       {
         if ($ini_array["AUDIO_OUTPUT"] == "vol-plug")
         { ?>
@@ -205,7 +205,7 @@
         { ?>
           <input type="checkbox" id="jack" name="JACK_INPUT" value="ON" <? test_input() ?> > <?
         } ?>
-      </td> 
+      </td>
       <td>
         <input type="hidden" name="JACK_NETJACK" value="OFF"> <?
         if ($ini_array["JACK_NETJACK"] == "ON")
@@ -290,7 +290,7 @@
       { ?>
         <input type="checkbox" id="jack-ms" name="JACKMS_INPUT" value="ON" <? test_input() ?> > <?
       } ?>
-    </td> 
+    </td>
     <td>
       <input type="hidden" name="JACKMS_NETJACK" value="OFF"> <?
       if ($ini_array["JACKMS_NETJACK"] == "ON")
@@ -363,7 +363,7 @@
         { ?>
           <input type="checkbox" id="jackbf" name="JACKBF_BLUEALSAAPLAY" value="ON" <? test_bt() ?> > <?
         } ?>
-      </td> 
+      </td>
 
       <td>
         <input type="hidden" name="JACKBF_INPUT" value="OFF" <? test_input() ?> > <?
@@ -375,7 +375,7 @@
           { ?>
             <input type="checkbox" id="jackbf" name="JACKBF_INPUT" value="ON" <? test_input() ?> > <?
           } ?>
-      </td> 
+      </td>
       <td>
         <input type="hidden" name="JACKBF_NETJACK" value="OFF"> <?
         if ($ini_array["JACKBF_NETJACK"] == "ON")
@@ -400,7 +400,7 @@
         else
         { ?>
           <input class="actiongroup" type="radio" name="AUDIO_OUTPUT" value="jack-bfms">
-          <a title="<? print ${helptext_audio_out_convol_ms._.$lang} ?>"class="tooltip"> Convol. MS <? 
+          <a title="<? print ${helptext_audio_out_convol_ms._.$lang} ?>"class="tooltip"> Convol. MS <?
         } ?>
       </td>
 
@@ -450,7 +450,7 @@
       { ?>
         <input type="checkbox" id="jackbfms" name="JACKBFMS_BLUEALSAAPLAY" value="ON" <? test_bt() ?> > <?
       } ?>
-    </td> 
+    </td>
 
     <td>
       <input type="hidden" name="JACKBFMS_INPUT" value="OFF" <? test_input() ?> > <?
