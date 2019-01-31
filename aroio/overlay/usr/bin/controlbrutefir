@@ -9,12 +9,34 @@ function chgDelay()
 
 function chgFilter()
 {
-	echo "Selected coeff: "$DEF_COEFF""
-	eval COEFF_ATT='COEFF_ATT'$DEF_COEFF
-	ATT=$(eval echo \$$COEFF_ATT)
-	echo "Attenuation: $ATT"
+	# Get our current attenuation
+	CUR_ATT=$(echo 'lf' | nc 127.0.0.1 3000 | awk -F/ '/from inputs:[[:space:]]*0\/(-?[[:digit:]]*\.[[:digit:]]*)/ {print $2}')
+echo "cur_att is "$CUR_ATT""
 
-	`echo 'cfc' $1 $2 ';' 'cfc' $3 $4 ';' 'cfia' 0 0 "$ATT" ';' 'cfia' 1 1 "$ATT" | nc 127.0.0.1 3000` &> /dev/null
+#	# Get our attentuation to switch to
+	eval COEFF_ATT='COEFF_ATT$DEF_COEFF'
+	ATT=$(eval echo \$$COEFF_ATT)
+echo "target_att is "$ATT""
+
+	# Multiply our values, so bash can compare integers
+	CUR_ATT=$(echo $CUR_ATT|awk '{print 10 * $1}')
+	ATT=$(echo $ATT|awk '{print 10 * $1}')
+echo "cur_att multiplied to "$CUR_ATT""
+echo "att multiplied to "$ATT""
+
+
+
+#	# Now apply the formula in the right order!
+	if [ $ATT -le $CUR_ATT ]
+	then	ATT=$(echo $ATT|awk '{print $1 / 10}')
+			`echo 'cfc' $1 $2 ';' 'cfc' $3 $4 | nc 127.0.0.1 3000` &> /dev/null
+			`echo 'cfia' 0 0 "$ATT" ';' 'cfia' 1 1 "$ATT" | nc 127.0.0.1 3000` &> /dev/null
+	else
+			ATT=$(echo $ATT|awk '{print $1 / 10}')
+			`echo 'cfia' 0 0 "$ATT" ';' 'cfia' 1 1 "$ATT" | nc 127.0.0.1 3000` &> /dev/null
+			`echo 'sleep 1 ; cfc' $1 $2 ';' 'cfc' $3 $4 | nc 127.0.0.1 3000` &> /dev/null
+	fi
+
 }
 
 function getDelay()
