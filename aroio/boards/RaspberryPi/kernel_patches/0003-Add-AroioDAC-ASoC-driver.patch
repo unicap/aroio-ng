@@ -1,0 +1,372 @@
+From 10f25370feab098f7bdfff9ca1dbf84c825719f8 Mon Sep 17 00:00:00 2001
+From: Arne Caspari <arne@unicap-imaging.org>
+Date: Mon, 4 Feb 2019 09:53:45 +0100
+Subject: [PATCH 3/4] Add AroioDAC ASoC driver
+
+---
+ sound/soc/bcm/Kconfig    |   8 +
+ sound/soc/bcm/Makefile   |   2 +
+ sound/soc/bcm/aroiodac.c | 312 +++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 322 insertions(+)
+ create mode 100644 sound/soc/bcm/aroiodac.c
+
+diff --git a/sound/soc/bcm/Kconfig b/sound/soc/bcm/Kconfig
+index 21622eda8c60..86f2a4c824e7 100644
+--- a/sound/soc/bcm/Kconfig
++++ b/sound/soc/bcm/Kconfig
+@@ -8,6 +8,14 @@ config SND_BCM2835_SOC_I2S
+ 	  the BCM2835 I2S interface. You will also need
+ 	  to select the audio interfaces to support below.
+ 
++config SND_BCM2708_SOC_AROIODAC
++	tristate "Support for Abacus AroioDAC soundcard"
++	depends on SND_BCM2708_SOC_I2S || SND_BCM2835_SOC_I2S
++	select SND_SOC_PCM512x
++	select SND_SOC_SPDIF
++	help
++		Say Y or M if you want to add support for AroioDAC.
++
+ config SND_SOC_CYGNUS
+ 	tristate "SoC platform audio for Broadcom Cygnus chips"
+ 	depends on ARCH_BCM_CYGNUS || COMPILE_TEST
+diff --git a/sound/soc/bcm/Makefile b/sound/soc/bcm/Makefile
+index e96022b866b5..f9363f978d28 100644
+--- a/sound/soc/bcm/Makefile
++++ b/sound/soc/bcm/Makefile
+@@ -13,6 +13,7 @@ snd-soc-googlevoicehat-codec-objs := googlevoicehat-codec.o
+ 
+ # BCM2708 Machine Support
+ snd-soc-adau1977-adc-objs := adau1977-adc.o
++snd-soc-aroiodac-objs := aroiodac.o
+ snd-soc-googlevoicehat-soundcard-objs := googlevoicehat-soundcard.o
+ snd-soc-hifiberry-amp-objs := hifiberry_amp.o
+ snd-soc-hifiberry-dac-objs := hifiberry_dac.o
+@@ -39,6 +40,7 @@ snd-soc-pisound-objs := pisound.o
+ snd-soc-fe-pi-audio-objs := fe-pi-audio.o
+ 
+ obj-$(CONFIG_SND_BCM2708_SOC_ADAU1977_ADC) += snd-soc-adau1977-adc.o
++obj-$(CONFIG_SND_BCM2708_SOC_AROIODAC) += snd-soc-aroiodac.o
+ obj-$(CONFIG_SND_BCM2708_SOC_GOOGLEVOICEHAT_SOUNDCARD) += snd-soc-googlevoicehat-soundcard.o
+ obj-$(CONFIG_SND_BCM2708_SOC_GOOGLEVOICEHAT_SOUNDCARD)  += snd-soc-googlevoicehat-codec.o
+ obj-$(CONFIG_SND_BCM2708_SOC_HIFIBERRY_AMP) += snd-soc-hifiberry-amp.o
+diff --git a/sound/soc/bcm/aroiodac.c b/sound/soc/bcm/aroiodac.c
+new file mode 100644
+index 000000000000..31928b524e32
+--- /dev/null
++++ b/sound/soc/bcm/aroiodac.c
+@@ -0,0 +1,312 @@
++#include <linux/module.h>
++#include <linux/platform_device.h>
++#include <linux/kernel.h>
++#include <linux/clk.h>
++#include <linux/kernel.h>
++#include <linux/module.h>
++#include <linux/of.h>
++#include <linux/of_device.h>
++#include <linux/slab.h>
++#include <linux/delay.h>
++
++#include <sound/core.h>
++#include <sound/pcm.h>
++#include <sound/pcm_params.h>
++#include <sound/soc.h>
++#include <sound/jack.h>
++
++#include "../codecs/pcm512x.h"
++
++#define AROIODAC_HAS_SRC (1<<0)
++
++#define AROIODAC_NOCLOCK 0
++#define AROIODAC_CLK44EN 1
++#define AROIODAC_CLK48EN 2
++
++/* Clock rate of CLK44EN attached to GPIO6 pin */
++#define CLK_44EN_RATE 22579200UL
++/* Clock rate of CLK48EN attached to GPIO3 pin */
++#define CLK_48EN_RATE 24576000UL
++
++struct aroiodac_priv{
++    int flags;
++    unsigned char src_addr;
++};
++
++struct pcm512x_priv {
++	struct regmap *regmap;
++	struct clk *sclk;
++};
++
++static void aroiodac_select_clk(struct snd_soc_component *component,
++	int clk_id)
++{
++	switch (clk_id) {
++	case AROIODAC_NOCLOCK:
++		snd_soc_component_update_bits(component, PCM512x_GPIO_CONTROL_1, 0x24, 0x00);
++		break;
++	case AROIODAC_CLK44EN:
++		snd_soc_component_update_bits(component, PCM512x_GPIO_CONTROL_1, 0x24, 0x20);
++		break;
++	case AROIODAC_CLK48EN:
++		snd_soc_component_update_bits(component, PCM512x_GPIO_CONTROL_1, 0x24, 0x04);
++		break;
++	}
++}
++
++
++static void aroiodac_clk_gpio(struct snd_soc_component *component)
++{
++	snd_soc_component_update_bits(component, PCM512x_GPIO_EN, 0x24, 0x24);
++	snd_soc_component_update_bits(component, PCM512x_GPIO_OUTPUT_3, 0x0f, 0x02);
++	snd_soc_component_update_bits(component, PCM512x_GPIO_OUTPUT_6, 0x0f, 0x02);
++}
++
++
++static int aroiodac_clk_for_rate(int sample_rate)
++{
++	int type;
++
++	switch (sample_rate) {
++	case 11025:
++	case 22050:
++	case 44100:
++	case 88200:
++	case 176400:
++	case 352800:
++		type = AROIODAC_CLK44EN;
++		break;
++	default:
++		type = AROIODAC_CLK48EN;
++		break;
++	}
++	return type;
++}
++
++
++static void aroiodac_set_sclk(struct snd_soc_component *component,
++	int sample_rate)
++{
++	struct pcm512x_priv *pcm512x = snd_soc_component_get_drvdata(component);
++
++	if (!IS_ERR(pcm512x->sclk)) {
++		int ctype;
++
++		ctype = aroiodac_clk_for_rate(sample_rate);
++		clk_set_rate(pcm512x->sclk, (ctype == AROIODAC_CLK44EN)
++			? CLK_44EN_RATE : CLK_48EN_RATE);
++		aroiodac_select_clk(component, ctype);
++	}
++}
++
++
++static int aroiodac_init(struct snd_soc_pcm_runtime *rtd)
++{
++    struct snd_soc_component *component = rtd->codec_dai->component;
++    aroiodac_clk_gpio(component);
++    snd_soc_component_update_bits(component, PCM512x_BCLK_LRCLK_CFG, 0x31, 0x11);
++    snd_soc_component_update_bits(component, PCM512x_MASTER_MODE, 0x03, 0x03);
++    snd_soc_component_update_bits(component, PCM512x_MASTER_CLKDIV_2, 0x7f, 63);
++	snd_soc_component_update_bits(component, PCM512x_GPIO_EN, 0x08, 0x08);
++	snd_soc_component_update_bits(component, PCM512x_GPIO_OUTPUT_4, 0x0f, 0x02);
++	snd_soc_component_update_bits(component, PCM512x_GPIO_CONTROL_1, 0x08, 0x08);
++
++    return 0;
++}
++
++static int aroiodac_update_rate_den(
++	struct snd_pcm_substream *substream, struct snd_pcm_hw_params *params)
++{
++	struct snd_soc_pcm_runtime *rtd = substream->private_data;
++	struct snd_soc_component *component = rtd->codec_dai->component;
++	struct pcm512x_priv *pcm512x = snd_soc_component_get_drvdata(component);
++	struct snd_ratnum *rats_no_pll;
++	unsigned int num = 0, den = 0;
++	int err;
++
++	rats_no_pll = devm_kzalloc(rtd->dev, sizeof(*rats_no_pll), GFP_KERNEL);
++	if (!rats_no_pll)
++		return -ENOMEM;
++
++	rats_no_pll->num = clk_get_rate(pcm512x->sclk) / 64;
++	rats_no_pll->den_min = 1;
++	rats_no_pll->den_max = 128;
++	rats_no_pll->den_step = 1;
++
++	err = snd_interval_ratnum(hw_param_interval(params,
++		SNDRV_PCM_HW_PARAM_RATE), 1, rats_no_pll, &num, &den);
++	if (err >= 0 && den) {
++		params->rate_num = num;
++		params->rate_den = den;
++	}
++
++	devm_kfree(rtd->dev, rats_no_pll);
++	return 0;
++}
++
++static int aroiodac_hw_params(struct snd_pcm_substream *subs,
++                              struct snd_pcm_hw_params *params)
++{
++	int ret = 0;
++	struct snd_soc_pcm_runtime *rtd = subs->private_data;
++	int channels = params_channels(params);
++	int width = 32;
++
++    struct snd_soc_component *component = rtd->codec_dai->component;
++
++    width = snd_pcm_format_physical_width(params_format(params));
++
++    aroiodac_set_sclk(component, params_rate(params));
++
++    ret = aroiodac_update_rate_den(subs, params);
++
++	ret = snd_soc_dai_set_tdm_slot(rtd->cpu_dai, 0x03, 0x03,
++		channels, width);
++	if (ret)
++		return ret;
++
++	ret = snd_soc_dai_set_tdm_slot(rtd->codec_dai, 0x03, 0x03,
++		channels, width);
++
++	return ret;
++}
++
++static int aroiodac_LED_cnt;
++
++static int aroiodac_startup(struct snd_pcm_substream *subs)
++{
++	struct snd_soc_pcm_runtime *rtd = subs->private_data;
++	struct snd_soc_component *component = rtd->codec_dai->component;
++
++	snd_soc_component_update_bits(component, PCM512x_GPIO_CONTROL_1,
++					 0x08, 0x08);
++	aroiodac_LED_cnt++;
++
++	return 0;
++}
++
++static void aroiodac_shutdown(struct snd_pcm_substream *subs)
++{
++	struct snd_soc_pcm_runtime *rtd = subs->private_data;
++	struct snd_soc_component *component = rtd->codec_dai->component;
++
++	aroiodac_LED_cnt--;
++	if (!aroiodac_LED_cnt)
++		snd_soc_component_update_bits(component, PCM512x_GPIO_CONTROL_1,
++						 0x08, 0x00);
++}
++
++static struct snd_soc_ops aroiodac_ops = {
++    .startup = aroiodac_startup,
++    .shutdown = aroiodac_shutdown,
++    .hw_params = aroiodac_hw_params,
++};
++
++static struct snd_soc_dai_link_component aroiodac_codecs[] = {
++    {
++        .name = "pcm512x.1-004d",
++        .dai_name = "pcm512x-hifi"
++    },
++    {
++        .name = "src4382",
++        .dai_name = "src4382-hifi"
++    },
++};
++
++static struct snd_soc_dai_link aroiodac_dai[] = {
++    {
++        .name = "Abacus AroioDAC",
++        .stream_name = "Abacus AroioDAC",
++        .cpu_dai_name	= "bcm2708-i2s.0",
++        .platform_name	= "bcm2708-i2s.0",
++        .codecs = aroiodac_codecs,
++        .num_codecs = 2,
++        .dai_fmt = SND_SOC_DAIFMT_I2S | SND_SOC_DAIFMT_NB_NF |
++            SND_SOC_DAIFMT_CBS_CFS,
++        .ops = &aroiodac_ops,
++        .init = aroiodac_init,
++    },
++};
++
++static struct snd_soc_card aroiodac_card = {
++    .name = "aroiodac",
++    .driver_name = "AbacusAroioDAC",
++    .owner = THIS_MODULE,
++    .dai_link = aroiodac_dai,
++    .num_links = ARRAY_SIZE(aroiodac_dai),
++};
++
++static int aroiodac_probe(struct platform_device *pdev)
++{
++    struct device_node *node = pdev->dev.of_node;
++    struct aroiodac_priv *priv;
++    struct device_node *i2s_node;
++    struct snd_soc_dai_link *dai;
++    int err;
++
++    dev_info(&pdev->dev, "Probing Abacus AroioDAC\n");
++
++    if(!node)
++    {
++        dev_err(&pdev->dev, "Missing DT device node\n");
++        return -ENODEV;
++    }
++
++    priv = devm_kzalloc(&pdev->dev, sizeof(struct aroiodac_priv), GFP_KERNEL);
++    if(!priv)
++    {
++        dev_err(&pdev->dev, "Unable to allocate memory\n");
++        return -ENOMEM;
++    }
++
++    err = of_property_read_u8(node, "src-addr", &priv->src_addr);
++    if(err){
++        dev_err(&pdev->dev, "src-addr not in DT\n");
++    }
++    if(priv->src_addr){
++        priv->flags = AROIODAC_HAS_SRC;
++    }
++
++    dai = &aroiodac_dai[0];
++    i2s_node = of_parse_phandle(node, "i2s-controller", 0);
++    if (i2s_node){
++        dai->cpu_dai_name = NULL;
++        dai->cpu_of_node = i2s_node;
++        dai->platform_name = NULL;
++        dai->platform_of_node = i2s_node;
++    } else {
++        dev_err(&pdev->dev, "i2s-controller not in DT\n");
++    }
++
++    aroiodac_card.dev = &pdev->dev;
++
++    err = devm_snd_soc_register_card(&pdev->dev, &aroiodac_card);
++	if (err && err != -EPROBE_DEFER)
++        pr_err("snd_soc_register_card failed\n");
++		// dev_err(&pdev->dev, "snd_soc_register_card() failed: %d\n",
++		// 	err);
++
++    return err;
++}
++
++static const struct of_device_id aroiodac_of_match[] = {
++    { .compatible = "abacus,aroiodac", },
++    {},
++};
++
++MODULE_DEVICE_TABLE(of, aroiodac_of_match);
++
++static struct platform_driver aroiodac_driver = {
++    .driver = {
++        .name = "snd-soc-aroiodac",
++        .owner = THIS_MODULE,
++        .of_match_table = aroiodac_of_match,
++    },
++    .probe = aroiodac_probe,
++};
++
++module_platform_driver(aroiodac_driver);
++
++MODULE_AUTHOR("Arne Caspari <arne@unicap-imaging.org>");
++MODULE_DESCRIPTION("ASoC Driver for Abacus AroioDAC");
++MODULE_LICENSE("GPL v2");
+-- 
+2.20.1
+
