@@ -444,8 +444,8 @@
     $button_mount_en='File systems';
     $button_mount_de='Dateisysteme';
 
-    $button_free_en='Memory usage';
-    $button_free_de='Speicher-Verbrauch';
+    $button_deliver_log_en='Download logs';
+    $button_deliver_log_de='Download Logs';
     //HELPTEXT
     $helptext_beta_de='Ist dieses Feld gesetzt, wird ausschliesslich nach verf&uuml;gbaren Entwicklungsversionen gesucht. Diese enthalten neue Features oder Korrekturen f&uuml;r bekannte Fehler, sind aber noch in Entwicklung und somit nicht offiziell freigegeben. F&uuml;r Experimentierfreudige und Unerschrockene.';
     $helptext_beta_en='If set, Aroio will look excusively for development versions. These may contain new features or fixes for known bugs, but are still under development and not officially released and supported. For the unafraid or adventurous... ';

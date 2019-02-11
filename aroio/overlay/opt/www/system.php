@@ -1,4 +1,6 @@
 <?php
+    ob_start();
+    include('header.php');
     include('strings.php');
     include('functions.inc.php');
     include('style.css');
@@ -260,7 +262,7 @@ if ($test_wlan == "0"){?>
     </td>
 
     <td>
-      <input class="button" type="submit" class="actiongroup" value=" <? print ${button_free._.$lang} ?> " name="free">
+      <input class="button" type="submit" class="actiongroup" value=" <? print ${button_deliver_log._.$lang} ?> " name="deliver_log">
     </td>
   </tr>
 
@@ -289,23 +291,26 @@ if ($test_wlan == "0"){?>
 
 <?
 if ( isset($_POST['ifconfig']) )
-print_cmdout('ifconfig');
+    print_cmdout('ifconfig');
 if ( isset($_POST['dmesg']) )
-print_cmdout('dmesg');
+    print_cmdout('dmesg');
 if ( isset($_POST['mount']) )
-print_cmdout('mount');
+    print_cmdout('mount');
 if ( isset($_POST['free']) )
-print_cmdout('free');
+    print_cmdout('free');
 if ( isset($_POST['systemlog']) )
-	print_journalctl_boot();
+    print_journalctl_boot();
 if ( isset($_POST['squeezelitelog']) )
-	print_journalctl('squeezelite');
+    print_journalctl('squeezelite');
 if ( isset($_POST['jackdlog']) )
-	print_journalctl('jackd');
+    print_journalctl('jackd');
 if ( isset($_POST['brutefirlog']) )
-	print_journalctl('brutefir');
+    print_journalctl('brutefir');
 if ( isset($_POST['Audio-HW-Info']) )
-	print_audio_hw_params();
+    print_audio_hw_params();
+if ( isset($_POST['deliver_log']) )
+//    header("Location: " . "http://" . $_SERVER['HTTP_HOST'] . '/getlogs.php');
+    deliver_logs();
 ?>
 </fieldset>
 </form>

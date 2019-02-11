@@ -1,6 +1,13 @@
 <?php
 include('strings.php');
 
+function deliver_logs()
+{
+    exec('aroio_prepare_logs');
+    header("Location: " . "http://" . $_SERVER['HTTP_HOST'] . '/getlogs.php');
+	die();
+}
+
 function scanwifi()
 {
 	$wifiscan=exec('ifconfig wlan0 up && iwlist scan 2>/dev/null | sed \'s/\"//g\' | awk -F":" \'/ESSID/{print $2}\' | sort -f  ',$wifilist);

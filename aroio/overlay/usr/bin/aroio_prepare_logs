@@ -1,0 +1,35 @@
+#!/bin/sh
+
+[ -e /tmp/aroio_logs ] && rm /tmp/aroio_logs/* || mkdir -p /tmp/aroio_logs
+[ -e /opt/www/aroio_logs.7z ] && rm /opt/www/aroio_logs.7z
+
+# copy userconfig to logs
+cp /boot/userconfig.txt /tmp/aroio_logs
+
+# Create list of convolution filters
+echo "Filters on SDCard:" > /tmp/aroio_logs/filters.txt
+ls /boot/filter/ >> /tmp/aroio_logs/filters.txt
+echo -e "\nFilters in tmp:" >> /tmp/aroio_logs/filters.txt
+ls /tmp/filter/ >> /tmp/aroio_logs/filters.txt
+
+# Save output of ifconfig
+ifconfig > /tmp/aroio_logs/network.txt
+
+# Store information about audio-hardware
+controlaudio stop
+aplay --duration=1 -Dhw:0 --dump-hw-params /dev/zero &> /tmp/aroio_logs/audio_hw_params.txt
+controlaudio start
+
+# Collect mostly needed logs
+journalctl -u brutefir > /tmp/aroio_logs/brutefir.log.txt
+journalctl -u squeezelite > /tmp/aroio_logs/squeezelite.log.txt
+journalctl -u jackd > /tmp/aroio_logs/jackd.log.txt
+journalctl -u bluealsa-aplay > /tmp/aroio_logs/bluealsa-aplay.log.txt
+journalctl -u gmediarender > /tmp/aroio_logs/gmediarender.log.txt
+journalctl -u jackminimix > /tmp/aroio_logs/jackminimix.log.txt
+journalctl -u shairport-sync > /tmp/aroio_logs/shairportsync.log.txt
+
+# Create archive for download
+7zr a -t7z /opt/www/aroio_logs.7z /tmp/aroio_logs /run/log/journal
+
+exit 0
