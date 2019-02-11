@@ -82,7 +82,7 @@ function Start()
 			[ "$JACK_GMEDIARENDER"  = "ON" ] && systemctl "$ACTION" gmediarender.service
 			[ "$JACK_SHAIRPORTSYNC" = "ON" ] && systemctl "$ACTION" shairport-sync.service
 			[ "$JACK_BLUEALSAAPLAY" = "ON" ] && systemctl "$ACTION" bluealsa-aplay.service
-			[ "$JACK_INPUT" = "ON" ] && sleep 0.2 && jack_connect system:capture_1 system:playback_1 && jack_connect system:capture_2 system:playback_2
+			[ "$JACK_INPUT" = "ON" ] && sleep 0.2 && jack_connect system:capture_1 jackmixer:in1_left && jack_connect system:capture_2 jackmixer:in1_right
 		;;
 
 		jack-ms)
@@ -93,7 +93,7 @@ function Start()
 			[ "$JACKMS_GMEDIARENDER"  = "ON" ] && systemctl "$ACTION" gmediarender.service
 			[ "$JACKMS_SHAIRPORTSYNC" = "ON" ] && systemctl "$ACTION" shairport-sync.service
 			[ "$JACKMS_BLUEALSAAPLAY" = "ON" ] && systemctl "$ACTION" bluealsa-aplay.service
-			[ "$JACKMS_INPUT" = "ON" ] && sleep 0.2 && jack_connect system:capture_1 system:playback_1 && jack_connect system:capture_2 system:playback_2
+			[ "$JACKMS_INPUT" = "ON" ] && sleep 0.2 && jack_connect system:capture_1 jackmixer:in1_left && jack_connect system:capture_2 jackmixer:in1_right
 		;;
 
 		jack-bf)

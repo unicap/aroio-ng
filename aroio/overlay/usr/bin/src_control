@@ -2,28 +2,209 @@
 
 if ! lsmod | grep -q i2c_dev ; then modprobe i2c_dev ; fi
 
+setcmd="i2cset -y 1 0x70"
+getcmd="i2cget -y 1 0x70"
+
+#function get_status2()
+#{
+#
+#}
+
+function enable_interrupts()
+{
+	$setcmd 0x0b 0x33
+	echo "Interrupts enabled"
+}
+
+function reset_coax()
+{
+	echo "Resetting, restarting and switching to coax input..."
+	$setcmd 0x7f 0x00 # Page auswählen
+	$setcmd 0x80 0x00 # Alles aus(?!)
+	$setcmd 0x1B 0x01 # Coax-LED ON
+	$setcmd 0x1C 0x00 # Opt. LED OFF
+	$setcmd 0x0d 0x08 # Receiver Reference Clock is MCLK, RXBTD is enabled, Input is RX1 (coax)
+	$setcmd 0x03 0x31 # SDOUTA is output, Source is SRC, Slave Mode, 3 Bit hinten: 24-Bit Philips I2S
+	$setcmd 0x2d 0x02 # Outp. Att. Track. Disab., Unmuted, Ref. Clock Source=MCLK, Source=Digital Input Receiver
+	$setcmd 0x01 0x3f # Alle Module am SRC einschalten (?)
+	echo "Done!"
+}
+
+# PLL for 44.1, 88.2 and 176.4 kHz
+function pll_22mhz()
+{
+	$setcmd 0x0f 0x22
+	$setcmd 0x10 0x1b
+	$setcmd 0x11 0xa3
+	echo "PLL settings set for 22.5792 MHz"
+}
+
+# PLL for 48, 96 and 192 kHZ
+function pll_24mhz()
+{
+	$setcmd 0x0f 0x22
+	$setcmd 0x10 0x00
+	$setcmd 0x11 0x00
+	echo "PLL settings set for 24.5760 MHz"
+}
+
+function dir_control()
+{
+	case $1 in
+		rx1_mclk)
+			wert=0x08
+			echo "RXBTD is enabled, Receiver Reference Clock is MCLK, Input is RX1"
+			;;
+
+		rx2_mclk)
+			wert=0x09
+			echo "RXBTD is enabled, Receiver Reference Clock is MCLK, Input is RX2"
+			;;
+
+		rx3_mclk)
+			wert=0x10
+			echo "RXBTD is enabled, Receiver Reference Clock is MCLK, Input is RX3"
+			;;
+
+		rx4_mclk)
+			wert=0x11
+			echo "RXBTD is enabled, Receiver Reference Clock is MCLK, Input is RX4"
+			;;
+	esac
+
+	$setcmd 0x0d $wert
+}
+
+function gpo1()
+{
+	case $1 in
+		high)
+			wert=0x00
+			echo "GPO1 is Forced Low"
+			;;
+
+		low)
+			wert=0x01
+			echo "GPO1 is Forced High"
+			;;
+	esac
+
+	$setcmd 0x1B $wert
+}
+
+function gpo2()
+{
+	case $1 in
+
+		high)
+			wert=0x00
+			echo "GPO2 is Forced Low"
+			;;
+
+		low)
+			wert=0x01
+			echo "GPO2 is Forced High"
+			;;
+	esac
+
+	$setcmd 0x1C $wert
+}
+
+function gpo3()
+{
+	case $1 in
+		high)
+			wert=0x00
+			echo "GPO3 is Forced Low"
+			;;
+
+		low)
+			wert=0x01
+			echo "GPO3 is Forced High"
+			;;
+	esac
+
+	$setcmd 0x1D $wert
+}
+
+function gpo4()
+{
+	case $1 in
+		high)
+			wert=0x00
+			echo "GPO4 is Forced Low"
+			;;
+
+		low)
+			wert=0x01
+			echo "GPO4 is Forced High"
+			;;
+	esac
+
+	$setcmd 0x1E $wert
+}
+
 case $1 in
-	pll_48)
-		i2cset -y 1 0x70 0x0f 0x22
-		i2cset -y 1 0x70 0x10 0x00
-		i2cset -y 1 0x70 0x11 0x00
-	;;	
+	enable_interrupts)
+		enable_interrupts
+		;;
+
+	pll_48000 | pll_96000 | pll_192000)
+		pll_24mhz
+		;;
+
+	pll_44100 | pll_88200 | pll_176400)
+		pll_22mhz
+		;;
 
 	reset_coax)
-		echo "Resetting, restarting and switching to coax input..."
-		i2cset -y 1 0x70 0x7f 0x00 # Page auswählen
-		i2cset -y 1 0x70 0x80 0x00 # Alles aus(?!)
-		i2cset -y 1 0x70 0x1B 0x01 # Coax-LED ON
-		i2cset -y 1 0x70 0x1C 0x00 # Opt. LED OFF
-		i2cset -y 1 0x70 0x0d 0x08 # Receiver Reference Clock is MCLK, RXBTD is enabled, Input is RX1 (coax)
-		i2cset -y 1 0x70 0x03 0x31 # SDOUTA is output, Source is SRC, Slave Mode, 3 Bit hinten: 24-Bit Philips I2S
-		i2cset -y 1 0x70 0x2d 0x02 # Outp. Att. Track. Disab., Unmuted, Ref. Clock Source=MCLK, Source=Digital Input Receiver
-		i2cset -y 1 0x70 0x01 0x3f # Alle Module am SRC einschalten (?)
-		echo "Done!"
+		reset_coax
+		;;
+
+	# Receiver auf RX1 als Input auswählen mit MCLK als Taktgeber
+	input1_mclk)
+		dir_control rx1_mclk
+		gpo1 high
+		gpo2 low
+		gpo3 low
+		gpo4 low
+		echo "Input set to RX1 with MCLK as clock-input"
+		;;
+
+	# Receiver auf RX2 als Input auswählen mit MCLK als Taktgeber
+	input2_mclk)
+		dir_control rx2_mclk
+		gpo1 low
+		gpo2 high
+		gpo3 low
+		gpo4 low
+		echo "Input set to RX2 with MCLK as clock-input"
+		;;
+
+	# Receiver auf RX3 als Input auswählen mit MCLK als Taktgeber
+	input3_mclk)
+		dir_control rx3_mclk
+		gpo1 low
+		gpo2 low
+		gpo3 high
+	gpo4 low
+		echo "Input set to RX3 with MCLK as clock-input"
 	;;
+
+	# Receiver auf RX4 als Input auswählen mit MCLK als Taktgeber
+	input4_mclk)
+		dir_control rx4_mclk
+		gpo1 low
+		gpo2 low
+		gpo3 low
+		gpo4 high
+		echo "Input set to RX4 with MCLK as clock-input"
+		;;
 
 	*)
 	echo "You did not enter anything recognizeable as argument, please enter somethin valid!"
-	;;
-
+		echo "We have: reset_koax , pll_48000, input1_mclk , input2_mclk , input3_mclk input4_mclk"
+		;;
 esac
+
+

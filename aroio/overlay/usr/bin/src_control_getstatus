@@ -1,0 +1,102 @@
+#!/bin/sh
+
+function read_register()
+{
+	reghex=$(i2cget -y 1 0x70 $1)
+	function get_bits()
+	{
+		[ "$(echo $(((0x01 & $reghex) != 0)))" = 1 ] && bit0=1 || bit0=0
+		[ "$(echo $(((0x02 & $reghex) != 0)))" = 1 ] && bit1=1 || bit1=0
+		[ "$(echo $(((0x04 & $reghex) != 0)))" = 1 ] && bit2=1 || bit2=0
+		[ "$(echo $(((0x08 & $reghex) != 0)))" = 1 ] && bit3=1 || bit3=0
+		[ "$(echo $(((0x10 & $reghex) != 0)))" = 1 ] && bit4=1 || bit4=0
+		[ "$(echo $(((0x20 & $reghex) != 0)))" = 1 ] && bit5=1 || bit5=0
+		[ "$(echo $(((0x40 & $reghex) != 0)))" = 1 ] && bit6=1 || bit6=0
+		[ "$(echo $(((0x80 & $reghex) != 0)))" = 1 ] && bit7=1 || bit7=0
+
+		echo -e "Contents of register $1\nBin: "$bit7$bit6$bit5$bit4$bit3$bit2$bit1$bit0
+		echo "Hex: $reghex"
+	}
+
+	# Register 0x02
+	reg_0x02_bit0_0="SRC did not generated an interrupt"
+	reg_0x02_bit0_1="SRC has generated an interrupt, check 0x0a"
+	reg_0x02_bit1_0="DIR has not generated an interrupt"
+	reg_0x02_bit1_1="DIR has generated an interrupt, check 0x14, 0x15"
+	reg_0x02_bit2_0="DIT has not generated an interrupt"
+	reg_0x02_bit2_1="DIT has generated an interrupt, check 0x0a"
+
+	# Register 0x0a
+	reg_0x0a_bit0_1=""
+	reg_0x0a_bit1_1=""
+	reg_0x0a_bit2_1=""
+	reg_0x0a_bit3_1=""
+
+	# Register 0x12
+	reg_0x12_bit0_0="IEC61937 check:            Not IEC61937 data"
+	reg_0x12_bit0_1="IEC61937 check             IEC61937 data detected"
+	reg_0x12_bit1_0="DTS check:                 No DTS data"
+	reg_0x12_bit1_1="DTS check:                 DTS data detected"
+
+	# register 0x13
+	reg_0x13_bit0_0=""
+	reg_0x13_bit0_1=""
+	reg_0x13_bit1_0=""
+	reg_0x13_bit1_1=""
+
+	# register 0x14
+	reg_0x14_bit0_1="DIR to UA buffer transfer: OK"
+	reg_0x14_bit0_0="DIR to UA buffer transfer: Buffer transfer incomplete or no buffer transfer interrupt indicated"
+	reg_0x14_bit1_0="Q-Channel CRC status:      OK"
+	reg_0x14_bit1_1="Q-Channel CRC status:      Q-channel sub-code data CRC error"
+	reg_0x14_bit2_0="DIR unlock status:         OK"
+	reg_0x14_bit2_1="DIR unlock status:         Error! AES3 decoder and PLL are unlocked"
+	reg_0x14_bit3_0="Q-channel data status:     OK"
+	reg_0x14_bit3_1="Q-channel data status:     Q-channel data has changed."
+	reg_0x14_bit4_0="Bipolar encoding:          OK"
+	reg_0x14_bit4_1="Bipolar encoding:          Error!"
+	reg_0x14_bit5_0="Validity bit:              OK"
+	reg_0x14_bit5_1="Validity bit:              Non valid data detected! "
+	reg_0x14_bit6_0="Parity:                    OK"
+	reg_0x14_bit6_1="Parity:                    Parity error!"
+	reg_0x14_bit7_0="CRC:                       OK"
+	reg_0x14_bit7_1="CRC:                       CRC error!"
+
+	# Register 0x15
+	reg_0x15_bit0_0="OSLIP:                     OK"
+	reg_0x15_bit0_1="OSLIP:                     OSLIP error!"
+
+	# Register 0x0a SRC and DIT status
+	reg_0x0a_bit0_0=""
+	reg_0x0a_bit0_1="                           Transmit buffer transfer completed"
+	reg_0x0a_bit1_0=""
+	reg_0x0a_bit1_1="                           Transmit source data SLIP status bit set"
+	reg_0x0a_bit4_0=""
+	reg_0x0a_bit4_1="                           SRC ready"
+	reg_0x0a_bit5_0=""
+	reg_0x0a_bit5_1="                           Input rate higher than output rate"
+
+	get_bits $1
+
+	case $1 in
+		0x0a | 0x02 | 0x12 | 0x14 | 0x15)
+			for count in $(seq 0 7) ; do
+				string0=$(eval echo \$$(eval echo reg_'$1'_bit"$count"_0))
+				string1=$(eval echo \$$(eval echo reg_'$1'_bit"$count"_1))
+				if [[ "$bit0" = "0" && "$string0" != "" ]]
+				then	echo $string0
+				else [ "$string1" != "" ] && echo $string1
+				fi
+			done
+			;;
+
+		0x13)
+			[[ "$bit0" = "0" && "$bit1" = "0" ]] && echo "Max available clock rate not determined"
+			[[ "$bit0" = "1" && "$bit1" = "0" ]] && echo "Max available clock rate is 128 * fs"
+			[[ "$bit0" = "0" && "$bit1" = "1" ]] && echo "Max available clock rate is 256 * fs"
+			[[ "$bit0" = "1" && "$bit1" = "1" ]] && echo "Max available clock rate is 512 * fs"
+		;;
+	esac
+}
+
+read_register $1
