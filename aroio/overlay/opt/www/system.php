@@ -41,7 +41,8 @@
         //exec("/usr/bin/update update" , $update_output);
     }
 
-    include "header.php";?>
+//    include "header.php";
+?>
 
 <!-- Navigation -->
 <ul>
@@ -258,19 +259,15 @@ if ($test_wlan == "0"){?>
     </td>
 
     <td>
-      <input class="button" type="submit" class="actiongroup" value=" <? print ${button_mount._.$lang} ?> " name="mount">
-    </td>
-
-    <td>
       <input class="button" type="submit" class="actiongroup" value=" <? print ${button_deliver_log._.$lang} ?> " name="deliver_log">
     </td>
-  </tr>
 
-  <tr>
     <td>
       <input class="button" type="submit" class="actiongroup" value="squeezelitelog" name="squeezelitelog">
     </td>
+ </tr>
 
+  <tr>
     <td>
       <input class="button" type="submit" class="actiongroup" value="systemlog" name="systemlog">
     </td>
