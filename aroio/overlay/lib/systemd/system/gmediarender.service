@@ -6,8 +6,9 @@ Wants=network-online.target
 
 [Service]
 Type=simple
-EnvironmentFile=/boot/userconfig.txt
-ExecStart=/bin/taskset -c 2,3 /bin/gmediarender -f $PLAYERNAME --gstout-audiosink alsasink --gstout-audiodevice $AUDIO_OUTPUT
+#EnvironmentFile=/boot/userconfig.txt
+#ExecStart=/bin/taskset -c 2,3 /bin/gmediarender -f $PLAYERNAME --gstout-audiosink alsasink --gstout-audiodevice $AUDIO_OUTPUT
+ExecStart=/bin/taskset -c 2,3 /bin/gmediarender-starter
 Restart=always
 
 [Install]
