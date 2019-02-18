@@ -30,7 +30,7 @@
           </td>
         </tr>
         <?
-        if ($_POST["PLATFORM"] != "AroioSU" && $_POST["PLATFORM"] != "AroioEX") // Depending on theese, values are set in index.php!
+        if ($_POST["PLATFORM"] != "AroioSU" && $_POST["PLATFORM"] != "AroioEX" && $ini_array["PLATFORM"] !="AroioSU" && $ini_array["PLATFORM"] !="AroioEX") // Depending on theese, values are set in index.php!
         { ?>
           <tr>
             <td>
@@ -104,6 +104,7 @@
                 case "IQAudIO DAC":
                 case "HiFiBerry Digi":
                 case "HiFiBerry DAC":
+                case "HiFiBerry DAC+":
                 case "JustBoom DAC":
                 case "Allo Piano DAC":
                 case "Allo Piano 2.1 DAC":
