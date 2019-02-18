@@ -1,15 +1,10 @@
-#!/bin/python
+#!/bin/python -u
 
 from RPi import GPIO
 from time import sleep
 import subprocess
 import threading
 import os
-
-Enc_A = 0 # Not all aroios have a rotary encoder, so we are disabling it
-Enc_B = 0 #   by initializing it with pin 0
-Btn_Pause = 27
-LED_Net = 22
 
 # Setting up a null device
 FNULL = open(os.devnull, 'w')
@@ -24,14 +19,13 @@ with open("/boot/userconfig.txt") as f:
             print("Incorrect line in config: ", line)
         config[key] = value[1:-1]
 
+Enc_A = 0 # Not all aroios have a rotary encoder, so we are disabling it
+Enc_B = 0 #   by initializing it with pin 0
+LED_Net = 22
+Btn_Pause = 0
+
 # Set initial volume to prevent jump upon first usage of rotary encoder
 Volume = int(config["VOLUME_START"])
-
-# AmixerVolume = int(subprocess.Popen(["amixer sget Master | awk '/Left:/ { print $3 }'"], shell=True,stdout=subprocess.PIPE).communicate()[0].decode('utf-8'))
-# print (AmixerVolume)
-
-# VOLalsa = (VOLjack*3,1875)+255
-
 oldVolume = 0
 A_LastState = 0
 
@@ -39,14 +33,19 @@ A_LastState = 0
 if (str(config["PLATFORM"]) == "AroioLT"):
     Enc_A = 23
     Enc_B = 24
-    LED_net = 22
+#    LED_net = 22
+
+# Check if platform has a pause-button
+if (str(config["PLATFORM"]) == "AroioEX" or str(config["PLATFORM"]) == "AroioLT"):
+    Btn_Pause = 27
+    print("Platform has pause button")
 
 # Initializing our GPIOs
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(Enc_A, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 GPIO.setup(Enc_B, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-GPIO.setup(Btn_Pause, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-GPIO.setup(LED_Net, GPIO.OUT)
+GPIO.setup(Btn_Pause, GPIO.IN)
+#GPIO.setup(LED_Net, GPIO.OUT)
 
 # Callback function that decodes our rotary encoder
 def rotation_decode(Enc_A):
@@ -73,18 +72,29 @@ def rotation_decode(Enc_A):
 # Callback function that controls our LMS server: pause
 def pause_alert(input):
     #print("Button Pause was pushed!")
-    subprocess.call(["aroio_control_lms", "pause"])
+    pause_press = GPIO.input(Btn_Pause)
+    if pause_press:
+        print("Button pause pressed, will inform our LMS...")
+        subprocess.call(["aroio_control_lms", "pause"])
 
 # Callback function that controls our LED
-def control_led(state):
-    print("Turning LED", state)
-    if str(state) == "on":
-        GPIO.output(LED_net, 1)
-    else:
-        GPIO.output(LED_net, 0)
+#def control_led(state):
+#    print("Turning LED", state)
+#    if str(state) == "on":
+#        GPIO.output(LED_net, 1)
+#    else:
+#        GPIO.output(LED_net, 0)
 
+
+# Make sure there are no leftovers from previous runs
+GPIO.remove_event_detect(Enc_A)
+GPIO.remove_event_detect(Enc_B)
 # Attach events to our pins
 GPIO.add_event_detect(Enc_A, GPIO.BOTH, callback=rotation_decode, bouncetime=2)
+
+# Again take care of leftovers
+GPIO.remove_event_detect(Btn_Pause)
+# Attach event
 GPIO.add_event_detect(Btn_Pause,GPIO.RISING,callback=pause_alert, bouncetime=200)
 
 # Main loop
@@ -93,8 +103,8 @@ try:
         sleep(0.01)
         if Volume != oldVolume:
             AlsaVolume = Volume * 3.1875 + 255
-            print(Volume)
-            print(AlsaVolume)
+            print("New jackmixer volume: ",Volume)
+            print("New amixer volume:    ",AlsaVolume)
             threading.Thread(target=lambda ctr: subprocess.call(["volumecontrol", str(ctr)], stdout=FNULL, stderr=subprocess.STDOUT), args=(Volume,)).start()
             threading.Thread(target=lambda ctr: subprocess.call(["amixer", "sset", "'Master'", str(ctr)], stdout=FNULL, stderr=subprocess.STDOUT), args=(AlsaVolume,)).start()
             oldVolume = Volume
