@@ -3,7 +3,9 @@
 . /boot/userconfig.txt
 
 [ "$SERVERNAME" = "" ] && LMS_ADDRESS=$(netstat -n | grep -oE "\b([0-9]{1,3}\.){3}[0-9]{1,3}:3483\b" | grep -oE "\b([0-9]{1,3}\.){3}[0-9]{1,3}") || LMS_ADDRESS="$SERVERNAME"
-[ "$SERVERPORT" = "" ] && LMS_PORT="9090" || LMS_PORT="$SERVERPORT"
+#[ "$SERVERPORT" = "" ] && LMS_PORT="9090" || LMS_PORT="$SERVERPORT"
+LMS_PORT="9090"
+
 MAC_ADDRESS=$(cat /sys/class/net/eth0/address)
 LMS_AUTH="$AUTH"
 
