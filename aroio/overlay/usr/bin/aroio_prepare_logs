@@ -16,6 +16,9 @@ ls /boot/filter/ >> /tmp/aroio_logs/config/filters.txt
 echo -e "\nFilters in tmp:" >> /tmp/aroio_logs/config/filters.txt
 ls /tmp/filter/ >> /tmp/aroio_logs/config/filters.txt
 
+# Collect version information
+cp /boot/version /tmp/aroio_logs/config/
+
 # Save output of ifconfig
 ifconfig > /tmp/aroio_logs/config/network.txt
 
