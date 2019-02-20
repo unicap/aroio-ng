@@ -17,7 +17,7 @@ echo -e "\nFilters in tmp:" >> /tmp/aroio_logs/config/filters.txt
 ls /tmp/filter/ >> /tmp/aroio_logs/config/filters.txt
 
 # Collect version information
-cp /boot/version /tmp/aroio_logs/config/
+echo "Aroio $(cat /boot/version) on Raspberry $(aroio_piversion)" > /tmp/aroio_logs/config/versions.txt
 
 # Save output of ifconfig
 ifconfig > /tmp/aroio_logs/config/network.txt
