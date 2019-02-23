@@ -1,6 +1,4 @@
 <?php
-    ob_start();
-    include('header.php');
     include('strings.php');
     include('functions.inc.php');
     include('style.css');
@@ -11,7 +9,9 @@
     if ( isset($_POST['check_update']) )
     {
         //$shell_exec_ret=shell_exec('chmod 750 /usr/bin/update check');
+        $shell_exec_ret=shell_exec('cardmount rw');
         wrtToUserconfig('USEBETA',$_POST['USEBETA']);
+        $shell_exec_ret=shell_exec('cardmount ro');
         if ($_POST['USEBETA'] == "ON"){
             exec ( "/usr/bin/update -c -u beta" , $ausgabe , $return_var  );}
         else{
@@ -23,12 +23,12 @@
         if ($remote[0] == $local[0] && $remote[1] > $local[1])
         {
             $update_message="<h1>${infotext_update_available._.$lang}</h1>";
-            shell_exec('cardmount rw');
+            //shell_exec('cardmount rw');
         }
         else
         {
             $update_message="<b>${infotext_update_unchanged._.$lang}</b>";
-            shell_exec('cardmount rw');
+            //shell_exec('cardmount rw');
         }
         unset($_POST['submit']);
     }
@@ -41,8 +41,7 @@
         //exec("/usr/bin/update update" , $update_output);
     }
 
-//    include "header.php";
-?>
+    include "header.php";?>
 
 <!-- Navigation -->
 <ul>
@@ -259,15 +258,19 @@ if ($test_wlan == "0"){?>
     </td>
 
     <td>
-      <input class="button" type="submit" class="actiongroup" value=" <? print ${button_deliver_log._.$lang} ?> " name="deliver_log">
+      <input class="button" type="submit" class="actiongroup" value=" <? print ${button_mount._.$lang} ?> " name="mount">
     </td>
 
     <td>
-      <input class="button" type="submit" class="actiongroup" value="squeezelitelog" name="squeezelitelog">
+      <input class="button" type="submit" class="actiongroup" value=" <? print ${button_free._.$lang} ?> " name="free">
     </td>
- </tr>
+  </tr>
 
   <tr>
+    <td>
+      <input class="button" type="submit" class="actiongroup" value="squeezelitelog" name="squeezelitelog">
+    </td>
+
     <td>
       <input class="button" type="submit" class="actiongroup" value="systemlog" name="systemlog">
     </td>
@@ -288,26 +291,23 @@ if ($test_wlan == "0"){?>
 
 <?
 if ( isset($_POST['ifconfig']) )
-    print_cmdout('ifconfig');
+print_cmdout('ifconfig');
 if ( isset($_POST['dmesg']) )
-    print_cmdout('dmesg');
+print_cmdout('dmesg');
 if ( isset($_POST['mount']) )
-    print_cmdout('mount');
+print_cmdout('mount');
 if ( isset($_POST['free']) )
-    print_cmdout('free');
+print_cmdout('free');
 if ( isset($_POST['systemlog']) )
-    print_journalctl_boot();
+	print_journalctl_boot();
 if ( isset($_POST['squeezelitelog']) )
-    print_journalctl('squeezelite');
+	print_journalctl('squeezelite');
 if ( isset($_POST['jackdlog']) )
-    print_journalctl('jackd');
+	print_journalctl('jackd');
 if ( isset($_POST['brutefirlog']) )
-    print_journalctl('brutefir');
+	print_journalctl('brutefir');
 if ( isset($_POST['Audio-HW-Info']) )
-    print_audio_hw_params();
-if ( isset($_POST['deliver_log']) )
-//    header("Location: " . "http://" . $_SERVER['HTTP_HOST'] . '/getlogs.php');
-    deliver_logs();
+	print_audio_hw_params();
 ?>
 </fieldset>
 </form>

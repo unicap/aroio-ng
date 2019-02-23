@@ -84,12 +84,12 @@
           if ($ini_array["AUDIO_OUTPUT"] == "vol-plug-ms") { ?>
             <tr>
               <td> <input class="actiongroup" type="radio" name="AUDIO_OUTPUT" value="vol-plug-ms" checked>
-              <a title="<? print ${helptext_audio_out_direct_ms._.$lang} ?>"class="tooltip"> DirectMS <?
+              <a title="<? print ${helptext_audio_out_direct_ms._.$lang} ?>"class="tooltip"> 	&boxur;Clean <?
           }
           else { ?>
             <tr>
               <td> <input class="actiongroup" type="radio" name="AUDIO_OUTPUT" value="vol-plug-ms">
-              <a title="<? print ${helptext_audio_out_direct_ms._.$lang} ?>"class="tooltip"> DirectMS <?
+              <a title="<? print ${helptext_audio_out_direct_ms._.$lang} ?>"class="tooltip"> 	&boxur;Clean <?
           }
 
           switch ($ini_array["RAW_PLAYERMS"]){
@@ -224,12 +224,12 @@
       if ($ini_array["AUDIO_OUTPUT"] == "jack-ms")
       { ?>
         <input class="actiongroup" type="radio" id="output" name="AUDIO_OUTPUT" value="jack-ms" checked>
-        <a title="<? print ${helptext_audio_out_bus_ms._.$lang} ?>"class="tooltip"> Bus MS <?
+        <a title="<? print ${helptext_audio_out_bus_ms._.$lang} ?>"class="tooltip"> 	&boxur;Clean <?
       }
       else
       { ?>
         <input class="actiongroup" type="radio" id="output" name="AUDIO_OUTPUT" value="jack-ms">
-        <a title="<? print ${helptext_audio_out_bus_ms._.$lang} ?>"class="tooltip"> Bus MS <?
+        <a title="<? print ${helptext_audio_out_bus_ms._.$lang} ?>"class="tooltip"> 	&boxur;Clean <?
       } ?>
     </td>
 
@@ -395,12 +395,12 @@
         if ($ini_array["AUDIO_OUTPUT"] == "jack-bfms")
         { ?>
           <input class="actiongroup" type="radio" name="AUDIO_OUTPUT" value="jack-bfms" checked>
-          <a title="<? print ${helptext_audio_out_convol_ms._.$lang} ?>"class="tooltip"> Convol. MS <?
+          <a title="<? print ${helptext_audio_out_convol_ms._.$lang} ?>"class="tooltip"> 	&boxur;Clean <?
         }
         else
         { ?>
           <input class="actiongroup" type="radio" name="AUDIO_OUTPUT" value="jack-bfms">
-          <a title="<? print ${helptext_audio_out_convol_ms._.$lang} ?>"class="tooltip"> Convol. MS <?
+          <a title="<? print ${helptext_audio_out_convol_ms._.$lang} ?>"class="tooltip"> 	&boxur;Clean <?
         } ?>
       </td>
 
