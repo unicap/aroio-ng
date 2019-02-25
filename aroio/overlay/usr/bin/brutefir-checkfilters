@@ -4,7 +4,7 @@
 
 SDDIR='/boot/filter'
 OLDSDDIR="/boot/brutefir"
-RAMDIR='/tmp/filter'
+RAMDIR='/run/filter'
 
 mkdir -p "$SDDIR"
 mkdir -p "$RAMDIR"
@@ -12,7 +12,7 @@ mkdir -p "$RAMDIR"
 cp -r "$SDDIR"/* "$RAMDIR"
 
 # Mitgelieferte Filter bei Bedarf auspacken
-[ "$LOAD_PREFILTER" = "ON" ] && /bin/zcat /etc/brutefir/filter.tgz | tar -xvf - -C /tmp
+[ "$LOAD_PREFILTER" = "ON" ] && /bin/zcat /etc/brutefir/filter.tgz | tar -xvf - -C /run
 cardmount rw
 rsync --exclude "*.tmp" -vrLt --delete "$RAMDIR"/ "$SDDIR"
 cardmount ro

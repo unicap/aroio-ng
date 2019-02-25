@@ -214,7 +214,7 @@ function print_optgroup2D($name,$arr_values,$sel_value)
 function fltrSelect($id,$ini_array)
 {
 	//$directory = '/home/sftparoio'; //evtl als konstante bzw in config-file
-	$directory = '/tmp/filter'; //evtl als konstante bzw in config-file
+	$directory = '/run/filter'; //evtl als konstante bzw in config-file
 	if ($regexString=browseDirectory($directory)) {
 	    /*while(false !== ($entry = readdir($handle)))
 	    {
@@ -478,7 +478,7 @@ function readCoeffNamesFromBrutefir($sets)
 function switchFilter($fltrBank)
 {
 	$cmd = '/usr/bin/controlbrutefir chgFilter'; //evtl als konstante auslagern
-	$directory = '/tmp/filter';
+	$directory = '/run/filter';
 	$coeffSet0=2*$fltrBank;
 	$coeffSet1=2*$fltrBank+1;
 	$coeffSet2=2*$fltrBank+2;

@@ -30,9 +30,9 @@ case $CHANNELS in
 			COEFF_NAME=$(eval "echo \$$i")
 			counter=$((counter+1))
 			if [ "$COEFF_NAME" = "" ] ; then COEFF_NAME="BypassFilter" ; fi
-			if ! [ -e /tmp/filter/"$COEFF_NAME"L"$(( $RATE / 1000 ))".dbl ]  ; then COEFF_NAME="BypassFilter" ; fi
-			sed -i -- s/"coeff\"left"$counter"\"{filename:\"\/tmp\/filter\/BypassFilterL96.dbl\";"/"coeff\"left"$counter"\"{filename:\"\/tmp\/filter\/"$COEFF_NAME"L"$(( $RATE / 1000 ))".dbl\";"/g /etc/brutefir/brutefir.conf
-			sed -i -- s/"coeff\"right"$counter"\"{filename:\"\/tmp\/filter\/BypassFilterR96.dbl\";"/"coeff\"right"$counter"\"{filename:\"\/tmp\/filter\/"$COEFF_NAME"R"$(( $RATE / 1000 ))".dbl\";"/g /etc/brutefir/brutefir.conf
+			if ! [ -e /run/filter/"$COEFF_NAME"L"$(( $RATE / 1000 ))".dbl ]  ; then COEFF_NAME="BypassFilter" ; fi
+			sed -i -- s/"coeff\"left"$counter"\"{filename:\"\/run\/filter\/BypassFilterL96.dbl\";"/"coeff\"left"$counter"\"{filename:\"\/run\/filter\/"$COEFF_NAME"L"$(( $RATE / 1000 ))".dbl\";"/g /etc/brutefir/brutefir.conf
+			sed -i -- s/"coeff\"right"$counter"\"{filename:\"\/run\/filter\/BypassFilterR96.dbl\";"/"coeff\"right"$counter"\"{filename:\"\/run\/filter\/"$COEFF_NAME"R"$(( $RATE / 1000 ))".dbl\";"/g /etc/brutefir/brutefir.conf
 			sed -i -- s/"96000"/"$RATE"/g /etc/brutefir/brutefir.conf
 		done
 		;;
@@ -42,11 +42,11 @@ case $CHANNELS in
 			COEFF_NAME=$(eval "echo \$$i")
 			counter=$((counter+1))
 			if [ "$COEFF_NAME" = ""  ] ; then COEFF_NAME="BypassFilter" ; fi
-			if ! [ -e /tmp/"$COEFF_NAME"L"$RATE".dbl ]  ; then COEFF_NAME="BypassFilter" ; fi
-			sed -i -- s/"coeff\"left"$counter"\"{filename:\"\/tmp\/filter\/BypassFilterL96.dbl\";"/"coeff\"left"$counter"\"{filename:\"\/tmp\/filter\/"$COEFF_NAME"L"$(( $RATE / 1000 )).dbl\";"/g /etc/brutefir/brutefir.conf
-			sed -i -- s/"coeff\"right"$counter"\"{filename:\"\/tmp\/filter\/BypassFilterR96.dbl\";"/"coeff\"right"$counter"\"{filename:\"\/tmp\/filter\/"$COEFF_NAME"R"$(( $RATE / 1000 )).dbl\";"/g /etc/brutefir/brutefir.conf
-			sed -i -- s/"coeff\"sleft"$counter"\"{filename:\"\/tmp\/filter\/BypassFilterL96.dbl\";"/"coeff\"sleft"$counter"\"{filename:\"\/tmp\/filter\/"$COEFF_NAME"SL"$(( $RATE / 1000 )).dbl\";"/g /etc/brutefir/brutefir.conf
-			sed -i -- s/"coeff\"sright"$counter"\"{filename:\"\/tmp\/filter\/BypassFilterR96.dbl\";"/"coeff\"sright"$counter"\"{filename:\"\/tmp\/filter\/"$COEFF_NAME"SR"$(( $RATE / 1000 )).dbl\";"/g /etc/brutefir/brutefir.conf
+			if ! [ -e /run/"$COEFF_NAME"L"$RATE".dbl ]  ; then COEFF_NAME="BypassFilter" ; fi
+			sed -i -- s/"coeff\"left"$counter"\"{filename:\"\/run\/filter\/BypassFilterL96.dbl\";"/"coeff\"left"$counter"\"{filename:\"\/run\/filter\/"$COEFF_NAME"L"$(( $RATE / 1000 )).dbl\";"/g /etc/brutefir/brutefir.conf
+			sed -i -- s/"coeff\"right"$counter"\"{filename:\"\/run\/filter\/BypassFilterR96.dbl\";"/"coeff\"right"$counter"\"{filename:\"\/run\/filter\/"$COEFF_NAME"R"$(( $RATE / 1000 )).dbl\";"/g /etc/brutefir/brutefir.conf
+			sed -i -- s/"coeff\"sleft"$counter"\"{filename:\"\/run\/filter\/BypassFilterL96.dbl\";"/"coeff\"sleft"$counter"\"{filename:\"\/run\/filter\/"$COEFF_NAME"SL"$(( $RATE / 1000 )).dbl\";"/g /etc/brutefir/brutefir.conf
+			sed -i -- s/"coeff\"sright"$counter"\"{filename:\"\/run\/filter\/BypassFilterR96.dbl\";"/"coeff\"sright"$counter"\"{filename:\"\/run\/filter\/"$COEFF_NAME"SR"$(( $RATE / 1000 )).dbl\";"/g /etc/brutefir/brutefir.conf
 			sed -i -- s/"96000"/"$RATE"/g /etc/brutefir/brutefir.conf
 		done
 		;;
@@ -92,28 +92,24 @@ DEF_SCOEFF_NAME='$SCOEFF$NAME$DEF_SCOEFF'
 eval DEF_SCOEFF_NAME=$DEF_SCOEFF_NAME
 DEF_SCOEFF_NAME=$(eval echo \$$DEF_SCOEFF_NAME)
 
-if [ "$DEF_COEFF" = "" ] ; then DEF_COEFF="0" ; fi
-if [ "$DEF_COEFF_PHASE" = "" ] ; then DEF_COEFF_PHASE="1" ; fi
-if [ "$DEF_COEFF_ATT" = "" ] ; then DEF_COEFF_ATT="0" ; fi
-
-#if [ "$DEF_SCOEFF" = "" ] ; then DEF_COEFF="0" ; fi
-#if [ "$DEF_SCOEFF_PHASE" = "" ] ; then DEF_COEFF_PHASE="1" ; fi
-#if [ "$DEF_SCOEFF_ATT" = "" ] ; then DEF_COEFF_ATT="0" ; fi
+[ "$DEF_COEFF" = "" ] && DEF_COEFF="0"
+[ "$DEF_COEFF_PHASE" = "" ] && DEF_COEFF_PHASE="1"
+[ "$DEF_COEFF_ATT" = "" ] && DEF_COEFF_ATT="0"
 
 case $CHANNELS in
 	2)
-	sed -i -- s/"to_outputs:\"left\"\/0\/0;"/"to_outputs:\"left\"\/"$DEF_COEFF_ATT"\/"$DEF_COEFF_PHASE";"/g /etc/brutefir/brutefir.conf
-	sed -i -- s/"to_outputs:\"right\"\/0\/0;"/"to_outputs:\"right\"\/"$DEF_COEFF_ATT"\/"$DEF_COEFF_PHASE";"/g /etc/brutefir/brutefir.conf
+	sed -i -- s/"to_outputs:\"left\"\/0\/1;"/"to_outputs:\"left\"\/"$DEF_COEFF_ATT"\/"$DEF_COEFF_PHASE";"/g /etc/brutefir/brutefir.conf
+	sed -i -- s/"to_outputs:\"right\"\/0\/1;"/"to_outputs:\"right\"\/"$DEF_COEFF_ATT"\/"$DEF_COEFF_PHASE";"/g /etc/brutefir/brutefir.conf
 
 	sed -i -- s/"coeff:\"left0\";"/"coeff:\"left"$DEF_COEFF"\";"/g /etc/brutefir/brutefir.conf
 	sed -i -- s/"coeff:\"right0\";"/"coeff:\"right"$DEF_COEFF"\";"/g /etc/brutefir/brutefir.conf
 	;;
 
 	4)
-	sed -i -- s/"to_outputs:\"left\"\/0\/0;"/"to_outputs:\"left\"\/"$DEF_COEFF_ATT"\/"$DEF_COEFF_PHASE";"/g /etc/brutefir/brutefir.conf
-	sed -i -- s/"to_outputs:\"right\"\/0\/0;"/"to_outputs:\"right\"\/"$DEF_COEFF_ATT"\/"$DEF_COEFF_PHASE";"/g /etc/brutefir/brutefir.conf
-	sed -i -- s/"to_outputs:\"sleft\"\/0\/0;"/"to_outputs:\"sleft\"\/"$DEF_COEFF_ATT"\/"$DEF_COEFF_PHASE";"/g /etc/brutefir/brutefir.conf
-	sed -i -- s/"to_outputs:\"sright\"\/0\/0;"/"to_outputs:\"sright\"\/"$DEF_COEFF_ATT"\/"$DEF_COEFF_PHASE";"/g /etc/brutefir/brutefir.conf
+	sed -i -- s/"to_outputs:\"left\"\/0\/1;"/"to_outputs:\"left\"\/"$DEF_COEFF_ATT"\/"$DEF_COEFF_PHASE";"/g /etc/brutefir/brutefir.conf
+	sed -i -- s/"to_outputs:\"right\"\/0\/1;"/"to_outputs:\"right\"\/"$DEF_COEFF_ATT"\/"$DEF_COEFF_PHASE";"/g /etc/brutefir/brutefir.conf
+	sed -i -- s/"to_outputs:\"sleft\"\/0\/1;"/"to_outputs:\"sleft\"\/"$DEF_COEFF_ATT"\/"$DEF_COEFF_PHASE";"/g /etc/brutefir/brutefir.conf
+	sed -i -- s/"to_outputs:\"sright\"\/0\/1;"/"to_outputs:\"sright\"\/"$DEF_COEFF_ATT"\/"$DEF_COEFF_PHASE";"/g /etc/brutefir/brutefir.conf
 
 	sed -i -- s/"coeff:\"left0\";"/"coeff:\"left"$DEF_COEFF"\";"/g /etc/brutefir/brutefir.conf
 	sed -i -- s/"coeff:\"right0\";"/"coeff:\"right"$DEF_COEFF"\";"/g /etc/brutefir/brutefir.conf

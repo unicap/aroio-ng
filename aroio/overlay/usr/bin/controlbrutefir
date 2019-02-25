@@ -30,10 +30,10 @@ echo "att multiplied to "$ATT""
 	if [ $ATT -le $CUR_ATT ]
 	then	ATT=$(echo $ATT|awk '{print $1 / 10}')
 			`echo 'cfc' $1 $2 ';' 'cfc' $3 $4 | nc 127.0.0.1 3000` &> /dev/null
-			`echo 'cfia' 0 0 "$ATT" ';' 'cfia' 1 1 "$ATT" | nc 127.0.0.1 3000` &> /dev/null
+			`echo 'cfoa' 0 0 "$ATT" ';' 'cfoa' 1 1 "$ATT" | nc 127.0.0.1 3000` &> /dev/null
 	else
 			ATT=$(echo $ATT|awk '{print $1 / 10}')
-			`echo 'cfia' 0 0 "$ATT" ';' 'cfia' 1 1 "$ATT" | nc 127.0.0.1 3000` &> /dev/null
+			`echo 'cfoa' 0 0 "$ATT" ';' 'cfoa' 1 1 "$ATT" | nc 127.0.0.1 3000` &> /dev/null
 			`echo 'sleep 1 ; cfc' $1 $2 ';' 'cfc' $3 $4 | nc 127.0.0.1 3000` &> /dev/null
 	fi
 
@@ -62,7 +62,7 @@ function tgglMute()
 
 function volControl()
 {
-	`echo 'cfia 0 0' $2 ';cfia 1 1' $2| nc 127.0.0.1 3000` 2>>/dev/null
+	`echo 'cfoa 0 0' $2 ';cfoa 1 1' $2| nc 127.0.0.1 3000` 2>>/dev/null
 }
 
 [ "$1" = "" ] && echo "No command! Possible commands: chgDelay chgFilter getDelay getFilter getVol tgglMute volControl" || "$1" "$2" "$3" "$4" "$5"
