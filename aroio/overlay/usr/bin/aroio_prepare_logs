@@ -19,24 +19,40 @@ ls /tmp/filter/ >> /tmp/aroio_logs/config/filters.txt
 # Collect version information
 echo "Aroio $(cat /boot/version) on Raspberry $(aroio_piversion)" > /tmp/aroio_logs/config/versions.txt
 
+# Collect module information
+lsmod > /tmp/aroio_logs/config/loaded_modules.txt
+
 # Save output of ifconfig
-ifconfig > /tmp/aroio_logs/config/network.txt
+echo -e "ifconfig -a output:" > /tmp/aroio_logs/config/network.txt
+ifconfig -a >> /tmp/aroio_logs/config/network.txt
+echo -e "\n\niwconfig output:" >> /tmp/aroio_logs/config/network.txt
+iwconfig >> /tmp/aroio_logs/config/network.txt
 
 # Store information about audio-hardware
 controlaudio stop
-aplay --duration=1 -Dhw:0 --dump-hw-params /dev/zero &> /tmp/aroio_logs/config/audio_hw_params.txt
-controlaudio start
+echo -e "cat /proc/asound/cards:" > /tmp/aroio_logs/config/audio_hw.txt
+cat /proc/asound/cards >> /tmp/aroio_logs/config/audio_hw.txt
+echo -e "aplay --dump-hw-params:" >> /tmp/aroio_logs/config/audio_hw.txt
+aplay --duration=1 -Dhw:0 --dump-hw-params /dev/zero >> /tmp/aroio_logs/config/audio_hw.txt
 
 # Collect mostly needed logs
-journalctl -u brutefir > /tmp/aroio_logs/logs/brutefir.log.txt
-journalctl -u squeezelite > /tmp/aroio_logs/logs/squeezelite.log.txt
-journalctl -u jackd > /tmp/aroio_logs/logs/jackd.log.txt
-journalctl -u bluealsa-aplay > /tmp/aroio_logs/logs/bluealsa-aplay.log.txt
-journalctl -u gmediarender > /tmp/aroio_logs/logs/gmediarender.log.txt
-journalctl -u jackminimix > /tmp/aroio_logs/logs/jackminimix.log.txt
-journalctl -u shairport-sync > /tmp/aroio_logs/logs/shairportsync.log.txt
+for SERVICE in brutefir squeezelite jackd bluealsa-aplay gmediarender jackminimix shairport-sync
+do
+	journalctl -u $SERVICE > /tmp/aroio_logs/logs/"$SERVICE".log.txt
+done
+
+#journalctl -u brutefir > /tmp/aroio_logs/logs/brutefir.log.txt
+#journalctl -u squeezelite > /tmp/aroio_logs/logs/squeezelite.log.txt
+#journalctl -u jackd > /tmp/aroio_logs/logs/jackd.log.txt
+#journalctl -u bluealsa-aplay > /tmp/aroio_logs/logs/bluealsa-aplay.log.txt
+#journalctl -u gmediarender > /tmp/aroio_logs/logs/gmediarender.log.txt
+#journalctl -u jackminimix > /tmp/aroio_logs/logs/jackminimix.log.txt
+#journalctl -u shairport-sync > /tmp/aroio_logs/logs/shairportsync.log.txt
 
 # Create archive for download
-7zr a -t7z /opt/www/aroio_logs.7z /tmp/aroio_logs/logs /run/log/journal /tmp/aroio_logs/config/*
+#7zr a -t7z /opt/www/aroio_logs.7z /tmp/aroio_logs/logs /run/log/journal /tmp/aroio_logs/config/*
+7zr a -t7z -m0=LZMA2:d64k:fb32 -ms=8m -mmt=8 -mx=1 -- /opt/www/aroio_logs.7z /tmp/aroio_logs/logs /run/log/journal /tmp/aroio_logs/config/*
+
+controlaudio start
 
 exit 0
