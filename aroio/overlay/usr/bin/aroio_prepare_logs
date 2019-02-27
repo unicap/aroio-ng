@@ -14,7 +14,7 @@ sed -i "/USERPASSWD/c\USERPASSWD=\"\"" /tmp/aroio_logs/config/userconfig.txt
 echo "Filters on SDCard:" > /tmp/aroio_logs/config/filters.txt
 ls /boot/filter/ >> /tmp/aroio_logs/config/filters.txt
 echo -e "\nFilters in tmp:" >> /tmp/aroio_logs/config/filters.txt
-ls /tmp/filter/ >> /tmp/aroio_logs/config/filters.txt
+ls /run/filter/ >> /tmp/aroio_logs/config/filters.txt
 
 # Collect version information
 echo "Aroio $(cat /boot/version) on Raspberry $(aroio_piversion)" > /tmp/aroio_logs/config/versions.txt
@@ -40,14 +40,6 @@ for SERVICE in brutefir squeezelite jackd bluealsa-aplay gmediarender jackminimi
 do
 	journalctl -u $SERVICE > /tmp/aroio_logs/logs/"$SERVICE".log.txt
 done
-
-#journalctl -u brutefir > /tmp/aroio_logs/logs/brutefir.log.txt
-#journalctl -u squeezelite > /tmp/aroio_logs/logs/squeezelite.log.txt
-#journalctl -u jackd > /tmp/aroio_logs/logs/jackd.log.txt
-#journalctl -u bluealsa-aplay > /tmp/aroio_logs/logs/bluealsa-aplay.log.txt
-#journalctl -u gmediarender > /tmp/aroio_logs/logs/gmediarender.log.txt
-#journalctl -u jackminimix > /tmp/aroio_logs/logs/jackminimix.log.txt
-#journalctl -u shairport-sync > /tmp/aroio_logs/logs/shairportsync.log.txt
 
 # Create archive for download
 #7zr a -t7z /opt/www/aroio_logs.7z /tmp/aroio_logs/logs /run/log/journal /tmp/aroio_logs/config/*
