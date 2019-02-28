@@ -37,24 +37,14 @@
             </td>
           </tr>
 
-          <td>
-            <a title="<? print ${helptext_squeeze_alsabuffer._.$lang} ?>"class="tooltip">
-            <span title=""><label for="squeeze_alsabuffer"> <? print ${squeeze_alsabuffer._.$lang} ; ?> </label></span></a>
-          </td>
-
-          <td>
-            <?$arr_squeeze_alsabuffer= array(512,1024,2048,4096,8192,16384,32768,65536,131072,262144,524288,1048576);
-            print_optgroup("SQUEEZE_ALSABUFFER",$arr_squeeze_alsabuffer,$ini_array["SQUEEZE_ALSABUFFER"]);?>
-          </td>
-
           <tr>
             <td>
-              <a title="<? print ${helptext_squeeze_alsaperiod._.$lang} ?>"class="tooltip">
-              <span title=""><label for="squeeze_alsaperiod"> <? print ${squeeze_alsaperiod._.$lang} ; ?> </label></span></a>
+              <a title="<? print ${helptext_squeeze_maxfrequency._.$lang} ?>"class="tooltip">
+              <span title=""><label for="squeeze_maxfrequency"> <? print ${squeeze_maxfrequency._.$lang} ; ?> </label></span></a>
             </td>
             <td>
-              <?$arr_squeeze_alsaperiod= array(2,3,4,8,16,32);
-              print_optgroup("SQUEEZE_ALSAPERIOD",$arr_squeeze_alsaperiod,$ini_array["SQUEEZE_ALSAPERIOD"]);?>
+              <?$arr_squeeze_maxfrequency= array(44100,48000,88000,96000,174000,192000,348000);
+              print_optgroup("SQUEEZE_MAXFREQUENCY",$arr_squeeze_maxfrequency,$ini_array["SQUEEZE_MAXFREQUENCY"]);?>
             </td>
           </tr>
 

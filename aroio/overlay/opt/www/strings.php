@@ -22,7 +22,6 @@
     $off_en='off';
     $off_de='aus';
 
-
 //Konfiguration
     //Netzwerkeinstellungen
         //
@@ -206,8 +205,11 @@
     $jack_period_en='Jack period size';
     $jack_period_de='Jack Periodengr&ouml;&szlig;e';
 
-    $squeeze_alsabuffer_en='Squeezelite ALSA buffer size';
-    $squeeze_alsabuffer_de='Squeezelite ALSA Puffergrö&szlig;e';
+    $squeeze_maxfrequency_en='LMS max. frequency';
+    $squeeze_maxfrequency_de='LMS max. Frequenz';
+
+    $helptext_squeeze_maxfrequency_en='Highest frequency that LMS will output without its own resampling. You can use this to force server-side resampling.';
+    $helptext_squeeze_maxfrequency_de='Maximal von LMS ausgegebene Frequenz, da&uuml;ber wird seitens LMS geresampelt. Hiermit wird serverseitiges Resampling erzwungen.';
 
     $squeeze_alsaperiod_en='Squeezelite ALSA period number';
     $squeeze_alsaperiod_de='Squeezelite ALSA Periodenanzahl';
