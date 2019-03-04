@@ -24,19 +24,26 @@ if [ -z "$1" ] || [ -z "$2" ] ; then
 	exit 1
 fi
 
-aroio_control_led blink 0.15 0.15 5 2 0
+aroio_control_led blink 0.15 0.15 5 2 0 
 
 # Check out the state of our NICs
-ETH0_CARRIER=$(networkctl status eth0 | awk '/State/ {print $2}')
-ETH0_STATE=$(networkctl | awk '/eth0/ {print $5}')
-WLAN0_CARRIER=$(networkctl status wlan0 | awk '/State/ {print $2}')
-WLAN0_STATE=$(networkctl | awk '/wlan0/ {print $5}')
-echo $ETH0_CARRIER
-echo $ETH0_STATE
-echo $WLAN0_CARRIER
-echo $WLAN0_STATE
+function checkinterfaces()
+{
+	ETH0_STATE=$(networkctl status eth0 | awk '/State/ {print $2}')
+	WLAN0_STATE=$(networkctl status wlan0 | awk '/State/ {print $2}')
+	ETH0_SETUP=$(networkctl | awk '/eth0/ {print $5}')
+	WLAN0_SETUP=$(networkctl | awk '/wlan0/ {print $5}')
+	echo "eth0 state : "$ETH0_STATE
+	echo "eth0 setup: " $ETH0_SETUP
+	echo "wlan0 state: "$WLAN0_STATE
+	echo "wlan0 setup: "$WLAN0_SETUP
+}
 
-if [[ "$ETH0_CARRIER" = "routable"  &&  "$ETH0_STATE" = "configured" || "$WLAN0_CARRIER" = "routable"  &&  "$WLAN0_STATE" = "configured" ]]
+checkinterfaces
+
+[[ "$ETH0_SETUP" = "configuring" || "$WLAN0_SETUP" = "configuring" ]] && checkinterfaces
+
+if [[ "$ETH0_STATE" = "routable"  &&  "$ETH0_SETUP" = "configured" || "$WLAN0_STATE" = "routable"  &&  "$WLAN0_SETUP" = "configured" ]]
 then
 	echo "We have a configured network!"
 	echo "Will turn LED on!"

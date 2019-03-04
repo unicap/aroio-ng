@@ -1,0 +1,11 @@
+[Unit]
+Description=ifplugd - Watching eth0 interface carrier
+After=mount.target
+
+[Service]
+Type=simple
+ExecStart=/sbin/ifplugd -n -t 1 -d 0 -a -f -I -b -i eth0 
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
