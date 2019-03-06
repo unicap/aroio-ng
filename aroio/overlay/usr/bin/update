@@ -26,9 +26,10 @@ echo "Usage: "$(basename "$0")" [OPTIONS ]
 }
 
 restart(){
-	# wait 5s and reboot the system
-	sleep 5
-	reboot
+	# wait 3s and reboot the system
+	cardmount ro
+	sleep 3
+	halt -f --reboot
 }
 
 check(){
