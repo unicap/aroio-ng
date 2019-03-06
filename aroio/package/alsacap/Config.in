@@ -1,0 +1,9 @@
+config BR2_PACKAGE_ALSACAP
+	bool "alsacap"
+	depends on BR2_PACKAGE_ALSA_LIB
+	depends on BR2_TOOLCHAIN_HAS_THREADS # alsa-lib
+	select BR2_PACKAGE_ALSA_LIB
+	help
+	  Alsa capability tool
+
+	  https://github.com/bubbapizza/alsacap

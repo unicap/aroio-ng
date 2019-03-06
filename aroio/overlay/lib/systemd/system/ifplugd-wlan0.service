@@ -4,8 +4,9 @@ After=mount.target
 
 [Service]
 Type=simple
-ExecStart=/sbin/ifplugd -n -t 1 -d 0 -a -f -I -b -i wlan0 
+ExecStart=/sbin/ifplugd -q -n -t 1 -d 0 -a -f -I -b -i wlan0 
 Restart=always
+ExecStop=/bin/killall -9 $MAINPID 
 
 [Install]
 WantedBy=multi-user.target

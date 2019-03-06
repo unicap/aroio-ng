@@ -5,7 +5,7 @@
 CONFIG="/boot/config.txt"
 ALSACONFIG="/etc/modprobe.d/alsa-base.conf"
 
-[ "$DISPLAY_ROTATE" = "ON" ] && DISPLAY_ROTATE="display_rotate=1"
+[ "$DISPLAY_ROTATE" = "ON" ] && DISPLAY_ROTATE="display_rotate=1" || DISPLAY_ROTATE=""
 
 case $SOUNDCARD in
 	'Internal HDMI audio')
