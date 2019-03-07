@@ -10,27 +10,43 @@
 
     if ( isset($_POST['check_update']) )
     {
-        //$shell_exec_ret=shell_exec('chmod 750 /usr/bin/update check');
         shell_exec('cardmount rw');
         wrtToUserconfig('USEBETA',$_POST['USEBETA']);
         shell_exec('cardmount ro');
-        if ($_POST['USEBETA'] == "ON"){
-            exec ( "/usr/bin/update -c -u beta" , $ausgabe , $return_var  );}
-        else{
-            exec ( "/usr/bin/update -c" , $ausgabe , $return_var  );}
-        list($remote[0], $remote[1]) = explode(".", $ausgabe[0]);
-        list($local[0], $local[1]) = explode(".", $ausgabe[1]);
-        if (is_numeric("$remote[0]")){
-            if ($remote[0] > $local[0]) $update_message="<h1>${infotext_update_available._.$lang}</h1>";}
-        if ($remote[0] == $local[0] && $remote[1] > $local[1])
+
+        if ($_POST['USEBETA'] == "ON")
         {
-            $update_message="<h1>${infotext_update_available._.$lang}</h1>";
-            //shell_exec('cardmount rw');
+            exec ( "/usr/bin/update -c -u beta" , $ausgabe , $return_var );
         }
         else
         {
-            $update_message="<b>${infotext_update_unchanged._.$lang}</b>";
-            //shell_exec('cardmount rw');
+            exec ( "/usr/bin/update -c" , $ausgabe , $return_var );
+		}
+
+        list($remote[0], $remote[1], $remote[2]) = explode(".", $ausgabe[0]);
+        list($local[0], $local[1], $local[2]) = explode(".", $ausgabe[1]);
+
+        if ($remote[0] > $local[0])
+        {
+            $update_message="<h1>${infotext_update_available._.$lang}</h1>";
+        }
+        else
+        {
+            if ($remote[0] == $local[0] && $remote[1] > $local[1])
+            {
+                $update_message="<h1>${infotext_update_available._.$lang}</h1>";
+            }
+            else
+            {
+                if ($remote[0] == $local[0] && $remote[1] == $local[1] && $remote[2] > $local[2])
+                {
+                    $update_message="<h1>${infotext_update_available._.$lang}</h1>";
+                }
+                else
+                {
+                    $update_message="<b>${infotext_update_unchanged._.$lang}</b>";
+                }
+            }
         }
         unset($_POST['submit']);
     }
@@ -40,27 +56,26 @@
     if ( isset($_POST['update']) )
     {
         $update=true;
-        //exec("/usr/bin/update update" , $update_output);
     }
 
-//    include "header.php";
 ?>
 
 <!-- Navigation -->
 <ul>
-<li><a href="index.php" target=""><? print ${linktext_configuration._.$lang} ?></span></a></li>
-<li><a class="select" href="system.php" target=""><? print ${linktext_system._.$lang} ?></a></li>
-<li><a href="measurement.php" target=""><? print${linktext_measurement._.$lang} ?></a></li>
-<li>
-<? if ($ini_array['BRUTEFIR'] == "OFF"){?>
-    <a style="color: #c5c5c5" href="brutefir.php"target=""><? print ${linktext_brutefir._.$lang} ?></a>
+  <li><a href="index.php" target=""><? print ${linktext_configuration._.$lang} ?></span></a></li>
+  <li><a class="select" href="system.php" target=""><? print ${linktext_system._.$lang} ?></a></li>
+  <li><a href="measurement.php" target=""><? print${linktext_measurement._.$lang} ?></a></li>
+  <li>
+    <? if ($ini_array['BRUTEFIR'] == "OFF"){?>
+      <a style="color: #c5c5c5" href="brutefir.php"target=""><? print ${linktext_brutefir._.$lang} ?></a>
     <?}else{?>
-        <a href="brutefir.php"target=""><? print ${linktext_brutefir._.$lang} ?></a>
-        <?}?>
-</li>
+      <a href="brutefir.php"target=""><? print ${linktext_brutefir._.$lang} ?></a>
+    <?}?>
+  </li>
 
-<li style="float:right"><a href="credits.php" target=""><? print ${linktext_credits._.$lang} ?></a></li>
-</ul><!-- Ende Navigation -->
+  <li style="float:right"><a href="credits.php" target=""><? print ${linktext_credits._.$lang} ?></a></li>
+</ul>
+<!-- Ende Navigation -->
 
 <hr class="top">
 </div> <!-- Ende vom Head -->
@@ -72,18 +87,17 @@
 <h1> <? print $ini_array["HOSTNAME"] ?> - <? print ${page_title_system._.$lang} ?></h1>
 
 <fieldset> <!-- Afang Update -->
-<legend><? print ${update_form._.$lang};?></legend>
+  <legend><? print ${update_form._.$lang};?></legend>
 
 <?
 if ($update == false){ ?>
   <fieldset style="border-style: dotted">
-      <? print "${update_info1._.$lang}" ; ?>
-      <a href="https://www.abacus-electronics.de/produkte/streaming/aroioos.html#aroionews" target="_blank">
-      <input type="button" class="button" value="Aroio News"/></a>
-
-      <div style="text-align: center">
-         <? print "${update_info2._.$lang}" ; ?>
-      </div>
+    <? print "${update_info1._.$lang}" ; ?>
+    <a href="https://www.abacus-electronics.de/produkte/streaming/aroioos.html#aroionews" target="_blank">
+    <input type="button" class="button" value="Aroio News"/></a>
+    <div style="text-align: center">
+       <? print "${update_info2._.$lang}" ; ?>
+    </div>
   </fieldset>
 
   <table>
@@ -108,10 +122,12 @@ if ($update == false){ ?>
     <tr>
       <td>
         <? print ${local_version._.$lang};?>
-        <b><? echo $local[0].".".$local[1]; ?></b>
+        <? if(is_numeric($local[2])) $separator_local="." ?>
+        <b><? echo $local[0].".".$local[1]."$separator_local".$local[2]; ?></b>
         <br>
+        <? if(is_numeric($remote[2])) $separator_remote="." ?>
         <? print ${remote_version._.$lang};?>
-        <b><? echo $remote[0].".".$remote[1]; ?></b>
+        <b><? echo $remote[0].".".$remote[1]."$separator_remote".$remote[2]; ?></b>
       </td>
     </tr>
   </table>
