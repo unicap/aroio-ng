@@ -3,11 +3,7 @@
 # alsa-plugins
 #
 #############################################################
-<<<<<<< HEAD
-ALSA_PLUGINS_VERSION = 1.1.6
-=======
-ALSA_PLUGINS_VERSION = 1.1.8
->>>>>>> alsa-tests
+ALSA_PLUGINS_VERSION = 1.1.5
 ALSA_PLUGINS_SOURCE = alsa-plugins-$(ALSA_PLUGINS_VERSION).tar.bz2
 ALSA_PLUGINS_SITE = ftp://ftp.alsa-project.org/pub/plugins
 ALSA_PLUGINS_INSTALL_STAGING = NO
