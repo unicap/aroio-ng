@@ -37,14 +37,14 @@ check(){
 	REMOTE_VERSION=$(wget --no-check-certificate -q -O - "$UPDATESERVER"/latest)
 	if $(REMOTE_VERSION=$(wget --no-check-certificate -T 4 -q -O - "$UPDATESERVER"/latest))
 	then
-		LOCAL_VERSION=$(cat /boot/version)
+		LOCAL_VERSION=$(head -n1 /boot/version)
 		echo $REMOTE_VERSION
 		echo $LOCAL_VERSION
 		echo "Remote version is: $REMOTE_VERSION"
 		echo "Local version is:  $LOCAL_VERSION"
 	else
 		echo "Could not find remote version..."
-		cat /boot/version
+		echo "$LOCAL_VERSION"
 	fi
 }
 
