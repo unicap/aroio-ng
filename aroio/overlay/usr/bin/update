@@ -29,7 +29,7 @@ restart(){
 	# wait 3s and reboot the system
 	cardmount ro
 	sleep 3
-	halt -f --reboot
+	reboot
 }
 
 check(){
@@ -134,8 +134,6 @@ update(){
 		cp -r "$USRPATH"/save/userconfig.txt /boot
 		[ "$REMOTE_VERSION" != "3.50" ] && cp -r "$USRPATH"/save/config.txt /boot
 		cp -r "$USRPATH"/save/filter /boot
-	echo "Writing version file to boot partition..."
-	echo "$REMOTE_VERSION" > /boot/version
 	echo "Everything done, will reboot now. Please wait 20 seconds and DO NOT refresh page. Click System or Configuration link above."
 
 	# Queues reboot in 5s and exits script - that gives the ui-server time to respond back to user
