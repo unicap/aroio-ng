@@ -34,7 +34,7 @@ case $SOUNDCARD in
 		if ! mount | grep -q mmcblk0p2
 		then 	echo "initramfs rootfs.cpio" >> "$CONFIG"
 		fi
-		
+
 		cardmount ro
 		reboot
 	fi
@@ -110,7 +110,7 @@ case $SOUNDCARD in
 	;;
 
 
-	'Aroio DAC')
+	'AroioDAC-SRC')
 	if ! grep -q aroiodac "$CONFIG"
 	then
 		cardmount rw
