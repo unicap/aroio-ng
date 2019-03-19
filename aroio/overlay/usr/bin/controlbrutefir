@@ -1,5 +1,5 @@
 #!/bin/sh
-
+#exit
 . /boot/userconfig.txt
 
 function chgDelay()
@@ -11,18 +11,19 @@ function chgFilter()
 {
 	# Get our current attenuation
 	CUR_ATT=$(echo 'lf' | nc 127.0.0.1 3000 | awk -F/ '/from inputs:[[:space:]]*0\/(-?[[:digit:]]*\.[[:digit:]]*)/ {print $2}')
-echo "cur_att is "$CUR_ATT""
+	echo "cur_att is "$CUR_ATT""
 
 #	# Get our attentuation to switch to
 	eval COEFF_ATT='COEFF_ATT$DEF_COEFF'
 	ATT=$(eval echo \$$COEFF_ATT)
-echo "target_att is "$ATT""
+	echo "target_att is "$ATT""
 
 	# Multiply our values, so bash can compare integers
 	CUR_ATT=$(echo $CUR_ATT|awk '{print 10 * $1}')
 	ATT=$(echo $ATT|awk '{print 10 * $1}')
-echo "cur_att multiplied to "$CUR_ATT""
-echo "att multiplied to "$ATT""
+	echo "cur_att multiplied to "$CUR_ATT""
+	echo "att multiplied to "$ATT""
+
 
 
 
@@ -30,13 +31,20 @@ echo "att multiplied to "$ATT""
 	if [ $ATT -le $CUR_ATT ]
 	then	ATT=$(echo $ATT|awk '{print $1 / 10}')
 			`echo 'cfc' $1 $2 ';' 'cfc' $3 $4 | nc 127.0.0.1 3000` &> /dev/null
-			`echo 'cfoa' 0 0 "$ATT" ';' 'cfoa' 1 1 "$ATT" | nc 127.0.0.1 3000` &> /dev/null
+			if [ "$AUDIO_OUTPUT" = "jack-bfms" ]
+			then	ATT=$((ATT+6))
+					`echo 'cfoa' 0 0 "$ATT" ';' 'cfoa' 1 1 "$ATT" ';' 'cfoa' 0 1 "$ATT" ';' 'cfoa' 1 0 $ATT | nc 127.0.0.1 3000` &> /dev/null
+			else	`echo 'cfoa' 0 0 "$ATT" ';' 'cfoa' 1 1 "$ATT" | nc 127.0.0.1 3000` &> /dev/null
+			fi
 	else
 			ATT=$(echo $ATT|awk '{print $1 / 10}')
-			`echo 'cfoa' 0 0 "$ATT" ';' 'cfoa' 1 1 "$ATT" | nc 127.0.0.1 3000` &> /dev/null
+			if [ "$AUDIO_OUTPUT" = "jack-bfms" ]
+			then	ATT=$((ATT+6))
+				 	`echo 'cfoa' 0 0 "$ATT" ';' 'cfoa' 1 1 "$ATT" ';' 'cfoa' 0 1 "$ATT" ';' 'cfoa' 1 0 "$ATT" | nc 127.0.0.1 3000` &> /dev/null
+			else	`echo 'cfoa' 0 0 "$ATT" ';' 'cfoa' 1 1 "$ATT" | nc 127.0.0.1 3000` &> /dev/null
+			fi
 			`echo 'sleep 1 ; cfc' $1 $2 ';' 'cfc' $3 $4 | nc 127.0.0.1 3000` &> /dev/null
 	fi
-
 }
 
 function getDelay()
@@ -62,7 +70,11 @@ function tgglMute()
 
 function volControl()
 {
-	`echo 'cfoa 0 0' $2 ';cfoa 1 1' $2| nc 127.0.0.1 3000` 2>>/dev/null
+	if [ "$AUDIO_OUTPUT" = "jack-bfms" ]
+	then	ATT=$(($2+6))
+		 	`echo 'cfoa' 0 0 "$ATT" ';' 'cfoa' 1 1 "$ATT" ';' 'cfoa' 0 1 "$ATT" ';' 'cfoa' 1 0 "$ATT" | nc 127.0.0.1 3000` &> /dev/null
+	else	`echo 'cfoa 0 0' $2 ';cfoa 1 1' $2| nc 127.0.0.1 3000` 2>>/dev/null
+	fi
 }
 
 [ "$1" = "" ] && echo "No command! Possible commands: chgDelay chgFilter getDelay getFilter getVol tgglMute volControl" || "$1" "$2" "$3" "$4" "$5"

@@ -2,54 +2,34 @@
 		include('strings.php');
         include('functions.inc.php');
         include('style.css');
-		
+
         if($_GET["lang"] === "en" || $_POST[lang]=='en')
 		{
 			$lang='en';
 			$GLOBALS["lang"]='en';
-		} 
+		}
 		else
 		{
 			$lang='de';
 			$GLOBALS["lang"]='de';
 		}
-		
-		/* Save Configuration and reload */
-		/*
-		if(isset($_POST[save]))
-		{
-			$savedVol=getVol();
-			for ($i=0; $i < 10; $i++) { 
-				wrtToUserconfig('COEFF_NAME'.$i,$_POST[coeff.$i]);
-				wrtToUserconfig('COEFF_COMMENT'.$i,$_POST[comm.$i]);
-			}
-			wrtToUserconfig('COEFF_ATT'.$_POST[savedbank],getVol());
-			wrtToUserconfig('DEF_COEFF',$_POST[savedbank]);
-			shell_exec('/etc/init.d/brutefir reload &> /dev/null ' );
-
-			if ($ini_array[MSCODING]=='ON') {
-				volControl(1,$savedVol);
-			}
-			else {
-				volControl(0,$savedVol);
-			}			
-		}*/
 
         if(isset($_POST[set]))
 		{
 			$savedbank=$_POST[savedbank];
 			validateAndSave(10,$_POST);
-			
+
             $shell_exec_ret=shell_exec('cardmount rw');
             wrtToUserconfig('DEF_COEFF',$_POST[savedbank]);
             $shell_exec_ret=shell_exec('cardmount ro');
-			
-            if ($ini_array[MSCODING]=='ON') {
+
+/*            if ($ini_array[MSCODING]=='ON') {
 				volControl(1,($_POST[vol.$savedbank])*-1);
 			}
-			else {
+*/
+//			else {
 				volControl(0,($_POST[vol.$savedbank])*-1);
-			}
+//			}
 		}
 
 		if(isset($_POST[save]))
@@ -57,11 +37,10 @@
 			$savedbank=$_POST[savedbank];
 
             validateAndSave(10,$_POST);
-            
+ 
             $shell_exec_ret=shell_exec('cardmount rw');
 			wrtToUserconfig('DEF_COEFF',$_POST[savedbank]);
             $shell_exec_ret=shell_exec('cardmount ro');
-			
             shell_exec('controlaudio restart &> /dev/null ' );
             if ($ini_array[MSCODING]=='ON') {
 				volControl(1,$_POST[vol.$savedbank]);
@@ -70,10 +49,10 @@
 				volControl(0,$_POST[vol.$savedbank]);
 			}
 		}
-    
+
 // Load ini-array from userconfig.txt
     $ini_array = parse_ini_file("/boot/userconfig.txt", 1);
-    
+
     // Switch filter bank
 
     $bank_test= $_POST[bank];
@@ -117,7 +96,7 @@
 			tgglMute(0);
 			tgglMute(1);
 		}
-		
+
 		// LOUDER !!
 		if(isset($_POST[volPlus]))
 		{
@@ -132,10 +111,8 @@
 				volControl(0,$actVol);
 			//}
 			$ini_array[COEFF_ATT.$activeFilter]=$actVol;
-			
 		}
-		
-		// less louder ... 
+		// less louder ...
 		if(isset($_POST[volMinus]))
 		{
 			$actVol=getVol(); //auslesen
