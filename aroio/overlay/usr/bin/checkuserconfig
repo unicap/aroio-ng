@@ -9,15 +9,19 @@ then
 	mount -o remount,ro /boot
 fi
 
-# Check, if variables are good to go and if not use defaults
+# Load variables from userconfig.txt
 . /boot/userconfig.txt
 
-# If coming from 3.x we need to adjust the network parameters
+# If coming from 3.x we need to adjust some things
 [ "$IPADDR" != "" ] && LAN_IPADDR="$IPADDR"
 [ "$NETMASK" != "" ] && LAN_NETMASK="$NETMASK"
 [ "$GATEWAY" != "" ] && LAN_GATEWAY="$GATEWAY"
 [ "$DNSSERV" != "" ] && LAN_DNSSERV="$DNSSERV"
 [ "$DHCP" != "" ] && LAN_DHCP="$DHCP"
+[[ "$MSCODING" = "ON" && "BRUTEFIR" = "ON" ]] && AUDIO_OUTPUT="jack-bfms"
+[[ "$MSCODING" = "ON" && "BRUTEFIR" = "OFF" ]] && AUDIO_OUTPUT="vol-plug-ms"
+[[ "$MSCODING" = "OFF" && "BRUTEFIR" = "OFF" ]] && AUDIO_OUTPUT="vol-plug"
+[[ "$MSCODING" = "OFF" && "BRUTEFIR" = "ON" ]] && AUDIO_OUTPUT="jack-bf"
 
 [[ "$UPDATESERVER" = "" || "$UPDATESERVER" = "www.abacus-electronics.de/aroio2" ]] && UPDATESERVER="http://www.abacus-electronics.de/aroio-4"
 [[ "$RATE" != "44100" && "$RATE" != "48000" && "$RATE" != "96000" && "$RATE" != "192000" ]] && RATE="96000"
@@ -45,7 +49,6 @@ fi
 [ "$DHCP" = "ON" ] &&					IPADDR="" && NETMASK="" && DNSSERV="" && GATEWAY=""
 [ "$PLAYERNAME" = "" ] &&				PLAYERNAME="$HOSTNAME"
 [ "$BTKEY" = "" ] &&					BTKEY="2107"
-[ "$MSCODING" = "" ] &&					MSCODING="OFF"
 [ "$USERPASSWD" = "" ] &&				USERPASSWD="abacus"
 [ "$CHANNELS" = "" ] &&					CHANNELS="2"
 [ "$DEF_COEFF" = "" ] &&				DEF_COEFF="0"
@@ -142,7 +145,7 @@ LAN_DHCP LAN_IPADDR LAN_NETMASK LAN_DNSSERV LAN_GATEWAY  \
 WLAN_DHCP WLAN_IPADDR WLAN_NETMASK WLAN_DNSSERV WLAN_GATEWAY WLANSSID WLANPWD \
 SERVERNAME SERVERPORT SQUEEZEUSER SQUEEZEPWD PLAYERNAME \
 BTKEY ADVANCED DISPLAY_ROTATE \
-CHANNELS RATE SPRATE MSCODING RESAMPLING VOLUME_START \
+CHANNELS RATE SPRATE RESAMPLING VOLUME_START \
 JACKBUFFER JACKPERIOD SQUEEZE_MAXFREQUENCY SQUEEZE_INTBUFFER SQUEEZE_OUTBUFFER SP_OUTBUFFER SP_PERIOD BF_PARTITIONS \
 SOUNDCARD DEBUG AUDIO_OUTPUT \
 RAW_PLAYER RAW_PLAYERMS \
