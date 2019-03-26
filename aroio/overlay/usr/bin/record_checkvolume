@@ -4,14 +4,15 @@
 
 touch /tmp/checkvolume
 
-[ -e /tmp/checkvolume ] && controlaudio stop
-[ -e /tmp/checkvolume ] && [[ "$AUDIO_OUTPUT" = "jack"    || "$AUDIO_OUTPUT" = "jack-ms"   ]] && controlaudio jack
-[ -e /tmp/checkvolume ] && [[ "$AUDIO_OUTPUT" = "jack-bf" || "$AUDIO_OUTPUT" = "jack-bfms" ]] && controlaudio brutefir
+#[ -e /tmp/checkvolume ] && controlaudio stop
+[ -e /tmp/checkvolume ] && [[ "$AUDIO_OUTPUT" = "jack"        || "$AUDIO_OUTPUT" = "jack-ms"     ]] && controlaudio jack
+[ -e /tmp/checkvolume ] && [[ "$AUDIO_OUTPUT" = "jack-bf"     || "$AUDIO_OUTPUT" = "jack-bfms"   ]] && controlaudio brutefir
+[ -e /tmp/checkvolume ] && [[ "$AUDIO_OUTPUT" = "vol-plug"    || "$AUDIO_OUTPUT" = "vol-plug-ms" ]] && controlaudio stop
 
 [ -e /tmp/checkvolume ] && aplay -c1 -D $AUDIO_OUTPUT /opt/www/brown_noise.wav
 
 rm /tmp/checkvolume
 controlaudio start
 
-sleep 1
+#sleep 1
 echo "Done!"

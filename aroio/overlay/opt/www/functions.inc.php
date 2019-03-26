@@ -611,7 +611,7 @@ function play_noise()
 function stop_noise()
 {
 	shell_exec('killall aplay');
-	shell_exec('controlaudio restart');
+	shell_exec('controlaudio start');
 }
 
 

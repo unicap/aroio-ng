@@ -3,7 +3,7 @@
   include('functions.inc.php');
   include('style.css');
 
-print_r($_POST);
+//print_r($_POST);
 
   if($_GET["lang"] === "en" || $_POST[lang]=='en')
   {
