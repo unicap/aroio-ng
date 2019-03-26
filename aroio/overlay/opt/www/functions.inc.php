@@ -162,11 +162,7 @@ function restart_lms()
 	shell_exec('/usr/bin/startstreamer.sh &> /dev/null &');
 }
 
-function cancel_measurement()
-{
-	shell_exec('killall aplay');
-	shell_exec('killall arecord');
-}
+
 
 //HTML-Functions
 
@@ -555,7 +551,7 @@ function isMuted()
 
 }
 
-function volControl($ms,$attenuation)
+function volControl()
 {
 	$cmd = '/usr/bin/controlbrutefir volControl '.$ms.' '.$attenuation;
 	shell_exec($cmd);
@@ -564,7 +560,18 @@ function volControl($ms,$attenuation)
 
 function measurement()
 {
-	$cmd='/usr/bin/recordsweep 2>&1';
+	while (exec('pgrep controlaudio'))
+	{
+		sleep(1);
+	}
+
+	if($_POST['MEASURE_MS'] == "ON") $ms="ms_on";
+	else $ms="ms_off";
+	
+	if(isset($_POST['MEASUREMENT_CONTROL'])) $control="control_on";
+	else $control="control_off";
+
+	$cmd="/usr/bin/recordsweep $ms $control 2>&1";
 
 	while (@ ob_end_flush()); // end all output buffers if any
 
@@ -576,8 +583,37 @@ function measurement()
 	    @ flush();
 	}
     echo '</pre>' ;
-
 }
+
+
+function cancel_measurement()
+{
+	exec('rm /tmp/measurement');
+	//exec('pkill -P $(pgrep -o recordsweep_)');
+	exec('killall aplay');
+	exec('killall arecord');
+	while (exec('pgrep controlaudio'))
+	{
+		sleep(1);
+	}
+	exec('controlaudio stop');
+	exec('controlaudio start');
+	echo '<pre>';
+	echo 'Measurement cancelled.';
+	echo '</pre>';
+}
+
+function play_noise()
+{
+	shell_exec('record_checkvolume &> /dev/null &');
+}
+
+function stop_noise()
+{
+	shell_exec('killall aplay');
+	shell_exec('controlaudio restart');
+}
+
 
 function update($beta)
 {

@@ -1,0 +1,13 @@
+#!/bin/sh
+
+MEASUREMENT_OUTPUT=$1
+
+INFILE1='/boot/Logsweep/Start.wav'
+INFILE2='/boot/Logsweep/Logsweep96.raw.7z'
+INFILE3='/boot/Logsweep/End.wav'
+OUTFILE='/tmp/Logsweep48_rec.raw'
+
+[ -e /tmp/measurement ] && aplay -D "$MEASUREMENT_OUTPUT" -c1 $INFILE1
+[ -e /tmp/measurement ] && arecord -Dplughw:4 -I -d 200 -t raw -r 48000 -f FLOAT_LE -c2 $OUTFILE &
+[ -e /tmp/measurement ] && aplay -D "$MEASUREMENT_OUTPUT" -f S32_LE -r 96000 -c2 Logsweep96.raw
+[ -e /tmp/measurement ] && aplay -D "$MEASUREMENT_OUTPUT" -c1  $INFILE3

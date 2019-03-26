@@ -3,6 +3,7 @@
 . /boot/userconfig.txt
 
 ACTION="$1"
+[ -e /tmp/measurement ] && AUDIO_OUTPUT=$MEASUREMENT_OUTPUT
 
 echo "Controlaudio "$ACTION" ..."
 
@@ -133,12 +134,18 @@ function StopStatus()
 	done
 }
 
-function Measure()
+function Brutefir()
 {
-	for SERVICE in squeezelite gmediarender shairport-sync bluealsa-aplay
-	do
-		systemctl "$1" "$SERVICE".service
-	done
+	systemctl start jackd.service
+	until jack_lsp | grep jackmixer ; do sleep 0.1 ; done
+	systemctl start brutefir.service
+	until jack_lsp | grep brutefir ; do sleep 0.2 ; done
+}
+
+function Jack()
+{
+	systemctl start jackd.service
+	until jack_lsp | grep jackmixer ; do sleep 0.1 ; done
 }
 
 case "$ACTION" in
@@ -155,8 +162,12 @@ case "$ACTION" in
 	Start
 	;;
 
-	measure)
-	Measure stop
+	brutefir)
+	Brutefir
+	;;
+
+	jack)
+	Jack
 	;;
 esac
 

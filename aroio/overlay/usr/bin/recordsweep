@@ -12,9 +12,6 @@ INFILE2='/boot/Logsweep/Logsweep96.raw.7z'
 INFILE3='/boot/Logsweep/End.wav'
 OUTFILE='/tmp/Logsweep48_rec.raw'
 
-echo "Stopping audio processing"
-controlaudio measure
-
 cd /tmp
 rm Logsweep48_rec*
 
@@ -29,13 +26,30 @@ else
 	echo "Logsweep already unpacked, continuing..."
 fi
 
-aplay -D "$AUDIO_OUTPUT" -c1 -D $AUDIO_OUTPUT $INFILE1
-arecord -Dplughw:4 -I -d 200 -t raw -r 48000 -f FLOAT_LE -c2 $OUTFILE &
-aplay -D "$AUDIO_OUTPUT" -f S32_LE -r 96000 -c2 -D $AUDIO_OUTPUT Logsweep96.raw
-aplay -D "$AUDIO_OUTPUT" -c1 -D $AUDIO_OUTPUT $INFILE3
+touch /tmp/measurement
+
+# $1 marks ms_coding (ms_on|ms_off)
+# $2 marks measurement through convolver (control_on|control_off)
+#[[ "$1" = "ms_off" && "$2" = "control_off"  ]] && AUDIO_OUTPUT="vol-plug" && controlaudio stop
+#[[ "$1" = "ms_on"  && "$2" = "control_off"  ]] && AUDIO_OUTPUT="vol-plug-ms" && controlaudio stop
+#[[ "$1" = "ms_off" && "$2" = "control_on"   ]] && AUDIO_OUTPUT="jack-bf" && controlaudio measure
+#[[ "$1" = "ms_on"  && "$2" = "control_on"   ]] && AUDIO_OUTPUT="jack-bfms" && controlaudio measure
+
+[ -e /tmp/measurement ] && controlaudio stop
+[ -e /tmp/measurement ] && [[ "$MEASUREMENT_OUTPUT" = "jack-bf" || "$MEASUREMENT_OUTPUT" = "jack-bfms" ]] && controlaudio brutefir
+
+[ -e /tmp/measurement ] && echo "Output is $MEASUREMENT_OUTPUT"
+[ -e /tmp/measurement ] && echo "Stopped audio processing"
+
+# Start the acquisition elsewhere, so we can kill it easier
+[ -e /tmp/measurement ] && recordsweep_play_record "$MEASUREMENT_OUTPUT"
 
 rm "$OUTFILE".1
 mv "$OUTFILE".0 $OUTFILE
-echo "Measurement done! You may now further process the recording..."
+[ -e /tmp/measurement ] && echo "Measurement done!"
 echo "Starting audio processing again..."
-controlaudio stop && controlaudio start
+rm /tmp/measurement
+sleep 1
+#controlaudio stop &> /dev/null
+#controlaudio start &> /dev/null
+echo "Done!"

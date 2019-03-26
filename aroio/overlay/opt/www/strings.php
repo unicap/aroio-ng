@@ -470,17 +470,29 @@
     <p>F&uuml;r eine optimale Messung sollte eine Lautst&auml;rke eingestellt werden, dass der Pegel ausreichend hoch ist, ohne dass die Lautsprecher (vor allem im Bass) mechanisch an Grenzen sto&szlig;en.
     Starten Sie die Messung zun&auml;chst mit einer geringen Lautst&auml;rke. Klicken Sie auf <button type="button" style="padding: 4px 2px; margin: 0px;">Abbruch</button>, erh&ouml;hen Sie sie und starten Sie die Messung erneut. Das wiederholen Sie bis der Pegel stimmt. Lassen Sie dann die Messung komplett durchlaufen ohne die Lautst&auml;rke zu &auml;ndern (dauert ca. 3 Minuten).</p>';
 
-    //$measurement_buffer_warning_de='Der Jack-Puffer muss f&uuml;r zuverl&auml;ssige Messungen auf 8192 KB eingestellt sein. Bitte im Reiter Konfiguration korrigieren.';
-    //$measurement_buffer_warning_en='The jack buffer needs to be set to 8192 KB in order to achieve best measurement performance. Please adjust it accordingly in the configuration tab.';
-
     $measurement_runs_en='Measurement is running. <br> Please wait...';
     $measurement_runs_de='Messung läuft, Signal ertönt links, rechts und nochmals links. <br> Bitte warten... ';
 
     $measurement_upload_form_en='Upload measurement';
     $measurement_upload_form_de='Upload der Messung';
 
-    $start_measurement_en='Measure';
+    $play_noise_en='Volume test';
+    $play_noise_de='Pegel-Test';
+    
+    $stop_noise_en='Volume test stop';
+    $stop_noise_de='Pegel-Test stop';
+    
+    $start_measurement_en='Measurement';
     $start_measurement_de='Messung';
+
+    $start_measurement_control_en='Control measurement';
+    $start_measurement_control_de='Kontroll-Messung';
+
+    $measurement_ms_en='Clean!';
+    $measurement_ms_de='Clean!';
+
+    $measurement_ms_warning_en='If Clean! is selected on the Device, please select here as well!';
+    $measurement_ms_warning_de='Wenn Clean! am Ger&auml;t aktiviert ist, bitte zur Messung ebenfalls aktivieren!';
 
     $cancel_measurement_en='Cancel';
     $cancel_measurement_de='Abbruch';

@@ -3,6 +3,7 @@
 . /boot/userconfig.txt
 CHANNELS="2"
 
+[ -e /tmp/measurement ] && AUDIO_OUTPUT=$MEASUREMENT_OUTPUT
 
 case $CHANNELS in
 	2)
