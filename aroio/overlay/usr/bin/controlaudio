@@ -140,10 +140,10 @@ function Brutefir()
 	do
 		systemctl stop "$SERVICE".service
 	done
-	#systemctl start jackd.service
-	#until jack_lsp | grep jackmixer ; do sleep 0.1 ; done
-	#systemctl start brutefir.service
-	#until jack_lsp | grep brutefir ; do sleep 0.2 ; done
+	systemctl start jackd.service
+	until jack_lsp | grep jackmixer ; do sleep 0.1 ; done
+	systemctl start brutefir.service
+	until jack_lsp | grep brutefir ; do sleep 0.2 ; done
 }
 
 function Jack()

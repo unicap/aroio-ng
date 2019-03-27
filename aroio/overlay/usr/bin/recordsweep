@@ -2,10 +2,18 @@
 
 . /boot/userconfig.txt
 
+MSG_NO_MIC='<br><img src="/no_mic.png" border="0" style="float: left; width: 32px; margin-right: 4px;"/>No Microphone connected, please connect a <a class="forward" href="https://www.abacus-electronics.de/produkte/streaming/raumkorrektur/minidsp-umik-1.html" title="UMIK-1 ABACUS-Shop" target="_blank">miniDSP UMIK-1</a>.'
+MSG_MIC='<br><img src="/mic.gif" border="0" style="float: left; width: 32px; margin-right: 4px;"/>Microphone found, continuing with 200 sec measurement...<br>'
+
+MSG_CLEAN_OFF='<br><b>AudioVero Clean!: Off - Please disable Audiovero Clean! on the device!</b>'
+MSG_CLEAN_ON='<br><b>AudioVero Clean!: On - Please enable Audiovero Clean! on the device!</b>'
+
 if ! lsusb | grep '2752:0007'
-	then	echo '<img src="/no_mic.png" border="0" style="float: left; width: 32px; margin-right: 4px;"/>No Microphone connected, please connect a <a class="forward" href="https://www.abacus-electronics.de/produkte/streaming/raumkorrektur/minidsp-umik-1.html" title="UMIK-1 ABACUS-Shop" target="_blank">miniDSP UMIK-1</a>.<br>Kein Mikrofon angeschlossen, bitte schließen Sie ein <a class="forward" href="https://www.abacus-electronics.de/produkte/streaming/raumkorrektur/minidsp-umik-1.html" title="UMIK-1 ABACUS-Shop" target="_blank">miniDSP UMIK-1</a> an.<br>' && exit
-	else	echo '<img src="/mic.gif" border="0" style="float: left; width: 32px; margin-right: 4px;"/>Microphone found, continuing with 200 sec measurement...<br>Mikrofon gefunden, Messung läuft...<br>'
+then	echo "$MSG_NO_MIC" && exit
+else	echo "$MSG_MIC"
 fi
+
+[ $(echo $MEASUREMENT_OUTPUT | grep 'ms') ] && echo "$MSG_CLEAN_ON" || echo "$MSG_CLEAN_OFF"
 
 INFILE1='/boot/Logsweep/Start.wav'
 INFILE2='/boot/Logsweep/Logsweep96.raw.7z'
@@ -15,31 +23,21 @@ OUTFILE='/tmp/Logsweep48_rec.raw'
 cd /tmp
 rm Logsweep48_rec*
 
-echo '<b>Bitte beachten Sie, dass die Audiovero Clean! Funktion am Ger&auml;t entsprechend der Auswahl der Ausgabe eingestellt sein muss!
-<br>Please make sure to set the Audiovero Clean! funktion on the device acording to the chosen output option!</b>'
-
 if ! [ -e /tmp/Logsweep96.raw ]
-then
-	echo "Logsweep packed, unpacking it, this may take around 20 seconds, but only needs to be done once per boot..."
-	7zr e  $INFILE2
-else
-	echo "Logsweep already unpacked, continuing..."
+then	echo -ne "\nLogsweep packed, unpacking it, this may take around 20 seconds, but only needs to be done once per boot ...\n"
+		7zr e  $INFILE2
+else	echo -ne "\nLogsweep already unpacked, continuing ...\n"
 fi
 
+# Set a flag to enable external killing og the measurement anytime
 touch /tmp/measurement
 
-# $1 marks ms_coding (ms_on|ms_off)
-# $2 marks measurement through convolver (control_on|control_off)
-#[[ "$1" = "ms_off" && "$2" = "control_off"  ]] && AUDIO_OUTPUT="vol-plug" && controlaudio stop
-#[[ "$1" = "ms_on"  && "$2" = "control_off"  ]] && AUDIO_OUTPUT="vol-plug-ms" && controlaudio stop
-#[[ "$1" = "ms_off" && "$2" = "control_on"   ]] && AUDIO_OUTPUT="jack-bf" && controlaudio measure
-#[[ "$1" = "ms_on"  && "$2" = "control_on"   ]] && AUDIO_OUTPUT="jack-bfms" && controlaudio measure
+echo "Stopping audio processing ..."
 
-[ -e /tmp/measurement ] && controlaudio stop
-[ -e /tmp/measurement ] && [[ "$MEASUREMENT_OUTPUT" = "jack-bf" || "$MEASUREMENT_OUTPUT" = "jack-bfms" ]] && controlaudio brutefir
+[ -e /tmp/measurement ] && controlaudio stop &> /dev/null
+[ -e /tmp/measurement ] && [[ "$MEASUREMENT_OUTPUT" = "jack-bf" || "$MEASUREMENT_OUTPUT" = "jack-bfms" ]] && controlaudio brutefir &> /dev/null
 
-[ -e /tmp/measurement ] && echo "Output is $MEASUREMENT_OUTPUT"
-[ -e /tmp/measurement ] && echo "Stopped audio processing"
+[ -e /tmp/measurement ] && echo -e "Audio processing stopped. \nGoing into measurement mode ... \nAudio output is "$MEASUREMENT_OUTPUT".\n"
 
 # Start the acquisition elsewhere, so we can kill it easier
 [ -e /tmp/measurement ] && recordsweep_play_record "$MEASUREMENT_OUTPUT"
@@ -47,7 +45,7 @@ touch /tmp/measurement
 rm "$OUTFILE".1
 mv "$OUTFILE".0 $OUTFILE
 [ -e /tmp/measurement ] && echo "Measurement done!"
-echo "Starting audio processing again..."
+echo "Restarting audio processing  ..."
 rm /tmp/measurement
 sleep 1
 #controlaudio stop &> /dev/null
