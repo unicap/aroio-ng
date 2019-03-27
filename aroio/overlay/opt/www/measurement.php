@@ -53,7 +53,14 @@
 
       <?
       print ${measurement_warning._.$lang};
-      if (isset($_POST['PLAY_NOISE'])) play_noise();
+      if (isset($_POST['PLAY_NOISE']))
+        {
+          if($_POST['MEASURE_MS'] == "ON")
+            {
+              $ms="ms_on";
+            }
+          play_noise($ms);
+        }
       if (isset($_POST['STOP_NOISE'])) stop_noise();
       if (isset($_POST['CANCEL_MEASUREMENT'])) cancel_measurement();
       if (isset($_POST['MEASUREMENT']) || file_exists('/tmp/measurement')) 
@@ -106,7 +113,7 @@
         }
         else
         { ?>
-          <input type="submit" class="button" value=" <? print ${play_noise._.$lang} ?> " name="PLAY_NOISE"> <br>
+          <input type="submit" class="button" value=" <? print ${play_noise._.$lang} ?> " name="PLAY_NOISE">
           <input type="submit" class="button" value=" <? print ${start_measurement._.$lang} ?> " name="MEASUREMENT">
           <input type="submit" class="button" value=" <? print ${start_measurement_control._.$lang} ?> " name="MEASUREMENT_CONTROL"> <?
         

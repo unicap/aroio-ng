@@ -603,10 +603,12 @@ function cancel_measurement()
 	echo '</pre>';
 }
 
-function play_noise()
+
+function play_noise($ms)
 {
-	shell_exec('record_checkvolume &> /dev/null &');
+	shell_exec("record_checkvolume '$ms' &> /dev/null &");
 }
+
 
 function stop_noise()
 {
