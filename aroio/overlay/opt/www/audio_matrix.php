@@ -1,6 +1,9 @@
 <div class="content">
   <fieldset>
+
     <table>
+      <tr><td><b>Output</b></td><td><b>Player</td></b></tr>
+      <tr><td></td></tr>
       <tr> <!-- Headline with playernames ---------------------------------->
         <td></td>
         <td>
