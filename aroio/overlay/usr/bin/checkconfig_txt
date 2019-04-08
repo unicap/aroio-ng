@@ -5,7 +5,28 @@
 CONFIG="/boot/config.txt"
 ALSACONFIG="/etc/modprobe.d/alsa-base.conf"
 
-[ "$DISPLAY_ROTATE" = "ON" ] && DISPLAY_ROTATE="display_rotate=1" || DISPLAY_ROTATE=""
+if [ "$DISPLAY_ROTATE" = "ON" ] && ! grep -q display_rotate=1 "$CONFIG"
+then	cardmount rw
+		echo "display_rotate=1" >> "$CONFIG"
+		cardmount ro
+		REBOOT=1
+fi
+
+[ "$DISPLAY_ROTATE" = "ON" ] && DISPLAY_ROTATE="display_rotate=1"
+
+if ! grep -q pi3-disable-wifi "$CONFIG"
+then	cardmount rw
+		echo "pi3-disable-wifi" >> "$CONFIG"
+		cardmount ro
+		REBOOT=1
+fi
+
+if ! grep -q pi3-disable-bt /boot/config.txt
+then	cardmount rw
+		echo "pi3-disable-bt" >> /boot/config.txt
+		cardmount ro
+		REBOOT=1
+fi
 
 case $SOUNDCARD in
 	'Internal HDMI audio')
@@ -36,7 +57,7 @@ case $SOUNDCARD in
 		fi
 
 		cardmount ro
-		reboot
+		REBOOT=1
 	fi
 	# Taking care of correct soundcard order
 	sed -i '/options snd slots/c\options snd slots=snd_bcm2835' "$ALSACONFIG"
@@ -70,7 +91,7 @@ case $SOUNDCARD in
 		then 	echo "initramfs rootfs.cpio" >> "$CONFIG"
 		fi
 		cardmount ro
-		reboot
+		REBOOT=1
 	fi
 	# Taking care of correct soundcard order
 	sed -i '/options snd slots/c\options snd slots=snd_bcm2835' "$ALSACONFIG"
@@ -103,7 +124,7 @@ case $SOUNDCARD in
 		then 	echo "initramfs rootfs.cpio" >> "$CONFIG"
 		fi
 		cardmount ro
-		reboot
+		REBOOT=1
 	fi
 	# Taking care of correct soundcard order
 	sed -i '/options snd slots/c\options snd slots=snd_soc_justboom_dac' "$ALSACONFIG"
@@ -136,7 +157,7 @@ case $SOUNDCARD in
 		then 	echo "initramfs rootfs.cpio" >> "$CONFIG"
 		fi
 		cardmount ro
-		reboot
+		REBOOT=1
 	fi
 	# Taking care of correct soundcard order
 	sed -i '/options snd slots/c\options snd slots=snd_soc_aroiodac' "$ALSACONFIG"
@@ -170,7 +191,7 @@ case $SOUNDCARD in
 		then 	echo "initramfs rootfs.cpio" >> "$CONFIG"
 		fi
 		cardmount ro
-		reboot
+		REBOOT=1
 	fi
 	# Taking care of correct soundcard order
 	sed -i '/options snd slots/c\options snd slots=snd_soc_iqaudio_dac' "$ALSACONFIG"
@@ -205,7 +226,7 @@ case $SOUNDCARD in
 		then	echo "initramfs rootfs.cpio" >> "$CONFIG"
 		fi
 		cardmount ro
-		reboot
+		REBOOT=1
 	fi
 	# Taking care of correct soundcard order
 	sed -i '/options snd slots/c\options snd slots=snd_soc_hifiberry_dac' "$ALSACONFIG"
@@ -241,7 +262,7 @@ case $SOUNDCARD in
 		then	echo "initramfs rootfs.cpio" >> "$CONFIG"
 		fi
 		cardmount ro
-		reboot
+		REBOOT=1
 	fi
 	# Taking care of correct soundcard order
 	sed -i '/options snd slots/c\options snd slots=snd_soc_hifiberry_dacplus' "$ALSACONFIG"
@@ -277,7 +298,7 @@ case $SOUNDCARD in
 		then	echo "initramfs rootfs.cpio" >> "$CONFIG"
 		fi
 		cardmount ro
-		reboot
+		REBOOT=1
 	fi
 	# Taking care of correct soundcard order
 	sed -i '/options snd slots/c\options snd slots=snd_soc_hifiberry_dac' "$ALSACONFIG"
@@ -311,7 +332,7 @@ case $SOUNDCARD in
 	then	echo "initramfs rootfs.cpio" >> "$CONFIG"
 	fi
 	cardmount ro
-	reboot
+	REBOOT=1
 	fi
 	# Taking care of correct soundcard order
 	sed -i '/options snd slots/c\options snd slots=snd_soc_hifiberry_digi' "$ALSACONFIG"
@@ -344,7 +365,7 @@ case $SOUNDCARD in
 		then 	echo "initramfs rootfs.cpio" >> "$CONFIG"
 		fi
 		cardmount ro
-		reboot
+		REBOOT=1
 	fi
 	# Taking care of correct soundcard order
 	sed -i '/options snd slots/c\options snd slots=snd_soc_allo_piano_dac' "$ALSACONFIG"
@@ -377,7 +398,7 @@ case $SOUNDCARD in
 		then 	echo "initramfs rootfs.cpio" >> "$CONFIG"
 		fi
 		cardmount ro
-		reboot
+		REBOOT=1
 	fi
 	# Taking care of correct soundcard order
 	sed -i '/options snd slots/c\options snd slots=snd_soc_allo_piano_dacplus' "$ALSACONFIG"
@@ -410,7 +431,7 @@ case $SOUNDCARD in
 		then 	echo "initramfs rootfs.cpio" >> "$CONFIG"
 		fi
 		cardmount ro
-		reboot
+		REBOOT=1
 	fi
 	# Taking care of correct soundcard order
 	sed -i '/options snd slots/c\options snd slots=snd_soc_allo_boss_dac' "$ALSACONFIG"
@@ -443,7 +464,7 @@ case $SOUNDCARD in
 		then 	echo "initramfs rootfs.cpio" >> "$CONFIG"
 		fi
 		cardmount ro
-		reboot
+		REBOOT=1
 	fi
 	# Taking care of correct soundcard order
 	sed -i '/options snd slots/c\options snd slots=snd_soc_allo_digione' "$ALSACONFIG"
@@ -475,7 +496,7 @@ case $SOUNDCARD in
 		then	echo "initramfs rootfs.cpio" >> "$CONFIG"
 		fi
 		cardmount ro
-		reboot
+		REBOOT=1
 	fi
 	# Taking care of correct soundcard order
 	sed -i '/options snd slots/c\options snd slots=snd_usb_audio' "$ALSACONFIG"
@@ -507,7 +528,7 @@ case $SOUNDCARD in
 		then	echo "initramfs rootfs.cpio" >> "$CONFIG"
 		fi
 		cardmount ro
-		reboot
+		REBOOT=1
 	fi
 	# Taking care of correct soundcard order
 	sed -i '/options snd slots/c\options snd slots=snd_usb_audio' "$ALSACONFIG"
@@ -539,7 +560,7 @@ case $SOUNDCARD in
 		then	echo "initramfs rootfs.cpio" >> "$CONFIG"
 		fi
 		cardmount ro
-		reboot
+		REBOOT=1
 	fi
 	# Taking care of correct soundcard order
 	sed -i '/options snd slots/c\options snd slots=snd_usb_audio' "$ALSACONFIG"
@@ -571,7 +592,7 @@ case $SOUNDCARD in
 		then	echo "initramfs rootfs.cpio" >> "$CONFIG"
 		fi
 		cardmount ro
-		reboot
+		REBOOT=1
 	fi
 	# Taking care of correct soundcard order
 	sed -i '/options snd slots/c\options snd slots=snd_usb_audio' "$ALSACONFIG"
@@ -602,7 +623,7 @@ case $SOUNDCARD in
 		then	echo "initramfs rootfs.cpio" >> "$CONFIG"
 		fi
 		cardmount ro
-		reboot
+		REBOOT=1
 	fi
 	# Taking care of correct soundcard order
 	sed -i '/options snd slots/c\options snd slots=snd_usb_audio' "$ALSACONFIG"
@@ -633,7 +654,7 @@ case $SOUNDCARD in
 		then	echo "initramfs rootfs.cpio" >> "$CONFIG"
 		fi
 		cardmount ro
-		reboot
+		REBOOT=1
 	fi
 	# Taking care of correct soundcard order
 	sed -i '/options snd slots/c\options snd slots=snd_usb_audio' "$ALSACONFIG"
@@ -669,8 +690,12 @@ case $SOUNDCARD in
 		then	echo "initramfs rootfs.cpio" >> "$CONFIG"
 		fi
 		cardmount ro
-		reboot
+		REBOOT=1
 	fi
 	;;
 
 esac
+
+[ "$REBOOT" = "1" ] && echo "Had to make changes to config.txt, rebooting..." && reboot
+
+exit 0
