@@ -4,7 +4,7 @@
 
 [ -e /tmp/measurement ] && AUDIO_OUTPUT=$MEASUREMENT_OUTPUT
 
-[[ "$SOUNDCARD" = "HiFiBerry Digi" || "$SOUNDCARD" = "All DigiOne" ]] && JACKOPTS="-S"
+[[ "$SOUNDCARD" = "HiFiBerry Digi" || "$SOUNDCARD" = "Allo DigiOne" ]] && JACKOPTS="-S"
 
 case "$AUDIO_OUTPUT" in
 	jack)
