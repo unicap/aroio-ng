@@ -1,57 +1,58 @@
-From a9be198d68b8f497f81c3663cf3c5f6ee3f028d4 Mon Sep 17 00:00:00 2001
+From e431a366894848a03ad2e92aaa7bd96de9d3213c Mon Sep 17 00:00:00 2001
 From: Arne Caspari <arne@unicap-imaging.org>
-Date: Mon, 4 Feb 2019 09:53:09 +0100
-Subject: [PATCH 2/4] Add TI SRC4382 CODEC driver
+Date: Mon, 15 Apr 2019 10:58:45 +0200
+Subject: [PATCH 2/3] Add TI SRC4382 CODEC driver
 
 ---
- sound/soc/codecs/Kconfig   |   4 ++
+ sound/soc/codecs/Kconfig   |   5 ++
  sound/soc/codecs/Makefile  |   2 +
  sound/soc/codecs/src4382.c | 117 +++++++++++++++++++++++++++++++++++++
- 3 files changed, 123 insertions(+)
+ 3 files changed, 124 insertions(+)
  create mode 100644 sound/soc/codecs/src4382.c
 
 diff --git a/sound/soc/codecs/Kconfig b/sound/soc/codecs/Kconfig
-index b3c63d86e5ef..3aa25a0c79f1 100644
+index 56bb858eadcf..74cdadfb347c 100644
 --- a/sound/soc/codecs/Kconfig
 +++ b/sound/soc/codecs/Kconfig
-@@ -136,6 +136,7 @@ config SND_SOC_ALL_CODECS
+@@ -149,6 +149,7 @@ config SND_SOC_ALL_CODECS
+ 	select SND_SOC_SIMPLE_AMPLIFIER
  	select SND_SOC_SIRF_AUDIO_CODEC
- 	select SND_SOC_SN95031 if INTEL_SCU_IPC
  	select SND_SOC_SPDIF
 +	select SND_SOC_SRC4382
+ 	select SND_SOC_SSM2305
  	select SND_SOC_SSM2518 if I2C
  	select SND_SOC_SSM2602_SPI if SPI_MASTER
- 	select SND_SOC_SSM2602_I2C if I2C
-@@ -826,6 +827,9 @@ config SND_SOC_SN95031
- config SND_SOC_SPDIF
- 	tristate "S/PDIF CODEC"
+@@ -912,6 +913,10 @@ config SND_SOC_SIRF_AUDIO_CODEC
+ 	tristate "SiRF SoC internal audio codec"
+ 	select REGMAP_MMIO
  
 +config SND_SOC_SRC4382
 +	tristate "Texas Instruments SRC4382 CODEC"
 +
- config SND_SOC_SSM2518
- 	tristate
++
+ config SND_SOC_SPDIF
+ 	tristate "S/PDIF CODEC"
  
 diff --git a/sound/soc/codecs/Makefile b/sound/soc/codecs/Makefile
-index f910415bdd31..b3b15816595c 100644
+index 6127bc7b388e..d94385a42f37 100644
 --- a/sound/soc/codecs/Makefile
 +++ b/sound/soc/codecs/Makefile
-@@ -144,6 +144,7 @@ snd-soc-sirf-audio-codec-objs := sirf-audio-codec.o
- snd-soc-sn95031-objs := sn95031.o
+@@ -158,6 +158,7 @@ snd-soc-sigmadsp-i2c-objs := sigmadsp-i2c.o
+ snd-soc-sigmadsp-regmap-objs := sigmadsp-regmap.o
+ snd-soc-si476x-objs := si476x.o
+ snd-soc-sirf-audio-codec-objs := sirf-audio-codec.o
++snd-soc-src4382-objs := src4382.o
  snd-soc-spdif-tx-objs := spdif_transmitter.o
  snd-soc-spdif-rx-objs := spdif_receiver.o
-+snd-soc-src4382-objs := src4382.o
- snd-soc-ssm2518-objs := ssm2518.o
- snd-soc-ssm2602-objs := ssm2602.o
- snd-soc-ssm2602-spi-objs := ssm2602-spi.o
-@@ -382,6 +383,7 @@ obj-$(CONFIG_SND_SOC_SIGMADSP_REGMAP)	+= snd-soc-sigmadsp-regmap.o
+ snd-soc-ssm2305-objs := ssm2305.o
+@@ -419,6 +420,7 @@ obj-$(CONFIG_SND_SOC_SIGMADSP)	+= snd-soc-sigmadsp.o
+ obj-$(CONFIG_SND_SOC_SIGMADSP_I2C)	+= snd-soc-sigmadsp-i2c.o
+ obj-$(CONFIG_SND_SOC_SIGMADSP_REGMAP)	+= snd-soc-sigmadsp-regmap.o
  obj-$(CONFIG_SND_SOC_SI476X)	+= snd-soc-si476x.o
- obj-$(CONFIG_SND_SOC_SN95031)	+=snd-soc-sn95031.o
- obj-$(CONFIG_SND_SOC_SPDIF)	+= snd-soc-spdif-rx.o snd-soc-spdif-tx.o
 +obj-$(CONFIG_SND_SOC_SRC4382) += snd-soc-src4382.o
+ obj-$(CONFIG_SND_SOC_SPDIF)	+= snd-soc-spdif-rx.o snd-soc-spdif-tx.o
  obj-$(CONFIG_SND_SOC_SIRF_AUDIO_CODEC) += sirf-audio-codec.o
- obj-$(CONFIG_SND_SOC_SSM2518)	+= snd-soc-ssm2518.o
- obj-$(CONFIG_SND_SOC_SSM2602)	+= snd-soc-ssm2602.o
+ obj-$(CONFIG_SND_SOC_SSM2305)	+= snd-soc-ssm2305.o
 diff --git a/sound/soc/codecs/src4382.c b/sound/soc/codecs/src4382.c
 new file mode 100644
 index 000000000000..49b54d61836d
@@ -176,5 +177,5 @@ index 000000000000..49b54d61836d
 +MODULE_AUTHOR("Arne Caspari <arne@unicap-imaging.org>");
 +MODULE_LICENSE("GPL");
 -- 
-2.20.1
+2.21.0
 

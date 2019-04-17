@@ -18,7 +18,7 @@ fi
 if ! grep -q pi3-disable-wifi "$CONFIG"
 then	echo "Writing entry to config.txt to suppress loading of onboard WIFI to match userconfig requirement..."
 		cardmount rw
-		echo "pi3-disable-wifi" >> "$CONFIG"
+		echo "dtoverlay=pi3-disable-wifi" >> "$CONFIG"
 		cardmount ro
 		REBOOT=1
 fi
@@ -26,14 +26,16 @@ fi
 if ! grep -q pi3-disable-bt /boot/config.txt
 then	echo "Writing entry to config.txt to suppress loading of onboard Bluetooth to match userconfig requirement..."
 		cardmount rw
-		echo "pi3-disable-bt" >> /boot/config.txt
+		echo "dtoverlay=pi3-disable-bt" >> /boot/config.txt
 		cardmount ro
 		REBOOT=1
 fi
 
+sed -i '/dtoverlay=lirc-rpi,gpio_in_pin=25/c\dtoverlay=gpio-ir,gpio_pin=25' /boot/config.txt
+
 case $SOUNDCARD in
 	'Internal HDMI audio')
-	if ! grep -q HDMI_AUDIO "$CONFIG"
+	if ! grep -qw '#HDMI_AUDIO' "$CONFIG"
 	then
 		cardmount rw
 		echo "userconfig and config.txt have different entries for soundcards,"
@@ -47,7 +49,8 @@ case $SOUNDCARD in
 			disable_splash=1
 			kernel=zImage
 			dtoverlay=i2s-mmap
-			dtparam=audio=on #HDMI_AUDIO
+			dtparam=audio=on
+			#HDMI_AUDIO
 			hdmi_drive=2 #HDMI_AUDIO
 			dtoverlay=lirc-rpi,gpio_in_pin=25
 			disable_overscan=1
@@ -69,7 +72,7 @@ case $SOUNDCARD in
 
 
 	'Internal audio jack')
-	if ! grep -q ONBOARD_AUDIO "$CONFIG"
+	if ! grep -qw '#ONBOARD_AUDIO' "$CONFIG"
 	then
 		cardmount rw
 		echo "userconfig and config.txt have different entries for soundcards,"
@@ -83,7 +86,8 @@ case $SOUNDCARD in
 			disable_splash=1
 			kernel=zImage
 			dtoverlay=i2s-mmap
-			dtparam=audio=on #ONBOARD_AUDIO
+			dtparam=audio=on
+			#ONBOARD_AUDIO
 			dtoverlay=lirc-rpi,gpio_in_pin=25
 			disable_overscan=1
 			dtoverlay=pi3-disable-wifi
@@ -102,7 +106,7 @@ case $SOUNDCARD in
 
 
 	'JustBoom DAC')
-	if ! grep -q justboom-dac "$CONFIG"
+	if ! grep -qw 'dtoverlay=justboom-dac' "$CONFIG"
 	then
 		cardmount rw
 		echo "userconfig and config.txt have different entries for soundcards,"
@@ -135,7 +139,7 @@ case $SOUNDCARD in
 
 
 	'AroioDAC-SRC')
-	if ! grep -q aroiodac "$CONFIG"
+	if ! grep -qw 'dtoverlay=aroiodac' "$CONFIG"
 	then
 		cardmount rw
 		echo "userconfig and config.txt have different entries for soundcards,"
@@ -167,9 +171,8 @@ case $SOUNDCARD in
 	;;
 
 
-
 	'IQAudIO DAC')
-	if ! grep -q iqaudio-dac "$CONFIG"
+	if ! grep -qw 'dtoverlay=iqaudio-dac' "$CONFIG"
 	then
 		cardmount rw
 		echo "userconfig and config.txt have different entries for soundcards,"
@@ -202,7 +205,7 @@ case $SOUNDCARD in
 
 
 	'HiFiBerry DAC')
-	if ! grep -q hifiberry-dac "$CONFIG"
+	if ! grep -qw 'dtoverlay=hifiberry-dac' "$CONFIG"
 	then
 		cardmount rw
 		echo "userconfig and config.txt have different entries for soundcards,"
@@ -238,7 +241,7 @@ case $SOUNDCARD in
 
 	'HiFiBerry DAC+'|'AroioDAC')
 	echo "HiFiberry DAC+"
-	if ! grep -q hifiberry-dacplus "$CONFIG"
+	if ! grep -qw 'dtoverlay=hifiberry-dacplus' "$CONFIG"
 	then
 		cardmount rw
 		echo "userconfig and config.txt have different entries for soundcards,"
@@ -272,9 +275,9 @@ case $SOUNDCARD in
 	;;
 
 
-	'HiFiBerry DAC+ ADC)
+	'HiFiBerry DAC+ ADC')
 	echo "HiFiberry DAC+ ADC"
-	if ! grep -q hifiberry-dacplusadc "$CONFIG"
+	if ! grep -qw 'dtoverlay=hifiberry-dacplusadc' "$CONFIG"
 	then
 		cardmount rw
 		echo "userconfig and config.txt have different entries for soundcards,"
@@ -310,7 +313,7 @@ case $SOUNDCARD in
 
 	'HiFiBerry DAC')
 	echo "HiFiberry DAC"
-	if ! grep -q hifiberry-dac "$CONFIG"
+	if ! grep -qw 'dtoverlay=hifiberry-dac' "$CONFIG"
 	then
 		cardmount rw
 		echo "userconfig and config.txt have different entries for soundcards,"
@@ -346,7 +349,7 @@ case $SOUNDCARD in
 
 	'HiFiBerry Digi')
 	echo "HiFiBerry Digi"
-	if ! grep -q hifiberry-digi "$CONFIG"
+	if ! grep -qw 'dtoverlay=hifiberry-digi' "$CONFIG"
 	then
 		cardmount rw
 		echo "userconfig and config.txt have different entries for soundcards,"
@@ -379,7 +382,7 @@ case $SOUNDCARD in
 
 
 	'Allo Piano DAC')
-	if ! grep -q allo-piano-dac-pcm512x-audio "$CONFIG"
+	if ! grep -qw 'dtoverlay=allo-piano-dac-pcm512x-audio' "$CONFIG"
 	then
 		cardmount rw
 		echo "userconfig and config.txt have different entries for soundcards,"
@@ -412,7 +415,7 @@ case $SOUNDCARD in
 
 
 	'Allo Piano 2.1 DAC')
-	if ! grep -q allo-piano-dac-plus-pcm512x-audio "$CONFIG"
+	if ! grep -qw 'dtoverlay=allo-piano-dac-plus-pcm512x-audio' "$CONFIG"
 	then
 		cardmount rw
 		echo "userconfig and config.txt have different entries for soundcards,"
@@ -445,7 +448,7 @@ case $SOUNDCARD in
 
 
 	'Allo Boss DAC')
-	if ! grep -q allo-boss-dac-pcm512x-audio "$CONFIG"
+	if ! grep -qw 'dtoverlay=allo-boss-dac-pcm512x-audio' "$CONFIG"
 	then
 		cardmount rw
 		echo "userconfig and config.txt have different entries for soundcards,"
@@ -478,7 +481,7 @@ case $SOUNDCARD in
 
 
 	'Allo DigiOne')
-	if ! grep -q allo-digione "$CONFIG"
+	if ! grep -qw 'dtoverlay=allo-digione' "$CONFIG"
 	then
 		cardmount rw
 		echo "userconfig and config.txt have different entries for soundcards,"
@@ -511,7 +514,7 @@ case $SOUNDCARD in
 
 
 	'M-Audio Fast Track Pro')
-	if ! grep -q "#fasttrack_pro" "$CONFIG"
+	if ! grep -qw '#fasttrack_pro' "$CONFIG"
 	then
 		cardmount rw
 		echo "userconfig and config.txt have different entries for soundcards,"
@@ -543,7 +546,7 @@ case $SOUNDCARD in
 
 
 	'Focusrite Scarlett')
-	if ! grep -q "#fr_scarlett" "$CONFIG"
+	if ! grep -qw '#fr_scarlett' "$CONFIG"
 	then
 		cardmount rw
 		echo "userconfig and config.txt have different entries for soundcards,"
@@ -575,7 +578,7 @@ case $SOUNDCARD in
 
 
 	'NI Audio 8 DJ')
-	if ! grep -q "#ni_audio8dj" "$CONFIG"
+	if ! grep -qw '#ni_audio8dj' "$CONFIG"
 	then
 		cardmount rw
 		echo "userconfig and config.txt have different entries for soundcards,"
@@ -607,7 +610,7 @@ case $SOUNDCARD in
 
 
 	'RME Fireface UCX')
-	if ! grep -q "#fireface_ucx" "$CONFIG"
+	if ! grep -qw '#fireface_ucx' "$CONFIG"
 	then
 		cardmount rw
 		echo "userconfig and config.txt have different entries for soundcards,"
@@ -638,7 +641,7 @@ case $SOUNDCARD in
 	;;
 
 	'Dr. DAC prime')
-	if ! grep -q "#dr_dac_prime" "$CONFIG"
+	if ! grep -qw '#dr_dac_prime' "$CONFIG"
 	then
 		cardmount rw
 		echo "userconfig and config.txt have different entries for soundcards,"
@@ -669,7 +672,7 @@ case $SOUNDCARD in
 	;;
 
 	'USB Class Compliant')
-	if ! grep -q "#usb_class_compliant" "$CONFIG"
+	if ! grep -qw '#usb_class_compliant' "$CONFIG"
 	then
 		cardmount rw
 		echo "userconfig and config.txt have different entries for soundcards,"
@@ -702,7 +705,7 @@ case $SOUNDCARD in
 
 	'NOTAroioDAC')
 	echo "AroioDAC!"
-	if ! grep -q hifiberry-dacplus "$CONFIG"
+	if ! grep -qw 'dtoverlay=hifiberry-dacplus' "$CONFIG"
 	then
 		cardmount rw
 		echo "userconfig and config.txt have different entries for soundcards,"
