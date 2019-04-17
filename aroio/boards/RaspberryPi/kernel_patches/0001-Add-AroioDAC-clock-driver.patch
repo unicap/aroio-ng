@@ -1,7 +1,7 @@
-From 9cfd9cb8fad51ec5a2c573d4aef940d9233df6b5 Mon Sep 17 00:00:00 2001
+From 6243e5385b0db3b8d2df805f9c0d1dcdd8d91e51 Mon Sep 17 00:00:00 2001
 From: Arne Caspari <arne@unicap-imaging.org>
-Date: Mon, 4 Feb 2019 09:52:16 +0100
-Subject: [PATCH 1/4] Add AroioDAC clock driver
+Date: Mon, 15 Apr 2019 10:58:03 +0200
+Subject: [PATCH 1/3] Add AroioDAC clock driver
 
 ---
  drivers/clk/Makefile       |   1 +
@@ -10,7 +10,7 @@ Subject: [PATCH 1/4] Add AroioDAC clock driver
  create mode 100644 drivers/clk/clk-aroiodac.c
 
 diff --git a/drivers/clk/Makefile b/drivers/clk/Makefile
-index 3bb3ad099a02..c00787d4e805 100644
+index 9c01de6d2602..486d0e8c6c12 100644
 --- a/drivers/clk/Makefile
 +++ b/drivers/clk/Makefile
 @@ -19,6 +19,7 @@ endif
@@ -154,5 +154,5 @@ index 000000000000..57d7781fcb89
 +MODULE_LICENSE("GPL v2");
 \ No newline at end of file
 -- 
-2.20.1
+2.21.0
 

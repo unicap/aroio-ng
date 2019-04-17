@@ -66,7 +66,7 @@
             <span title=""><label for="Soundcard"> <? print ${soundcard._.$lang} ; ?> </label></span></a>
           </td>
           <td>
-            <?$arr_soundcard= array('Internal HDMI audio','Internal audio jack','AroioDAC','AroioDAC-SRC','JustBoom DAC','HiFiBerry DAC','HiFiBerry DAC+','HiFiBerry Digi','IQAudIO DAC','Allo Piano DAC','Allo Piano 2.1 DAC','Allo Boss DAC','Allo DigiOne','Dr. DAC prime','Focusrite Scarlett','M-Audio Fast Track Pro','RME Fireface UCX','USB Class Compliant');
+            <?$arr_soundcard= array('Internal HDMI audio','Internal audio jack','AroioDAC','AroioDAC-SRC','JustBoom DAC','HiFiBerry DAC','HiFiBerry DAC+','HiFiBerry DAC+ ADC','HiFiBerry Digi','IQAudIO DAC','Allo Piano DAC','Allo Piano 2.1 DAC','Allo Boss DAC','Allo DigiOne','Dr. DAC prime','Focusrite Scarlett','M-Audio Fast Track Pro','RME Fireface UCX','USB Class Compliant');
               print_optgroup("SOUNDCARD",$arr_soundcard,$ini_array["SOUNDCARD"]); ?>
           </td>
         </tr>
@@ -105,6 +105,7 @@
                 case "HiFiBerry Digi":
                 case "HiFiBerry DAC":
                 case "HiFiBerry DAC+":
+                case "HiFiBerry DAC+ ADC":
                 case "JustBoom DAC":
                 case "Allo Piano DAC":
                 case "Allo Piano 2.1 DAC":
