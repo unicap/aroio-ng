@@ -23,7 +23,7 @@ then	echo "Writing entry to config.txt to suppress loading of onboard WIFI to ma
 		REBOOT=1
 fi
 
-if ! grep -q pi3-disable-bt /boot/config.txt
+if ! grep -q pi3-disable-bt "$CONFIG"
 then	echo "Writing entry to config.txt to suppress loading of onboard Bluetooth to match userconfig requirement..."
 		cardmount rw
 		echo "dtoverlay=pi3-disable-bt" >> /boot/config.txt
@@ -31,7 +31,13 @@ then	echo "Writing entry to config.txt to suppress loading of onboard Bluetooth 
 		REBOOT=1
 fi
 
-sed -i '/dtoverlay=lirc-rpi,gpio_in_pin=25/c\dtoverlay=gpio-ir,gpio_pin=25' /boot/config.txt
+if ! grep -q gpio-ir "$CONFIG"
+then    echo "Found old lirc configuration in config.txt, writing a new one with gpio-ir."
+        cardmount rw
+        sed -i '/dtoverlay=lirc-rpi,gpio_in_pin=25/c\dtoverlay=gpio-ir,gpio_pin=25' /boot/config.txt
+        cardmount ro
+        REBOOT=1
+fi
 
 case $SOUNDCARD in
 	'Internal HDMI audio')
