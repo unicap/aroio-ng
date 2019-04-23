@@ -18,18 +18,20 @@ case $CHANNELS in
 		;;
 esac
 
-[ "$BF_PARTITIONS" != "1" ] && BF_PARTITIONS=$(( 65536 / $BF_PARTITIONS )),"$BF_PARTITIONS" || BF_PARTITIONS='65536'
-
 sed -i "/samplingrate/c\samplingrate: "$RATE"" /etc/brutefir/brutefir.conf
-sed -i "/filter_length/c\filter_length: $BF_PARTITIONS;" /etc/brutefir/brutefir.conf
 
 counter=-1
+COEFF_LENGTH_MAX=0
 case $CHANNELS in
 	2)
 		for i in $(grep -o "COEFF_NAME[^m]" /boot/userconfig.txt)
 		do
 			COEFF_NAME=$(eval "echo \$$i")
 			counter=$((counter+1))
+
+			eval COEFF_LENGTH_$COEFF_NAME=$(ls -laL /run/filter/"$COEFF_NAME"L"$(( $RATE / 1000 ))".dbl | awk '{print $5/8}')
+			[ $(eval echo "\$COEFF_LENGTH_$COEFF_NAME") -gt $COEFF_LENGTH_MAX ] && COEFF_LENGTH_MAX=$(eval echo "\$COEFF_LENGTH_$COEFF_NAME")
+
 			if [ "$COEFF_NAME" = "" ] ; then COEFF_NAME="BypassFilter" ; fi
 			if ! [ -e /run/filter/"$COEFF_NAME"L"$(( $RATE / 1000 ))".dbl ]  ; then COEFF_NAME="BypassFilter" ; fi
 			sed -i -- s/"coeff\"left"$counter"\"{filename:\"\/run\/filter\/BypassFilterL96.dbl\";"/"coeff\"left"$counter"\"{filename:\"\/run\/filter\/"$COEFF_NAME"L"$(( $RATE / 1000 ))".dbl\";"/g /etc/brutefir/brutefir.conf
@@ -37,6 +39,7 @@ case $CHANNELS in
 			sed -i -- s/"96000"/"$RATE"/g /etc/brutefir/brutefir.conf
 		done
 		;;
+
 	4)
 		for i in $(grep -o "COEFF_NAME[^m]" /boot/userconfig.txt)
 		do
@@ -52,6 +55,14 @@ case $CHANNELS in
 		done
 		;;
 esac
+
+#echo "Max. Filtersize was: "$COEFF_LENGTH_MAX
+BF_PARTSIZE=$(echo "x=l($COEFF_LENGTH_MAX)/l(2); scale=0; 2^((x+0.99999999)/1)" | bc -l)
+#echo "Next matching power of 2 is: "$BF_PARTSIZE
+
+[ "$BF_PARTITIONS" != "1" ] && BF_PARTITIONS=$(( $BF_PARTSIZE / $BF_PARTITIONS )),"$BF_PARTITIONS" || BF_PARTITIONS="$BF_PARTSIZE"
+sed -i "/filter_length/c\filter_length: $BF_PARTITIONS;" /etc/brutefir/brutefir.conf
+
 
 ##### BIS HIER SOLLTE MULTICHANNEL EINGEBUNDEN SEIN, AB HIER WEITERSCHREIBEN
 ##### BISHER SOLLTE STEREO WEITERLAUFEN WIE BISHER, TESTEN!!!!!
