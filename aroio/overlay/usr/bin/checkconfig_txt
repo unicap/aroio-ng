@@ -31,10 +31,18 @@ then	echo "Writing entry to config.txt to suppress loading of onboard Bluetooth 
 		REBOOT=1
 fi
 
-if ! grep -q gpio-ir "$CONFIG"
+if grep -q 'dtoverlay=lirc-rpi' "$CONFIG"
 then    echo "Found old lirc configuration in config.txt, writing a new one with gpio-ir."
         cardmount rw
-        sed -i '/dtoverlay=lirc-rpi,gpio_in_pin=25/c\dtoverlay=gpio-ir,gpio_pin=25' /boot/config.txt
+        sed -i '/dtoverlay=lirc-rpi/c\dtoverlay=gpio-ir,gpio_pin=25' /boot/config.txt
+        cardmount ro
+        REBOOT=1
+fi
+
+if ! grep -q 'dtoverlay=gpio-ir' "$CONFIG"
+then    echo "Missing gpio-ir overlay in config.txt, writing a new one."
+        cardmount rw
+        echo 'dtoverlay=gpio-ir,gpio_pin=25' >> /boot/config.txt
         cardmount ro
         REBOOT=1
 fi
