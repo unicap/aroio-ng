@@ -17,6 +17,8 @@ cardmount rw
 rsync --exclude "*.tmp" -vrLt --delete "$RAMDIR"/ "$SDDIR"
 cardmount ro
 
+chown -Rh sftparoio:users /run/filter
+
 # Fälle:
 # 1: Neues File im RAM -> nach SDKarte kopieren.
 # 2: Gelöschtes File im RAM -> von SDKarte löschen
