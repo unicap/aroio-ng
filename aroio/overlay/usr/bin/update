@@ -120,6 +120,7 @@ update(){
 		cp -r /boot/userconfig.txt "$USRPATH"/save
 		cp -r /boot/config.txt "$USRPATH"/save
 		cp -r /boot/filter "$USRPATH"/save
+		cp /boot/btdb.tar "$USRPATH"/save
 	echo "Unmounting SD-Card..."
 		cd /
 		umount /boot

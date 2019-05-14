@@ -1,0 +1,21 @@
+#!/bin/sh
+
+SDFILE='/boot/btdb.tar'
+RAMDIR='/var/lib/bluetooth'
+
+mkdir -p "$RAMDIR"
+cd /
+[ -e "$SDFILE" ] && tar -xvf "$SDFILE"
+
+while (true)
+do
+    inotifywait -r -e modify,attrib,close_write,move,create,delete --exclude '\.tmp' "$RAMDIR"
+    echo "Files changed in "$RAMDIR", will write changes to "$SDFILE"..."
+    cardmount rw
+    sleep 0.5
+    cd "$RAMDIR"
+    tar -cvf "$SDFILE" /var/lib/bluetooth/*
+    sleep 0.5
+    cardmount ro
+done
+
