@@ -47,6 +47,15 @@ then    echo "Missing gpio-ir overlay in config.txt, writing a new one."
         REBOOT=1
 fi
 
+if ! grep -q 'dtoverlay=pi3-act-led,gpio=22' "$CONFIG"
+then    echo "Missing gpio-LED overlay in config.txt, writing a new one."
+        cardmount rw
+        echo 'dtoverlay=pi3-act-led,gpio=22' >> /boot/config.txt
+        echo 'dtparam=act_led_trigger=timer' >> /boot/config.txt
+        cardmount ro
+        REBOOT=1
+fi
+
 case $SOUNDCARD in
 	'Internal HDMI audio')
 	if ! grep -qw '#HDMI_AUDIO' "$CONFIG"
@@ -70,6 +79,8 @@ case $SOUNDCARD in
 			disable_overscan=1
 			dtoverlay=pi3-disable-wifi
 			dtoverlay=pi3-disable-bt
+			dtoverlay=pi3-act-led,gpio=22
+			dtparam=act_led_trigger=timer
 		EOF
 
 		if ! mount | grep -q mmcblk0p2
@@ -105,6 +116,8 @@ case $SOUNDCARD in
 			dtoverlay=lirc-rpi,gpio_in_pin=25
 			disable_overscan=1
 			dtoverlay=pi3-disable-wifi
+			dtoverlay=pi3-act-led,gpio=22
+			dtparam=act_led_trigger=timer
 			dtoverlay=pi3-disable-bt
 		EOF
 
@@ -139,6 +152,8 @@ case $SOUNDCARD in
 			disable_overscan=1
 			dtoverlay=pi3-disable-wifi
 			dtoverlay=pi3-disable-bt
+			dtoverlay=pi3-act-led,gpio=22
+			dtparam=act_led_trigger=timer
 		EOF
 
 		if ! mount | grep -q mmcblk0p2
@@ -172,6 +187,8 @@ case $SOUNDCARD in
 			disable_overscan=1
 			dtoverlay=pi3-disable-wifi
 			dtoverlay=pi3-disable-bt
+			dtoverlay=pi3-act-led,gpio=22
+			dtparam=act_led_trigger=timer
 		EOF
 
 		if ! mount | grep -q mmcblk0p2
@@ -205,6 +222,8 @@ case $SOUNDCARD in
 			disable_overscan=1
 			dtoverlay=pi3-disable-wifi
 			dtoverlay=pi3-disable-bt
+			dtoverlay=pi3-act-led,gpio=22
+			dtparam=act_led_trigger=timer
 		EOF
 
 		if ! mount | grep -q mmcblk0p2
@@ -240,6 +259,8 @@ case $SOUNDCARD in
 			disable_overscan=1
 			dtoverlay=pi3-disable-wifi
 			dtoverlay=pi3-disable-bt
+			dtoverlay=pi3-act-led,gpio=22
+			dtparam=act_led_trigger=timer
 		EOF
 
 		if ! mount | grep -q mmcblk0p2
@@ -276,6 +297,8 @@ case $SOUNDCARD in
 			disable_overscan=1
 			dtoverlay=pi3-disable-wifi
 			dtoverlay=pi3-disable-bt
+			dtoverlay=pi3-act-led,gpio=22
+			dtparam=act_led_trigger=timer
 		EOF
 
 		if ! mount | grep -q mmcblk0p2
@@ -312,6 +335,8 @@ case $SOUNDCARD in
 			disable_overscan=1
 			dtoverlay=pi3-disable-wifi
 			dtoverlay=pi3-disable-bt
+			dtoverlay=pi3-act-led,gpio=22
+			dtparam=act_led_trigger=timer
 		EOF
 
 		if ! mount | grep -q mmcblk0p2
@@ -348,6 +373,8 @@ case $SOUNDCARD in
 			disable_overscan=1
 			dtoverlay=pi3-disable-wifi
 			dtoverlay=pi3-disable-bt
+			dtoverlay=pi3-act-led,gpio=22
+			dtparam=act_led_trigger=timer
 		EOF
 
 		if ! mount | grep -q mmcblk0p2
@@ -382,6 +409,8 @@ case $SOUNDCARD in
 			disable_overscan=1
 			dtoverlay=pi3-disable-wifi
 			dtoverlay=pi3-disable-bt
+			dtoverlay=pi3-act-led,gpio=22
+			dtparam=act_led_trigger=timer
 		EOF
 
 	if ! mount | grep -q mmcblk0p2
@@ -415,6 +444,8 @@ case $SOUNDCARD in
 			disable_overscan=1
 			dtoverlay=pi3-disable-wifi
 			dtoverlay=pi3-disable-bt
+			dtoverlay=pi3-act-led,gpio=22
+			dtparam=act_led_trigger=timer
 		EOF
 
 		if ! mount | grep -q mmcblk0p2
@@ -448,6 +479,8 @@ case $SOUNDCARD in
 			disable_overscan=1
 			dtoverlay=pi3-disable-wifi
 			dtoverlay=pi3-disable-bt
+			dtoverlay=pi3-act-led,gpio=22
+			dtparam=act_led_trigger=timer
 		EOF
 
 		if ! mount | grep -q mmcblk0p2
@@ -481,6 +514,8 @@ case $SOUNDCARD in
 			disable_overscan=1
 			dtoverlay=pi3-disable-wifi
 			dtoverlay=pi3-disable-bt
+			dtoverlay=pi3-act-led,gpio=22
+			dtparam=act_led_trigger=timer
 		EOF
 
 		if ! mount | grep -q mmcblk0p2
@@ -514,6 +549,8 @@ case $SOUNDCARD in
 			disable_overscan=1
 			dtoverlay=pi3-disable-wifi
 			dtoverlay=pi3-disable-bt
+			dtoverlay=pi3-act-led,gpio=22
+			dtparam=act_led_trigger=timer
 		EOF
 
 		if ! mount | grep -q mmcblk0p2
@@ -546,6 +583,8 @@ case $SOUNDCARD in
 			#fasttrack_pro
 			dtoverlay=pi3-disable-wifi
 			dtoverlay=pi3-disable-bt
+			dtoverlay=pi3-act-led,gpio=22
+			dtparam=act_led_trigger=timer
 		EOF
 
 		if ! mount | grep -q mmcblk0p2
@@ -578,6 +617,8 @@ case $SOUNDCARD in
 			#fr_scarlett
 			dtoverlay=pi3-disable-wifi
 			dtoverlay=pi3-disable-bt
+			dtoverlay=pi3-act-led,gpio=22
+			dtparam=act_led_trigger=timer
 		EOF
 
 		if ! mount | grep -q mmcblk0p2
@@ -610,6 +651,8 @@ case $SOUNDCARD in
 			#ni_audio8dj
 			dtoverlay=pi3-disable-wifi
 			dtoverlay=pi3-disable-bt
+			dtoverlay=pi3-act-led,gpio=22
+			dtparam=act_led_trigger=timer
 		EOF
 
 		if ! mount | grep -q mmcblk0p2
@@ -642,6 +685,8 @@ case $SOUNDCARD in
 			#fireface_ucx
 			dtoverlay=pi3-disable-wifi
 			dtoverlay=pi3-disable-bt
+			dtoverlay=pi3-act-led,gpio=22
+			dtparam=act_led_trigger=timer
 		EOF
 
 		if ! mount | grep -q mmcblk0p2
@@ -673,6 +718,8 @@ case $SOUNDCARD in
 			#dr_dac_prime
 			dtoverlay=pi3-disable-wifi
 			dtoverlay=pi3-disable-bt
+			dtoverlay=pi3-act-led,gpio=22
+			dtparam=act_led_trigger=timer
 		EOF
 
 		if ! mount | grep -q mmcblk0p2
@@ -704,6 +751,8 @@ case $SOUNDCARD in
 			#usb_class_compliant
 			dtoverlay=pi3-disable-wifi
 			dtoverlay=pi3-disable-bt
+			dtoverlay=pi3-act-led,gpio=22
+			dtparam=act_led_trigger=timer
 		EOF
 
 		if ! mount | grep -q mmcblk0p2
@@ -740,6 +789,8 @@ case $SOUNDCARD in
 			disable_overscan=1
 			dtoverlay=pi3-disable-wifi
 			dtoverlay=pi3-disable-bt
+			dtoverlay=pi3-act-led,gpio=22
+			dtparam=act_led_trigger=timer
 		EOF
 
 		if ! mount | grep -q mmcblk0p2
