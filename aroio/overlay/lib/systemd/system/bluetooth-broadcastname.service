@@ -1,8 +1,7 @@
 [Unit]
 Description=setting bluetooth broadcast name
 ConditionPathIsDirectory=/sys/class/bluetooth
-Requires=bluetooth.target
-After=systemd-hostnamed.service bluetooth-simpleagent.service
+After=preparenetwork.service
 
 [Service]
 Type=oneshot 
