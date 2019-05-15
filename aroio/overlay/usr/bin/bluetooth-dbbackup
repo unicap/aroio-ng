@@ -5,11 +5,11 @@ RAMDIR='/var/lib/bluetooth'
 
 mkdir -p "$RAMDIR"
 cd /
-[ -e "$SDFILE" ] && tar -xvf "$SDFILE"
+[ -e "$SDFILE" ] && echo "Stored BT-trust-database found, writing it back to system..." && tar -xvf "$SDFILE"
 
 while (true)
 do
-    inotifywait -r -e modify,attrib,close_write,move,create,delete --exclude '\.tmp' "$RAMDIR"
+    inotifywait -r -e modify,create --exclude '\.tmp' "$RAMDIR"
     echo "Files changed in "$RAMDIR", will write changes to "$SDFILE"..."
     cardmount rw
     sleep 0.5

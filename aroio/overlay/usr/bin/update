@@ -135,6 +135,7 @@ update(){
 		cp -r "$USRPATH"/save/userconfig.txt /boot
 		[[ "$REMOTE_VERSION" != "3.50" && "$REMOTE_VERSION" != "3.56" ]] && cp -r "$USRPATH"/save/config.txt /boot
 		cp -r "$USRPATH"/save/filter /boot
+		cp -r "$USRPATH"/save/btdb.tar /boot
 	echo "Everything done, will reboot now. Please wait 20 seconds and DO NOT refresh page. Click System or Configuration link above."
 
 	# Queues reboot in 5s and exits script - that gives the ui-server time to respond back to user

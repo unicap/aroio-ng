@@ -1,6 +1,6 @@
 [Unit]
 Description=Bluetooth database backup
-Before=bluetooth.target
+Before=bluetooth.service
 
 [Service]
 Type=simple
