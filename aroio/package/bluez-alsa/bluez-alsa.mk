@@ -4,9 +4,12 @@
 #
 ################################################################################
 
+#2018-03-02 - known to work ok
 BLUEZ_ALSA_VERSION = 9045edb436ea755f395a2e09e4525b5defad286a
-#BLUEZ_ALSA_VERSION = 8505bab
-#BLUEZ_ALSA_VERSION = 11eb11d
+
+# 2018-12-16 - needs to be debugged, might work..
+#BLUEZ_ALSA_VERSION = 49e3502eba94714b2a18f93deb6c66ddba73bd74
+
 BLUEZ_ALSA_SOURCE = bluez-alsa-$(BLUEZ_ALSA_VERSION).tar.gz
 BLUEZ_ALSA_SITE = $(call github,Arkq,bluez-alsa,$(BLUEZ_ALSA_VERSION))
 BLUEZ_ALSA_AUTORECONF = YES
