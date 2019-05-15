@@ -2,13 +2,14 @@
 Description=Bluetooth simple authentication service
 ConditionPathIsDirectory=/sys/class/bluetooth
 Requires=bluetooth.target
-After=bluetooth.target checkuserconfig.service
+After=bluetooth.target checkuserconfig.service systemd-hostnamed.service
 Before=bluealsa.service
 
 [Service]
 Type=simple 
-#ExecStartPre=/bin/sleep 2
+EnvironmentFile=/boot/userconfig.txt
 ExecStartPre=/bin/hciconfig hci0 up piscan sspmode 0 class 0x200428
+ExecStartPre=/bin/hciconfig hci0 name ${PLAYERNAME}
 ExecStart=/usr/bin/bluetooth-simpleagent
 Restart=always
 

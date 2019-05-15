@@ -1,0 +1,13 @@
+[Unit]
+Description=setting bluetooth broadcast name
+ConditionPathIsDirectory=/sys/class/bluetooth
+Requires=bluetooth.target
+After=systemd-hostnamed.service bluetooth-simpleagent.service
+
+[Service]
+Type=oneshot 
+EnvironmentFile=/boot/userconfig.txt
+ExecStart=/bin/hciconfig hci0 name ${PLAYERNAME}
+
+[Install]
+WantedBy=multi-user.target
