@@ -15,7 +15,7 @@ echo "Writing a config.txt with aroio specific options."
 cat << __EOF__ > "${BINARIES_DIR}/rpi-firmware/config.txt"
 
 kernel=zImage
-initramfs rootfs.cpio
+initramfs rootfs.cpio.lzo
 display_rotate=1
 force_turbo=1
 dtdebug=1
@@ -25,8 +25,12 @@ dtparam=i2c_arm=on
 dtoverlay=i2s-mmap
 dtoverlay=hifiberry-dacplus
 dtparam=spi=on
-dtoverlay=lirc-rpi,gpio_in_pin=25
+dtoverlay=gpio-ir,gpio_pin=25
 disable_overscan=1
+dtoverlay=pi3-disable-wifi
+dtoverlay=pi3-disable-bt
+dtoverlay=pi3-act-led,gpio=22
+dtparam=act_led_trigger=timer
 
 __EOF__
 
