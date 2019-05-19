@@ -51,7 +51,15 @@ if ! grep -q 'dtoverlay=pi3-act-led,gpio=22' "$CONFIG"
 then    echo "Missing gpio-LED overlay in config.txt, writing a new one."
         cardmount rw
         echo 'dtoverlay=pi3-act-led,gpio=22' >> /boot/config.txt
-        echo 'dtparam=act_led_trigger=timer' >> /boot/config.txt
+        echo 'dtparam=act_led_trigger=heartbeat' >> /boot/config.txt
+        cardmount ro
+        REBOOT=1
+fi
+
+if grep -q 'initramfs rootfs.cpio' "$CONFIG"
+then    echo "Found old lirc initrd entry config.txt, deleting it."
+        cardmount rw
+        sed -i '/initramfs rootfs.cpio/d' /boot/config.txt
         cardmount ro
         REBOOT=1
 fi
@@ -80,12 +88,8 @@ case $SOUNDCARD in
 			dtoverlay=pi3-disable-wifi
 			dtoverlay=pi3-disable-bt
 			dtoverlay=pi3-act-led,gpio=22
-			dtparam=act_led_trigger=timer
+			dtparam=act_led_trigger=heartbeat
 		EOF
-
-		if ! mount | grep -q mmcblk0p2
-		then 	echo "initramfs rootfs.cpio.lzo" >> "$CONFIG"
-		fi
 
 		cardmount ro
 		REBOOT=1
@@ -117,13 +121,10 @@ case $SOUNDCARD in
 			disable_overscan=1
 			dtoverlay=pi3-disable-wifi
 			dtoverlay=pi3-act-led,gpio=22
-			dtparam=act_led_trigger=timer
+			dtparam=act_led_trigger=heartbeat
 			dtoverlay=pi3-disable-bt
 		EOF
 
-		if ! mount | grep -q mmcblk0p2
-		then 	echo "initramfs rootfs.cpio.lzo" >> "$CONFIG"
-		fi
 		cardmount ro
 		REBOOT=1
 	fi
@@ -153,12 +154,9 @@ case $SOUNDCARD in
 			dtoverlay=pi3-disable-wifi
 			dtoverlay=pi3-disable-bt
 			dtoverlay=pi3-act-led,gpio=22
-			dtparam=act_led_trigger=timer
+			dtparam=act_led_trigger=heartbeat
 		EOF
 
-		if ! mount | grep -q mmcblk0p2
-		then 	echo "initramfs rootfs.cpio.lzo" >> "$CONFIG"
-		fi
 		cardmount ro
 		REBOOT=1
 	fi
@@ -188,12 +186,9 @@ case $SOUNDCARD in
 			dtoverlay=pi3-disable-wifi
 			dtoverlay=pi3-disable-bt
 			dtoverlay=pi3-act-led,gpio=22
-			dtparam=act_led_trigger=timer
+			dtparam=act_led_trigger=heartbeat
 		EOF
 
-		if ! mount | grep -q mmcblk0p2
-		then 	echo "initramfs rootfs.cpio.lzo" >> "$CONFIG"
-		fi
 		cardmount ro
 		REBOOT=1
 	fi
@@ -223,12 +218,9 @@ case $SOUNDCARD in
 			dtoverlay=pi3-disable-wifi
 			dtoverlay=pi3-disable-bt
 			dtoverlay=pi3-act-led,gpio=22
-			dtparam=act_led_trigger=timer
+			dtparam=act_led_trigger=heartbeat
 		EOF
 
-		if ! mount | grep -q mmcblk0p2
-		then 	echo "initramfs rootfs.cpio.lzo" >> "$CONFIG"
-		fi
 		cardmount ro
 		REBOOT=1
 	fi
@@ -260,12 +252,9 @@ case $SOUNDCARD in
 			dtoverlay=pi3-disable-wifi
 			dtoverlay=pi3-disable-bt
 			dtoverlay=pi3-act-led,gpio=22
-			dtparam=act_led_trigger=timer
+			dtparam=act_led_trigger=heartbeat
 		EOF
 
-		if ! mount | grep -q mmcblk0p2
-		then	echo "initramfs rootfs.cpio.lzo" >> "$CONFIG"
-		fi
 		cardmount ro
 		REBOOT=1
 	fi
@@ -298,12 +287,9 @@ case $SOUNDCARD in
 			dtoverlay=pi3-disable-wifi
 			dtoverlay=pi3-disable-bt
 			dtoverlay=pi3-act-led,gpio=22
-			dtparam=act_led_trigger=timer
+			dtparam=act_led_trigger=heartbeat
 		EOF
 
-		if ! mount | grep -q mmcblk0p2
-		then	echo "initramfs rootfs.cpio.lzo" >> "$CONFIG"
-		fi
 		cardmount ro
 		REBOOT=1
 	fi
@@ -336,12 +322,9 @@ case $SOUNDCARD in
 			dtoverlay=pi3-disable-wifi
 			dtoverlay=pi3-disable-bt
 			dtoverlay=pi3-act-led,gpio=22
-			dtparam=act_led_trigger=timer
+			dtparam=act_led_trigger=heartbeat
 		EOF
 
-		if ! mount | grep -q mmcblk0p2
-		then	echo "initramfs rootfs.cpio.lzo" >> "$CONFIG"
-		fi
 		cardmount ro
 		REBOOT=1
 	fi
@@ -374,12 +357,9 @@ case $SOUNDCARD in
 			dtoverlay=pi3-disable-wifi
 			dtoverlay=pi3-disable-bt
 			dtoverlay=pi3-act-led,gpio=22
-			dtparam=act_led_trigger=timer
+			dtparam=act_led_trigger=heartbeat
 		EOF
 
-		if ! mount | grep -q mmcblk0p2
-		then	echo "initramfs rootfs.cpio.lzo" >> "$CONFIG"
-		fi
 		cardmount ro
 		REBOOT=1
 	fi
@@ -410,12 +390,9 @@ case $SOUNDCARD in
 			dtoverlay=pi3-disable-wifi
 			dtoverlay=pi3-disable-bt
 			dtoverlay=pi3-act-led,gpio=22
-			dtparam=act_led_trigger=timer
+			dtparam=act_led_trigger=heartbeat
 		EOF
 
-	if ! mount | grep -q mmcblk0p2
-	then	echo "initramfs rootfs.cpio.lzo" >> "$CONFIG"
-	fi
 	cardmount ro
 	REBOOT=1
 	fi
@@ -445,12 +422,9 @@ case $SOUNDCARD in
 			dtoverlay=pi3-disable-wifi
 			dtoverlay=pi3-disable-bt
 			dtoverlay=pi3-act-led,gpio=22
-			dtparam=act_led_trigger=timer
+			dtparam=act_led_trigger=heartbeat
 		EOF
 
-		if ! mount | grep -q mmcblk0p2
-		then 	echo "initramfs rootfs.cpio.lzo" >> "$CONFIG"
-		fi
 		cardmount ro
 		REBOOT=1
 	fi
@@ -480,12 +454,9 @@ case $SOUNDCARD in
 			dtoverlay=pi3-disable-wifi
 			dtoverlay=pi3-disable-bt
 			dtoverlay=pi3-act-led,gpio=22
-			dtparam=act_led_trigger=timer
+			dtparam=act_led_trigger=heartbeat
 		EOF
 
-		if ! mount | grep -q mmcblk0p2
-		then 	echo "initramfs rootfs.cpio.lzo" >> "$CONFIG"
-		fi
 		cardmount ro
 		REBOOT=1
 	fi
@@ -515,12 +486,9 @@ case $SOUNDCARD in
 			dtoverlay=pi3-disable-wifi
 			dtoverlay=pi3-disable-bt
 			dtoverlay=pi3-act-led,gpio=22
-			dtparam=act_led_trigger=timer
+			dtparam=act_led_trigger=heartbeat
 		EOF
 
-		if ! mount | grep -q mmcblk0p2
-		then 	echo "initramfs rootfs.cpio.lzo" >> "$CONFIG"
-		fi
 		cardmount ro
 		REBOOT=1
 	fi
@@ -550,12 +518,9 @@ case $SOUNDCARD in
 			dtoverlay=pi3-disable-wifi
 			dtoverlay=pi3-disable-bt
 			dtoverlay=pi3-act-led,gpio=22
-			dtparam=act_led_trigger=timer
+			dtparam=act_led_trigger=heartbeat
 		EOF
 
-		if ! mount | grep -q mmcblk0p2
-		then 	echo "initramfs rootfs.cpio.lzo" >> "$CONFIG"
-		fi
 		cardmount ro
 		REBOOT=1
 	fi
@@ -584,12 +549,9 @@ case $SOUNDCARD in
 			dtoverlay=pi3-disable-wifi
 			dtoverlay=pi3-disable-bt
 			dtoverlay=pi3-act-led,gpio=22
-			dtparam=act_led_trigger=timer
+			dtparam=act_led_trigger=heartbeat
 		EOF
 
-		if ! mount | grep -q mmcblk0p2
-		then	echo "initramfs rootfs.cpio.lzo" >> "$CONFIG"
-		fi
 		cardmount ro
 		REBOOT=1
 	fi
@@ -618,12 +580,9 @@ case $SOUNDCARD in
 			dtoverlay=pi3-disable-wifi
 			dtoverlay=pi3-disable-bt
 			dtoverlay=pi3-act-led,gpio=22
-			dtparam=act_led_trigger=timer
+			dtparam=act_led_trigger=heartbeat
 		EOF
 
-		if ! mount | grep -q mmcblk0p2
-		then	echo "initramfs rootfs.cpio.lzo" >> "$CONFIG"
-		fi
 		cardmount ro
 		REBOOT=1
 	fi
@@ -652,12 +611,9 @@ case $SOUNDCARD in
 			dtoverlay=pi3-disable-wifi
 			dtoverlay=pi3-disable-bt
 			dtoverlay=pi3-act-led,gpio=22
-			dtparam=act_led_trigger=timer
+			dtparam=act_led_trigger=heartbeat
 		EOF
 
-		if ! mount | grep -q mmcblk0p2
-		then	echo "initramfs rootfs.cpio.lzo" >> "$CONFIG"
-		fi
 		cardmount ro
 		REBOOT=1
 	fi
@@ -686,12 +642,9 @@ case $SOUNDCARD in
 			dtoverlay=pi3-disable-wifi
 			dtoverlay=pi3-disable-bt
 			dtoverlay=pi3-act-led,gpio=22
-			dtparam=act_led_trigger=timer
+			dtparam=act_led_trigger=heartbeat
 		EOF
 
-		if ! mount | grep -q mmcblk0p2
-		then	echo "initramfs rootfs.cpio.lzo" >> "$CONFIG"
-		fi
 		cardmount ro
 		REBOOT=1
 	fi
@@ -719,12 +672,9 @@ case $SOUNDCARD in
 			dtoverlay=pi3-disable-wifi
 			dtoverlay=pi3-disable-bt
 			dtoverlay=pi3-act-led,gpio=22
-			dtparam=act_led_trigger=timer
+			dtparam=act_led_trigger=heartbeat
 		EOF
 
-		if ! mount | grep -q mmcblk0p2
-		then	echo "initramfs rootfs.cpio.lzo" >> "$CONFIG"
-		fi
 		cardmount ro
 		REBOOT=1
 	fi
@@ -752,12 +702,9 @@ case $SOUNDCARD in
 			dtoverlay=pi3-disable-wifi
 			dtoverlay=pi3-disable-bt
 			dtoverlay=pi3-act-led,gpio=22
-			dtparam=act_led_trigger=timer
+			dtparam=act_led_trigger=heartbeat
 		EOF
 
-		if ! mount | grep -q mmcblk0p2
-		then	echo "initramfs rootfs.cpio.lzo" >> "$CONFIG"
-		fi
 		cardmount ro
 		REBOOT=1
 	fi
@@ -790,12 +737,9 @@ case $SOUNDCARD in
 			dtoverlay=pi3-disable-wifi
 			dtoverlay=pi3-disable-bt
 			dtoverlay=pi3-act-led,gpio=22
-			dtparam=act_led_trigger=timer
+			dtparam=act_led_trigger=heartbeat
 		EOF
 
-		if ! mount | grep -q mmcblk0p2
-		then	echo "initramfs rootfs.cpio.lzo" >> "$CONFIG"
-		fi
 		cardmount ro
 		REBOOT=1
 	fi

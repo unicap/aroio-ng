@@ -93,6 +93,7 @@ test(){
 }
 
 update(){
+	echo heartbeat >/sys/class/leds/led0/trigger
 	echo "Update started..."
 
 	# Stop daemons that might write to the SDcard before updating
@@ -107,6 +108,7 @@ update(){
 		then
 			echo "There is more than one image in the update folder! Please specify one with the version option."
 			ls aroio*  -lh
+			echo none >/sys/class/leds/led0/trigger
 			exit 2
 	fi
 
@@ -119,6 +121,7 @@ update(){
 		cd /boot
 		cp -r /boot/userconfig.txt "$USRPATH"/save
 		cp -r /boot/config.txt "$USRPATH"/save
+		grep -q initramfs /"$USRPATH"/save/config.txt  && cardmount rw && sed -i '/initramfs rootfs.cpio/d' "$USRPATH"/save/config.txt
 		cp -r /boot/filter "$USRPATH"/save
 		cp /boot/btdb.tar "$USRPATH"/save
 	echo "Unmounting SD-Card..."
