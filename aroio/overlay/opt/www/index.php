@@ -128,6 +128,7 @@
     print '<h1>Configuration saved, will reboot now and redirect you here...</h1>';
     sleep(3);
     shell_exec('checksoundcard &');
+    shell_exec('echo heartbeat >/sys/class/leds/led0/trigger');
     shell_exec('reboot -d 1 &');
     echo '<meta http-equiv="refresh" content="15">';
   }
