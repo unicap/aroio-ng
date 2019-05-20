@@ -1,0 +1,4 @@
+config BR2_PACKAGE_FILTER
+       bool "filter"
+       help
+         Filter for brutefir
