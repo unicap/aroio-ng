@@ -14,6 +14,8 @@
   $ini_array = parse_ini_file("/boot/userconfig.txt", 1);
 //  print_r($ini_array);
 
+
+
   if ( isset($_POST['submit']) || isset($_POST['audiosettings_submit']) )
   {
     if ($_POST['DHCP'] == "OFF")
@@ -118,7 +120,7 @@
       echo '<meta http-equiv="refresh"> ';
     }
   }
-    
+
   if ( isset($_POST['reboot']) )
   {
     $shell_exec_ret=shell_exec('cardmount rw');
@@ -151,7 +153,7 @@
   {
       shell_exec('/usr/bin/controlaudio restart &> /dev/null' );
   }
-  
+
   include "header.php";
   include "nav.php";
 ?><form id="Audio settings" Name="Audio settings" action="" method="post"><?
@@ -159,13 +161,14 @@
   include "webui.php";
   include "hardware.php";
   include "lms.php";
-  include "audio.php"; 
+  include "audio.php";
 ?></form><?
-  
-  
+
+
 
 unset($_POST['submit']);
 
+include('update_check.php');
 include "footer.php";
 
 ?>

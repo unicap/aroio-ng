@@ -380,14 +380,17 @@
     $local_version_en='Installed version: ';
     $local_version_de='Installierte Version: ';
 
-    $remote_version_en='Remotely available version: ';
-    $remote_version_de='Verf&uuml;gbare Version: ';
+    $remote_version_en='Available version: ';
+    $remote_version_de='Verfügbare Version: ';
 
     $button_update_en='Update';
     $button_update_de='Update';
 
+    $infotext_update_ack_en='This version can be installed under \'System\'.\nThis message will not be shown again until the next release of a version.';
+    $infotext_update_ack_de='Diese Version kann unter \'System\' installiert werden.\nDiese Meldung wird bis zum Erscheinen einer neuen Version nicht wieder angezeigt!';
+
     $infotext_update_available_en='There is a newer Aroio-version available!';
-    $infotext_update_available_de='Es ist eine neuere Aroio-Version verf&uuml;gbar!';
+    $infotext_update_available_de='Es ist eine neuere Aroio-Version verfügbar!';
 
     $infotext_update_unchanged_en='There is no newer Version available at the moment, but you may still install the last version found.';
     $infotext_update_unchanged_de='Es ist derzeit keine neuere Version verf&uuml;gbar. <br>Es kann aber die letzte verf&uuml;gbare Version erneut installiert werden.';
@@ -463,13 +466,13 @@
     $measurement_form_en='Room Correction Measurement';
     $measurement_form_de='Raumkorrekturmessung';
 
-    $measurement_warning_en='For the measurement a <a class="forward" href="https://www.abacus-electronics.de/produkte/streaming/raumkorrektur/minidsp-umik-1.html" title="UMIK-1 ABACUS-Shop" target="_blank">miniDSP UMIK-1</a> USB measurement microphone is needed. 
-    The mic has to be set up at the listening position and connected to one of the USB ports on the Aroio. 
+    $measurement_warning_en='For the measurement a <a class="forward" href="https://www.abacus-electronics.de/produkte/streaming/raumkorrektur/minidsp-umik-1.html" title="UMIK-1 ABACUS-Shop" target="_blank">miniDSP UMIK-1</a> USB measurement microphone is needed.
+    The mic has to be set up at the listening position and connected to one of the USB ports on the Aroio.
     <p><button type="button" style="padding: 4px 2px; margin: 0px;">Measurement</button> loads the stimulus and plays all audio frequencies from low to high, once left, once right and left again.</p>
     <p>For a good measurement the volume should be adjusted such that the level is high enough but the speakers should not reach mechanical limits (especially at low frequencies).</p>
     <button type="button" style="padding: 4px 2px; margin: 0px;">Volume test</button> Will play a 10 second noise for volume setting. The volume should be set that is is still pleasant and not powerfull.</p>
     Now let the measurement proceed without changing the volume.</p>
-    <p><button type="button" style="padding: 4px 2px; margin: 0px;">Control measurement</button> starts a measurement through the convolver with its filters set in the convolver tab. 
+    <p><button type="button" style="padding: 4px 2px; margin: 0px;">Control measurement</button> starts a measurement through the convolver with its filters set in the convolver tab.
     This is independent of the output mode set under the system tab. This can be used to control generated filters.</p>';
 
 
@@ -480,7 +483,7 @@
     <p><button type="button" style="padding: 4px 2px; margin: 0px;">Pegel-Test</button> spielt für 10 Sekunden ein Rauschen ab, das als Orientierung für die Lautstärke der Messung dient. Diese sollte so eingestellt werden, dass sie als angenehm und nicht als kräftig empfunden wird.</p>
     <p>W&auml;hrend der Messung bitte die Lautstärke nicht ändern.</p>
     <p><button type="button" style="padding: 4px 2px; margin: 0px;">Kontroll-Messung</button> startet eine Messung durch den Convolver mit den im Reiter Convolver gesetzten Filtern.
-    Dies ist unabhängig von dem im Reiter System ausgewählten Ausgabemodus. 
+    Dies ist unabhängig von dem im Reiter System ausgewählten Ausgabemodus.
     Dieser Modus dient der Kontrolle von bestehenden Filtern.</p>';
 
     $measurement_runs_en='Measurement is running. <br> Please wait...';
@@ -491,10 +494,10 @@
 
     $play_noise_en='Volume test';
     $play_noise_de='Pegel-Test';
-    
+
     $stop_noise_en='Volume test stop';
     $stop_noise_de='Pegel-Test stop';
-    
+
     $start_measurement_en='Measurement';
     $start_measurement_de='Messung';
 
@@ -676,5 +679,5 @@ $debugging_off_de='aus';
 
 
 $helptext_filter_selection_de="Verwaltung der Filter. Filter k&ouml;nnen mit der Software Acourate von Audiovero direkt auf den AroioEX hochgeladen werden.";
-$helptext_filter_selection_en="Filter management. Filters can be uploaded directly to AroioEX using the Software Acourate by Audiovero."; 
+$helptext_filter_selection_en="Filter management. Filters can be uploaded directly to AroioEX using the Software Acourate by Audiovero.";
 ?>
