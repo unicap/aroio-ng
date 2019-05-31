@@ -1,0 +1,29 @@
+#!/bin/sh
+
+. /boot/userconfig.txt
+
+#killall aroio_control_led
+
+until networkctl | grep configured; do sleep 1 ; done
+
+sleep 3
+
+REM=$(update -u beta -c | awk -F": " '/Remote/{print $2}')
+LOC=$(cat /boot/version | awk '/\./{print $1}')
+
+	REM1=$(echo $REM | awk -F. '{print $1}')
+	REM2=$(echo $REM | awk -F. '{print $2}')
+	REM3=$(echo $REM | awk -F. '{print $3}')
+
+	LOC1=$(echo $LOC | awk -F. '{print $1}')
+	LOC2=$(echo $LOC | awk -F. '{print $2}')
+	LOC3=$(echo $LOC | awk -F. '{print $3}')
+
+echo "Remote Version: $REM"
+echo "Local version: $LOC"
+echo "Known version: $KNOWN_VERSION"
+
+if [[ "$REM" != "Could not find remote version..." && "$KNOWN_VERSION" != "$REM" ]]
+then
+	[[ $REM1 -gt $LOC1 || $REM1 -eq $LOC1 && $REM2 -gt $LOC2 || $REM1 -eq $LOC1 && $REM2 -eq $REM2 && $REM3 -gt $LOC3 ]] && echo "Aroio "$REM" available, setting LED to blink!" && sleep 10 && aroio_control_led blink 3 1 1 75 0 && aroio_control_led on
+fi

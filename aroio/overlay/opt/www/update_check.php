@@ -1,7 +1,7 @@
 <?php
   $ini_array = parse_ini_file("/boot/userconfig.txt", 1);
 
-  if ($_ini_array['USEBETA'] == "ON")
+  if ($ini_array['USEBETA'] == "ON")
   {
     exec ( "/usr/bin/update -c -u beta" , $ausgabe , $return_var );
   }

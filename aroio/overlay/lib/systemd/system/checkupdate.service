@@ -1,0 +1,10 @@
+[Unit]
+Description=checking for system update
+After=multi-user.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/checkupdate
+
+[Install]
+WantedBy=multi-user.target
