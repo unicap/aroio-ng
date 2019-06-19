@@ -1,0 +1,45 @@
+#!/bin/sh
+
+. /boot/userconfig.txt
+
+trap 2
+
+function printinfo()
+{
+	# Clear tty0
+	#echo -e "\033\0143" > /dev/tty0
+	clear
+
+	HOSTNAME=$(hostname)
+	UPTIME=$(uptime --pretty | awk '{print $2" "$3" "$4" "$5}')
+	ETH0_IP=$(ip -o -4 addr list eth0 | awk '{print $4}' | cut -d/ -f1)
+	[ $(cat /sys/class/net/eth0/carrier) -eq 1 ] && ETH0_LINK="Connected" || ETH0_LINK="Not connected"
+	[ -e /sys/class/net/wlan0/carrier ] && [ $(cat /sys/class/net/wlan0/carrier) -eq 1 ] && WLAN0_LINK="Connected" || WLAN0_LINK="Not connected"
+	WLAN0_IP=$(ip route get 1 | awk '/wlan0/{print $3}')
+	PIVERSION=$(aroio_piversion)
+	VERSION=$(awk 'NR==1{print $1}' /boot/version)
+	SOUNDCARD=$(cat /proc/asound/card0/id)
+	BLUETOOTHMAC=$(hcitool dev | awk '{print $2}')
+	TEMP=$(temp | awk '{print $5"C"}')
+	LMSADDR=$(netstat -n -t | grep -o -E '\b([0-9]{1,3}\.){3}[0-9]{1,3}\b':3483 | grep -oE '\b([0-9]{1,3}\.){3}[0-9]{1,3}\b')
+
+	echo -e "We are Aroio OS "$VERSION" running on machine "$HOSTNAME"\n"
+	echo -e "Hardware:\t\t"$PIVERSION""
+	echo -e "Up since:\t\t"$UPTIME""
+	echo -ne "LAN state:\t\t"$ETH0_LINK""
+	[ -e /sys/class/net/eth0/carrier ] && echo -ne ", IP-address is "$ETH0_IP""
+	echo -ne "\nW-LAN state:\t\t"$WLAN0_LINK""
+	[ -e /sys/class/net/wlan0/carrier ] && echo -e ", IP-address: "$WLAN0_IP""
+	[ -e /sys/class/bluetooth/hci0 ] && echo -ne "\nBluetooth:\t\tActive, MAC-address:"$BLUETOOTHMAC"" || echo -ne "\nBluetooth:\t\tInactive"
+	[ -e /proc/asound/card0/id ] && echo -ne "\nAudio interface:\t"$SOUNDCARD", configured" || echo "Audio interface:\tnot initialized"
+	[ "$LMSADDR" != "" ] && echo -ne "\nLogitechmediaserver:\tConnected with squeezelite, IP-address: "$LMSADDR"" || echo -ne "\nLogitechmediaserver:\tNot connected"
+	echo -ne "\nTemperature:\t\t"$TEMP""
+	echo ""
+}
+
+while true
+do	#$(printinfo)
+	OUTPUT=$(printinfo)
+	echo "$OUTPUT"
+	sleep 5
+done

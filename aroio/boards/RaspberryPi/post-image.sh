@@ -8,7 +8,7 @@ GENIMAGE_CFG="${BOARD_DIR}/genimage-${BOARD_NAME}.cfg"
 GENIMAGE_TMP="${BUILD_DIR}/genimage.tmp"
 
 # Fix wrong console in cmdline.txt
-echo 'root=/dev/ram0 rootwait console=ttyAMA0,115200 console=tty1' > "${BINARIES_DIR}/rpi-firmware/cmdline.txt"
+echo 'root=/dev/ram0 rootwait console=ttyAMA0,115200 console=tty2' > "${BINARIES_DIR}/rpi-firmware/cmdline.txt"
 
 # Include cpio fs option, might be better do do this elsewhere though..
 echo "Writing a config.txt with aroio specific options."

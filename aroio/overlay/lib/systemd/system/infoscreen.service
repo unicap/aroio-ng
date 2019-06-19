@@ -1,0 +1,14 @@
+[Unit]
+Description=system information on HDMI output
+#After=syslog.target sound.target local-fs.target checkuserconfig.service
+After=multi-user.target
+
+[Service]
+Type=simple 
+StandardInput=tty
+StandardOutput=tty
+TTYPath=/dev/tty0 
+ExecStart=/bin/sh -c /usr/bin/infoscreen            
+
+[Install]
+WantedBy=multi-user.target
