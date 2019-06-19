@@ -20,9 +20,12 @@
       echo '<script type="text/javascript" language="Javascript">
       alert("'.${infotext_update_available._.$lang}.'\n\n'.${local_version._.$lang}.$ausgabe[1].'\n'.${remote_version._.$lang}.$ausgabe[0].'\n\n'.${infotext_update_ack._.$lang}.'")
       </script> ';
-      exec( "/usr/bin/cardmount rw" );
-      wrtToUserconfig(KNOWN_VERSION,$ausgabe[0]);
-      exec( "/usr/bin/cardmount ro" );
+      if ($ausgabe[0] != "Could not find remote version...")
+      {
+        exec( "/usr/bin/cardmount rw" );
+        wrtToUserconfig(KNOWN_VERSION,$ausgabe[0]);
+        exec( "/usr/bin/cardmount ro" );
+      }
     }
     else
     {

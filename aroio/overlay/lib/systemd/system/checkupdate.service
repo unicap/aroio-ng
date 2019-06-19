@@ -3,7 +3,7 @@ Description=checking for system update
 After=multi-user.target
 
 [Service]
-Type=simple
+Type=oneshot
 ExecStart=/usr/bin/checkupdate
 
 [Install]
