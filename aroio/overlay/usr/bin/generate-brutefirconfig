@@ -27,6 +27,7 @@ case $CHANNELS in
 		for i in $(grep -o "COEFF_NAME[^m]" /boot/userconfig.txt)
 		do
 			COEFF_NAME=$(eval "echo \$$i")
+			if [ "$COEFF_NAME" = "" ] ; then COEFF_NAME="BypassFilter" ; fi
 			counter=$((counter+1))
 
 			eval COEFF_LENGTH_$COEFF_NAME=$(ls -laL /run/filter/"$COEFF_NAME"L"$(( $RATE / 1000 ))".dbl | awk '{print $5/8}')
