@@ -22,11 +22,6 @@ BLUEZ_ALSA_VERSION = 9045edb436ea755f395a2e09e4525b5defad286a
 # ...
 #BLUEZ_ALSA_VERSION = 680f904603097cca89e86a492147e223a73bb247
 
-
-
-
-
-
 BLUEZ_ALSA_SOURCE = bluez-alsa-$(BLUEZ_ALSA_VERSION).tar.gz
 BLUEZ_ALSA_SITE = $(call github,Arkq,bluez-alsa,$(BLUEZ_ALSA_VERSION))
 BLUEZ_ALSA_AUTORECONF = YES
@@ -43,7 +38,8 @@ BLUEZ_ALSA_CONF_OPTS = \
 	--with-alsadatadir=/usr/share/alsa 
 	
 
-BLUEZ_ALSA_DEPENDENCIES = alsa-lib sbc fdk-aac ldacbt
+BLUEZ_ALSA_DEPENDENCIES = alsa-lib sbc fdk-aac 
+#ldacbt
 
 define BLUEZ_ALSA_PRE_CONFIGURE_FIXUP
 	mkdir -p $(@D)/m4
