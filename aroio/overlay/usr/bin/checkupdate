@@ -8,7 +8,7 @@ until networkctl | grep configured; do sleep 1 ; done
 
 sleep 3
 
-REM=$(update -u beta -c | awk -F": " '/Remote/{print $2}')
+[ "$USEBETA" = "ON" ] && REM=$(update -u beta -c | awk -F": " '/Remote/{print $2}') || REM=$(update -c | awk -F": " '/Remote/{print $2}')
 	REM1=$(echo $REM | awk -F. '{print $1}')
 	REM2=$(echo $REM | awk -F. '{print $2}')
 	REM3=$(echo $REM | awk -F. '{print $3}')

@@ -21,11 +21,13 @@
         else
         {
             exec ( "/usr/bin/update -c" , $ausgabe , $return_var );
-		}
+        }
 
-        list($remote[0], $remote[1], $remote[2]) = explode(".", $ausgabe[0]);
-        list($local[0], $local[1], $local[2]) = explode(".", $ausgabe[1]);
-
+        if (preg_match( '/([0-9])([\.][0-9]){1,2}/', "$ausgabe[0]" ) )
+        {
+          list($remote[0], $remote[1], $remote[2]) = explode(".", $ausgabe[0]);
+          list($local[0], $local[1], $local[2]) = explode(".", $ausgabe[1]);
+        }
         if ($remote[0] > $local[0])
         {
             $update_message="<h1>${infotext_update_available._.$lang}</h1>";
