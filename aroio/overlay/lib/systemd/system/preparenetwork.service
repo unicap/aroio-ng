@@ -8,7 +8,7 @@ Before=wpa_supplicant@wlan0.service
 [Service]
 Type=oneshot
 EnvironmentFile=/boot/userconfig.txt
-ExecStartPre=/bin/hostnamectl set-hostname "$HOSTNAME"
+ExecStartPre=/bin/hostname "$HOSTNAME"
 ExecStartPre=/bin/sh -c '/bin/echo "" > /etc/wpa_supplicant/wpa_supplicant-wlan0.conf'
 ExecStart=-/bin/sh -c '[ "$WLANPWD" != "" ] && /sbin/wpa_passphrase "$WLANSSID" "$WLANPWD" > /etc/wpa_supplicant/wpa_supplicant-wlan0.conf'
 
