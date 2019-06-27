@@ -24,7 +24,7 @@ echo "Known version: $KNOWN_VERSION"
 
 if [[ "$REM" != "Could not find remote version..." && "$KNOWN_VERSION" != "$REM" ]]
 then
-	[[ $REM1 -gt $LOC1 || $REM1 -eq $LOC1 && $REM2 -gt $LOC2 || $REM1 -eq $LOC1 && $REM2 -eq $REM2 && $REM3 -gt $LOC3 ]] && echo "Aroio "$REM" available, setting LED to blink!" && sleep 10 && aroio_control_led blink 3 1 1 75 0 && aroio_control_led on
+	[[ $REM1 -gt $LOC1 || $REM1 -eq $LOC1 && $REM2 -gt $LOC2 || $REM1 -eq $LOC1 && $REM2 -eq $LOC2 && $REM3 -gt $LOC3 ]] && echo "Aroio "$REM" available, setting LED to blink!" && sleep 10 && aroio_control_led blink 3 1 1 75 0 && aroio_control_led on
 fi
 
 exit 0
