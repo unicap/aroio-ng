@@ -8,6 +8,7 @@ rm /etc/systemd/network/*
 
 if [ "$LAN_DHCP" = "OFF" ]
 then
+	echo "Writing network configuration file for wired network with fixed adresses..."
 	cat <<-EOF > /etc/systemd/network/20-wired.network
 	[Match]
 	Name=eth0
@@ -23,6 +24,7 @@ then
 	EOF
 
 else
+	echo "Writing network configuration file for wired network with DHCP..."
 	cat <<-EOF > /etc/systemd/network/20-wired.network
 	[Match]
 	Name=eth0
@@ -39,8 +41,10 @@ fi
 
 if [[ "$WLANSSID" != "" && "$WLANSSID" != "WIFI-OFF!" ]] && [ -e /sys/class/net/wlan0 ]
 then
+	echo "WLAN SSID is neither empty nor \"WIFI-OFF\"."
 	if [ "WLAN_DHCP" = "OFF" ]
 	then
+		echo "Writing network configuration file for WiFi network with fixed adresses..."
 		cat <<-EOF > /etc/systemd/network/25-wireless.network
 		[Match]
 		Name=wlan0
@@ -55,6 +59,7 @@ then
 		Gateway=$WLAN_GATEWAY
 		EOF
 	else
+		echo "Writing network configuration file for WiFi network with DHCP..."
 		cat <<-EOF > /etc/systemd/network/25-wireless.network
 		[Match]
 		Name=wlan0
@@ -68,4 +73,5 @@ then
 		UseNTP=false
 		EOF
 	fi
+else echo "WLAN SSID is either empty of \"WIFI-OFF\", will not write a configuration for it."
 fi
