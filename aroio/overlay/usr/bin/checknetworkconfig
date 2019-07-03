@@ -39,6 +39,10 @@ else
 	EOF
 fi
 
+echo "DEBUG!"
+echo "WLANSSID = "$WLANSSID""
+echo $(ls /sys/class/net/wlan0)
+
 if [[ "$WLANSSID" != "" && "$WLANSSID" != "WIFI-OFF!" ]] && [ -e /sys/class/net/wlan0 ]
 then
 	echo "WLAN SSID is neither empty nor \"WIFI-OFF\"."
@@ -73,5 +77,5 @@ then
 		UseNTP=false
 		EOF
 	fi
-else echo "WLAN SSID is either empty of \"WIFI-OFF\", will not write a configuration for it."
+else echo "WLAN SSID is either empty or \"WIFI-OFF\", will not write a configuration for it."
 fi
