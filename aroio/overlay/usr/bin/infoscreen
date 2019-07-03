@@ -14,8 +14,8 @@ function printinfo()
 	UPTIME=$(uptime --pretty | awk '{print $2" "$3" "$4" "$5}')
 	ETH0_IP=$(ip -o -4 addr list eth0 | awk '{print $4}' | cut -d/ -f1)
 	[ $(cat /sys/class/net/eth0/carrier) -eq 1 ] && ETH0_LINK="Connected" || ETH0_LINK="Not connected"
+	WLAN0_IP=$(ip -o -4 addr list wlan0 | awk '{print $4}' | cut -d/ -f1)
 	[ -e /sys/class/net/wlan0/carrier ] && [ $(cat /sys/class/net/wlan0/carrier) -eq 1 ] && WLAN0_LINK="Connected" || WLAN0_LINK="Not connected"
-	WLAN0_IP=$(ip route get 7 | awk '/wlan0/{print $3}')
 	PIVERSION=$(aroio_piversion)
 	VERSION=$(awk 'NR==1{print $1}' /boot/version)
 	SOUNDCARD=$(cat /proc/asound/card0/id)
