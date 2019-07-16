@@ -2,11 +2,13 @@
 Description=Bluetooth service
 Documentation=man:bluetoothd(8)
 ConditionPathIsDirectory=/sys/class/bluetooth
+Before=bluetooth-simpleagent.service bluetooth-broadcastname.service
+After=bluetooth-dbbackup.service
 
 [Service]
 Type=dbus
 BusName=org.bluez
-ExecStart=/usr/libexec/bluetooth/bluetoothd
+ExecStart=/usr/libexec/bluetooth/bluetoothd -d
 NotifyAccess=main
 #WatchdogSec=10
 #Restart=on-failure

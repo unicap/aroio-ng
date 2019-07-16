@@ -2,7 +2,7 @@
 Description=Bluetooth simple authentication service
 ConditionPathIsDirectory=/sys/class/bluetooth
 Requires=bluetooth.target
-After=bluetooth.target checkuserconfig.service systemd-hostnamed.service
+After=bluetooth.service bluetooth.target bluetooth-broadcastname.service checkuserconfig.service systemd-hostnamed.service
 Before=bluealsa.service
 
 [Service]
