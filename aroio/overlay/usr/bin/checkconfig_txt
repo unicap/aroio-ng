@@ -57,7 +57,7 @@ then    echo "Missing gpio-LED overlay in config.txt, writing a new one."
 fi
 
 if grep -q 'initramfs rootfs.cpio' "$CONFIG"
-then    echo "Found old lirc initrd entry config.txt, deleting it."
+then    echo "Found old intramfs entry in config.txt, deleting it."
         cardmount rw
         sed -i '/initramfs rootfs.cpio/d' /boot/config.txt
         cardmount ro
