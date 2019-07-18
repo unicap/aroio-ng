@@ -57,7 +57,7 @@ class Agent(dbus.service.Object):
 					in_signature="os", out_signature="")
 	def AuthorizeService(self, device, uuid):
 		print("AuthorizeService (%s, %s)" % (device, uuid))
-		authorize = ask("Authorize connection (yes/no): ")
+		authorize = "yes"
 		if (authorize == "yes"):
 			return
 		raise Rejected("Connection rejected by user")
@@ -67,7 +67,6 @@ class Agent(dbus.service.Object):
 	def RequestPinCode(self, device):
 		print("RequestPinCode (%s)" % (device))
 		set_trusted(device)
-#		return ask("Enter PIN Code: ")
 		return "2107"
 
 	@dbus.service.method(AGENT_INTERFACE,
@@ -93,17 +92,19 @@ class Agent(dbus.service.Object):
 					in_signature="ou", out_signature="")
 	def RequestConfirmation(self, device, passkey):
 		print("RequestConfirmation (%s, %06d)" % (device, passkey))
-		confirm = ask("Confirm passkey (yes/no): ")
-		if (confirm == "yes"):
-			set_trusted(device)
-			return
-		raise Rejected("Passkey doesn't match")
+		#confirm = ask("Confirm passkey (yes/no): ")
+		#if (confirm == "yes"):
+		#	set_trusted(device)
+		#	return
+		#raise Rejected("Passkey doesn't match")
+		set_trusted(device)
+		return
 
 	@dbus.service.method(AGENT_INTERFACE,
 					in_signature="o", out_signature="")
 	def RequestAuthorization(self, device):
 		print("RequestAuthorization (%s)" % (device))
-		auth = ask("Authorize? (yes/no): ")
+		auth = "yes"
 		if (auth == "yes"):
 			return
 		raise Rejected("Pairing rejected")
@@ -135,7 +136,7 @@ if __name__ == '__main__':
 
 	bus = dbus.SystemBus()
 
-	capability = "KeyboardDisplay"
+	capability = "NoInputNoOutput"
 
 	parser = OptionParser()
 	parser.add_option("-i", "--adapter", action="store",
@@ -162,7 +163,7 @@ if __name__ == '__main__':
 
 	print("Agent registered")
 
-#	# Fix-up old style invocation (BlueZ 4)
+	# Fix-up old style invocation (BlueZ 4)
 	if len(args) > 0 and args[0].startswith("hci"):
 		options.adapter_pattern = args[0]
 		del args[:1]
@@ -182,4 +183,3 @@ if __name__ == '__main__':
 
 	#adapter.UnregisterAgent(path)
 	#print("Agent unregistered")
-

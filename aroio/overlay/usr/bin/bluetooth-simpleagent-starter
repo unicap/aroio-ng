@@ -1,0 +1,38 @@
+#!/bin/sh
+
+. /boot/userconfig.txt
+
+i=0
+
+function initialize_bt()
+{
+	hciconfig hci0 up
+	if hciconfig hci0 | grep UP > /dev/null ; then return 0 ; else return 1 ; fi
+}
+
+until [[ $i = 3 ]]
+do
+	echo "Initializing Bluetooth adapter"
+	initialize_bt
+	if [[ $? -eq 0 ]]
+	then	echo "Bluetooth adapter successfully initialized!"
+		i=3
+	else	echo "Could not initialize Bluetooth adapter, will retry "$((2-$i))" times..."
+		i=$((i+1))
+		sleep 1
+	fi
+done
+
+echo "Setting Bluetooth page and inquiry scan"
+hciconfig hci0 piscan
+
+echo "Setting Bluetooth simple paring mode to OFF"
+hciconfig hci0 sspmode 0
+
+echo "Setting Bluetooth device Class to HiFi Audio Device"
+hciconfig hci0 class 0x200428
+
+echo "Setting Bluetooth local name to $PLAYERNAME"
+hciconfig hci0 name "$PLAYERNAME"
+
+exit 0

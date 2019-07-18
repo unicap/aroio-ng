@@ -6,10 +6,9 @@ After=bluetooth.service bluetooth.target bluetooth-broadcastname.service checkus
 Before=bluealsa.service
 
 [Service]
-Type=simple 
-EnvironmentFile=/boot/userconfig.txt
-ExecStartPre=/bin/hciconfig hci0 up piscan sspmode 0 class 0x200428
-ExecStartPre=/bin/hciconfig hci0 name ${PLAYERNAME}
+Type=simple
+ExecStartPre=/bin/sleep 3
+ExecStartPre=/usr/bin/bluetooth-simpleagent-starter
 ExecStart=/usr/bin/bluetooth-simpleagent
 Restart=always
 
