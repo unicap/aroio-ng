@@ -1,0 +1,21 @@
+#!/bin/sh
+
+case $1 in
+	0)
+	echo 'cfc 0 1 ; cfc 1 2 ; cfc 2 3 ; cfc 3 4 ; cfc 4 5 ; cfc 5 6  ; cfc 6 7' | nc localhost 3000
+	;;
+
+	1)
+	echo 'cfc 0 8 ; cfc 1 9 ; cfc 2 10 ; cfc 3 11 ; cfc 4 12 ; cfc 5 13  ; cfc 6 14' | nc localhost 3000
+	;;
+
+	2)
+	echo 'cfc 0 15 ; cfc 1 16 ; cfc 2 17 ; cfc 3 18 ; cfc 4 19 ; cfc 5 20  ; cfc 6 21' | nc localhost 3000
+	;;
+
+	3)
+	echo 'cfc 0 22 ; cfc 1 23 ; cfc 2 24 ; cfc 3 25 ; cfc 4 26 ; cfc 5 27  ; cfc 6 28' | nc localhost 3000
+	;;
+esac
+
+echo 'lf' | nc localhost 3000

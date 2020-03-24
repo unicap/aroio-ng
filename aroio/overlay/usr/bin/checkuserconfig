@@ -12,6 +12,9 @@ fi
 # Load variables from userconfig.txt
 . /boot/userconfig.txt
 
+# If we wannbe Cario we have to take care of some settings..
+[ "$PLATFORM" = "Caroio" ] && SOUNDCARD="HiFiBerry DAC+ ADC"
+
 # If coming from 3.x we need to adjust some things
 [ "$IPADDR" != "" ] && LAN_IPADDR="$IPADDR"
 [ "$NETMASK" != "" ] && LAN_NETMASK="$NETMASK"

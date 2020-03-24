@@ -2,6 +2,8 @@
 
 . /boot/userconfig.txt
 
+[ "$PLATFORM" = "Caroio" ] && echo "Platform Caroio detected, holding back until USB soundcard becomes active..." && until [ -e /proc/asound/card1 ] ; do sleep 0.1 ; done
+
 ACTION="$1"
 [ -e /tmp/measurement ] && AUDIO_OUTPUT=$MEASUREMENT_OUTPUT
 
@@ -12,12 +14,11 @@ echo "Controlaudio "$ACTION" ..."
 
 function Start()
 {
-
 	sed -i "/#SAMPLINGRATE/c\        rate "$RATE" #SAMPLINGRATE" /etc/asound.conf
 	sed -i "/defaults.pcm.rate_converter/c\defaults.pcm.rate_converter \"$RESAMPLING\"" /etc/asound.conf
 	sed -i "/output_rate/c\output_rate = "$SPRATE""  /etc/shairport-sync.conf
 	sed -i "/buffer_size/c\buffer_size = "$SP_OUTBUFFER""  /etc/shairport-sync.conf
-#	sed -i "/period_size/c\period_size = "$SP_PERIOD""  /etc/shairport-sync.conf
+  #	sed -i "/period_size/c\period_size = "$SP_PERIOD""  /etc/shairport-sync.conf
 
 	case "$AUDIO_OUTPUT" in
 		vol-plug)
@@ -76,7 +77,8 @@ function Start()
 
 		jack)
 			systemctl "$ACTION" jackd.service
-			until jack_lsp | grep jackmixer ; do sleep 0.1 ; done
+			echo "Waiting for jack daemon to start up..."
+      	jack_wait -w -t1 &> /dev/null && echo "jack daemon started" || echo "jack daemon failed to start"
 			sleep 1
 			[[ "$JACK_NETJACK"      = "ON"  && "$ACTION" != "stop" ]] && echo "netmanager start" && jack_load netmanager && connect_netjackports
 			[ "$JACK_SQUEEZELITE"   = "ON" ] && systemctl "$ACTION" squeezelite.service
@@ -88,7 +90,8 @@ function Start()
 
 		jack-ms)
 			systemctl "$ACTION" jackd.service
-			until jack_lsp | grep jackmixer ; do sleep 0.1 ; done
+			echo "Waiting for jack daemon to start up..."
+      	jack_wait -w -t1 &> /dev/null && echo "jack daemon started" || echo "jack daemon failed to start"
 			[[ "$JACKMS_NETJACK"      = "ON"  && "$ACTION" != "stop" ]] &&  jack_load netmanager && connect_netjackports
 			[ "$JACKMS_SQUEEZELITE"   = "ON" ] && systemctl "$ACTION" squeezelite.service
 			[ "$JACKMS_GMEDIARENDER"  = "ON" ] && systemctl "$ACTION" gmediarender.service
@@ -99,22 +102,25 @@ function Start()
 
 		jack-bf)
 			systemctl "$ACTION" jackd.service
-			until jack_lsp | grep jackmixer ; do sleep 0.1 ; done
+			echo "Waiting for jack daemon to start up..."
+      	jack_wait -w -t1 &> /dev/null && echo "jack daemon started" || echo "jack daemon failed to start"
 			systemctl "$ACTION" brutefir.service
-			until jack_lsp | grep brutefir ; do sleep 0.2 ; done
+			echo "Waiting for brutefir to start up..."
+			until jack_lsp | grep brutefir &> /dev/null ; do sleep 0.2 ; done && echo "brutefir started"
 			[[ "$JACKBF_NETJACK"      = "ON"  && "$ACTION" != "stop" ]] && jack_load netmanager && connect_netjackports
 			[ "$JACKBF_SQUEEZELITE"   = "ON" ] && systemctl "$ACTION" squeezelite.service
 			[ "$JACKBF_GMEDIARENDER"  = "ON" ] && systemctl "$ACTION" gmediarender.service
 			[ "$JACKBF_SHAIRPORTSYNC" = "ON" ] && systemctl "$ACTION" shairport-sync.service
 			[[ "$JACKBF_BLUEALSAAPLAY" = "ON" && -e /sys/class/bluetooth/hci0 ]] && systemctl "$ACTION" bluealsa-aplay.service
-			[ "$JACKBF_INPUT" = "ON" ] && sleep 0.2 && jack_connect system:capture_1 brutefir:input-0 && jack_connect system:capture_2 brutefir:input-1
+			[[ "$JACKBF_INPUT" = "ON" || "$PLATFORM" = "Caroio" ]] && sleep 0.2 && jack_connect system:capture_1 brutefir:input-0 && jack_connect system:capture_2 brutefir:input-1
 		;;
 
 		jack-bfms)
 			systemctl "$ACTION" jackd.service
-			until jack_lsp | grep jackmixer ; do sleep 0.1 ; done
+			echo "Waiting for jack daemon to be started..."
+      	jack_wait -w -t1 &> /dev/null && echo "jack daemon started" || echo "jack daemon failed to start"
 			systemctl "$ACTION" brutefir.service
-			until jack_lsp | grep brutefir ; do sleep 0.2 ; done
+			until jack_lsp | grep brutefir &> /dev/null ; do sleep 0.2 ; done && echo "brutefir started"
 			[[ "$JACKBFMS_NETJACK"      = "ON"  && "$ACTION" != "stop" ]] && jack_load netmanager && connect_netjackports
 			[ "$JACKBFMS_SQUEEZELITE"   = "ON" ] && systemctl "$ACTION" squeezelite.service
 			[ "$JACKBFMS_GMEDIARENDER"  = "ON" ] && systemctl "$ACTION" gmediarender.service

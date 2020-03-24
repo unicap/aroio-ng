@@ -120,6 +120,7 @@ update(){
 		mkdir -p "$USRPATH"/save
 		cd /boot
 		cp -r /boot/userconfig.txt "$USRPATH"/save
+    cp -r /boot/brutefir.conf "$USRPATH"/save
 		cp -r /boot/config.txt "$USRPATH"/save
 		grep -q initramfs /"$USRPATH"/save/config.txt  && cardmount rw && sed -i '/initramfs rootfs.cpio/d' "$USRPATH"/save/config.txt
 		cp -r /boot/filter "$USRPATH"/save
@@ -136,6 +137,7 @@ update(){
 		sleep 1
 	echo "Restoring user files..."
 		cp -r "$USRPATH"/save/userconfig.txt /boot
+    cp -r "$USRPATH"/save/brutefir.conf /boot
 		[[ "$REMOTE_VERSION" != "3.50" && "$REMOTE_VERSION" != "3.56" ]] && cp -r "$USRPATH"/save/config.txt /boot
 		cp -r "$USRPATH"/save/filter /boot
 		cp -r "$USRPATH"/save/btdb.tar /boot

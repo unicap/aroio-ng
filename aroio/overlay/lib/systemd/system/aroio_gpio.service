@@ -1,8 +1,7 @@
 [Unit]
 Description=Aroio GPIO daemon
-After=syslog.target sound.target network.target bluetooth.target checkuserconfig.service checksoundcard.service 
+After=sound.target
 Before=audioplayers.service
-ConditionPathExists=/proc/asound/card0
 
 [Service]
 EnvironmentFile=/boot/userconfig.txt
@@ -12,4 +11,4 @@ ExecStartPre=/bin/sh -c 'amixer sset Master $(( $VOLUME_START * ( 32 / 10 ) + 25
 ExecStart=/bin/sh -c /usr/bin/aroio_gpio
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=sound.target

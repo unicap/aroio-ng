@@ -1,0 +1,5 @@
+#!/bin/sh
+
+. /boot/userconfig.txt
+
+[ "$PLATFORM" = "Caroio" ] && taskset -c 0,1,2,3 /bin/brutefir /etc/brutefir/brutefir.conf || taskset -c 0,1 /bin/brutefir /etc/brutefir/brutefir.conf

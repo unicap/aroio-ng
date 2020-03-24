@@ -10,7 +10,7 @@
             <span title=""><label for="Userpassword"> <? print ${platform_form._.$lang} ; ?> </label></span></a>
           </td>
           <td>
-            <? $arr_platform=array('AroioEX','AroioSU','AroioLT','RaspberryPi');
+            <? $arr_platform=array('AroioEX','AroioSU','AroioLT','RaspberryPi','Caroio');
             print_optgroup("PLATFORM",$arr_platform,$ini_array["PLATFORM"]); ?>
           </td>
         </tr>

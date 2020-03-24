@@ -1,7 +1,6 @@
 #!/bin/sh
 
 . /boot/userconfig.txt
-CHANNELS="2"
 
 [ -e /tmp/measurement ] && AUDIO_OUTPUT=$MEASUREMENT_OUTPUT
 
@@ -12,11 +11,9 @@ case $CHANNELS in
 		else	cp /etc/brutefir/brutefir.conf.default.jack.stereo /etc/brutefir/brutefir.conf
 		fi
 		;;
-
-	4)
-		cp /etc/brutefir/brutefir.conf.default.jack.4-channel /etc/brutefir/brutefir.conf
-		;;
 esac
+
+[ -e /boot/brutefir.conf ] && cp /boot/brutefir.conf /etc/brutefir/brutefir.conf && echo "Using custom brutefir.conf found on SD-card." && exit 0
 
 sed -i "/samplingrate/c\samplingrate: "$RATE"" /etc/brutefir/brutefir.conf
 
@@ -27,6 +24,7 @@ case $CHANNELS in
 		for i in $(grep -o "COEFF_NAME[^m]" /boot/userconfig.txt)
 		do
 			COEFF_NAME=$(eval "echo \$$i")
+echo "Working on coeff $COEFF_NAME now..."
 			if [ "$COEFF_NAME" = "" ] ; then COEFF_NAME="BypassFilter" ; fi
 			counter=$((counter+1))
 
@@ -57,9 +55,9 @@ case $CHANNELS in
 		;;
 esac
 
-#echo "Max. Filtersize was: "$COEFF_LENGTH_MAX
+echo "Max. Filtersize was: "$COEFF_LENGTH_MAX
 BF_PARTSIZE=$(echo "x=l($COEFF_LENGTH_MAX)/l(2); scale=0; 2^((x+0.99999999)/1)" | bc -l)
-#echo "Next matching power of 2 is: "$BF_PARTSIZE
+echo "Next matching power of 2 is: "$BF_PARTSIZE
 
 [ "$BF_PARTITIONS" != "1" ] && BF_PARTITIONS=$(( $BF_PARTSIZE / $BF_PARTITIONS )),"$BF_PARTITIONS" || BF_PARTITIONS="$BF_PARTSIZE"
 sed -i "/filter_length/c\filter_length: $BF_PARTITIONS;" /etc/brutefir/brutefir.conf
@@ -133,4 +131,3 @@ esac
 
 echo "Successfully generated brutefir configuration file in /etc"
 exit 0
-
