@@ -99,6 +99,7 @@ update(){
 	# Stop daemons that might write to the SDcard before updating
 	controlaudio stop
 	systemctl stop brutefir-checkfilters.service
+  rm -rf /run/filter/*
 
 	cd "$USRPATH"
 		[ $? != 0 ] 2>/dev/null && echo "Invalid path given, exiting!" && exit 5
@@ -120,7 +121,8 @@ update(){
 		mkdir -p "$USRPATH"/save
 		cd /boot
 		cp -r /boot/userconfig.txt "$USRPATH"/save
-    cp -r /boot/brutefir.conf "$USRPATH"/save
+    cp /boot/userscript.sh "$USRPATH"/save &> /dev/null
+    cp -r /boot/brutefir.conf "$USRPATH"/save &> /dev/null
 		cp -r /boot/config.txt "$USRPATH"/save
 		grep -q initramfs /"$USRPATH"/save/config.txt  && cardmount rw && sed -i '/initramfs rootfs.cpio/d' "$USRPATH"/save/config.txt
 		cp -r /boot/filter "$USRPATH"/save
@@ -137,7 +139,8 @@ update(){
 		sleep 1
 	echo "Restoring user files..."
 		cp -r "$USRPATH"/save/userconfig.txt /boot
-    cp -r "$USRPATH"/save/brutefir.conf /boot
+    cp -r "$USRPATH"/save/brutefir.conf /boot &> /dev/null
+    cp -r "$USRPATH"/save/userscript.sh /boot &> /dev/null
 		[[ "$REMOTE_VERSION" != "3.50" && "$REMOTE_VERSION" != "3.56" ]] && cp -r "$USRPATH"/save/config.txt /boot
 		cp -r "$USRPATH"/save/filter /boot
 		cp -r "$USRPATH"/save/btdb.tar /boot
