@@ -5,24 +5,9 @@
 [ -e /tmp/measurement ] && AUDIO_OUTPUT=$MEASUREMENT_OUTPUT
 
 ALSAOPTS=""
+
 [[ "$SOUNDCARD" = "HiFiBerry Digi" || "$SOUNDCARD" = "Allo DigiOne" ]] && JACKOPTS="-S"
-[[ "$JACKINPUT" != "ON" ]] && ALSAOPTS="-P"
+[[ "$JACK_INPUT" != "ON" && "$JACKMS_INPUT" != "ON" && "$JACKBF_INPUT" != "ON" && "$JACKBFMS_INPUT" != "ON" ]] && ALSAOPTS="-P"
 [[ "$PLATFORM" = "Caroio" ]] && ALSAOPTS="-C hw:0 -P hw:1"
 
-#case "$AUDIO_OUTPUT" in
-#	jack)
-		taskset -c 0,1 /bin/jackd -R -P 50 -d alsa $JACKOPTS $ALSAOPTS -r $RATE -p $JACKBUFFER -n $JACKPERIOD
-#	;;
-
-#	jack-ms)
-#		taskset -c 0,1 /bin/jackd -R -P 50 -d alsa $JACKOPTS $ALSAOPTS -r $RATE -p $JACKBUFFER -n $JACKPERIOD
-#	;;
-
-#	jack-bf)
-#		taskset -c 0,1 /bin/jackd -R -P 50 -d alsa $JACKOPTS $ALSAOPTS -r $RATE -p $JACKBUFFER -n $JACKPERIOD
-#	;;
-
-#	jack-bfms)
-#		taskset -c 0,1 /bin/jackd -R -P 50 -d alsa $JACKOPTS $ALSAOPTS -r $RATE -p $JACKBUFFER -n $JACKPERIOD
-#	;;
-#esac
+taskset -c 0,1 /bin/jackd -R -P 50 -d alsa $JACKOPTS $ALSAOPTS -r $RATE -p $JACKBUFFER -n $JACKPERIOD
