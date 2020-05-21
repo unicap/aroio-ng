@@ -5,7 +5,7 @@ Before=brutefir-checkfilters.service audioplayers.service
 
 [Service]
 Type=oneshot
-ExecStart=/bin/sh -c "/bin/zcat /etc/brutefir/filter.tgz | tar -xvf - -C /tmp"
+ExecStart=/bin/sh -c "/bin/zcat /etc/brutefir/filter.tgz | tar -mxvf - -C /run"
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=local-fs.target

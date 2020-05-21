@@ -1,13 +1,13 @@
 [Unit]
 Description=Shairport-sync Audio Player
-After=syslog.target sound.target jackd.service network-online.target checkuserconfig.service nss-lookup.target
+After=systemd-networkd-wait-online.service syslog.target sound.target jackd.service network-online.target checkuserconfig.service nss-lookup.target
+Wants=systemd-networkd-wait-online.service
 
 [Service]
 Type=simple
 EnvironmentFile=/boot/userconfig.txt
+ExecStartPre=/bin/sh -c 'until /etc/ifplugd/ifplugd.action eth0 wlan0 ; do sleep 0.1 ; done'
+ExecStartPre=/bin/sleep 2
 ExecStart=/bin/taskset -c 2,3 /bin/shairport-sync -v -a $HOSTNAME -o alsa -- -d $AUDIO_OUTPUT
 Restart=always
 RestartSec=2
-
-[Install]
-WantedBy=audioplayers.target

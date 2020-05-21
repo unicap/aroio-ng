@@ -5,7 +5,7 @@ After=network.target
 [Service]
 Type=forking
 PIDFile=/var/run/lirc/lircd.pid
-ExecStart=/usr/sbin/lircd
+ExecStart=/usr/sbin/lircd -D3
 
 [Install]
 WantedBy=multi-user.target

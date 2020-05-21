@@ -12,5 +12,5 @@ ExecStart=/usr/bin/brutefir-starter
 ExecStartPost=/bin/sh -c 'until jack_lsp | grep brutefir ; do sleep 0.2 ; done'
 Restart=always
 
-[Install]
-WantedBy=multi-user.target
+#[Install]
+#WantedBy=multi-user.target

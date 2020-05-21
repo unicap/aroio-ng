@@ -1,6 +1,6 @@
 [Unit]
 Description=Audio Players
-After=sound.target network.target bluetooth.target checkuserconfig.service
+After=sound.target network.target bluetooth.target checkuserconfig.service brutefir-checkfilters.service
 
 [Service]
 Type=oneshot
