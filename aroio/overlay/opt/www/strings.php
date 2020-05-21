@@ -352,6 +352,22 @@
     $title_system_en=$page_title_system_en;
     $title_system_de=$page_title_system_de;
 
+    //Bluetooth
+    $bluetooth_form_en='Bluetooth-Pairing';
+    $bluetooth_form_de='Bluetooth-Pairing';
+
+    $helptext_bluetooth_en='Start Bluetooth pairing process for 45 Seconds or forget paired devices';
+    $helptext_bluetooth_de='Bluetooth pairing Modus für 45 Sekunden aktivieren bzw. bekannte Ger&auml;te vergessen';
+
+    $bluetooth_en='Bluetooth';
+    $bluetooth_de='Bluetooth';
+
+    $button_bluetooth_pairing_en='BT-Pairing';
+    $button_bluetooth_pairing_de='BT-Pairing';
+
+    $button_bluetooth_dbpurge_en='BT-Reset';
+    $button_bluetooth_dbpurge_de='BT-Reset';
+
     //Update
     $update_form_en='Update';
     $update_form_de='Update';

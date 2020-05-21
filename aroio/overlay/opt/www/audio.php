@@ -111,7 +111,7 @@
                 case "Allo Piano 2.1 DAC":
                 case "Allo Boss DAC":
                 case "Allo DigiOne":
-                  $arr_rate= array('44100','48000','96000','192000');
+                  $arr_rate= array('44100','48000','96000','176400','192000');
                   break;
               }
               print_optgroup("RATE",$arr_rate,$ini_array["RATE"]); ?>

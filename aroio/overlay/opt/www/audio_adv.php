@@ -43,7 +43,7 @@
               <span title=""><label for="squeeze_maxfrequency"> <? print ${squeeze_maxfrequency._.$lang} ; ?> </label></span></a>
             </td>
             <td>
-              <?$arr_squeeze_maxfrequency= array(44100,48000,88000,96000,174000,192000,348000);
+              <?$arr_squeeze_maxfrequency= array(44100,48000,88000,96000,176400,192000,348000);
               print_optgroup("SQUEEZE_MAXFREQUENCY",$arr_squeeze_maxfrequency,$ini_array["SQUEEZE_MAXFREQUENCY"]);?>
             </td>
           </tr>
@@ -97,7 +97,7 @@
               <span title=""><label for="sp_samplerate"> <? print ${sp_samplerate._.$lang} ; ?> </label></span></a>
             </td>
             <td>
-              <?$arr_sprate= array('44100','88200');
+              <?$arr_sprate= array('44100','88200','176400');
               print_optgroup("SPRATE",$arr_sprate,$ini_array["SPRATE"]);?>
             </td>
           </tr>

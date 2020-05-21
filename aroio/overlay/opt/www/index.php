@@ -94,6 +94,20 @@
           $_POST[SPRATE]=44100;
         break;
 
+        case 176400:
+          $_POST[JACKBUFFER]=8192;
+          $_POST[JACKPERIOD]=3;
+          $_POST[SQUEEZE_ALSABUFFER]=4096;
+          $_POST[SQUEEZE_ALSAPERIOD]=2;
+          $_POST[SQUEEZE_INTBUFFER]=4096;
+          $_POST[SQUEEZE_OUTBUFFER]=4096;
+          $_POST[SP_OUTBUFFER]=32768;
+          $_POST[SP_PERIOD]=2;
+          $_POST[BF_PARTITIONS]=2;
+          $_POST[RESAMPLING]=speexrate_medium;
+          $_POST[SPRATE]=44100;
+        break;
+
         case 192000:
           $_POST[JACKBUFFER]=8192;
           $_POST[JACKPERIOD]=3;
@@ -163,8 +177,6 @@
   include "lms.php";
   include "audio.php";
 ?></form><?
-
-
 
 unset($_POST['submit']);
 
