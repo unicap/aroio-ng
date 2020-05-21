@@ -24,7 +24,6 @@ case $CHANNELS in
 		for i in $(grep -o "COEFF_NAME[^m]" /boot/userconfig.txt)
 		do
 			COEFF_NAME=$(eval "echo \$$i")
-echo "Working on coeff $COEFF_NAME now..."
 			if [ "$COEFF_NAME" = "" ] ; then COEFF_NAME="BypassFilter" ; fi
 			counter=$((counter+1))
 
@@ -55,9 +54,9 @@ echo "Working on coeff $COEFF_NAME now..."
 		;;
 esac
 
-echo "Max. Filtersize was: "$COEFF_LENGTH_MAX
+#echo "Max. Filtersize was: "$COEFF_LENGTH_MAX
 BF_PARTSIZE=$(echo "x=l($COEFF_LENGTH_MAX)/l(2); scale=0; 2^((x+0.99999999)/1)" | bc -l)
-echo "Next matching power of 2 is: "$BF_PARTSIZE
+#echo "Next matching power of 2 is: "$BF_PARTSIZE
 
 [ "$BF_PARTITIONS" != "1" ] && BF_PARTITIONS=$(( $BF_PARTSIZE / $BF_PARTITIONS )),"$BF_PARTITIONS" || BF_PARTITIONS="$BF_PARTSIZE"
 sed -i "/filter_length/c\filter_length: $BF_PARTITIONS;" /etc/brutefir/brutefir.conf
