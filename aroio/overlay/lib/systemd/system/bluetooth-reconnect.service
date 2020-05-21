@@ -1,0 +1,14 @@
+[Unit]
+Description=Bluetooth reconnect service
+ConditionPathIsDirectory=/sys/class/bluetooth
+Requires=bluetooth.target
+After=bluetooth.service bluetooth-dbbackup.service bluetooth.target bluetooth-broadcastname.service checkuserconfig.service systemd-hostnamed.service
+Before=bluealsa.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/bluetooth-reconnect
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
