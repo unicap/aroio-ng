@@ -8,6 +8,5 @@ Type=simple
 ExecStart=/usr/bin/squeezelite-starter
 Restart=always
 
-[Install]
-WantedBy=audioplayers.target
-
+#[Install]
+#WantedBy=audioplayers.target

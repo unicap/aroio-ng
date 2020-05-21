@@ -11,5 +11,5 @@ EnvironmentFile=/boot/userconfig.txt
 ExecStart=/bin/taskset -c 2,3 /usr/bin/bluealsa-aplay 00:00:00:00:00:00 -d $AUDIO_OUTPUT
 Restart=always
 
-[Install]
-WantedBy=multi-user.target
+#[Install]
+#WantedBy=multi-user.target

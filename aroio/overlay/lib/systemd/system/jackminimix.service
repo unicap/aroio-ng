@@ -14,5 +14,5 @@ ExecStartPost=/bin/sh -c '/bin/chrt -f -a -v -p 75 $(pgrep jackminimix)'
 ExecStartPost=/bin/sh -c "sleep 0.2 && oscsend localhost 13239 /mixer/channel/set_gain  if 1 $(($(amixer sget Master | awk '/Left:/ { print $3 }') * 3 / 10 -77 ))"
 Restart=always
 
-[Install]
-WantedBy=multi-user.target
+#[Install]
+#WantedBy=multi-user.target

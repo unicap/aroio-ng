@@ -11,5 +11,5 @@ Type=simple
 ExecStart=/bin/taskset -c 2,3 /bin/gmediarender-starter
 Restart=always
 
-[Install]
-WantedBy=audioplayers.target
+#[Install]
+#WantedBy=audioplayers.target

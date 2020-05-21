@@ -12,9 +12,9 @@ ExecStart=/bin/jack-starter
 #ExecStartPost=/bin/sh -c 'until jack_lsp ; do sleep 0.1 ; done'
 ExecStartPost=/bin/jack_wait -w -t1 &> /dev/null
 #ExecStopPost=/bin/sh -c 'while jack_lsp ; do sleep 0.1 ; done'
-ExecStopPost=/bin/jack_wait -q -t 5 &> /dev/null 
+ExecStopPost=/bin/jack_wait -q -t 5 &> /dev/null
 ExecStop=/bin/kill -9 $MAINPID
 Restart=always
 
-[Install]
-WantedBy=multi-user.target
+#[Install]
+#WantedBy=multi-user.target
