@@ -2,20 +2,39 @@
 
 case $1 in
 	0)
-	echo 'cfc 0 1 ; cfc 1 2 ; cfc 2 3 ; cfc 3 4 ; cfc 4 5 ; cfc 5 6  ; cfc 6 7' | nc localhost 3000
+		echo 'cfc 0 0 ; cfc 1 1 ; cfc 2 2 ; cfc 3 3 ; cfc 4 4 ; cfc 5 5  ; cfc 6 6' | nc localhost 3000
+		echo 'lf' | nc localhost 3000
 	;;
 
 	1)
-	echo 'cfc 0 8 ; cfc 1 9 ; cfc 2 10 ; cfc 3 11 ; cfc 4 12 ; cfc 5 13  ; cfc 6 14' | nc localhost 3000
+		echo 'cfc 0 7 ; cfc 1 8 ; cfc 2 9 ; cfc 3 10 ; cfc 4 11 ; cfc 5 12  ; cfc 6 13' | nc localhost 3000
+		echo 'lf' | nc localhost 3000
 	;;
 
 	2)
-	echo 'cfc 0 15 ; cfc 1 16 ; cfc 2 17 ; cfc 3 18 ; cfc 4 19 ; cfc 5 20  ; cfc 6 21' | nc localhost 3000
+		echo 'cfc 0 14 ; cfc 1 15 ; cfc 2 16 ; cfc 3 17 ; cfc 4 18 ; cfc 5 19  ; cfc 6 20' | nc localhost 3000
+		echo 'lf' | nc localhost 3000
 	;;
 
-	3)
-	echo 'cfc 0 22 ; cfc 1 23 ; cfc 2 24 ; cfc 3 25 ; cfc 4 26 ; cfc 5 27  ; cfc 6 28' | nc localhost 3000
+  3)
+  	echo 'cfc 0 21 ; cfc 1 22 ; cfc 2 23 ; cfc 3 24 ; cfc 4 25 ; cfc 5 26  ; cfc 6 27' | nc localhost 3000
+		echo 'lf' | nc localhost 3000
+  ;;
+
+  4)
+  	echo 'cfc 0 28 ; cfc 1 29 ; cfc 2 30 ; cfc 3 31 ; cfc 4 32 ; cfc 5 33  ; cfc 6 34' | nc localhost 3000
+		echo 'lf' | nc localhost 3000
+  ;;
+
+  5)
+  	echo 'cfc 0 35 ; cfc 1 36 ; cfc 2 37 ; cfc 3 38 ; cfc 4 39 ; cfc 5 40  ; cfc 6 41' | nc localhost 3000
+		echo 'lf' | nc localhost 3000
 	;;
+
+	"")
+		echo 'lf' | nc localhost 3000
+	;;
+
+	*)
+		echo "Wrong argument - Please enter a number from 0-5 for the filter bank!"
 esac
-
-echo 'lf' | nc localhost 3000
