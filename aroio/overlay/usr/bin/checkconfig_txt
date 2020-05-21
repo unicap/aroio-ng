@@ -15,12 +15,16 @@ fi
 
 [ "$DISPLAY_ROTATE" = "ON" ] && DISPLAY_ROTATE="display_rotate=1"
 
-if ! grep -q pi3-disable-wifi "$CONFIG"
-then	echo "Writing entry to config.txt to suppress loading of onboard WIFI to match userconfig requirement..."
+if [ "$PLATFORM" != "Caroio" ]
+then
+	if ! grep -q pi3-disable-wifi "$CONFIG"
+	then
+		echo "Writing entry to config.txt to suppress loading of onboard WIFI to match userconfig requirement..."
 		cardmount rw
 		echo "dtoverlay=pi3-disable-wifi" >> "$CONFIG"
 		cardmount ro
 		REBOOT=1
+	fi
 fi
 
 if ! grep -q pi3-disable-bt "$CONFIG"
@@ -264,7 +268,6 @@ case $SOUNDCARD in
 
 
 	'HiFiBerry DAC+'|'AroioDAC')
-	echo "HiFiberry DAC+"
 	if ! grep -qw 'dtoverlay=hifiberry-dacplus' "$CONFIG"
 	then
 		cardmount rw
@@ -299,7 +302,6 @@ case $SOUNDCARD in
 
 
 	'HiFiBerry DAC+ ADC')
-	echo "HiFiberry DAC+ ADC"
 	if ! grep -qw 'dtoverlay=hifiberry-dacplusadc' "$CONFIG"
 	then
 		cardmount rw
@@ -334,7 +336,6 @@ case $SOUNDCARD in
 
 
 	'HiFiBerry DAC')
-	echo "HiFiberry DAC"
 	if ! grep -qw 'dtoverlay=hifiberry-dac' "$CONFIG"
 	then
 		cardmount rw
@@ -369,7 +370,6 @@ case $SOUNDCARD in
 
 
 	'HiFiBerry Digi')
-	echo "HiFiBerry Digi"
 	if ! grep -qw 'dtoverlay=hifiberry-digi' "$CONFIG"
 	then
 		cardmount rw
@@ -714,7 +714,6 @@ case $SOUNDCARD in
 
 
 	'NOTAroioDAC')
-	echo "AroioDAC!"
 	if ! grep -qw 'dtoverlay=hifiberry-dacplus' "$CONFIG"
 	then
 		cardmount rw
