@@ -1,0 +1,168 @@
+#!/bin/sh
+
+calc(){ awk "BEGIN { print $*}"; }
+CMPERSMPL=0.778231293
+
+INI_DELAY_0=$(echo lo|nc localhost 3000 | grep '^  0' | awk -F': |:' '{ print $3}')
+INI_DELAY_1=$(echo lo|nc localhost 3000 | grep '^  1' | awk -F': |:' '{ print $3}')
+INI_DELAY_2=$(echo lo|nc localhost 3000 | grep '^  2' | awk -F': |:' '{ print $3}')
+INI_DELAY_3=$(echo lo|nc localhost 3000 | grep '^  3' | awk -F': |:' '{ print $3}')
+INI_DELAY_4=$(echo lo|nc localhost 3000 | grep '^  4' | awk -F': |:' '{ print $3}')
+INI_DELAY_5=$(echo lo|nc localhost 3000 | grep '^  5' | awk -F': |:' '{ print $3}')
+INI_DELAY_6=$(echo lo|nc localhost 3000 | grep '^  6' | awk -F': |:' '{ print $3}')
+INI_DELAY_7=$(echo lo|nc localhost 3000 | grep '^  7' | awk -F': |:' '{ print $3}')
+
+DELAY_0=$INI_DELAY_0
+DELAY_1=$INI_DELAY_1
+DELAY_2=$INI_DELAY_2
+DELAY_3=$INI_DELAY_3
+DELAY_4=$INI_DELAY_4
+DELAY_5=$INI_DELAY_5
+DELAY_6=$INI_DELAY_6
+DELAY_7=$INI_DELAY_7
+
+while true
+do
+	read -sn1 KEY
+	case $KEY in
+		0)
+			DELAY_0=$(( DELAY_0 + 1))
+			echo "cod 0 $DELAY_0" | nc localhost 3000 &> /dev/null
+		;;
+
+		p)
+			DELAY_0=$(( DELAY_0 - 1))
+			echo "cod 0 $DELAY_0" | nc localhost 3000 &> /dev/null
+		;;
+
+		'=')
+			[ MUTE0=OFF ] && MUTE0=ON || [ MUTE0=ON ] && MUTE0=OFF
+			echo "tmo 0" | nc localhost 3000 &> /dev/null
+		;;
+
+		1)
+			DELAY_1=$(( DELAY_1 + 1))
+			echo "cod 1 $DELAY_1" | nc localhost 3000 &> /dev/null
+		;;
+
+		q)
+			DELAY_1=$(( DELAY_1 - 1))
+			echo "cod 1 $DELAY_1" | nc localhost 3000 &> /dev/null
+		;;
+
+		'!')
+			MUTE1=ON
+			echo "tmo 1" | nc localhost 3000 &> /dev/null
+		;;
+
+		2)
+			DELAY_2=$(( DELAY_2 + 1))
+			echo "cod 2 $DELAY_2" | nc localhost 3000 &> /dev/null
+		;;
+
+		w)
+			DELAY_2=$(( DELAY_2 - 1))
+			echo "cod 2 $DELAY_2" | nc localhost 3000 &> /dev/null
+		;;
+
+		'"')
+			MUTE2=ON
+			echo "tmo 2" | nc localhost 3000 &> /dev/null
+		;;
+
+		3)
+			DELAY_3=$(( DELAY_3 + 1))
+			echo "cod 3 $DELAY_3" | nc localhost 3000 &> /dev/null
+		;;
+
+		e)
+			DELAY_3=$(( DELAY_3 - 1))
+			echo "cod 3 $DELAY_3" | nc localhost 3000 &> /dev/null
+		;;
+
+		'd')
+			MUTE3=ON
+			echo "tmo 3" | nc localhost 3000 &> /dev/null
+		;;
+
+		4)
+			DELAY_4=$(( DELAY_4 + 1))
+			echo "cod 4 $DELAY_4" | nc localhost 3000 &> /dev/null
+		;;
+
+		r)
+			DELAY_4=$(( DELAY_4 - 1))
+			echo "cod 4 $DELAY_4" | nc localhost 3000 &> /dev/null
+		;;
+
+		'$')
+			MUTE4=ON
+			echo "tmo 4" | nc localhost 3000 &> /dev/null
+		;;
+
+		5)
+			DELAY_5=$(( DELAY_5 + 1))
+			echo "cod 5 $DELAY_5" | nc localhost 3000 &> /dev/null
+		;;
+
+		t)
+			DELAY_5=$(( DELAY_5 - 1))
+			echo "cod 5 $DELAY_5" | nc localhost 3000 &> /dev/null
+		;;
+
+		'%')
+			MUTE5=ON
+			echo "tmo 5" | nc localhost 3000 &> /dev/null
+		;;
+
+		6)
+			DELAY_6=$(( DELAY_6 + 1))
+			echo "cod 6 $DELAY_6" | nc localhost 3000 &> /dev/null
+		;;
+
+		z)
+			DELAY_6=$(( DELAY_6 - 1))
+			echo "cod 6 $DELAY_6" | nc localhost 3000 &> /dev/null
+		;;
+
+		'&')
+			MUTE6=ON
+			echo "tmo 6" | nc localhost 3000 &> /dev/null
+		;;
+
+		7)
+			DELAY_7=$(( DELAY_7 + 50))
+			echo "cod 7 $DELAY_7" | nc localhost 3000 &> /dev/null
+		;;
+
+		u)
+			DELAY_7=$(( DELAY_7 - 50))
+			echo "cod 7 $DELAY_7" | nc localhost 3000 &> /dev/null
+		;;
+
+		'/')
+			MUTE7=ON
+			echo "tmo 7" | nc localhost 3000 &> /dev/null
+		;;
+
+esac
+
+clear
+echo "Current delays:"
+echo -e "0 HL: $DELAY_0 samples ($(calc $DELAY_0*$CMPERSMPL) cm) | 1 HR: $DELAY_1 samples ($(calc $DELAY_1*$CMPERSMPL) cm)"
+echo -e "2 ML: $DELAY_2 samples ($(calc $DELAY_2*$CMPERSMPL) cm) | 3 MR: $DELAY_3 samples ($(calc $DELAY_3*$CMPERSMPL) cm)"
+echo -e "4 LL: $DELAY_4 samples ($(calc $DELAY_4*$CMPERSMPL) cm) | 5 LR: $DELAY_5 samples ($(calc $DELAY_5*$CMPERSMPL) cm)"
+echo -e "6 SL: $DELAY_6 samples ($(calc $DELAY_6*$CMPERSMPL) cm) | 7 SR: $DELAY_7 samples ($(calc $DELAY_7*$CMPERSMPL) cm)"
+
+echo -e "\n\nInitial delays:"
+echo -e "0 HL: $INI_DELAY_0 | 1 HR: $INI_DELAY_1"
+echo -e "2 ML: $INI_DELAY_2 | 3 MR: $INI_DELAY_3"
+echo -e "4 LL: $INI_DELAY_4 | 5 LR: $INI_DELAY_5"
+echo -e "6 SL: $INI_DELAY_6 | 7 SR: $INI_DELAY_7"
+
+echo -e "\n\nHL 0: +   p: -   Shift0: toggle mute\nHR 1: +   q: -   Shift1: toggle mute\nML 2: +   w: -   Shift2: toggle mute\nMR 3: +   e: -   d: toggle mute\nLL 4: +   r: -   Shift4: toggle mute\nLR 5: +   t: -   Shift5: toggle mute\nSL 6: +   z: -   Shift6: toggle mute\nSR 7: +   u: -   Shift7: toggle mute"
+
+#echo lo | nc localhost 3000
+
+
+done

@@ -1,0 +1,32 @@
+#!/bin/sh
+
+ATT=$1
+LEFT=$(( ATT + 2 ))
+RIGHT=$ATT
+SUB=$(( ATT + 1 ))
+
+
+BFATT=$(echo lf | nc localhost 3000 | grep 'outputs:   0' | awk -F'/' '{print $2}' | awk -F. '{print $1}')
+
+#BFVOL=$(( BFATT * -1 ))
+
+echo "BFAtt is: $BFATT"
+
+case $1 in
+	+)
+		TGTATT=$(( BFATT - 1))
+		echo "Target Att : $TGTATT"
+	;;
+
+	-)
+		TGTATT=$(( BFATT + 1))
+		echo "Target Att : $TGTATT"
+	;;
+esac
+
+echo "cfoa 0 0 $LEFT ; cfoa 1 1 $RIGHT ; cfoa 2 2 $LEFT ; cfoa 3 3 $RIGHT ; cfoa 4 4 $LEFT ; cfoa 5 5 $RIGHT ; cfoa 6 6 $(( SUB + 6 )) ; cfoa 6 7 $(( SUB + 6 ))" | nc localhost 3000
+
+echo "L: $LEFT"
+echo "R: $RIGHT"
+
+exit 0
