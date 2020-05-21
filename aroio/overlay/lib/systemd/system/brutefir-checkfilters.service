@@ -1,10 +1,11 @@
 [Unit]
 Description=Brutefir filter caretaker
-After=local-fs.target brutefir-filters.service
+After=local-fs.target checkuserconfig.service brutefir-filters.service
+Before=audioplayers.service
 
 [Service]
 Type=simple
 ExecStart=/usr/bin/brutefir-checkfilters
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=local-fs.target

@@ -8,16 +8,24 @@ RAMDIR='/run/filter'
 
 mkdir -p "$SDDIR"
 mkdir -p "$RAMDIR"
-[ -e /boot/brutefir ] && mv /boot/brutefir /boot/filter
+[ -e /boot/brutefir ] && cardmount rw && mv /boot/brutefir /boot/filter && cardmount ro
+echo "Copying FIR filters from SD-card into system RAM..."
 cp -r "$SDDIR"/* "$RAMDIR"
 
 # Mitgelieferte Filter bei Bedarf auspacken
-[ "$LOAD_PREFILTER" = "ON" ] && /bin/zcat /etc/brutefir/filter.tgz | tar -xvf - -C /run
+if [ "$LOAD_PREFILTER" = "ON" ]
+then  echo "Unpacking stock FIR filters into System RAM..."
+      /bin/zcat /etc/brutefir/filter.tgz | tar -mxvf - -C /run &> /dev/null
+      [ $? -eq 0 ] && echo "Stock FIR filters unpacked." || echo "Could not unpack stock FIR filters!"
+fi
+
 cardmount rw
-rsync --exclude "*.tmp" -vrLt --delete "$RAMDIR"/ "$SDDIR"
+rsync --exclude "*.tmp" -vrLt --delete "$RAMDIR"/ "$SDDIR" &> /dev/null
 cardmount ro
 
 chown -Rh sftparoio:users /run/filter
+
+touch /run/filters_ready
 
 # Fälle:
 # 1: Neues File im RAM -> nach SDKarte kopieren.
