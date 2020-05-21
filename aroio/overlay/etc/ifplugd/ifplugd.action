@@ -22,6 +22,7 @@ function checkinterfaces()
 		echo "eth0 setup:  "$ETH0_SETUP
 		echo "wlan0 state: "$WLAN0_STATE
 		echo "wlan0 setup: "$WLAN0_SETUP
+		sleep 0.5
 	done
 }
 
@@ -32,7 +33,8 @@ then
 	echo "We have a configured network!"
 	echo "Will turn LED on!"
 	aroio_control_led on
+	exit 0
 else
 	echo "The interface(s) didn't manage to get configured properly!"
+	exit 1
 fi
-exit 0
