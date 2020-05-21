@@ -1,0 +1,15 @@
+[Unit]
+Description=/etc/rc.local Compatibility
+ConditionPathExists=/boot/userscript.sh
+
+[Service]
+Type=forking
+ExecStartPre=/bin/cp /boot/userscript.sh /bin
+ExecStartPre=/bin/chmod 755 /bin/userscript.sh
+ExecStart=/bin/userscript.sh
+TimeoutSec=0
+#RemainAfterExit=yes
+GuessMainPID=no
+
+[Install]
+WantedBy=multi-user.target
