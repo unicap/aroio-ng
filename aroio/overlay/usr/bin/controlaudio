@@ -8,6 +8,9 @@ ACTION="$1"
 [ -e /tmp/measurement ] && AUDIO_OUTPUT=$MEASUREMENT_OUTPUT
 
 echo "Controlaudio "$ACTION" ..."
+echo "Checking if unpacking of FIR filters is done..."
+until [ -e /run/filters_ready ] ; do sleep 0.2 ; done
+echo "FIR filters found, continuing! ..."
 
 [ "$SOUNDCARD" = "Internal HDMI audio" ] && amixer cset numid=3 2
 [ "$SOUNDCARD" = "Internal audio jack" ] && amixer cset numid=3 1
@@ -112,7 +115,8 @@ function Start()
 			[ "$JACKBF_GMEDIARENDER"  = "ON" ] && systemctl "$ACTION" gmediarender.service
 			[ "$JACKBF_SHAIRPORTSYNC" = "ON" ] && systemctl "$ACTION" shairport-sync.service
 			[[ "$JACKBF_BLUEALSAAPLAY" = "ON" && -e /sys/class/bluetooth/hci0 ]] && systemctl "$ACTION" bluealsa-aplay.service
-			[[ "$JACKBF_INPUT" = "ON" || "$PLATFORM" = "Caroio" ]] && sleep 0.2 && jack_connect system:capture_1 brutefir:input-0 && jack_connect system:capture_2 brutefir:input-1
+			[[ "$JACKBF_INPUT" = "ON" || "$PLATFORM" = "Caroio" ]] && sleep 0.2 && jack_connect system:capture_1 brutefir:input-0 \
+				&& jack_connect system:capture_2 brutefir:input-1 && caroio_volume $(( $(cat /tmp/volume) * -1 ))
 		;;
 
 		jack-bfms)
@@ -150,6 +154,7 @@ function Brutefir()
 	until jack_lsp | grep jackmixer ; do sleep 0.1 ; done
 	systemctl start brutefir.service
 	until jack_lsp | grep brutefir ; do sleep 0.2 ; done
+	[ "$PLATFORM" = "Caroio" ] && caroio_volume $(( $(cat /tmp/volume) * -1 ) ))
 }
 
 function Jack()
