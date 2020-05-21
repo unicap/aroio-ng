@@ -1,7 +1,7 @@
 [Unit]
 Description=Network preparation unit
 After=local-fs.target
-Requires=local-fs.target
+Requires=local-fs.target checkuserconfig.service
 Before=wpa_supplicant@wlan0.service
 #RequiresMountsFor=/boot
 
