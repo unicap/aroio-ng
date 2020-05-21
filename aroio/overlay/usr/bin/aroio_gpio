@@ -26,6 +26,7 @@ Btn_Pause = 0
 
 # Set initial volume to prevent jump upon first usage of rotary encoder
 Volume = int(config["VOLUME_START"])
+Att = Volume * -1
 oldVolume = 0
 A_LastState = 0
 
@@ -61,10 +62,10 @@ def rotation_decode(Enc_A):
                 Volume -= 1
             else:
                 Volume += 1
-        if Volume > -1:
-            Volume = 0
-        if Volume < -80:
-            Volume = -80
+        if Volume > 10:
+            Volume = 10
+        if Volume < -50:
+            Volume = -50
     else:
         if A_State != A_LastState:
             if A_State != B_State:
@@ -109,17 +110,17 @@ GPIO.add_event_detect(Btn_Pause,GPIO.RISING,callback=pause_alert, bouncetime=200
 # Main loop
 try:
     while True:
-        sleep(0.01)
+        sleep(0.003)
         if Volume != oldVolume:
             if (str(config["PLATFORM"]) == "Caroio"):
-                AlsaVolume = Volume * 3.1875 + 126
+                Att = Volume * -1
             else:
                 AlsaVolume = Volume * 3.1875 + 255
             print("New jackmixer volume: ",Volume)
-            print("New amixer volume:    ",AlsaVolume)
+            print("New BruteFIR attenuation: ",Att)
             threading.Thread(target=lambda ctr: subprocess.call(["volumecontrol", str(ctr)], stdout=FNULL, stderr=subprocess.STDOUT), args=(Volume,)).start()
             if (str(config["PLATFORM"]) == "Caroio"):
-                threading.Thread(target=lambda ctr: subprocess.call(["amixer", "sset", "'PCM'", str(ctr)], stdout=FNULL, stderr=subprocess.STDOUT), args=(AlsaVolume,)).start()
+                threading.Thread(target=lambda ctr: subprocess.call(["caroio_volume", str(ctr)], stdout=FNULL, stderr=subprocess.STDOUT), args=(Att,)).start()
             else:
                 threading.Thread(target=lambda ctr: subprocess.call(["amixer", "sset", "'Master'", str(ctr)], stdout=FNULL, stderr=subprocess.STDOUT), args=(AlsaVolume,)).start()
             oldVolume = Volume
