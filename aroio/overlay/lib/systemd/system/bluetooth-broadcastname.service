@@ -1,10 +1,10 @@
 [Unit]
 Description=setting bluetooth broadcast name
-ConditionPathIsDirectory=/sys/class/bluetooth
-After=preparenetwork.service
+#ConditionPathIsDirectory=/sys/class/bluetooth
+After=preparenetwork.service bluetooth.target bluetooth.service
 
 [Service]
-Type=oneshot 
+Type=oneshot
 EnvironmentFile=/boot/userconfig.txt
 ExecStart=/bin/hciconfig hci0 name ${PLAYERNAME}
 
