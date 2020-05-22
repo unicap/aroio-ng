@@ -1,5 +1,5 @@
 # Always show cursor position
-set const
+set constantshow
 
 # Use auto-indentation 
 #set autoindent 
