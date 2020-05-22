@@ -1,5 +1,7 @@
 export PATH=/bin:/sbin:/usr/bin:/usr/sbin
 export TERM=xterm
+export PAGER='/bin/less '
+export EDITOR='/bin/nano'
 
 if [ "$PS1" ]; then
 	if [ "`id -u`" -eq 0 ]; then
@@ -9,9 +11,6 @@ if [ "$PS1" ]; then
 	fi
 fi
 
-export PAGER='/bin/more '
-export EDITOR='/bin/vi'
-
 # Source configuration files from /etc/profile.d
 for i in /etc/profile.d/*.sh ; do
 	if [ -r "$i" ]; then
@@ -19,3 +18,15 @@ for i in /etc/profile.d/*.sh ; do
 	fi
 	unset i
 done
+
+## Colorize the ls output ##
+alias ls='ls --color=auto'
+ 
+## Use a long listing format ##
+alias ll='ls -la'
+
+## Colorize the grep command output for ease of use (good for log files)##
+alias grep='grep --color=auto'
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
+
