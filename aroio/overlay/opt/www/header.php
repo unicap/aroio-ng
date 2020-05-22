@@ -26,11 +26,11 @@
       <? $path = $_SERVER['REQUEST_URI'];
       switch($path)
       {
-        case "/index.php": echo ${title_main._.$lang}; break;
-        case "/system.php": echo ${title_system._.$lang}; break;
-        case "/measurement.php": echo ${title_measurement._.$lang}; break;
-        case "/credits.php": echo ${title_credits._.$lang}; break;
-        case "/brutefir.php": echo ${title_brutefir._.$lang}; break;
+        case "/index.php": echo ${"title_main_"."$lang"}; break;
+        case "/system.php": echo ${"title_system_"."$lang"}; break;
+        case "/measurement.php": echo ${"title_measurement_"."$lang"}; break;
+        case "/credits.php": echo ${"title_credits_"."$lang"}; break;
+        case "/brutefir.php": echo ${"title_brutefir_"."$lang"}; break;
       } ?>
     </title>
 

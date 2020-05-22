@@ -218,19 +218,19 @@ function fltrSelect($id,$ini_array)
 	    }
 	    closedir($handle);*/
 
-		$rate=(int)($ini_array[RATE] / 1000);
+		$rate=(int)($ini_array["RATE"] / 1000);
 		//$pattern = "/(\\w*)L|R(\\d*).dbl/";
 		$pattern = "/(\\w*)(L|R)".$rate.".dbl/";
 
 		//check if surround
-		if ($ini_array[CHANNELS]==4) {
+		if ($ini_array["CHANNELS"]==4) {
 			$pattern = "/(\\w*)S(L|R)".$rate.".dbl/";
 		}
 
 		preg_match_all($pattern, $regexString,$banks); // in $banks[1] Coeffset-Name
 		$result = array_unique($banks[1]);
 		$out='<select class="filter" name="coeff'.$id.'">';
-		if($ini_array[COEFF_NAME.$id]!="" || !empty($ini_array[COEFF_NAME.$id]))$out .= '<option selected>'.$ini_array[COEFF_NAME.$id].'</option>';
+		if($ini_array["COEFF_NAME"."$id"]!="" || !empty($ini_array["COEFF_NAME"."$id"]))$out .= '<option selected>'.$ini_array["COEFF_NAME"."$id"].'</option>';
 		else $out.= '<option selected>BypassFilter</option>';
 		foreach ($result as &$option) {
 			$out.='<option>'.$option.'</option>';
@@ -326,10 +326,10 @@ function print_squeezeaddr($port)
 // PHP aktiver Filter für Filterset
 function activeFilter()
 {
-	if(isset($_GET[filter]))
+	if(isset($_GET["filter"]))
 	{
-		switchFilter($_GET[filter]);
-		return $activeFilter = $_GET[filter];
+		switchFilter($_GET["filter"]);
+		return $activeFilter = $_GET["filter"];
 	}
 	else
 	{
@@ -388,7 +388,7 @@ function print_filterset($count,$ini_array)
                 $out.='<button type="submit" name="bank" value="'.$i.'">Bank '.($i+1).'</button>';
                 $out.='</td>';
             }
-            $out.='<td class="convolve"><input type="text" autocomplete="off" name=comm'.$i.' value="'.$ini_array[COEFF_COMMENT.$i].'"/></td>';
+            $out.='<td class="convolve"><input type="text" autocomplete="off" name=comm'.$i.' value="'.$ini_array["COEFF_COMMENT"."$i"].'"/></td>';
         }
         $out.='<td class="convolve">';
 		$out.=	fltrSelect($i,$ini_array);
@@ -396,7 +396,7 @@ function print_filterset($count,$ini_array)
         //$out.='<td class="convolve">';
         //if-Abfrage für Prefilter
         //if($ini_array["LOAD_PREFILTER"] == "ON"){
-            $att=$ini_array[COEFF_ATT.$i]*-1;
+            $att=$ini_array["COEFF_ATT"."$i"]*-1;
         //} else{
         //    $att=$ini_array[COEFF_ATT.$i]*-1; //Hier Filterauswahl ohne ABACUS-Presets
         //}
@@ -567,7 +567,7 @@ function measurement()
 
 	if($_POST['MEASURE_MS'] == "ON") $ms="ms_on";
 	else $ms="ms_off";
-	
+
 	if(isset($_POST['MEASUREMENT_CONTROL'])) $control="control_on";
 	else $control="control_off";
 

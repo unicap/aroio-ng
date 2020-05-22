@@ -1,13 +1,13 @@
   <div class="content">
     <fieldset>
       <legend>
-        <? print ${hardware_form._.$lang};?>
+        <? print ${"hardware_form_"."$lang"};?>
       </legend>
       <table>
         <tr>
           <td>
-            <a title="<? print ${helptext_platform._.$lang} ?>"class="tooltip">
-            <span title=""><label for="Userpassword"> <? print ${platform_form._.$lang} ; ?> </label></span></a>
+            <a title="<? print ${"helptext_platform_"."$lang"} ?>"class="tooltip">
+            <span title=""><label for="Userpassword"> <? print ${"platform_form_"."$lang"} ; ?> </label></span></a>
           </td>
           <td>
             <? $arr_platform=array('AroioEX','AroioSU','AroioLT','RaspberryPi');

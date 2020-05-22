@@ -1,11 +1,11 @@
   <div class="content">
     <fieldset>
-      <legend><? print ${audio_form._.$lang};?></legend>
+      <legend><? print ${"audio_form_"."$lang"};?></legend>
       <table>
         <tr>
           <td>
-            <a title="<? print ${helptext_advancedsettings._.$lang} ?>"class="tooltip">
-            <span title=""><label for="Advanced settings"> <? print ${advancedsettings._.$lang} ; ?> </label></span></a>
+            <a title="<? print ${"helptext_advancedsettings_"."$lang"} ?>"class="tooltip">
+            <span title=""><label for="Advanced settings"> <? print ${"advancedsettings_"."$lang"} ; ?> </label></span></a>
             <input type="hidden" name="ADVANCED" value="OFF"> <?
 
             if ($ini_array["ADVANCED"] == "ON")
@@ -21,8 +21,8 @@
 
         <tr>
           <td>
-            <a title="<? print ${helptext_playername._.$lang} ?>"class="tooltip">
-            <span title=""><label for="Player name"> <? print ${player_name._.$lang} ; ?> </label></span></a>
+            <a title="<? print ${"helptext_playername_"."$lang"} ?>"class="tooltip">
+            <span title=""><label for="Player name"> <? print ${"player_name_"."$lang"} ; ?> </label></span></a>
           </td>
           <td>
             <? if ( $ini_array["PLAYERNAME"] == "" ) { $ini_array["PLAYERNAME"] = $ini_array["HOSTNAME"]; } ?>
@@ -34,8 +34,8 @@
         { ?>
           <tr>
             <td>
-              <a title="<? print ${helptext_volume._.$lang} ?>"class="tooltip">
-              <span title=""><label for="Volume"> <? print ${volume._.$lang} ; ?> </label></span></a>
+              <a title="<? print ${"helptext_volume_"."$lang"} ?>"class="tooltip">
+              <span title=""><label for="Volume"> <? print ${"volume_"."$lang"} ; ?> </label></span></a>
             </td>
             <td> <?
               $arr_volume=array
@@ -62,8 +62,8 @@
 
         <tr>
           <td>
-            <a title="<? print ${helptext_soundcard._.$lang} ?>"class="tooltip">
-            <span title=""><label for="Soundcard"> <? print ${soundcard._.$lang} ; ?> </label></span></a>
+            <a title="<? print ${"helptext_soundcard_"."$lang"} ?>"class="tooltip">
+            <span title=""><label for="Soundcard"> <? print ${"soundcard_"."$lang"} ; ?> </label></span></a>
           </td>
           <td>
             <?$arr_soundcard= array('Internal HDMI audio','Internal audio jack','AroioDAC','AroioDAC-SRC','JustBoom DAC','HiFiBerry DAC','HiFiBerry DAC+','HiFiBerry DAC+ ADC','HiFiBerry Digi','IQAudIO DAC','Allo Piano DAC','Allo Piano 2.1 DAC','Allo Boss DAC','Allo DigiOne','Dr. DAC prime','Focusrite Scarlett','M-Audio Fast Track Pro','RME Fireface UCX','USB Class Compliant');
@@ -77,8 +77,8 @@
         <table>
           <tr>
             <td>
-              <a title="<? print ${helptext_samplerate._.$lang} ?>"class="tooltip">
-              <? print ${samplerate._.$lang} ; ?>
+              <a title="<? print ${"helptext_samplerate_"."$lang"} ?>"class="tooltip">
+              <? print ${"samplerate_"."$lang"} ; ?>
             </td>
             <td> <?
               switch ($ini_array["SOUNDCARD"])
@@ -126,10 +126,10 @@
   include "audio_matrix.php"; ?>
 
   <br>
-  <input class="button" type="submit" value=" <? print ${button_submit_audiosettings._.$lang} ?> " name="audiosettings_submit">
+  <input class="button" type="submit" value=" <? print ${"button_submit_audiosettings_"."$lang"} ?> " name="audiosettings_submit">
   <br>
 
   <div class="content">
-    <input class="button" type="submit" value=" <? print ${button_submit._.$lang} ?> " name="submit">
-    <input class="button" type="submit" value=" <? print ${button_reboot._.$lang} ?> " name="reboot">
+    <input class="button" type="submit" value=" <? print ${"button_submit_"."$lang"} ?> " name="submit">
+    <input class="button" type="submit" value=" <? print ${"button_reboot_"."$lang"} ?> " name="reboot">
   </div>

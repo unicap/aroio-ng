@@ -10,7 +10,7 @@
     exec ( "/usr/bin/update -c" , $ausgabe , $return_var );
   }
 
-  if ($ausgabe[0] != $ini_array[KNOWN_VERSION])
+  if ($ausgabe[0] != $ini_array['KNOWN_VERSION'])
   {
     list($remote[0], $remote[1], $remote[2]) = explode(".", $ausgabe[0]);
     list($local[0], $local[1], $local[2]) = explode(".", $ausgabe[1]);

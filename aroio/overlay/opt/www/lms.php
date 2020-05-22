@@ -1,12 +1,12 @@
 <!-- Logitech Media Server -->
 <div class="content">
   <fieldset>
-    <legend><? print ${squeeze_serv_form._.$lang};?></legend>
+    <legend><? print ${"squeeze_serv_form_"."$lang"};?></legend>
     <table>
       <tr>
         <td>
-          <a title="<? print ${helptext_servername._.$lang} ?>"class="tooltip">
-          <span title=""><label for="Address or hostname"> <? print ${squeeze_serv_hostname._.$lang} ; ?> </label></span></a>
+          <a title="<? print ${"helptext_servername_"."$lang"} ?>"class="tooltip">
+          <span title=""><label for="Address or hostname"> <? print ${"squeeze_serv_hostname_"."$lang"} ; ?> </label></span></a>
         </td>
         <td>
           <input class="actiongroup" <?if ($_POST['DHCP'] == "OFF") {if ( isset($_POST['submit']) && !validate_input("LMS",$_POST['SERVERNAME']) ){echo 'style="border:2px solid #ff0000"';};}?> type="text" name="SERVERNAME" value="<? if (isset($_POST['submit']))print $_POST['SERVERNAME']; else print $ini_array["SERVERNAME"] ?>">
@@ -14,8 +14,8 @@
       </tr>
       <tr>
         <td>
-          <a title="<? print ${helptext_squeezeuser._.$lang} ?>"class="tooltip">
-          <span title=""><label for="Username (if set)"> <? print ${squeeze_serv_user._.$lang} ; ?> </label></span></a>
+          <a title="<? print ${"helptext_squeezeuser_"."$lang"} ?>"class="tooltip">
+          <span title=""><label for="Username (if set)"> <? print ${"squeeze_serv_user_"."$lang"} ; ?> </label></span></a>
         </td>
         <td>
           <input class="actiongroup" type="text" name="SQUEEZEUSER" value="<? print $ini_array["SQUEEZEUSER"] ?>">
@@ -23,8 +23,8 @@
       </tr>
       <tr>
         <td>
-          <a title="<? print ${helptext_squeezepwd._.$lang} ?>"class="tooltip">
-          <span title=""><label for="Password (if set)"> <? print ${squeeze_serv_passwd._.$lang} ; ?> </label></span></a>
+          <a title="<? print ${"helptext_squeezepwd_"."$lang"} ?>"class="tooltip">
+          <span title=""><label for="Password (if set)"> <? print ${"squeeze_serv_passwd_"."$lang"} ; ?> </label></span></a>
         </td>
         <td>
           <input class="actiongroup" type="password" name="SQUEEZEPWD" value="<? print $ini_array["SQUEEZEPWD"] ?>">
@@ -32,8 +32,8 @@
       </tr>
       <tr>
         <td>
-          <a title="<? print ${helptext_serverport._.$lang} ?>"class="tooltip">
-          <span title=""><label for="Port (default 9000)"> <? print ${squeeze_serv_port._.$lang} ; ?> </label></span></a>
+          <a title="<? print ${"helptext_serverport_"."$lang"} ?>"class="tooltip">
+          <span title=""><label for="Port (default 9000)"> <? print ${"squeeze_serv_port_"."$lang"} ; ?> </label></span></a>
         </td>
         <td>
           <input class="actiongroup" <?if ( isset($_POST['submit']) && !validate_input("SERVERPORT",$_POST['SERVERPORT']) ){echo 'style="border:2px solid #ff0000"';};?> type="text" name="SERVERPORT" value="<? if (isset($_POST['submit']))print $_POST['SERVERPORT']; else print $ini_array["SERVERPORT"] ?>">

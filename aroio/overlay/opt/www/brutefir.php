@@ -3,7 +3,7 @@
         include('functions.inc.php');
         include('style.css');
 
-        if($_GET["lang"] === "en" || $_POST[lang]=='en')
+        if($_GET["lang"] === "en" || $_POST["lang"]=="en")
 		{
 			$lang='en';
 			$GLOBALS["lang"]='en';
@@ -14,7 +14,7 @@
 			$GLOBALS["lang"]='de';
 		}
 
-        if(isset($_POST[set]))
+        if(isset($_POST["set"]))
 		{
 			$savedbank=$_POST[savedbank];
 			validateAndSave(10,$_POST);
@@ -32,12 +32,12 @@
 //			}
 		}
 
-		if(isset($_POST[save]))
+		if(isset($_POST["save"]))
 		{
 			$savedbank=$_POST[savedbank];
 
             validateAndSave(10,$_POST);
- 
+
             $shell_exec_ret=shell_exec('cardmount rw');
 			wrtToUserconfig('DEF_COEFF',$_POST[savedbank]);
             $shell_exec_ret=shell_exec('cardmount ro');
@@ -55,12 +55,12 @@
 
     // Switch filter bank
 
-    $bank_test= $_POST[bank];
+    $bank_test= $_POST["bank"];
     $activeFilter=getFilter();
 
     if(isset($_POST['bank']))
     {
-        $activeFilter = $_POST[bank];
+        $activeFilter = $_POST["bank"];
         validateAndSave(10,$_POST);
 
         $shell_exec_ret=shell_exec('cardmount rw');
@@ -80,7 +80,7 @@
     else
     {
         $activeFilter = getFilter();
-        if(isset($_POST[save])){
+        if(isset($_POST["save"])){
             if($ini_array[MSCODING]=='ON') {
                 volControl(1,$ini_array[COEFF_ATT.$activeFilter]);
             }
@@ -91,14 +91,14 @@
     }
 
     // Mute channels
-    if(isset($_POST[mute]))
+    if(isset($_POST["mute"]))
 		{
 			tgglMute(0);
 			tgglMute(1);
 		}
 
 		// LOUDER !!
-		if(isset($_POST[volPlus]))
+		if(isset($_POST["volPlus"]))
 		{
 			$actVol=getVol();
 			$actVol-=0.5;
@@ -113,13 +113,13 @@
 			$ini_array[COEFF_ATT.$activeFilter]=$actVol;
 		}
 		// less louder ...
-		if(isset($_POST[volMinus]))
+		if(isset($_POST["volMinus"]))
 		{
 			$actVol=getVol(); //auslesen
 			$actVol+=0.5;	//setzen
             //if($ini_array[MSCODING]=='ON')
      	//	{
-          //  	volControl(1,$actVol);                       
+          //  	volControl(1,$actVol);
            // }
             //else
             //{
@@ -127,9 +127,9 @@
             //}
 			$ini_array[COEFF_ATT.$activeFilter]=$actVol; //ins array
 		}
-    
-    
-    
+
+
+
     $ini_array = parse_ini_file("/boot/userconfig.txt", 1);
     if ( isset($_POST['convolver_submit']))
     {
@@ -144,19 +144,19 @@
         }
 		shell_exec('/usr/bin/controlaudio restart &> /dev/null' );
     }
-    
+
     include "header.php";?>
 
 <!-- Navigation -->
 <ul>
-<li><a href="index.php" target=""><? print ${linktext_configuration._.$lang} ?></span></a></li>
-<li><a href="system.php" target=""><? print ${linktext_system._.$lang} ?></a></li>
-<li><a href="measurement.php" target=""><? print${linktext_measurement._.$lang} ?></a></li>
+<li><a href="index.php" target=""><? print ${"linktext_configuration_"."$lang"} ?></span></a></li>
+<li><a href="system.php" target=""><? print ${"linktext_system_"."$lang"} ?></a></li>
+<li><a href="measurement.php" target=""><? print${"linktext_measurement_"."$lang"} ?></a></li>
 <li>
-    <a class="select" href="brutefir.php"target=""><? print ${linktext_brutefir._.$lang} ?></a>
+    <a class="select" href="brutefir.php"target=""><? print ${"linktext_brutefir_"."$lang"} ?></a>
 </li>
 
-<li style="float:right"><a href="credits.php" target=""><? print ${linktext_credits._.$lang} ?></a></li>
+<li style="float:right"><a href="credits.php" target=""><? print ${"linktext_credits_"."$lang"} ?></a></li>
 </ul><!-- Ende Navigation -->
 
 <hr class="top">
@@ -164,13 +164,13 @@
 
 <div class="content">
 
-<h1><? print $ini_array["HOSTNAME"] ?> - <? print ${page_title_convolver._.$lang}?></h1>
+<h1><? print $ini_array["HOSTNAME"] ?> - <? print ${"page_title_convolver_"."$lang"}?></h1>
 
 <form action="<?echo $_SERVER['PHP_SELF'] ?>" method="post">
 
 <!-- Filterauswahl -->
-<fieldset> 
-    <legend><? print ${convolution_filterselection._.$lang}?></legend>
+<fieldset>
+    <legend><? print ${"convolution_filterselection_"."$lang"}?></legend>
     <? echo print_filterset(10,$ini_array)?>
 </fieldset>
 
@@ -178,16 +178,16 @@
 <input type="hidden" name="lang" value="<?echo $lang?>">
 <input type="hidden" name="savedbank" value="<?echo $activeFilter?>">
 
-<button type="submit" name="save" title="<? print ${helptext_bf_button_savereload._.$lang} ?>"><? print ${button_savefilter._.$lang}?></button>
-<button type="submit" name="set" title="<? print ${helptext_bf_button_setcoeffs._.$lang} ?>"><? print ${button_setcoeffs._.$lang}?></button>
-<button type="submit" <?if(isMuted()) echo 'style="background-color:#a00; "'; else echo 'style="color:white"';?> name="mute" value="1"><? print ${button_mute._.$lang}?></button>
+<button type="submit" name="save" title="<? print ${"helptext_bf_button_savereload_"."$lang"} ?>"><? print ${"button_savefilter_"."$lang"}?></button>
+<button type="submit" name="set" title="<? print ${"helptext_bf_button_setcoeffs_"."$lang"} ?>"><? print ${"button_setcoeffs_"."$lang"}?></button>
+<button type="submit" <?if(isMuted()) echo 'style="background-color:#a00; "'; else echo 'style="color:white"';?> name="mute" value="1"><? print ${"button_mute_"."$lang"}?></button>
 </form>
 </div>
 
 <div class="content">
 <fieldset> <!-- Erläuterungen -->
-    <legend><? print ${helptext_convolver_.$lang} ?></legend>
-    <? print ${helptext_bf._.$lang} ;?>
+    <legend><? print ${"helptext_convolver_"."$lang"} ?></legend>
+    <? print ${"helptext_bf_"."$lang"} ;?>
 </fieldset>
 </div>
 

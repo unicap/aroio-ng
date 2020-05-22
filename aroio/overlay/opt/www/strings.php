@@ -346,11 +346,11 @@
     $button_reboot_de='Neustart';
 
     //System
-    $page_title_system_en='System ';
-    $page_title_system_de='System ';
+    $page_title_system_en='System';
+    $page_title_system_de='System';
 
-    $title_system_en=$page_title_system_en;
-    $title_system_de=$page_title_system_de;
+    $title_system_en="$page_title_system_en";
+    $title_system_de="$page_title_system_de";
 
     //Update
     $update_form_en='Update';

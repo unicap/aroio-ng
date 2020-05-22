@@ -30,23 +30,23 @@
         }
         if ($remote[0] > $local[0])
         {
-            $update_message="<h1>${infotext_update_available._.$lang}</h1>";
+            $update_message="<h1>${"infotext_update_available_"."$lang"}</h1>";
         }
         else
         {
             if ($remote[0] == $local[0] && $remote[1] > $local[1])
             {
-                $update_message="<h1>${infotext_update_available._.$lang}</h1>";
+                $update_message="<h1>${"infotext_update_available_"."$lang"}</h1>";
             }
             else
             {
                 if ($remote[0] == $local[0] && $remote[1] == $local[1] && $remote[2] > $local[2])
                 {
-                    $update_message="<h1>${infotext_update_available._.$lang}</h1>";
+                    $update_message="<h1>${"infotext_update_available_"."$lang"}</h1>";
                 }
                 else
                 {
-                    $update_message="<b>${infotext_update_unchanged._.$lang}</b>";
+                    $update_message="<b>${"infotext_update_unchanged_"."$lang"}</b>";
                 }
             }
         }
@@ -64,18 +64,18 @@
 
 <!-- Navigation -->
 <ul>
-  <li><a href="index.php" target=""><? print ${linktext_configuration._.$lang} ?></span></a></li>
-  <li><a class="select" href="system.php" target=""><? print ${linktext_system._.$lang} ?></a></li>
-  <li><a href="measurement.php" target=""><? print${linktext_measurement._.$lang} ?></a></li>
+  <li><a href="index.php" target=""><? print ${"linktext_configuration_"."$lang"} ?></span></a></li>
+  <li><a class="select" href="system.php" target=""><? print ${"linktext_system_"."$lang"} ?></a></li>
+  <li><a href="measurement.php" target=""><? print${"linktext_measurement_"."$lang"} ?></a></li>
   <li>
     <? if ($ini_array['BRUTEFIR'] == "OFF"){?>
-      <a style="color: #c5c5c5" href="brutefir.php"target=""><? print ${linktext_brutefir._.$lang} ?></a>
+      <a style="color: #c5c5c5" href="brutefir.php"target=""><? print ${"linktext_brutefir_"."$lang"} ?></a>
     <?}else{?>
-      <a href="brutefir.php"target=""><? print ${linktext_brutefir._.$lang} ?></a>
+      <a href="brutefir.php"target=""><? print ${"linktext_brutefir_"."$lang"} ?></a>
     <?}?>
   </li>
 
-  <li style="float:right"><a href="credits.php" target=""><? print ${linktext_credits._.$lang} ?></a></li>
+  <li style="float:right"><a href="credits.php" target=""><? print ${"linktext_credits_"."$lang"} ?></a></li>
 </ul>
 <!-- Ende Navigation -->
 
@@ -86,49 +86,49 @@
 <form id="Network settings" Name="Network settings" action="" method="post">
 <div class="content">
 
-<h1> <? print $ini_array["HOSTNAME"] ?> - <? print ${page_title_system._.$lang} ?></h1>
+<h1> <? print $ini_array["HOSTNAME"] ?> - <? print ${"page_title_system_"."$lang"} ?></h1>
 
 <fieldset> <!-- Afang Update -->
-  <legend><? print ${update_form._.$lang};?></legend>
+  <legend><? print ${"update_form_"."$lang"};?></legend>
 
 <?
 if ($update == false){ ?>
   <fieldset style="border-style: dotted">
-    <? print "${update_info1._.$lang}" ; ?>
+    <? print "${"update_info1_"."$lang"}" ; ?>
     <a href="https://www.abacus-electronics.de/produkte/streaming/aroioos.html#aroionews" target="_blank">
     <input type="button" class="button" value="Aroio News"/></a>
     <div style="text-align: center">
-       <? print "${update_info2._.$lang}" ; ?>
+       <? print "${"update_info2_"."$lang"}" ; ?>
     </div>
   </fieldset>
 
   <table>
     <tr>
       <td>
-        <a style="text-decoration: none href="#" title="<? print ${helptext_beta._.$lang} ?>"class="tooltip">
-        <span title=""><label for="Use beta"> <? print ${beta._.$lang} ; ?> </label></span></a>
+        <a style="text-decoration: none href="#" title="<? print ${"helptext_beta_"."$lang"} ?>"class="tooltip">
+        <span title=""><label for="Use beta"> <? print ${"beta_"."$lang"} ; ?> </label></span></a>
 
         <? if ($ini_array['USEBETA'] == "ON"){ ?>
-          <input class="actiongroup" type="radio" name="USEBETA" value="OFF"> <? print ${use_beta_off._.$lang} ; ?>
-          <input class="actiongroup" type="radio" name="USEBETA" value="ON" checked> <? print ${use_beta_on._.$lang} ; ?>
+          <input class="actiongroup" type="radio" name="USEBETA" value="OFF"> <? print ${"use_beta_off_"."$lang"} ; ?>
+          <input class="actiongroup" type="radio" name="USEBETA" value="ON" checked> <? print ${"use_beta_on_"."$lang"} ; ?>
         <? }
         else
         { ?>
-          <input class="actiongroup" type="radio" name="USEBETA" value="OFF" checked> <? print ${use_beta_off._.$lang} ; ?>
-          <input class="actiongroup" type="radio" name="USEBETA" value="ON"> <? print ${use_beta_on._.$lang} ;
+          <input class="actiongroup" type="radio" name="USEBETA" value="OFF" checked> <? print ${"use_beta_off_"."$lang"} ; ?>
+          <input class="actiongroup" type="radio" name="USEBETA" value="ON"> <? print ${"use_beta_on_"."$lang"} ;
         } ?>
       <td>
-        <input class="button" type="submit" value=" <? print ${button_check_update._.$lang} ?> " name="check_update">
+        <input class="button" type="submit" value=" <? print ${"button_check_update_"."$lang"} ?> " name="check_update">
       </td>
     </tr>
     <tr>
       <td>
-        <? print ${local_version._.$lang};?>
+        <? print ${"local_version_"."$lang"};?>
         <? if(is_numeric($local[2])) $separator_local="." ?>
         <b><? echo $local[0].".".$local[1]."$separator_local".$local[2]; ?></b>
         <br>
         <? if(is_numeric($remote[2])) $separator_remote="." ?>
-        <? print ${remote_version._.$lang};?>
+        <? print ${"remote_version_"."$lang"};?>
         <b><? echo $remote[0].".".$remote[1]."$separator_remote".$remote[2]; ?></b>
       </td>
     </tr>
@@ -141,14 +141,14 @@ if ($update == false){ ?>
       <div style="text-align: center; margin-top: 15px">
         <? print $update_message; ?>
         <br>
-        <input class="button" type="submit" value=" <? print ${button_update._.$lang} ?> " name="update">
+        <input class="button" type="submit" value=" <? print ${"button_update_"."$lang"} ?> " name="update">
       </div>
     </fieldset> <?
   }
 }
 else
 {
-  print ${infotext_update_running._.$lang}; ?>
+  print ${"infotext_update_running_"."$lang"}; ?>
   <br>
   <fieldset style="border-style: dotted"> <?
     echo '<pre>';
@@ -192,7 +192,7 @@ else
 </fieldset> <!-- Ende Update -->
 
 <fieldset> <!-- System-Informationen -->
-<legend><? print ${sysinfo_form._.$lang};?></legend>
+<legend><? print ${"sysinfo_form_"."$lang"};?></legend>
 
 <?
 $uptime=echo_uptime();
@@ -203,14 +203,14 @@ $ip_addr_wlan=get_ipaddr_wlan();
 $carrierstate=echo_carrierstate();
 
 if ( $carrierstate == '0')
-$carrierstate=${infotext_carrierstate_0._.$lang};
-else $carrierstate=${infotext_carrierstate_1._.$lang};
+$carrierstate=${"infotext_carrierstate_0_"."$lang"};
+else $carrierstate=${"infotext_carrierstate_1_"."$lang"};
 ?>
 <p>
 <table>
   <tr>
     <td>
-        <? print ${infotext_uptime._.$lang};?>
+        <? print ${"infotext_uptime_"."$lang"};?>
     </td>
     <td>
         <? echo "$uptime"; ?>
@@ -218,7 +218,7 @@ else $carrierstate=${infotext_carrierstate_1._.$lang};
   </tr>
   <tr>
     <td>
-        <? print ${infotext_macaddr_lan._.$lang};?>
+        <? print ${"infotext_macaddr_lan_"."$lang"};?>
     </td>
     <td>
         <? echo "$mac_addr_lan"; ?>
@@ -226,7 +226,7 @@ else $carrierstate=${infotext_carrierstate_1._.$lang};
   </tr>
   <tr>
     <td>
-        <? print ${infotext_ipaddr_lan._.$lang};?>
+        <? print ${"infotext_ipaddr_lan_"."$lang"};?>
     </td>
     <td>
         <? echo "$ip_addr_lan[0]"; ?>
@@ -237,7 +237,7 @@ else $carrierstate=${infotext_carrierstate_1._.$lang};
     <? $test_wlan=test_wlan();
 if ($test_wlan == "0"){?>
     <td>
-        <? print ${infotext_macaddr_wlan._.$lang};?>
+        <? print ${"infotext_macaddr_wlan_"."$lang"};?>
     </td>
     <td>
         <? echo "$mac_addr_wlan"; ?>
@@ -245,17 +245,17 @@ if ($test_wlan == "0"){?>
   </tr>
   <tr>
     <td>
-        <? print ${infotext_ipaddr_wlan._.$lang};?>
+        <? print ${"infotext_ipaddr_wlan_"."$lang"};?>
     </td>
     <td>
-        <? if ($ip_addr_wlan[0] == "") echo ${infotext_wlan_unconfigured._.$lang};
+        <? if ($ip_addr_wlan[0] == "") echo ${"infotext_wlan_unconfigured_"."$lang"};
         else echo "$ip_addr_wlan[0]"; ?>
     </td>
   </tr>
 
 <?}?>
   <tr>
-    <td><? print ${infotext_carrierstate._.$lang}.$carrierstate; ?> </td><td></td>
+    <td><? print ${"infotext_carrierstate_"."$lang"}.$carrierstate; ?> </td><td></td>
 
   </tr>
   <tr>
@@ -271,15 +271,15 @@ if ($test_wlan == "0"){?>
 <table>
   <tr>
     <td>
-      <input class="button" type="submit" class="actiongroup" value=" <? print ${button_ifconfig._.$lang} ?> " name="ifconfig">
+      <input class="button" type="submit" class="actiongroup" value=" <? print ${"button_ifconfig_"."$lang"} ?> " name="ifconfig">
     </td>
 
     <td>
-      <input class="button" type="submit" class="actiongroup" value=" <? print ${button_dmesg._.$lang} ?> " name="dmesg">
+      <input class="button" type="submit" class="actiongroup" value=" <? print ${"button_dmesg_"."$lang"} ?> " name="dmesg">
     </td>
 
     <td>
-      <input class="button" type="submit" class="actiongroup" value=" <? print ${button_deliver_log._.$lang} ?> " name="deliver_log">
+      <input class="button" type="submit" class="actiongroup" value=" <? print ${"button_deliver_log_"."$lang"} ?> " name="deliver_log">
     </td>
 
     <td>
