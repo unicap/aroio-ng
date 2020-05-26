@@ -4,14 +4,13 @@
 #
 ################################################################################
 
-SPOTIFYD_VERSION = master
-SPOTIFYD_SOURCE = spotifyd-$(SPOTIFYD_VERSION).tar.gz
+SPOTIFYD_VERSION = v0.2.24
+#SPOTIFYD_SOURCE = spotifyd-$(SPOTIFYD_VERSION).tar.gz
 SPOTIFYD_SITE = $(call github,Spotifyd,spotifyd,$(SPOTIFYD_VERSION))
 SPOTIFYD_LICENSE = GPL-3.0+
 SPOTIFYD_LICENSE_FILES = COPYING
 
-SPOTIFYD_DEPENDENCIES = host-cargo
-
+SPOTIFYD_DEPENDENCIES = host-cargo alsa-lib openssl
 SPOTIFYD_CARGO_ENV = CARGO_HOME=$(HOST_DIR)/share/cargo
 SPOTIFYD_CARGO_MODE = $(if $(BR2_ENABLE_DEBUG),debug,release)
 
