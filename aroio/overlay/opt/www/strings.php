@@ -314,6 +314,9 @@
     $helptext_showpwd_de='WLAN-Schlüssel anzeigen';
 
     //Audio_matrix
+    $audio_matrix_form_en='Player-Selection';
+    $audio_matrix_form_de='Player-Auswahl';
+
     $helptext_audio_out_direct_en='Direct output mode: The samplingrate of the DAC follows the Audio-Stream. If the DAC does not support the rate, the signal will be resampled.';
     $helptext_audio_out_direct_de='Direkter Ausgabemodus: Die Samplingfrequenz der Wandler folgt dem zugespielten Musiksignal, es sei denn, die Wandler beherrschen diese nicht, dann wird geresampelt.';
 
