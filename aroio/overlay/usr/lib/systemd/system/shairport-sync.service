@@ -9,5 +9,3 @@ ExecStart=/bin/taskset -c 2,3 /bin/shairport-sync -v -a $HOSTNAME -o alsa -- -d 
 Restart=always
 RestartSec=2
 
-[Install]
-WantedBy=audioplayers.target
