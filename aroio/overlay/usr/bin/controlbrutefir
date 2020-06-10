@@ -4,13 +4,13 @@
 
 function chgDelay()
 {
-	`echo 'cod' $1 $2 | nc 127.0.0.1 3000` 2>>/dev/null
+	`echo 'cod' $1 $2 | nc -q0 127.0.0.1 3000` 2>>/dev/null
 }
 
 function chgFilter()
 {
 	# Get our current attenuation
-	CUR_ATT=$(echo 'lf' | nc 127.0.0.1 3000 | awk -F/ '/from inputs:[[:space:]]*0\/(-?[[:digit:]]*\.[[:digit:]]*)/ {print $2}')
+	CUR_ATT=$(echo 'lf' | nc -q0 127.0.0.1 3000 | awk -F/ '/from inputs:[[:space:]]*0\/(-?[[:digit:]]*\.[[:digit:]]*)/ {print $2}')
 	echo "cur_att is "$CUR_ATT""
 
 #	# Get our attentuation to switch to
@@ -30,50 +30,50 @@ function chgFilter()
 #	# Now apply the formula in the right order!
 	if [ $ATT -le $CUR_ATT ]
 	then	ATT=$(echo $ATT|awk '{print $1 / 10}')
-			`echo 'cfc' $1 $2 ';' 'cfc' $3 $4 | nc 127.0.0.1 3000` &> /dev/null
+			`echo 'cfc' $1 $2 ';' 'cfc' $3 $4 | nc -q0 127.0.0.1 3000` &> /dev/null
 			if [ "$AUDIO_OUTPUT" = "jack-bfms" ]
 			then	ATT=$((ATT+6))
-					`echo 'cfoa' 0 0 "$ATT" ';' 'cfoa' 1 1 "$ATT" ';' 'cfoa' 0 1 "$ATT" ';' 'cfoa' 1 0 $ATT | nc 127.0.0.1 3000` &> /dev/null
-			else	`echo 'cfoa' 0 0 "$ATT" ';' 'cfoa' 1 1 "$ATT" | nc 127.0.0.1 3000` &> /dev/null
+					`echo 'cfoa' 0 0 "$ATT" ';' 'cfoa' 1 1 "$ATT" ';' 'cfoa' 0 1 "$ATT" ';' 'cfoa' 1 0 $ATT | nc -q0 127.0.0.1 3000` &> /dev/null
+			else	`echo 'cfoa' 0 0 "$ATT" ';' 'cfoa' 1 1 "$ATT" | nc -q0 127.0.0.1 3000` &> /dev/null
 			fi
 	else
 			ATT=$(echo $ATT|awk '{print $1 / 10}')
 			if [ "$AUDIO_OUTPUT" = "jack-bfms" ]
 			then	ATT=$((ATT+6))
-				 	`echo 'cfoa' 0 0 "$ATT" ';' 'cfoa' 1 1 "$ATT" ';' 'cfoa' 0 1 "$ATT" ';' 'cfoa' 1 0 "$ATT" | nc 127.0.0.1 3000` &> /dev/null
-			else	`echo 'cfoa' 0 0 "$ATT" ';' 'cfoa' 1 1 "$ATT" | nc 127.0.0.1 3000` &> /dev/null
+				 	`echo 'cfoa' 0 0 "$ATT" ';' 'cfoa' 1 1 "$ATT" ';' 'cfoa' 0 1 "$ATT" ';' 'cfoa' 1 0 "$ATT" | nc -q0 127.0.0.1 3000` &> /dev/null
+			else	`echo 'cfoa' 0 0 "$ATT" ';' 'cfoa' 1 1 "$ATT" | nc -q0 127.0.0.1 3000` &> /dev/null
 			fi
-			`echo 'sleep 1 ; cfc' $1 $2 ';' 'cfc' $3 $4 | nc 127.0.0.1 3000` &> /dev/null
+			`echo 'sleep 1 ; cfc' $1 $2 ';' 'cfc' $3 $4 | nc -q0 127.0.0.1 3000` &> /dev/null
 	fi
 }
 
 function getDelay()
 {
-	echo 'lo' | nc 127.0.0.1 3000 | awk -F\( '/delay: /{print $2}'
+	echo 'lo' | nc -q0 127.0.0.1 3000 | awk -F\( '/delay: /{print $2}'
 }
 
 function getFilter()
 {
-	echo 'lf' | nc 127.0.0.1 3000 | grep -m 1 'coeff set: [[:digit:]]'
+	echo 'lf' | nc -q0 127.0.0.1 3000 | grep -m 1 'coeff set: [[:digit:]]'
 }
 
 function getVol()
 {
-	#echo 'lf' | nc 127.0.0.1 3000 | awk -F: '/from inputs:[[:space:]]*0\/(-?[[:digit:]]*\.[[digit:]]*)/ {print $2}'
-	echo 'lf' | nc 127.0.0.1 3000 | awk -F: '/from inputs:[[:space:]]*0\/(-?[[:digit:]]*\.[[:digit:]]*)/ {print $2}'
+	#echo 'lf' | nc -q0 127.0.0.1 3000 | awk -F: '/from inputs:[[:space:]]*0\/(-?[[:digit:]]*\.[[digit:]]*)/ {print $2}'
+	echo 'lf' | nc -q0 127.0.0.1 3000 | awk -F: '/from inputs:[[:space:]]*0\/(-?[[:digit:]]*\.[[:digit:]]*)/ {print $2}'
 }
 
 function tgglMute()
 {
-	`echo 'tmo' $1 | nc 127.0.0.1 3000` 2>>/dev/null
+	`echo 'tmo' $1 | nc -q0 127.0.0.1 3000` 2>>/dev/null
 }
 
 function volControl()
 {
 	if [ "$AUDIO_OUTPUT" = "jack-bfms" ]
 	then	ATT=$(($2+6))
-		 	`echo 'cfoa' 0 0 "$ATT" ';' 'cfoa' 1 1 "$ATT" ';' 'cfoa' 0 1 "$ATT" ';' 'cfoa' 1 0 "$ATT" | nc 127.0.0.1 3000` &> /dev/null
-	else	`echo 'cfoa 0 0' $2 ';cfoa 1 1' $2| nc 127.0.0.1 3000` 2>>/dev/null
+		 	`echo 'cfoa' 0 0 "$ATT" ';' 'cfoa' 1 1 "$ATT" ';' 'cfoa' 0 1 "$ATT" ';' 'cfoa' 1 0 "$ATT" | nc -q0 127.0.0.1 3000` &> /dev/null
+	else	`echo 'cfoa 0 0' $2 ';cfoa 1 1' $2| nc -q0 127.0.0.1 3000` 2>>/dev/null
 	fi
 }
 

@@ -536,7 +536,7 @@ function tgglMute($channel)
 
 function isMuted()
 {
-	$str = shell_exec("echo 'lo' | nc localhost 3000 ");
+	$str = shell_exec("echo 'lo' | nc -q0 localhost 3000 ");
 	$re = "/muted/";
 	preg_match($re, $str, $matches);
 
