@@ -10,7 +10,8 @@ LIBRESPOT_LICENSE = GPL-3.0+
 LIBRESPOT_LICENSE_FILES = COPYING
 
 LIBRESPOT_DEPENDENCIES = host-cargo alsa-lib openssl
-LIBRESPOT_CARGO_ENV = CARGO_HOME=$(HOST_DIR)/share/cargo
+LIBRESPOT_CARGO_ENV = CARGO_HOME=$(HOST_DIR)/share/cargo \
+					 PKG_CONFIG_ALLOW_CROSS=1
 LIBRESPOT_CARGO_MODE = $(if $(BR2_ENABLE_DEBUG),debug,release)
 
 LIBRESPOT_BIN_DIR = target/$(RUSTC_TARGET_NAME)/$(LIBRESPOT_CARGO_MODE)
@@ -27,8 +28,9 @@ define LIBRESPOT_BUILD_CMDS
 endef
 
 define LIBRESPOT_INSTALL_TARGET_CMDS
-    $(INSTALL) -D -m 0755 $(@D)/$(LIBRESPOT_BIN_DIR)/LIBRESPOT \
-            $(TARGET_DIR)/usr/bin/LIBRESPOT
+    $(INSTALL) -D -m 0755 $(@D)/$(LIBRESPOT_BIN_DIR)/librespot \
+            $(TARGET_DIR)/usr/bin/librespot
+            
 endef
 
 $(eval $(generic-package))
