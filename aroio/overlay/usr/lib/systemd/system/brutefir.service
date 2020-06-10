@@ -1,7 +1,5 @@
 [Unit]
 Description=Brutefir convolution engine
-After=syslog.target sound.target jackd.service jackminimix.service
-Before=squeezelite.service gmediarender.service shairport-sync.service bluealsa-aplay.service
 
 [Service]
 TimeoutStartSec=3
@@ -12,5 +10,3 @@ ExecStart=/bin/taskset -c 0,1 /bin/brutefir /etc/brutefir/brutefir.conf
 ExecStartPost=/bin/sh -c 'until jack_lsp | grep brutefir ; do sleep 0.2 ; done'
 Restart=always
 
-[Install]
-WantedBy=multi-user.target
