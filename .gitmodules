@@ -1,4 +1,0 @@
-[submodule "buildroot"]
-	path = buildroot
-	url = https://github.com/unicap/audiostreamer-buildroot.git
-	branch = 2020.02-aroio-ng
