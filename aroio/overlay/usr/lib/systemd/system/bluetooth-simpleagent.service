@@ -4,6 +4,7 @@ ConditionPathIsDirectory=/sys/class/bluetooth
 Requires=bluetooth.target
 After=bluetooth.service bluetooth.target bluetooth-broadcastname.service checkuserconfig.service systemd-hostnamed.service
 Before=bluealsa.service
+BindsTo=sys-subsystem-bluetooth-devices-hci0.device
 
 [Service]
 Type=simple
@@ -13,4 +14,4 @@ ExecStart=/usr/bin/bluetooth-simpleagent
 Restart=always
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=bluetooth.target
