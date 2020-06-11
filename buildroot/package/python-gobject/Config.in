@@ -4,8 +4,8 @@ config BR2_PACKAGE_PYTHON_GOBJECT
 	depends on BR2_TOOLCHAIN_HAS_THREADS # libglib2
 	depends on BR2_USE_MMU # libglib2
 	depends on BR2_PACKAGE_PYTHON || BR2_PACKAGE_PYTHON3 # Broken with python 3.8
+	depends on BR2_PACKAGE_GOBJECT_INTROSPECTION
 	select BR2_PACKAGE_LIBGLIB2
-	select BR2_PACKAGE_GOBJECT_INTROSPECTION
 	help
 	  Python bindings for the GLib/GObject library
 
