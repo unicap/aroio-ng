@@ -1,0 +1,2 @@
+#!/bin/sh
+$STAGING_DIR/usr/bin/g-ir-scanner-qemuwrapper $STAGING_DIR/usr/bin/g-ir-compiler.real "$@"
