@@ -682,6 +682,36 @@ case $SOUNDCARD in
 	sed -i '/options snd slots/c\options snd slots=snd_usb_audio' "$ALSACONFIG"
 	;;
 
+	'I-Sabre Q2M')
+	if ! grep -qw 'i-sabre-q2m' "$CONFIG"
+	then
+		cardmount rw
+		echo "userconfig and config.txt have different entries for soundcards,"
+		echo "backing up and writing a new config.txt..."
+		cp "$CONFIG" "$CONFIG"-bak
+		cat <<-EOF > "$CONFIG"
+			$DISPLAY_ROTATE
+			force_turbo=1
+			dtdebug=1
+			max_usb_current=1
+			disable_splash=1
+			kernel=zImage
+			disable_overscan=1
+			dtoverlay=lirc-rpi,gpio_in_pin=25
+			dtoverlay=i-sabre-q2m
+			dtoverlay=pi3-disable-wifi
+			dtoverlay=pi3-disable-bt
+			dtoverlay=pi3-act-led,gpio=22
+			dtparam=act_led_trigger=heartbeat
+		EOF
+
+		cardmount ro
+		REBOOT=1
+	fi
+	# Taking care of correct soundcard order
+	sed -i '/options snd slots/c\options snd slots=snd_usb_audio' "$ALSACONFIG"
+	;;
+
 	'USB Class Compliant')
 	if ! grep -qw '#usb_class_compliant' "$CONFIG"
 	then
