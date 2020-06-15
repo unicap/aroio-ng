@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Use a modules directory which does not exist so we don't load random things
 # which may then get deleted (or their dependencies) and potentially segfault
 export GIO_MODULE_DIR=$STAGING_DIR/usr/lib/gio/modules-dummy
