@@ -60,6 +60,16 @@
         $update=true;
     }
 
+    if ( isset($_POST['bluetooth_pairing']) )
+    {
+        shell_exec ( "killall bluetooth-sspmode > /dev/null" );
+        shell_exec ( "bluetooth-sspmode > /dev/null &" );
+    }
+
+    if ( isset($_POST['bluetooth_dbpurge']) )
+    {
+        shell_exec ( "/usr/bin/bluetooth-dbpurge > /dev/null" );
+    }
 ?>
 
 <!-- Navigation -->
@@ -190,6 +200,9 @@ else
 
 </table>
 </fieldset> <!-- Ende Update -->
+
+<? include "bluetooth.php"; ?>  
+
 
 <fieldset> <!-- System-Informationen -->
 <legend><? print ${"sysinfo_form_"."$lang"};?></legend>
