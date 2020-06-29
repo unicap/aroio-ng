@@ -6,7 +6,7 @@ After=checkuserconfig.service
 [Service]
 Type=simple
 EnvironmentFile=/boot/userconfig.txt
-ExecStart=/sbin/httpd -f -v -c /etc/httpd.conf
+ExecStart=/sbin/httpd -f -v -h /opt/www/ -c /etc/httpd.conf
 Restart=always
 
 [Install]
