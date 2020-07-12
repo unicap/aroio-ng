@@ -22,7 +22,7 @@
             <span title=""><label for="Jackbuffer"> <? print ${"jack_buffer_"."$lang"} ; ?> </label></span></a>
           </td>
           <td>
-            <?$arr_jackbuffer= array(32,64,128,256,512,1024,2048,4096,8192,16384);
+            <?$arr_jackbuffer= array(32,64,128,256,512,1024,2048,4096);
             print_optgroup("JACKBUFFER",$arr_jackbuffer,$ini_array["JACKBUFFER"]);?>
           </td>
 
