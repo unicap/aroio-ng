@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-AROIO_UI_VERSION = bade126b5b0c056951eb3fa0b50e9d50c5069cde
+AROIO_UI_VERSION = 51565733280cef5bb9339937d7684943398acbc8
 AROIO_UI_GIT_SUBMODULES = YES
 AROIO_UI_SITE_METHOD = git
 AROIO_UI_SITE = git://github.com/worosom/aroio-ui
