@@ -27,7 +27,7 @@ fi
 [[ "$RATE" != "44100" && "$RATE" != "48000" && "$RATE" != "96000" && "$RATE" != "192000" ]] && RATE="96000"
 [[ "$SPRATE" != "88200" && "$SPRATE" != "44100" ]] && SPRATE="44100"
 [[ "$RESAMPLING" != "speexrate" && "$RESAMPLING" != "speexrate_medium" && "$RESAMPLING" != "speexrate_best" ]] && RESAMPLING="speexrate_medium"
-[[ "$JACKBUFFER" = "" || "$JACKBUFFER" > "4096" ]] && JACKBUFFER="4096"
+[[ "$JACKBUFFER" = "" || $JACKBUFFER -gt 4096 ]] && JACKBUFFER="4096"
 [[ "$HOSTNAME" = "" || "$HOSTNAME" = "(none)" ]] && HOSTNAME="AroioOS"
 [[ "$PLAYERNAME" = "" || "$PLAYERNAME" = "(none)" ]] && PLAYERNAME="$HOSTNAME"
 [[ "$LAN_DHCP" = "" || "$LAN_DHCP" = "OFF" ]] && [[ "$LAN_IPADDR" = "" || "$LAN_NETMASK" = "" || "$LAN_DNSSERV" = "" || "$LAN_GATEWAY" = "" ]] && LAN_DHCP="ON"
