@@ -48,7 +48,7 @@
             </td>
           </tr>
 
-          <tr>
+<?/*          <tr>
             <td>
               <a title="<? print ${"helptext_squeeze_intbuffer_"."$lang"} ?>"class="tooltip">
               <span title=""><label for="squeeze_intbuffer"> <? print ${"squeeze_intbuffer_"."$lang"} ; ?> </label></span></a>
@@ -69,7 +69,7 @@
               print_optgroup("SQUEEZE_OUTBUFFER",$arr_squeeze_outbuffer,$ini_array["SQUEEZE_OUTBUFFER"]);?>
             </td>
           </tr>
-
+*/?>
           <tr>
             <td>
               <a title="<? print ${"helptext_sp_outbuffer_"."$lang"} ?>"class="tooltip">
