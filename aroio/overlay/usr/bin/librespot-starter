@@ -9,7 +9,7 @@ LIBRESPOT_NORMALISATION='' #--volume-normalisation
 
 
 
-taskset -c 2,3 librespot \
+/bin/librespot \
 		-b "$LIBRESPOT_BITRATE" \
 		-n "$HOSTNAME"	\
 		--backend alsa \

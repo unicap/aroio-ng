@@ -4,6 +4,4 @@
 
 MACADDRESS=$(cat /sys/class/net/eth0/address)
 
-taskset -c 2,3 gmediarender -f $PLAYERNAME -u "$MACADDRESS" --gstout-audiosink alsasink --gstout-audiodevice $AUDIO_OUTPUT --logfile=/tmp/gmlog
-
-
+gmediarender -f $PLAYERNAME -u "$MACADDRESS" --gstout-audiosink alsasink --gstout-audiodevice $AUDIO_OUTPUT --logfile=/tmp/gmlog

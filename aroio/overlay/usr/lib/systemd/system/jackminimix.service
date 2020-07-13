@@ -7,9 +7,8 @@ BindsTo=jackd.service
 TimeoutStartSec=3
 Type=simple
 EnvironmentFile=/boot/userconfig.txt
-ExecStart=/bin/taskset -c 0,1 /bin/jackminimix -v -l system:playback_1 -r system:playback_2 -v -p 13239 -c 1 -n jackmixer
-ExecStartPost=/bin/sh -c 'until jack_lsp | grep jackmixer ; do sleep 0.1 ; done'
+ExecStart=/bin/jackminimix -v -l system:playback_1 -r system:playback_2 -v -p 13239 -c 1 -n jackmixer
+ExecStartPost=/bin/sh -c 'until jack_lsp | grep jackmixer &> /dev/null ; do sleep 0.1 ; done'
 ExecStartPost=/bin/sh -c '/bin/chrt -f -a -v -p 75 $(pgrep jackminimix)'
 ExecStartPost=/bin/sh -c "sleep 0.2 && oscsend localhost 13239 /mixer/channel/set_gain  if 1 $(($(amixer sget Master | awk '/Left:/ { print $3 }') * 3 / 10 -77 ))"
 Restart=always
-

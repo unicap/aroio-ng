@@ -10,29 +10,28 @@ MACADDRESS=$(cat /sys/class/net/eth0/address)
 
 # For the life of my I cannot figure out, why I cannot give '-s $SERVERNAME' on the cmdline!?!
 if [ "$SERVERNAME" = "" ]
-then	taskset -c 2,3 squeezelite \
-		-Z "$SQUEEZE_MAXFREQUENCY" \
-		-M "$PLATFORM"	\
-		-m "$MACADDRESS" \
-		-n "$PLAYERNAME" \
-		-p 45 \
-		-a 145:4::1 \
-		-b "$SQUEEZE_INTBUFFER":"$SQUEEZE_OUTBUFFER" \
-		-d all=info \
-		-o "$AUDIO_OUTPUT"
+then	/bin/squeezelite \
+			-Z "$SQUEEZE_MAXFREQUENCY" \
+			-M "$PLATFORM"	\
+			-m "$MACADDRESS" \
+			-n "$PLAYERNAME" \
+			-p 45 \
+			-d all=info \
+			-o "$AUDIO_OUTPUT"
 
+#		-a 145:4::1 \
+#		-b "$SQUEEZE_INTBUFFER":"$SQUEEZE_OUTBUFFER" \
 
-
-else	taskset -c 2,3 squeezelite \
-		-Z "$SQUEEZE_MAXFREQUENCY" \
-		-s "$SERVERNAME" \
-		-M "$PLATFORM" \
-		-m "$MACADDRESS" \
-		-n "$PLAYERNAME" \
-		-p 45 \
-		-a 145:4::1 \
-		-b "$SQUEEZE_INTBUFFER":"$SQUEEZE_OUTBUFFER" \
-		-d all=info \
-		-o "$AUDIO_OUTPUT"
+else	/bin/squeezelite \
+			-Z "$SQUEEZE_MAXFREQUENCY" \
+			-s "$SERVERNAME" \
+			-M "$PLATFORM" \
+			-m "$MACADDRESS" \
+			-n "$PLAYERNAME" \
+			-p 45 \
+			-d all=info \
+			-o "$AUDIO_OUTPUT"
 fi
 
+#		-a 145:4::1 \
+#		-b "$SQUEEZE_INTBUFFER":"$SQUEEZE_OUTBUFFER" \

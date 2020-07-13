@@ -9,7 +9,7 @@ SPOTIFYD_NORMALISATION='' #--volume-normalisation
 
 
 
-taskset -c 2,3 spotifyd \
+/bin/spotifyd \
 		-B "$SPOTIFYD_BITRATE" \
 		-d "$HOSTNAME"	\
 		--device "$AUDIO_OUTPUT" \

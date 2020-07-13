@@ -6,6 +6,5 @@ Wants=network-online.target
 
 [Service]
 Type=simple
-ExecStart=/bin/taskset -c 2,3 /bin/gmediarender-starter
+ExecStart=/bin/gmediarender-starter
 Restart=always
-
