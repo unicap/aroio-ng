@@ -43,7 +43,7 @@
               <span title=""><label for="squeeze_maxfrequency"> <? print ${"squeeze_maxfrequency_"."$lang"} ; ?> </label></span></a>
             </td>
             <td>
-              <?$arr_squeeze_maxfrequency= array(44100,48000,88000,96000,174000,192000,348000);
+              <?$arr_squeeze_maxfrequency= array(44100,48000,88000,96000,176400,192000,348000);
               print_optgroup("SQUEEZE_MAXFREQUENCY",$arr_squeeze_maxfrequency,$ini_array["SQUEEZE_MAXFREQUENCY"]);?>
             </td>
           </tr>
