@@ -1,8 +1,9 @@
 [Unit]
 Description=Audio Players
-#After=syslog.target sound.target aroio_gpio.service network.target bluetooth.target checkuserconfig.service checkconfig_txt.service 
-Wants=network.target
-After=network.target
+#After=syslog.target sound.target aroio_gpio.service network.target bluetooth.target checkuserconfig.service checkconfig_txt.service
+#Wants=network.target
+#After=network.target
+After=multi-user.target
 
 [Service]
 Type=oneshot
