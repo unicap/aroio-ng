@@ -44,7 +44,7 @@
 
     if ($_POST["PLATFORM"] == "AroioSU" || $_POST["PLATFORM"] == "AroioEX")
     {
-     $_POST[VOLUME_START]=0;
+     $_POST['VOLUME_START']=0;
     }
 
 
