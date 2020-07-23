@@ -50,6 +50,7 @@
 
     if ($_POST["ADVANCED"] == "OFF")
     {
+      $_POST['SP_INTERPOL']=soxr;
       switch ($_POST["RATE"])
       {
         case 44100:
