@@ -101,6 +101,16 @@
               print_optgroup("SPRATE",$arr_sprate,$ini_array["SPRATE"]);?>
             </td>
           </tr>
+          <tr>
+            <td>
+              <a title="<? print ${"helptext_sp_interpol_"."$lang"} ?>"class="tooltip">
+              <span title=""><label for="sp_interpol"> <? print ${"sp_interpol_"."$lang"} ; ?> </label></span></a>
+            </td>
+            <td>
+              <?$arr_spinterpol= array('basic','soxr');
+              print_optgroup("SP_INTERPOL",$arr_spinterpol,$ini_array["SP_INTERPOL"]);?>
+            </td>
+          </tr>
           </div> <?
         } ?>
       </tr>
