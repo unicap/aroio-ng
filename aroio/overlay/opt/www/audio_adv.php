@@ -97,7 +97,7 @@
               <span title=""><label for="sp_samplerate"> <? print ${"sp_samplerate_"."$lang"} ; ?> </label></span></a>
             </td>
             <td>
-              <?$arr_sprate= array('44100','88200');
+              <?$arr_sprate= array('44100','88200','176400');
               print_optgroup("SPRATE",$arr_sprate,$ini_array["SPRATE"]);?>
             </td>
           </tr>
