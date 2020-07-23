@@ -14,6 +14,7 @@
           $_POST[BF_PARTITIONS]=2;
           $_POST[RESAMPLING]=speexrate_medium;
           $_POST[SPRATE]=44100;
+          $_POST['SP_INTERPOL']=soxr;
         break;
 
         case 48000:
@@ -28,6 +29,7 @@
           $_POST[BF_PARTITIONS]=4;
           $_POST[RESAMPLING]=speexrate_medium;
           $_POST[SPRATE]=44100;
+          $_POST['SP_INTERPOL']=soxr;
         break;
 
         case 96000:
@@ -42,6 +44,7 @@
           $_POST[BF_PARTITIONS]=2;
           $_POST[RESAMPLING]=speexrate_medium;
           $_POST[SPRATE]=88200;
+          $_POST['SP_INTERPOL']=soxr;
         break;
 
         case 176400:
@@ -56,6 +59,7 @@
           $_POST[BF_PARTITIONS]=1;
           $_POST[RESAMPLING]=speexrate_medium;
           $_POST[SPRATE]=44100;
+          $_POST['SP_INTERPOL']=soxr;
         break;
 
         case 176400:
@@ -70,6 +74,7 @@
           $_POST[BF_PARTITIONS]=2;
           $_POST[RESAMPLING]=speexrate_medium;
           $_POST[SPRATE]=44100;
+          $_POST['SP_INTERPOL']=soxr;
         break;
 
         case 192000:
@@ -84,6 +89,7 @@
           $_POST[BF_PARTITIONS]=1;
           $_POST[RESAMPLING]=speexrate_medium;
           $_POST[SPRATE]=44100;
+          $_POST['SP_INTERPOL']=soxr;
         break;
       }
     }
