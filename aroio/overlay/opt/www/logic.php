@@ -2,7 +2,7 @@
   else $lang='de';
 
   $ini_array = parse_ini_file("/boot/userconfig.txt", 1);
-  
+
   if ( isset($_POST['submit']) || isset($_POST['audiosettings_submit']) )
   {
     if ($_POST['DHCP'] == "OFF")
@@ -75,6 +75,20 @@
           $_POST[SPRATE]=88200;
         break;
 
+        case 176400:
+          $_POST[JACKBUFFER]=2048;
+          $_POST[JACKPERIOD]=3;
+          $_POST[SQUEEZE_ALSABUFFER]=4096;
+          $_POST[SQUEEZE_ALSAPERIOD]=4;
+          $_POST[SQUEEZE_INTBUFFER]=4096;
+          $_POST[SQUEEZE_OUTBUFFER]=4096;
+          $_POST[SP_OUTBUFFER]=16384;
+          $_POST[SP_PERIOD]=2;
+          $_POST[BF_PARTITIONS]=1;
+          $_POST[RESAMPLING]=speexrate_medium;
+          $_POST[SPRATE]=176400;
+        break;
+
         case 192000:
           $_POST[JACKBUFFER]=2048;
           $_POST[JACKPERIOD]=3;
@@ -101,7 +115,7 @@
       echo '<meta http-equiv="refresh"> ';
     }
   }
-    
+
   if ( isset($_POST['reboot']) )
   {
     $shell_exec_ret=shell_exec('cardmount rw');
@@ -133,4 +147,3 @@
   {
       shell_exec('/usr/bin/controlaudio restart &> /dev/null' );
   }
-  

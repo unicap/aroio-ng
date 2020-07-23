@@ -112,7 +112,7 @@
                 case "Allo Boss DAC":
                 case "Allo DigiOne":
                 case "I-Sabre Q2M":
-                  $arr_rate= array('44100','48000','96000','192000');
+                  $arr_rate= array('44100','48000','96000','176400','192000');
                   break;
               }
               print_optgroup("RATE",$arr_rate,$ini_array["RATE"]); ?>
