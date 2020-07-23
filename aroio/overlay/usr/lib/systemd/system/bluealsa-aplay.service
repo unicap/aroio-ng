@@ -8,8 +8,5 @@ BindsTo=sys-subsystem-bluetooth-devices-hci0.device
 [Service]
 Type=simple
 EnvironmentFile=/boot/userconfig.txt
-ExecStart=/bin/taskset -c 2,3 /usr/bin/bluealsa-aplay 00:00:00:00:00:00 -d $AUDIO_OUTPUT
+ExecStart=/usr/bin/bluealsa-aplay 00:00:00:00:00:00 -d $AUDIO_OUTPUT
 Restart=always
-
-[Install]
-WantedBy=multi-user.target

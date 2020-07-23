@@ -1,18 +1,16 @@
 [Unit]
 Description=Jack Daemon
-After=syslog.target sound.target checkuserconfig.service brutefir-checkfilters.service
-Before=jackminimix.service squeezelite.service gmediarender.service shairport-sync.service bluealsa-aplay.service brutefir.service
+Before=jackminimix.service
 Wants=jackminimix.service
 
 [Service]
-TimeoutStartSec=3
+#Type=notify
 Type=simple
+TimeoutStartSec=3
 EnvironmentFile=/boot/userconfig.txt
 ExecStart=/bin/jack-starter
-ExecStartPost=/bin/sh -c 'until jack_lsp ; do sleep 0.1 ; done'
-ExecStopPost=/bin/sh -c 'while jack_lsp ; do sleep 0.1 ; done'
+ExecStartPost=/bin/sh -c 'until jack_lsp &> /dev/null ; do sleep 0.1 ; done'
+ExecStartPost=/bin/sh -c 'echo jackd is up and running!'
+ExecStopPost=/bin/sh -c 'while jack_lsp &> /dev/null ; do sleep 0.1 ; done'
 ExecStop=/bin/kill -9 $MAINPID
 Restart=always
-
-[Install]
-WantedBy=multi-user.target

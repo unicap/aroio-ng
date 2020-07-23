@@ -1,0 +1,70 @@
+--- a/jack/pcm_jack.c	2019-11-13 12:04:26.000000000 +0100
++++ b/jack/pcm_jack.c	2020-06-09 14:18:48.449423067 +0200
+@@ -206,9 +206,9 @@
+ 	snd_pcm_jack_t *jack = io->private_data;
+ 	snd_pcm_uframes_t xfer = 0;
+ 	unsigned int channel;
+-	
++
+ 	for (channel = 0; channel < io->channels; channel++) {
+-		jack->areas[channel].addr = 
++		jack->areas[channel].addr =
+ 			jack_port_get_buffer (jack->ports[channel], nframes);
+ 		jack->areas[channel].first = 0;
+ 		jack->areas[channel].step = jack->sample_bits;
+@@ -428,6 +428,7 @@
+ 	unsigned int format = SND_PCM_FORMAT_FLOAT;
+ 	unsigned int rate = jack_get_sample_rate(jack->client);
+ 	unsigned int psize_list[MAX_PERIODS_MULTIPLE];
++	unsigned int bsize_list[MAX_PERIODS_MULTIPLE];
+ 	unsigned int nframes = jack_get_buffer_size(jack->client);
+ 	unsigned int jack_buffer_bytes = (snd_pcm_format_size(format, nframes) *
+ 					  jack->num_ports);
+@@ -441,6 +442,9 @@
+ 	for (i = 1; i <= ARRAY_SIZE(psize_list); i++)
+ 		psize_list[i-1] = jack_buffer_bytes * i;
+ 
++	for (i = 1; i <= ARRAY_SIZE(bsize_list); i++)
++		bsize_list[i-1] = jack_buffer_bytes * (i + 1);
++
+ 	jack->sample_bits = snd_pcm_format_physical_width(format);
+ 	if ((err = snd_pcm_ioplug_set_param_list(&jack->io, SND_PCM_IOPLUG_HW_ACCESS,
+ 						 ARRAY_SIZE(access_list), access_list)) < 0 ||
+@@ -452,7 +456,9 @@
+ 						   rate, rate)) < 0 ||
+ 	    (err = snd_pcm_ioplug_set_param_list(&jack->io, SND_PCM_IOPLUG_HW_PERIOD_BYTES,
+ 						 ARRAY_SIZE(psize_list), psize_list)) < 0 ||
+-	    (err = snd_pcm_ioplug_set_param_minmax(&jack->io, SND_PCM_IOPLUG_HW_PERIODS,
++			(err = snd_pcm_ioplug_set_param_list(&jack->io, SND_PCM_IOPLUG_HW_BUFFER_BYTES,
++						 ARRAY_SIZE(bsize_list), bsize_list)) < 0 ||
++			(err = snd_pcm_ioplug_set_param_minmax(&jack->io, SND_PCM_IOPLUG_HW_PERIODS,
+ 						   2, 64)) < 0)
+ 		return err;
+ 
+@@ -539,7 +545,7 @@
+ 	int fd[2];
+ 	static unsigned int num = 0;
+ 	char jack_client_name[32];
+-	
++
+ 	assert(pcmp);
+ 	jack = calloc(1, sizeof(*jack));
+ 	if (!jack)
+@@ -590,7 +596,7 @@
+ 	}
+ 
+ 	socketpair(AF_LOCAL, SOCK_STREAM, 0, fd);
+-	
++
+ 	make_nonblock(fd[0]);
+ 	make_nonblock(fd[1]);
+ 
+@@ -635,7 +641,7 @@
+ 	snd_config_t *capture_conf = NULL;
+ 	const char *client_name = NULL;
+ 	int err;
+-	
++
+ 	snd_config_for_each(i, next, conf) {
+ 		snd_config_t *n = snd_config_iterator_entry(i);
+ 		const char *id;

@@ -6,9 +6,7 @@ After=checkuserconfig.service
 [Service]
 Type=simple
 EnvironmentFile=/boot/userconfig.txt
-#ExecStartPre=/bin/echo -e '*.php:/usr/bin/php-cgi\n/:aroio:'"$USERPASSWD" > /etc/httpd.conf
-#ExecStartPre=/bin/echo -e 'I:index.php      # Show index.php when a directory is requested' >> /etc/httpd.conf
-ExecStart=/sbin/httpd -f -v -h /opt/www -c /etc/httpd.conf
+ExecStart=/sbin/httpd -f -v -h /opt/www/ -c /etc/httpd.conf
 Restart=always
 
 [Install]

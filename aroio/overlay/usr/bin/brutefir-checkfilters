@@ -25,6 +25,9 @@ chown -Rh sftparoio:users /run/filter
 
 while (true)
 do
+    cardmount rw
+    rsync --exclude "*.tmp" -vLrt --delete "$RAMDIR"/ "$SDDIR" #needed, in case a slow connection still causes changes while we are synchronizing
+    cardmount ro
     inotifywait -r -e modify,attrib,close_write,move,create,delete --exclude '\.tmp' "$RAMDIR"
     echo "Files changed in "$RAMDIR", will synchronize changes to "$SDDIR"..."
     cardmount rw

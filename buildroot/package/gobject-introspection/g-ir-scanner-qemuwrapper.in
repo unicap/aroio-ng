@@ -1,0 +1,10 @@
+#!/bin/bash
+# Use a modules directory which does not exist so we don't load random things
+# which may then get deleted (or their dependencies) and potentially segfault
+export GIO_MODULE_DIR=$STAGING_DIR/usr/lib/gio/modules-dummy
+PSEUDO_UNLOAD=1 @QEMU_USER@ -r @TOOLCHAIN_HEADERS_VERSION@ -L $STAGING_DIR -E LD_LIBRARY_PATH=$GIR_EXTRA_LIBS_PATH:.libs:$STAGING_DIR/usr/lib:$STAGING_DIR/lib "$@"
+if [[ $? -ne 0 ]]; then
+    echo "If the above error message is about missing .so libraries, then setting up GIR_EXTRA_LIBS_PATH in the .mk file should help."
+    echo '(typically like this: GIR_EXTRA_LIBS_PATH="$(@D)/.libs")'
+    exit 1
+fi

@@ -226,6 +226,9 @@
     $sp_samplerate_en='ShAirPlay samplerate';
     $sp_samplerate_de='ShAirPlay Samplingfrequenz';
 
+    $sp_interpol_en='ShAirPlay interpolation';
+    $sp_interpol_de='ShAirPlay Interpolation';
+
     $bf_partitions_en='BruteFIR partitions';
     $bf_partitions_de='BruteFIR Partitionen';
 
@@ -253,7 +256,7 @@
     $helptext_soundcard_en='Selection of the installed audio card. A chenge here requires restarting the system.';
     $helptext_soundcard_de='Auswahl der verwendeten Soundkarte. Eine &Auml;nderung erfordert einen Neustart.';
 
-    $helptext_samplerate_en='Selection of the system samplerate. Does not ally for the mode \'Direct\'';
+    $helptext_samplerate_en='Selection of the system samplerate. Does not aply for the mode \'Direct\'';
     $helptext_samplerate_de='Auswahl der System-Sampling-Frequenz. Bezieht sich nicht auf den Modus \'Direct\'';
 
     $helptext_display_rotate_en='Rotation of the HDMI output signal for 90°';
@@ -310,6 +313,9 @@
     $helptext_sp_samplerate_en='Target samplingrate of the ShAirPlay module.';
     $helptext_sp_samplerate_de='Ziel Resamplingfrequenz des ShAirPlay Moduls.';
 
+    $helptext_sp_interpol_en='Resampler algorithm for ShAirPlay player.';
+    $helptext_sp_interpol_de='Resampling Algorithmus f&uuml;r den ShAirPlay Player.';
+
     $helptext_showpwd_en='Show WLAN key.';
     $helptext_showpwd_de='WLAN-Schlüssel anzeigen';
 
@@ -354,6 +360,22 @@
 
     $title_system_en="$page_title_system_en";
     $title_system_de="$page_title_system_de";
+
+    //Bluetooth
+    $bluetooth_form_en='Bluetooth-Pairing';
+    $bluetooth_form_de='Bluetooth-Pairing';
+
+    $helptext_bluetooth_en='Start Bluetooth pairing process for 45 Seconds or forget paired devices';
+    $helptext_bluetooth_de='Bluetooth pairing Modus für 45 Sekunden aktivieren bzw. bekannte Ger&auml;te vergessen';
+
+    $bluetooth_en='Bluetooth';
+    $bluetooth_de='Bluetooth';
+
+    $button_bluetooth_pairing_en='BT-Pairing';
+    $button_bluetooth_pairing_de='BT-Pairing';
+
+    $button_bluetooth_dbpurge_en='BT-Reset';
+    $button_bluetooth_dbpurge_de='BT-Reset';
 
     //Update
     $update_form_en='Update';

@@ -1,0 +1,6 @@
+config BR2_PACKAGE_HOST_PRELINK_CROSS
+	bool "host prelink-cross"
+	help
+	  Emulate a runtime linker for a given sysroot.
+
+	  https://wiki.yoctoproject.org/wiki/Cross-Prelink

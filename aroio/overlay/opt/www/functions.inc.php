@@ -373,7 +373,7 @@ function print_filterset($count,$ini_array)
                 $out.='<button type="submit" name="bank" value="'.$i.'">Bank '.($i+1).'</button> ';
                 $out.='</td>';
             }
-            $out.='<td class="convolve"><input type="text" autocomplete="off" name=comm'.$i.' value="'.$ini_array[COEFF_COMMENT.$i].'"/></td>';
+            $out.='<td class="convolve"><input type="text" autocomplete="off" name=comm'.$i.' value="'.$ini_array['COEFF_COMMENT'.$i].'"/></td>';
         }
 		else
 		{
@@ -418,16 +418,17 @@ function validateAndSave($size,$arr)
 	$shell_exec_ret=exec('cardmount rw');
 	for ($i=0; $i < $size; $i++)
 	{
-		if(is_numeric($arr[vol.$i])){
-			if (-90<$arr[vol.$i] && $arr[vol.$i]<=3) {
-				wrtToUserconfig('COEFF_ATT'.$i,(-1*$arr[vol.$i]));
+		if(is_numeric($arr['vol'.$i])){
+			if (-90<$arr['vol'.$i] && $arr['vol'.$i]<=3) {
+				wrtToUserconfig('COEFF_ATT'.$i,(-1*$arr['vol'.$i]));
 			}
 		}
-
-		wrtToUserconfig('COEFF_NAME'.$i,$arr[coeff.$i]);
-		wrtToUserconfig('COEFF_COMMENT'.$i,$arr[comm.$i]);
+    wrtToUserconfig('COEFF_NAME'.$i,$arr['coeff'.$i]);
+		wrtToUserconfig('COEFF_COMMENT'.$i,$arr['comm'.$i]);
 	}
 	$shell_exec_ret=exec('cardmount ro');
+  $i=0;
+  //echo $arr['coeff'.$i];
 }
 
 
@@ -536,7 +537,7 @@ function tgglMute($channel)
 
 function isMuted()
 {
-	$str = shell_exec("echo 'lo' | nc localhost 3000 ");
+	$str = shell_exec("echo 'lo' | nc -q0 localhost 3000 ");
 	$re = "/muted/";
 	preg_match($re, $str, $matches);
 

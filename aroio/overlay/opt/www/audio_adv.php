@@ -22,7 +22,7 @@
             <span title=""><label for="Jackbuffer"> <? print ${"jack_buffer_"."$lang"} ; ?> </label></span></a>
           </td>
           <td>
-            <?$arr_jackbuffer= array(32,64,128,256,512,1024,2048,4096,8192,16384);
+            <?$arr_jackbuffer= array(32,64,128,256,512,1024,2048,4096);
             print_optgroup("JACKBUFFER",$arr_jackbuffer,$ini_array["JACKBUFFER"]);?>
           </td>
 
@@ -43,12 +43,12 @@
               <span title=""><label for="squeeze_maxfrequency"> <? print ${"squeeze_maxfrequency_"."$lang"} ; ?> </label></span></a>
             </td>
             <td>
-              <?$arr_squeeze_maxfrequency= array(44100,48000,88000,96000,174000,192000,348000);
+              <?$arr_squeeze_maxfrequency= array(44100,48000,88000,96000,176400,192000,348000);
               print_optgroup("SQUEEZE_MAXFREQUENCY",$arr_squeeze_maxfrequency,$ini_array["SQUEEZE_MAXFREQUENCY"]);?>
             </td>
           </tr>
 
-          <tr>
+<?/*          <tr>
             <td>
               <a title="<? print ${"helptext_squeeze_intbuffer_"."$lang"} ?>"class="tooltip">
               <span title=""><label for="squeeze_intbuffer"> <? print ${"squeeze_intbuffer_"."$lang"} ; ?> </label></span></a>
@@ -69,7 +69,7 @@
               print_optgroup("SQUEEZE_OUTBUFFER",$arr_squeeze_outbuffer,$ini_array["SQUEEZE_OUTBUFFER"]);?>
             </td>
           </tr>
-
+*/?>
           <tr>
             <td>
               <a title="<? print ${"helptext_sp_outbuffer_"."$lang"} ?>"class="tooltip">
@@ -97,8 +97,18 @@
               <span title=""><label for="sp_samplerate"> <? print ${"sp_samplerate_"."$lang"} ; ?> </label></span></a>
             </td>
             <td>
-              <?$arr_sprate= array('44100','88200');
+              <?$arr_sprate= array('44100','88200','176400');
               print_optgroup("SPRATE",$arr_sprate,$ini_array["SPRATE"]);?>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <a title="<? print ${"helptext_sp_interpol_"."$lang"} ?>"class="tooltip">
+              <span title=""><label for="sp_interpol"> <? print ${"sp_interpol_"."$lang"} ; ?> </label></span></a>
+            </td>
+            <td>
+              <?$arr_spinterpol= array('basic','soxr');
+              print_optgroup("SP_INTERPOL",$arr_spinterpol,$ini_array["SP_INTERPOL"]);?>
             </td>
           </tr>
           </div> <?

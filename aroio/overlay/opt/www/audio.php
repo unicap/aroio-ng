@@ -66,7 +66,7 @@
             <span title=""><label for="Soundcard"> <? print ${"soundcard_"."$lang"} ; ?> </label></span></a>
           </td>
           <td>
-            <?$arr_soundcard= array('Internal HDMI audio','Internal audio jack','AroioDAC','AroioDAC-SRC','JustBoom DAC','HiFiBerry DAC','HiFiBerry DAC+','HiFiBerry DAC+ ADC','HiFiBerry Digi','IQAudIO DAC','Allo Piano DAC','Allo Piano 2.1 DAC','Allo Boss DAC','Allo DigiOne','Dr. DAC prime','Focusrite Scarlett','M-Audio Fast Track Pro','RME Fireface UCX','USB Class Compliant');
+            <?$arr_soundcard= array('Internal HDMI audio','Internal audio jack','AroioDAC','AroioDAC-SRC','JustBoom DAC','HiFiBerry DAC','HiFiBerry DAC+','HiFiBerry DAC+ ADC','HiFiBerry Digi','IQAudIO DAC','Allo Piano DAC','Allo Piano 2.1 DAC','Allo Boss DAC','Allo DigiOne','Dr. DAC prime','Focusrite Scarlett','M-Audio Fast Track Pro','RME Fireface UCX','USB Class Compliant','I-Sabre Q2M');
               print_optgroup("SOUNDCARD",$arr_soundcard,$ini_array["SOUNDCARD"]); ?>
           </td>
         </tr>
@@ -111,7 +111,8 @@
                 case "Allo Piano 2.1 DAC":
                 case "Allo Boss DAC":
                 case "Allo DigiOne":
-                  $arr_rate= array('44100','48000','96000','192000');
+                case "I-Sabre Q2M":
+                  $arr_rate= array('44100','48000','96000','176400','192000');
                   break;
               }
               print_optgroup("RATE",$arr_rate,$ini_array["RATE"]); ?>

@@ -5,7 +5,7 @@
 
 //print_r($_POST);
 
-  if($_GET["lang"] === "en" || $_POST[lang]=='en')
+  if($_GET["lang"] === "en" || $_POST['lang']=='en')
   {
       $lang='en';
       $GLOBALS["lang"]='en';

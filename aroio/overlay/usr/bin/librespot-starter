@@ -1,0 +1,16 @@
+#!/bin/sh
+
+. /boot/userconfig.txt
+
+LIBRESPOT_BITRATE='320'
+LIBRESPOT_USERNAME=''
+LIBRESPOT_PASSWORD=''
+LIBRESPOT_NORMALISATION='' #--volume-normalisation
+
+
+
+/bin/librespot \
+		-b "$LIBRESPOT_BITRATE" \
+		-n "$HOSTNAME"	\
+		--backend alsa \
+		--device "$AUDIO_OUTPUT"

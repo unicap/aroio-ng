@@ -17,6 +17,7 @@ function Start()
 	sed -i "/defaults.pcm.rate_converter/c\defaults.pcm.rate_converter \"$RESAMPLING\"" /etc/asound.conf
 	sed -i "/output_rate/c\output_rate = "$SPRATE""  /etc/shairport-sync.conf
 	sed -i "/buffer_size/c\buffer_size = "$SP_OUTBUFFER""  /etc/shairport-sync.conf
+	sed -i "/interpolation \=/c\interpolation = \""$SP_INTERPOL"\";"  /etc/shairport-sync.conf
 #	sed -i "/period_size/c\period_size = "$SP_PERIOD""  /etc/shairport-sync.conf
 
 	case "$AUDIO_OUTPUT" in
@@ -24,6 +25,10 @@ function Start()
 			case "$RAW_PLAYER" in
 				squeezelite)
 					systemctl "$ACTION" squeezelite.service
+				;;
+
+				librespot)
+					systemctl "$ACTION" librespot.service
 				;;
 
 				spotifyd)
@@ -50,6 +55,10 @@ function Start()
 					systemctl "$ACTION" squeezelite.service
 				;;
 
+				librespot)
+					systemctl "$ACTION" librespot.service
+				;;
+
 				spotifyd)
 					systemctl "$ACTION" spotifyd.service
 				;;
@@ -71,6 +80,7 @@ function Start()
 		vol-plug-dmix)
 			[ "$DMIX_SQUEEZELITE"   = "ON" ] && systemctl "$ACTION" squeezelite.service
 			[ "$DMIX_SPOTIFYD"   = "ON" ] && systemctl "$ACTION" spotifyd.service
+			[ "$DMIX_LIBRESPOT"   = "ON" ] && systemctl "$ACTION" librespot.service
 			[ "$DMIX_GMEDIARENDER"  = "ON" ] && systemctl "$ACTION" gmediarender.service
 			[ "$DMIX_SHAIRPORTSYNC" = "ON" ] && systemctl "$ACTION" shairport-sync.service
 			[[ "$DMIX_BLUEALSAAPLAY" = "ON" && -e /sys/class/bluetooth/hci0 ]] && systemctl "$ACTION" bluealsa-aplay.service
@@ -79,6 +89,7 @@ function Start()
 		vol-plug-dmix-ms)
 			[ "$DMIXMS_SQUEEZELITE"   = "ON" ] && systemctl "$ACTION" squeezelite.service
 			[ "$DMIXMS_SPOTIFYD"   = "ON" ] && systemctl "$ACTION" spotifyd.service
+			[ "$DMIXMS_LIBRESPOT"   = "ON" ] && systemctl "$ACTION" librespot.service
 			[ "$DMIXMS_GMEDIARENDER"  = "ON" ] && systemctl "$ACTION" gmediarender.service
 			[ "$DMIXMS_SHAIRPORTSYNC" = "ON" ] && systemctl "$ACTION" shairport-sync.service
 			[[ "$DMIXMS_BLUEALSAAPLAY" = "ON" && -e /sys/class/bluetooth/hci0 ]] && systemctl "$ACTION" bluealsa-aplay.service
@@ -91,6 +102,7 @@ function Start()
 			[[ "$JACK_NETJACK"      = "ON"  && "$ACTION" != "stop" ]] && echo "netmanager start" && jack_load netmanager && connect_netjackports
 			[ "$JACK_SQUEEZELITE"   = "ON" ] && systemctl "$ACTION" squeezelite.service
 			[ "$JACK_SPOTIFYD"   = "ON" ] && systemctl "$ACTION" spotifyd.service
+			[ "$JACK_LIBRESPOT"   = "ON" ] && systemctl "$ACTION" librespot.service
 			[ "$JACK_GMEDIARENDER"  = "ON" ] && systemctl "$ACTION" gmediarender.service
 			[ "$JACK_SHAIRPORTSYNC" = "ON" ] && systemctl "$ACTION" shairport-sync.service
 			[[ "$JACK_BLUEALSAAPLAY" = "ON" && -e /sys/class/bluetooth/hci0 ]] && systemctl "$ACTION" bluealsa-aplay.service
@@ -103,6 +115,7 @@ function Start()
 			[[ "$JACKMS_NETJACK"      = "ON"  && "$ACTION" != "stop" ]] &&  jack_load netmanager && connect_netjackports
 			[ "$JACKMS_SQUEEZELITE"   = "ON" ] && systemctl "$ACTION" squeezelite.service
 			[ "$JACKMS_SPOTIFYD"   = "ON" ] && systemctl "$ACTION" spotifyd.service
+			[ "$JACKMS_LIBRESPOT"   = "ON" ] && systemctl "$ACTION" librespot.service
 			[ "$JACKMS_GMEDIARENDER"  = "ON" ] && systemctl "$ACTION" gmediarender.service
 			[ "$JACKMS_SHAIRPORTSYNC" = "ON" ] && systemctl "$ACTION" shairport-sync.service
 			[[ "$JACKMS_BLUEALSAAPLAY" = "ON" && -e /sys/class/bluetooth/hci0 ]] && systemctl "$ACTION" bluealsa-aplay.service
@@ -117,6 +130,7 @@ function Start()
 			[[ "$JACKBF_NETJACK"      = "ON"  && "$ACTION" != "stop" ]] && jack_load netmanager && connect_netjackports
 			[ "$JACKBF_SQUEEZELITE"   = "ON" ] && systemctl "$ACTION" squeezelite.service
 			[ "$JACKBF_SPOTIFYD"   = "ON" ] && systemctl "$ACTION" spotifyd.service
+			[ "$JACKBF_LIBRESPOT"   = "ON" ] && systemctl "$ACTION" librespot.service
 			[ "$JACKBF_GMEDIARENDER"  = "ON" ] && systemctl "$ACTION" gmediarender.service
 			[ "$JACKBF_SHAIRPORTSYNC" = "ON" ] && systemctl "$ACTION" shairport-sync.service
 			[[ "$JACKBF_BLUEALSAAPLAY" = "ON" && -e /sys/class/bluetooth/hci0 ]] && systemctl "$ACTION" bluealsa-aplay.service
@@ -131,6 +145,7 @@ function Start()
 			[[ "$JACKBFMS_NETJACK"      = "ON"  && "$ACTION" != "stop" ]] && jack_load netmanager && connect_netjackports
 			[ "$JACKBFMS_SQUEEZELITE"   = "ON" ] && systemctl "$ACTION" squeezelite.service
 			[ "$JACKBFMS_SPOTIFYD"   = "ON" ] && systemctl "$ACTION" spotifyd.service
+			[ "$JACKBFMS_LIBRESPOT"   = "ON" ] && systemctl "$ACTION" librespot.service
 			[ "$JACKBFMS_GMEDIARENDER"  = "ON" ] && systemctl "$ACTION" gmediarender.service
 			[ "$JACKBFMS_SHAIRPORTSYNC" = "ON" ] && systemctl "$ACTION" shairport-sync.service
 			[[ "$JACKBF_BLUEALSAAPLAY" = "ON" && -e /sys/class/bluetooth/hci0 ]] && systemctl "$ACTION" bluealsa-aplay.service
@@ -142,7 +157,7 @@ function Start()
 function StopStatus()
 {
 	[ "$1" = "stop" ] && volumecontrol -120 && sleep 0.5 && killall jack_persistent_client
-	for SERVICE in squeezelite spotifyd gmediarender shairport-sync bluealsa-aplay brutefir jackd
+	for SERVICE in squeezelite spotifyd librespot gmediarender shairport-sync bluealsa-aplay brutefir jackd
 	do
 		systemctl "$1" "$SERVICE".service
 	done
@@ -150,7 +165,7 @@ function StopStatus()
 
 function Brutefir()
 {
-	for SERVICE in squeezelite spotifyd gmediarender shairport-sync bluealsa-aplay
+	for SERVICE in squeezelite spotifyd librespot gmediarender shairport-sync bluealsa-aplay
 	do
 		systemctl stop "$SERVICE".service
 	done
@@ -162,7 +177,7 @@ function Brutefir()
 
 function Jack()
 {
-	for SERVICE in squeezelite spotifyd gmediarender shairport-sync bluealsa-aplay
+	for SERVICE in squeezelite spotifyd librespot gmediarender shairport-sync bluealsa-aplay
 	do
 		systemctl stop "$SERVICE".service
 	done

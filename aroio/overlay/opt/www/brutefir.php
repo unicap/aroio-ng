@@ -1,9 +1,9 @@
 <?php
 		include('strings.php');
-        include('functions.inc.php');
-        include('style.css');
+    include('functions.inc.php');
+    include('style.css');
 
-        if($_GET["lang"] === "en" || $_POST["lang"]=="en")
+    if($_GET["lang"] === "en" || $_POST["lang"]=="en")
 		{
 			$lang='en';
 			$GLOBALS["lang"]='en';
@@ -16,11 +16,11 @@
 
         if(isset($_POST["set"]))
 		{
-			$savedbank=$_POST[savedbank];
+			$savedbank=$_POST['savedbank'];
 			validateAndSave(10,$_POST);
 
             $shell_exec_ret=shell_exec('cardmount rw');
-            wrtToUserconfig('DEF_COEFF',$_POST[savedbank]);
+            wrtToUserconfig('DEF_COEFF',$_POST['savedbank']);
             $shell_exec_ret=shell_exec('cardmount ro');
 
 /*            if ($ini_array[MSCODING]=='ON') {
@@ -28,25 +28,25 @@
 			}
 */
 //			else {
-				volControl(0,($_POST[vol.$savedbank])*-1);
+				volControl(0,($_POST['vol'.$savedbank])*-1);
 //			}
 		}
 
 		if(isset($_POST["save"]))
 		{
-			$savedbank=$_POST[savedbank];
+			$savedbank=$_POST['savedbank'];
 
-            validateAndSave(10,$_POST);
+            validateAndSave('10',$_POST);
 
             $shell_exec_ret=shell_exec('cardmount rw');
-			wrtToUserconfig('DEF_COEFF',$_POST[savedbank]);
+			wrtToUserconfig('DEF_COEFF',$_POST['savedbank']);
             $shell_exec_ret=shell_exec('cardmount ro');
             shell_exec('controlaudio restart &> /dev/null ' );
-            if ($ini_array[MSCODING]=='ON') {
-				volControl(1,$_POST[vol.$savedbank]);
+            if ($ini_array['MSCODING']=='ON') {
+				volControl(1,$_POST['vol'.$savedbank]);
 			}
 			else {
-				volControl(0,$_POST[vol.$savedbank]);
+				volControl(0,$_POST['vol'.$savedbank]);
 			}
 		}
 
@@ -55,7 +55,7 @@
 
     // Switch filter bank
 
-    $bank_test= $_POST["bank"];
+    $bank_test= $_POST['bank'];
     $activeFilter=getFilter();
 
     if(isset($_POST['bank']))
@@ -66,7 +66,7 @@
         $shell_exec_ret=shell_exec('cardmount rw');
         wrtToUserconfig('DEF_COEFF',$activeFilter);
         $shell_exec_ret=shell_exec('cardmount ro');
-        switchFilter($_POST[bank]);
+        switchFilter($_POST['bank']);
 
         // Check if MSCODING is on
 /*        if ($ini_array[MSCODING]=='ON') {
@@ -81,11 +81,11 @@
     {
         $activeFilter = getFilter();
         if(isset($_POST["save"])){
-            if($ini_array[MSCODING]=='ON') {
-                volControl(1,$ini_array[COEFF_ATT.$activeFilter]);
+            if($ini_array['MSCODING']=='ON') {
+                volControl(1,$ini_array['COEFF_ATT'.$activeFilter]);
             }
             else {
-                volControl(0,$ini_array[COEFF_ATT.$activeFilter]);
+                volControl(0,$ini_array['COEFF_ATT'.$activeFilter]);
             }
         }
     }
