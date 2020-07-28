@@ -13,24 +13,40 @@ cp -r "$SDDIR"/* "$RAMDIR"
 
 # Mitgelieferte Filter bei Bedarf auspacken
 [ "$LOAD_PREFILTER" = "ON" ] && /bin/zcat /etc/brutefir/filter.tgz | tar -xvf - -C /run
-cardmount rw
-rsync --exclude "*.tmp" -vrLt --delete "$RAMDIR"/ "$SDDIR"
-cardmount ro
 
+#echo "first rsync run"
+#cardmount rw
+#rsync --exclude "*.tmp" -vrLt --delete "$RAMDIR"/ "$SDDIR"
+#cardmount ro
+#echo "first rsync run done"
+
+#echo "chown start"
 chown -Rh sftparoio:users /run/filter
+#echo "chown done"
 
 # Fälle:
 # 1: Neues File im RAM -> nach SDKarte kopieren.
 # 2: Gelöschtes File im RAM -> von SDKarte löschen
 
+
+cardmount_ro()
+{
+	while pgrep mount ; do sleep 0.2 ; done
+	cardmount ro
+}
+
+syncdirs()
+{
+		cardmount rw
+	    rsync --inplace --no-perms --no-group --no-owner --exclude "*.tmp" -Lqrt --delete "$RAMDIR"/ "$SDDIR"
+		#echo "Syncing done, running it again, just to be sure..."
+		rsync --inplace --no-perms --no-group --no-owner --exclude "*.tmp" -Lqrt --delete "$RAMDIR"/ "$SDDIR"
+		cardmount_ro
+}
+
 while (true)
 do
-    cardmount rw
-    rsync --exclude "*.tmp" -vLrt --delete "$RAMDIR"/ "$SDDIR" #needed, in case a slow connection still causes changes while we are synchronizing
-    cardmount ro
-    inotifywait -r -e modify,attrib,close_write,move,create,delete --exclude '\.tmp' "$RAMDIR"
-    echo "Files changed in "$RAMDIR", will synchronize changes to "$SDDIR"..."
-    cardmount rw
-    rsync --exclude "*.tmp" -vLrt --delete "$RAMDIR"/ "$SDDIR"
-    cardmount ro
+    inotifywait -q -r -e modify,attrib,close_write,move,create,delete --exclude '\.tmp' "$RAMDIR"
+	sleep 5
+	syncdirs &
 done
