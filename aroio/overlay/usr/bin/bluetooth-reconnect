@@ -1,0 +1,36 @@
+#!/bin/sh
+
+# First Find our controller...
+CONTROLLER=$(echo list | bluetoothctl 2&>/dev/null | grep -E '^Controller'.'([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2}' | awk '{print $2}')
+echo "Starting bluetooth auto-reconnect daemon using controller $CONTROLLER"
+
+# Function to compare nearby devices to the database of known devices and connect them
+compare()
+{
+	for MACONLINE in $(echo devices | bluetoothctl 2>/dev/null | grep -E '^Device'.'([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2}' | awk '{print $2}')
+	do
+		#echo "BT-device with MAC-address $1 online, checking if it is known..."
+		if [ "$MACONLINE" = "$1" ]
+		then
+				#echo "Yes, it is. Checking, if it is already connected..."
+				CONDEV=$(hcitool con | grep -oE '([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2}')
+				if [ "$CONDEV" != "$1" ]
+				then	echo "Scan found known device $1, connecting it..."
+						echo connect $1 | bluetoothctl &>/dev/null
+						CONDEV=$(hcitool con | grep -oE '([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2}')
+						[ "$CONDEV" = "$1" ] && echo "Connection successfull" || echo "Connection attempt failed!"
+				#else	echo "Yes, it is already connected, leaving it at that."
+				fi
+		fi
+	done
+}
+
+while true
+do
+	for MACKNOWN in $(ls /var/lib/bluetooth/$CONTROLLER | grep -oE '([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2}')
+	do
+		#echo "Found stored MAC-Adress $MACKNOWN. Checking if it is online..."
+		compare $MACKNOWN
+	done
+sleep 5
+done
