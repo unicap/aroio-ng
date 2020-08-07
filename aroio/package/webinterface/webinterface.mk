@@ -9,7 +9,7 @@ WEBINTERFACE_GIT_SUBMODULES = YES
 WEBINTERFACE_SITE_METHOD = git
 WEBINTERFACE_SITE = git://github.com/aroio/webinterface
 WEBINTERFACE_LICENSE = MIT
-WEBINTERFACE_DEPENDENCIES = python3 python-uvicorn python-fastapi python-pyjwt
+WEBINTERFACE_DEPENDENCIES = python3 python-uvicorn python-fastapi
 
 define WEBINTERFACE_BUILD_CMDS
 	$(TARGET_MAKE_ENV) $(MAKE) $(TARGET_CONFIGURE_OPTS) \
