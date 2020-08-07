@@ -17,6 +17,7 @@ define WEBINTERFACE_BUILD_CMDS
 endef
 
 define WEBINTERFACE_INSTALL_TARGET_CMDS
+	rm -rf $(TARGET_DIR)/opt/www
 	mkdir -p $(TARGET_DIR)/opt/webinterface
 	cp -r $(@D)/frontend/dist/aroio-wi/* $(TARGET_DIR)/opt/webinterface
 	cp $(@D)/webinterface.service $(TARGET_DIR)/lib/systemd/system/
