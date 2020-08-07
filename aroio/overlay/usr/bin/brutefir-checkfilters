@@ -9,44 +9,37 @@ RAMDIR='/run/filter'
 mkdir -p "$SDDIR"
 mkdir -p "$RAMDIR"
 [ -e /boot/brutefir ] && mv /boot/brutefir /boot/filter
-cp -r "$SDDIR"/* "$RAMDIR"
+cp -vr "$SDDIR"/* "$RAMDIR"
 
 # Mitgelieferte Filter bei Bedarf auspacken
-[ "$LOAD_PREFILTER" = "ON" ] && /bin/zcat /etc/brutefir/filter.tgz | tar -xvf - -C /run
+[ "$LOAD_PREFILTER" = "ON" ] && echo "Unpacking Stock filters..." ; /bin/zcat /etc/brutefir/filter.tgz | tar -xvf - -C /run
 
-#echo "first rsync run"
-#cardmount rw
-#rsync --exclude "*.tmp" -vrLt --delete "$RAMDIR"/ "$SDDIR"
-#cardmount ro
-#echo "first rsync run done"
-
-#echo "chown start"
 chown -Rh sftparoio:users /run/filter
-#echo "chown done"
-
-# Fälle:
-# 1: Neues File im RAM -> nach SDKarte kopieren.
-# 2: Gelöschtes File im RAM -> von SDKarte löschen
-
 
 cardmount_ro()
 {
-	while pgrep mount ; do sleep 0.2 ; done
+	echo "starting inotifywait with t-3 secs..."
+	inotifywait -t 3 -q -r -e create,delete "$SDDIR" && echo "File being written, breaking..." && break
+	echo "Checking if mount is running..."
+	while pgrep mount ; do echo "mount busy" && sleep 0.1 ; done
+	echo "All seems good, mounting ro!"
 	cardmount ro
 }
 
-syncdirs()
-{
+inotifywait -m -q -r -e close_write,delete,create --format '%e;%f' --exclude '\.tmp' "$RAMDIR" | \
+	while read event; do
+		echo "Event: $event"
+		CMD=$(echo $event | awk -F ';' '{print $1}')
+		FILE=$(echo $event | awk -F ';' '{print $2}')
+		echo "File: "$FILE""
 		cardmount rw
-	    rsync --inplace --no-perms --no-group --no-owner --exclude "*.tmp" -Lqrt --delete "$RAMDIR"/ "$SDDIR"
-		#echo "Syncing done, running it again, just to be sure..."
-		rsync --inplace --no-perms --no-group --no-owner --exclude "*.tmp" -Lqrt --delete "$RAMDIR"/ "$SDDIR"
-		cardmount_ro
-}
-
-while (true)
-do
-    inotifywait -q -r -e modify,attrib,close_write,move,create,delete --exclude '\.tmp' "$RAMDIR"
-	sleep 5
-	syncdirs &
-done
+		case $CMD in
+			"CREATE" | "CLOSE_WRITE,CLOSE")
+				cp -v "$RAMDIR"/"$FILE" "$SDDIR"/
+			;;
+			"DELETE")
+				rm -v "$SDDIR"/"$FILE"
+			;;
+		esac
+		cardmount_ro &
+	done
