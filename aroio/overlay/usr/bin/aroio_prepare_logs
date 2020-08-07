@@ -12,13 +12,16 @@ sed -i "/USERPASSWD/c\USERPASSWD=\"\"" /tmp/aroio_logs/config/userconfig.txt
 
 # copy config.txt and brutefir.conf to logs
 cp /boot/config.txt /tmp/aroio_logs/config/
-cp /etc/brutefir/brutefir.conf /tmp/aroio_logs/config/
+cp /etc/brutefir/brutefir.conf /tmp/aroio_logs/logs/
 
 # Create list of convolution filters
 echo "Filters on SDCard:" > /tmp/aroio_logs/config/filters.txt
 ls /boot/filter/ >> /tmp/aroio_logs/config/filters.txt
 echo -e "\nFilters in tmp:" >> /tmp/aroio_logs/config/filters.txt
 ls /run/filter/ >> /tmp/aroio_logs/config/filters.txt
+
+# Get running brutefir filters and attenuation
+echo lf | nc -q0 localhost 3000 > /tmp/aroio_logs/logs/brutefir_lf.txt
 
 # Collect version information
 echo -e "Aroio version: $(head -n1 /boot/version)\nRaspberry $(aroio_piversion)" > /tmp/aroio_logs/config/versions.txt

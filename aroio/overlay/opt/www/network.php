@@ -79,7 +79,7 @@
         else
         {
           $test_wlan=test_wlan();
-          if ($test_wlan == "0")
+          if ($test_wlan == "enabled")
             { ?>
               <tr>
                 <td>
@@ -104,8 +104,11 @@
                         if($ssid == $ini_array["WLANSSID"]){
                             echo'<option selected>'.$ssid.'</option>';
                         }
-                        else echo'<option>'.$ssid.'</option>';
+                        else{
+                              echo'<option>'.$ssid.'</option>';
+                            }
                     }
+                    echo '<option>WIFI-OFF!</option>';
                     echo '<option>AroioAP</option>';
                 }
                 //elseif (isset($_POST['WLANSSID'])) echo'<option selected>'.$_POST['WLANSSID'].'</option>';

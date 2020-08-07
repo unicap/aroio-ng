@@ -140,8 +140,9 @@ function get_ipaddr_wlan()
 
 function test_wlan()
 {
-	exec("dmesg | grep -qe WLAN -e Realtek" , $output , $return_val);
-	return $return_val;
+#	exec("dmesg | grep -qe WLAN -e Realtek" , $output , $return_val);
+#	return $return_val;
+	if (file_exists("/sys/class/net/wlan0")) return "enabled";
 }
 
 function test_bt()
