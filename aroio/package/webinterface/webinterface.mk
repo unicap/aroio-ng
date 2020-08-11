@@ -4,7 +4,6 @@
 #
 ################################################################################
 
-WEBINTERFACE_VERSION = b62ae0d5439e8dd72bffe34817cab298c1e8bcb4
 WEBINTERFACE_GIT_SUBMODULES = YES
 WEBINTERFACE_SITE_METHOD = git
 WEBINTERFACE_SITE = git://github.com/aroio/webinterface
