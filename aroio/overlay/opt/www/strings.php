@@ -105,15 +105,26 @@
     $helptext_userpwd_de='Eingabefeld f&uuml;r das Passwort der Weboberfl&auml;che. Der Benutzername ist stets aroio.';
 
 	 //Hardware-Plattform
-	$hardware_form_en='Hardware settings';
+	  $hardware_form_en='Hardware settings';
     $hardware_form_de='Einstellungen Hardware';
 
-	$platform_form_en='Hardware platform settings';
-	$platform_form_de='Auswahl der Hardware-Plattform';
+    $platform_form_en='Hardware platform';
+    $platform_form_de='Hardware-Plattform';
 
-	$helptext_platform_en='Choose your hardware platform here. Reboot required. Wrong settings may lead to malfunction.';
+    $helptext_platform_en='Choose your hardware platform here. Reboot required. Wrong settings may lead to malfunction.';
     $helptext_platform_de='Auswahl der Hardware-Plattform. Erfordert Neustart. Eine falsche Auswahl kann zu Fehlfunktionen f&uuml;hren.';
 
+    $helptext_onboard_wifi_en='Enable or disable the onboard WIFI';
+    $helptext_onboard_wifi_de='Aktivierung des eingebauten W-Lan';
+
+    $onboard_wifi_form_en='Onboard WIFI';
+    $onboard_wifi_form_de='Eingebautes W-Lan';
+
+    $helptext_onboard_bluetooth_en='Enable or disable the onboard Bluetooth module';
+    $helptext_onboard_bluetooth_de='Aktivierung des eingebauten Bluetooth Moduls';
+
+    $onboard_bluetooth_form_en='Onboard Bluetooth';
+    $onboard_bluetooth_form_de='Eingebautes Bluetooth';
 
     //LMS
         //

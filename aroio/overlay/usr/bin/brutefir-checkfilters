@@ -9,28 +9,37 @@ RAMDIR='/run/filter'
 mkdir -p "$SDDIR"
 mkdir -p "$RAMDIR"
 [ -e /boot/brutefir ] && mv /boot/brutefir /boot/filter
-cp -r "$SDDIR"/* "$RAMDIR"
+cp -vr "$SDDIR"/* "$RAMDIR"
 
 # Mitgelieferte Filter bei Bedarf auspacken
-[ "$LOAD_PREFILTER" = "ON" ] && /bin/zcat /etc/brutefir/filter.tgz | tar -xvf - -C /run
-cardmount rw
-rsync --exclude "*.tmp" -vrLt --delete "$RAMDIR"/ "$SDDIR"
-cardmount ro
+[ "$LOAD_PREFILTER" = "ON" ] && echo "Unpacking Stock filters..." ; /bin/zcat /etc/brutefir/filter.tgz | tar -xvf - -C /run
 
 chown -Rh sftparoio:users /run/filter
 
-# Fälle:
-# 1: Neues File im RAM -> nach SDKarte kopieren.
-# 2: Gelöschtes File im RAM -> von SDKarte löschen
+cardmount_ro()
+{
+	echo "starting inotifywait with t-3 secs..."
+	inotifywait -t 3 -q -r -e create,delete "$SDDIR" && echo "File being written, breaking..." && break
+	echo "Checking if mount is running..."
+	while pgrep mount ; do echo "mount busy" && sleep 0.1 ; done
+	echo "All seems good, mounting ro!"
+	cardmount ro
+}
 
-while (true)
-do
-    cardmount rw
-    rsync --exclude "*.tmp" -vLrt --delete "$RAMDIR"/ "$SDDIR" #needed, in case a slow connection still causes changes while we are synchronizing
-    cardmount ro
-    inotifywait -r -e modify,attrib,close_write,move,create,delete --exclude '\.tmp' "$RAMDIR"
-    echo "Files changed in "$RAMDIR", will synchronize changes to "$SDDIR"..."
-    cardmount rw
-    rsync --exclude "*.tmp" -vLrt --delete "$RAMDIR"/ "$SDDIR"
-    cardmount ro
-done
+inotifywait -m -q -r -e close_write,delete,create --format '%e;%f' --exclude '\.tmp' "$RAMDIR" | \
+	while read event; do
+		echo "Event: $event"
+		CMD=$(echo $event | awk -F ';' '{print $1}')
+		FILE=$(echo $event | awk -F ';' '{print $2}')
+		echo "File: "$FILE""
+		cardmount rw
+		case $CMD in
+			"CREATE" | "CLOSE_WRITE,CLOSE")
+				cp -v "$RAMDIR"/"$FILE" "$SDDIR"/
+			;;
+			"DELETE")
+				rm -v "$SDDIR"/"$FILE"
+			;;
+		esac
+		cardmount_ro &
+	done

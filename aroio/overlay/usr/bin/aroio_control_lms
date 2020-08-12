@@ -36,4 +36,4 @@ case $1 in
 		;;
 esac
 
-echo $MAC_ADDRESS" "$COMMAND | nc $LMS_ADDRESS $LMS_PORT
+echo "$MAC_ADDRESS $COMMAND" | nc -q0 $LMS_ADDRESS $LMS_PORT

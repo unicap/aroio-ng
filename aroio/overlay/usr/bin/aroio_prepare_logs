@@ -10,14 +10,18 @@ sed -i "/WLANPWD/c\WLANPWD=\"\"" /tmp/aroio_logs/config/userconfig.txt
 sed -i "/SQUEEZEPWD/c\SQUEEZEPWD=\"\"" /tmp/aroio_logs/config/userconfig.txt
 sed -i "/USERPASSWD/c\USERPASSWD=\"\"" /tmp/aroio_logs/config/userconfig.txt
 
-# copy config.txt to logs
+# copy config.txt and brutefir.conf to logs
 cp /boot/config.txt /tmp/aroio_logs/config/
+cp /etc/brutefir/brutefir.conf /tmp/aroio_logs/logs/
 
 # Create list of convolution filters
 echo "Filters on SDCard:" > /tmp/aroio_logs/config/filters.txt
 ls /boot/filter/ >> /tmp/aroio_logs/config/filters.txt
 echo -e "\nFilters in tmp:" >> /tmp/aroio_logs/config/filters.txt
 ls /run/filter/ >> /tmp/aroio_logs/config/filters.txt
+
+# Get running brutefir filters and attenuation
+echo lf | nc -q0 localhost 3000 > /tmp/aroio_logs/logs/brutefir_lf.txt
 
 # Collect version information
 echo -e "Aroio version: $(head -n1 /boot/version)\nRaspberry $(aroio_piversion)" > /tmp/aroio_logs/config/versions.txt
@@ -40,7 +44,7 @@ echo -e "aplay --dump-hw-params:" >> /tmp/aroio_logs/config/audio_hw.txt
 aplay --duration=1 -Dhw:0 --dump-hw-params /dev/zero >> /tmp/aroio_logs/config/audio_hw.txt 2>&1
 
 # Collect mostly needed logs
-for SERVICE in brutefir squeezelite jackd bluealsa-aplay gmediarender jackminimix shairport-sync
+for SERVICE in brutefir spotifyd librespot squeezelite jackd bluealsa-aplay gmediarender jackminimix shairport-sync
 do
 	journalctl -u $SERVICE > /tmp/aroio_logs/logs/"$SERVICE".log.txt
 done
