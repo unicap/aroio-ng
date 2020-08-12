@@ -1,0 +1,5 @@
+# md5, sha256 from https://pypi.org/pypi/dataclasses/json
+md5	969e12cac2b69ddc280758f76b481372  dataclasses-0.7.tar.gz
+sha256	494a6dcae3b8bcf80848eea2ef64c0cc5cd307ffc263e17cdf42f3e5420808e6  dataclasses-0.7.tar.gz
+# Locally computed sha256 checksums
+sha256	cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30  LICENSE.txt
