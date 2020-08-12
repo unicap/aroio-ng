@@ -14,6 +14,28 @@
             print_optgroup("PLATFORM",$arr_platform,$ini_array["PLATFORM"]); ?>
           </td>
         </tr>
+
+        <tr>
+          <td>
+            <a title="<? print ${"helptext_onboard_wifi_"."$lang"} ?>"class="tooltip">
+            <span title=""><label for="onboard_wifi"> <? print ${"onboard_wifi_form_"."$lang"} ; ?> </label></span></a>
+          </td>
+          <td>
+            <? $arr_onboard_wifi=array('ON','OFF');
+            print_optgroup("ONBOARD_WIFI",$arr_onboard_wifi,$ini_array["ONBOARD_WIFI"]); ?>
+          </td>
+        </tr>
+       <tr>
+          <td>
+            <a title="<? print ${"helptext_onboard_bluetooth_"."$lang"} ?>"class="tooltip">
+            <span title=""><label for="onboard_bluetooth"> <? print ${"onboard_bluetooth_form_"."$lang"} ; ?> </label></span></a>
+          </td>
+          <td>
+            <? $arr_onboard_bluetooth=array('ON','OFF');
+            print_optgroup("ONBOARD_BLUETOOTH",$arr_onboard_bluetooth,$ini_array["ONBOARD_BLUETOOTH"]); ?>
+          </td>
+        </tr>
+
       </table>
     </fieldset>
   </div>

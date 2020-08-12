@@ -74,6 +74,7 @@ COEFF="COEFF"
 DEF_COEFF_ATT='$COEFF$ATT$DEF_COEFF'
 eval DEF_COEFF_ATT=$DEF_COEFF_ATT
 DEF_COEFF_ATT=$(eval echo \$$DEF_COEFF_ATT)
+#[ $AUDIO_OUTPUT = "jack-bfms" ] && DEF_COEFF_ATT=$((DEF_COEFF_ATT+6))
 
 PHASE="_PHASE"
 COEFF="COEFF"
@@ -109,10 +110,17 @@ DEF_SCOEFF_NAME=$(eval echo \$$DEF_SCOEFF_NAME)
 [ "$DEF_COEFF_PHASE" = "" ] && DEF_COEFF_PHASE="1"
 [ "$DEF_COEFF_ATT" = "" ] && DEF_COEFF_ATT="0"
 
+echo "def_coeff_att: $DEF_COEFF_ATT"
+
 case $CHANNELS in
 	2)
+	# Search and replace in stereo config
 	sed -i -- s/"to_outputs:\"left\"\/0\/1;"/"to_outputs:\"left\"\/"$DEF_COEFF_ATT"\/"$DEF_COEFF_PHASE";"/g /etc/brutefir/brutefir.conf
 	sed -i -- s/"to_outputs:\"right\"\/0\/1;"/"to_outputs:\"right\"\/"$DEF_COEFF_ATT"\/"$DEF_COEFF_PHASE";"/g /etc/brutefir/brutefir.conf
+
+	# Search and replace in ms-config
+	sed -i -- s/"to_outputs:\"left\"\/0\/0.5,\"right\"\/0\/0.5;"/"to_outputs:\"left\"\/"$DEF_COEFF_ATT"\/0.5,\"right\"\/"$DEF_COEFF_ATT"\/0.5;"/g /etc/brutefir/brutefir.conf
+	sed -i -- s/"to_outputs:\"left\"\/0\/0.5,\"right\"\/0\/-0.5;"/"to_outputs:\"left\"\/"$DEF_COEFF_ATT"\/0.5,\"right\"\/"$DEF_COEFF_ATT"\/-0.5;"/g /etc/brutefir/brutefir.conf
 
 	sed -i -- s/"coeff:\"left0\";"/"coeff:\"left"$DEF_COEFF"\";"/g /etc/brutefir/brutefir.conf
 	sed -i -- s/"coeff:\"right0\";"/"coeff:\"right"$DEF_COEFF"\";"/g /etc/brutefir/brutefir.conf
@@ -133,4 +141,3 @@ esac
 
 echo "Successfully generated brutefir configuration file in /etc"
 exit 0
-

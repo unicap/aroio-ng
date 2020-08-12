@@ -1,6 +1,7 @@
 [Unit]
 Description=Brutefir filter caretaker
 After=local-fs.target brutefir-filters.service
+Before=audioplayers.service
 
 [Service]
 Type=simple
