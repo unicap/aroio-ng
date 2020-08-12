@@ -96,4 +96,12 @@ source "$BR2_EXTERNAL_aroio_PATH/package/brutefir/Config.in"
 source "$BR2_EXTERNAL_aroio_PATH/package/jack-connect-persistent/Config.in"
 source "$BR2_EXTERNAL_aroio_PATH/package/jack_minimix/Config.in"
 source "$BR2_EXTERNAL_aroio_PATH/package/rtl8812au/Config.in" 
-source "$BR2_EXTERNAL_aroio_PATH/package/aroio-ui/Config.in" 
+
+source "$BR2_EXTERNAL_aroio_PATH/package/python-dataclasses/Config.in"
+source "$BR2_EXTERNAL_aroio_PATH/package/python-fastapi/Config.in"
+source "$BR2_EXTERNAL_aroio_PATH/package/python-h11/Config.in"
+source "$BR2_EXTERNAL_aroio_PATH/package/python-httptools/Config.in"
+source "$BR2_EXTERNAL_aroio_PATH/package/python-starlette/Config.in"
+source "$BR2_EXTERNAL_aroio_PATH/package/python-uvicorn/Config.in"
+
+source "$BR2_EXTERNAL_aroio_PATH/package/webinterface/Config.in"
