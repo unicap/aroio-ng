@@ -4,7 +4,8 @@
 #
 ################################################################################
 
-RTL8812AU_VERSION = ac063a4
+RTL8812AU_VERSION = 772ad43
+#ac063a4
 #RTL8812AU_VERSION = 51ef8d50515d3b06a31a55598c238389ebaa9f15
 RTL8812AU_SITE = git://github.com/gordboy/rtl8812au.git
 #RTL8812AU_SITE = git://github.com/aircrack-ng/rtl8812au
