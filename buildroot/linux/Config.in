@@ -415,6 +415,14 @@ config BR2_LINUX_KERNEL_DTB_OVERLAY_SUPPORT
 	  Choose this option to support Device Tree overlays
 	  on the target system.
 
+config BR2_LINUX_KERNEL_DTS_OVERLAYS_SUPPORT
+	bool "Build Device Tree Overlays from kernel sources"
+	depends on BR2_LINUX_KERNEL_DTS_SUPPORT
+	help
+	  Build in-tree device tree overlays
+	  instead of using the ones from rpi-firmware.
+	  Currently supports Raspberry Pi kernels.
+
 endif
 
 config BR2_LINUX_KERNEL_INSTALL_TARGET
