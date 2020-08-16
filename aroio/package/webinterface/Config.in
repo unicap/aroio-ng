@@ -1,0 +1,4 @@
+config BR2_PACKAGE_WEBINTERFACE
+    bool "webinterface"
+    help
+        Aroio Webinterace - Python based API and Angular based Interface
