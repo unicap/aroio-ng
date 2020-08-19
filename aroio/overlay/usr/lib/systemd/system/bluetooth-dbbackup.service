@@ -1,7 +1,7 @@
 [Unit]
 Description=Bluetooth database backup
 After=sys-subsystem-bluetooth-devices-hci0.device
-ConditionPathIsDirectory=/sys/class/bluetooth/hci0
+#ConditionPathIsDirectory=/sys/class/bluetooth/
 Before=bluetooth.service
 
 [Service]
