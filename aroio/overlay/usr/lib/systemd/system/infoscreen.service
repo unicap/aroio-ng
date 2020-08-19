@@ -4,11 +4,11 @@ Description=system information on HDMI output
 After=multi-user.target
 
 [Service]
-Type=simple 
+Type=simple
 StandardInput=tty
 StandardOutput=tty
-TTYPath=/dev/tty0 
-ExecStart=/bin/sh -c /usr/bin/infoscreen            
+TTYPath=/dev/tty1 
+ExecStart=/bin/sh -c /usr/bin/infoscreen
 
 [Install]
 WantedBy=multi-user.target
