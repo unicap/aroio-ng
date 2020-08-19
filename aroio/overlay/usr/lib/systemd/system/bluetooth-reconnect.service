@@ -1,8 +1,7 @@
 [Unit]
 Description=Bluetooth reconnect service
 ConditionPathIsDirectory=/sys/class/bluetooth
-Requires=bluetooth.target
-After=bluetooth.service bluetooth-dbbackup.service bluetooth.target bluetooth-broadcastname.service checkuserconfig.service systemd-hostnamed.service
+After=bluetooth-simpleagent.service
 Before=bluealsa.service
 
 [Service]

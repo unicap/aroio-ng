@@ -2,13 +2,13 @@
 Description=Bluetooth simple authentication service
 ConditionPathIsDirectory=/sys/class/bluetooth
 Requires=bluetooth.target
-After=bluetooth.service bluetooth.target bluetooth-broadcastname.service checkuserconfig.service systemd-hostnamed.service
-Before=bluealsa.service
-BindsTo=sys-subsystem-bluetooth-devices-hci0.device
+After=bluetooth.service bluetooth-dbbackup.service
+Before=bluealsa.service bluetooth-reconnect.service
+BindsTo=bluetooth.service
 
 [Service]
-Type=simple
-ExecStartPre=/bin/sleep 3
+Type=exec
+#ExecStartPre=/bin/sleep 3
 ExecStartPre=/usr/bin/bluetooth-simpleagent-starter
 ExecStart=/usr/bin/bluetooth-simpleagent
 Restart=always
