@@ -14,22 +14,22 @@ ALSACONFIG="/etc/modprobe.d/alsa-base.conf"
 [ "$DISPLAY_ROTATE" = "ON" ] && DISPLAY_ROTATE="display_rotate=1" || DISPLAY_ROTATE="display_rotate=0"
 
 
-[ "$ONBOARD_WIFI" = "ON" ] && [ $(grep -c 'disable-wifi' /boot/config.txt ) -gt 0 ] \
-	&& cardmount rw && sed -i '/disable-wifi/d' "$CONFIG" && REBOOT=1
+[ "$ONBOARD_WIFI" = "ON" ] && [ $(grep -c 'pi3-disable-wifi' /boot/config.txt ) -gt 0 ] \
+	&& cardmount rw && sed -i '/pi3-disable-wifi/d' "$CONFIG" && REBOOT=1
 
-[ "$ONBOARD_WIFI" = "OFF" ] && [ $(grep -c 'disable-wifi' /boot/config.txt ) -eq 0 ] \
-	&& cardmount rw && echo 'dtoverlay=disable-wifi' >> "$CONFIG" && REBOOT=1
+[ "$ONBOARD_WIFI" = "OFF" ] && [ $(grep -c 'pi3-disable-wifi' /boot/config.txt ) -eq 0 ] \
+	&& cardmount rw && echo 'dtoverlay=pi3-disable-wifi' >> "$CONFIG" && REBOOT=1
 
-[ "$ONBOARD_WIFI" = "OFF" ] && WIFI="dtoverlay=disable-wifi" || WIFI=""
+[ "$ONBOARD_WIFI" = "OFF" ] && WIFI="dtoverlay=pi3-disable-wifi" || WIFI=""
 
 
-[ "$ONBOARD_BLUETOOTH" = "ON" ] && [ $(grep -c 'disable-bt' /boot/config.txt ) -gt 0 ] \
-	&& cardmount rw && sed -i '/disable-bt/d' "$CONFIG" && REBOOT=1
+[ "$ONBOARD_BLUETOOTH" = "ON" ] && [ $(grep -c 'pi3-disable-bt' /boot/config.txt ) -gt 0 ] \
+	&& cardmount rw && sed -i '/pi3-disable-bt/d' "$CONFIG" && REBOOT=1
 
-[ "$ONBOARD_BLUETOOTH" = "OFF" ] && [ $(grep -c 'disable-bt' /boot/config.txt ) -eq 0 ] \
-	&& cardmount rw && echo 'dtoverlay=disable-bt' >> "$CONFIG" && REBOOT=1
+[ "$ONBOARD_BLUETOOTH" = "OFF" ] && [ $(grep -c 'pi3-disable-bt' /boot/config.txt ) -eq 0 ] \
+	&& cardmount rw && echo 'dtoverlay=pi3-disable-bt' >> "$CONFIG" && REBOOT=1
 
-[ "$ONBOARD_BLUETOOTH" = "OFF" ] && BLUETOOTH="dtoverlay=disable-bt" || BLUETOOTH=""
+[ "$ONBOARD_BLUETOOTH" = "OFF" ] && BLUETOOTH="dtoverlay=pi3-disable-bt" || BLUETOOTH=""
 
 
 if grep -q 'dtoverlay=lirc-rpi' "$CONFIG"

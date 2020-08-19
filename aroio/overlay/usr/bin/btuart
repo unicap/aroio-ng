@@ -19,7 +19,8 @@ if [ "$uart0" = "$serial1" ] ; then
 	if [ "$uart0_pins" = "16" ] ; then
 		$HCIATTACH /dev/serial1 bcm43xx 3000000 flow - $BDADDR
 	else
-		$HCIATTACH /dev/serial1 bcm43xx 921600 noflow - $BDADDR
+		#$HCIATTACH /dev/serial1 bcm43xx 921600 noflow - $BDADDR
+        $HCIATTACH /dev/serial1 bcm43xx 460800 noflow - $BDADDR
 	fi
 else
 	$HCIATTACH /dev/serial1 bcm43xx 460800 noflow - $BDADDR

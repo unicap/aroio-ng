@@ -433,7 +433,7 @@ endif # BR2_LINUX_KERNEL_DTS_SUPPORT
 ifeq ($(BR2_LINUX_KERNEL_DTS_OVERLAYS_SUPPORT),y)
 define LINUX_INSTALL_DTB_OVERLAYS
 	mkdir -p $(1)
-	cp $(LINUX_ARCH_PATH)/boot/dts/overlays/*.dts $(1)
+	#cp $(LINUX_ARCH_PATH)/boot/dts/overlays/*.dts $(1)
 	cp $(LINUX_ARCH_PATH)/boot/dts/overlays/*.dtbo $(1)
 endef
 endif # BR2_LINUX_KERNEL_DTS_OVERLAYS
