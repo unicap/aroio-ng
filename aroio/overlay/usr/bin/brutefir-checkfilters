@@ -8,13 +8,13 @@ RAMDIR='/run/filter'
 
 mkdir -p "$SDDIR"
 mkdir -p "$RAMDIR"
-[ -e /boot/brutefir ] && mv /boot/brutefir /boot/filter
-cp -vr "$SDDIR"/* "$RAMDIR"
+#[ -e /boot/brutefir ] && mv /boot/brutefir /boot/filter
+#cp -vr "$SDDIR"/* "$RAMDIR"
 
 # Mitgelieferte Filter bei Bedarf auspacken
-[ "$LOAD_PREFILTER" = "ON" ] && echo "Unpacking Stock filters..." ; /bin/zcat /etc/brutefir/filter.tgz | tar -xvf - -C /run
+#[ "$LOAD_PREFILTER" = "ON" ] && echo "Unpacking Stock filters..." ; /bin/zcat /etc/brutefir/filter.tgz | tar -xvf - -C /run
 
-chown -Rh sftparoio:users /run/filter
+#chown -Rh sftparoio:users /run/filter
 
 cardmount_ro()
 {

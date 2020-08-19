@@ -4,7 +4,7 @@ After=local-fs.target brutefir-filters.service
 Before=audioplayers.service
 
 [Service]
-Type=simple
+Type=exec
 ExecStart=/usr/bin/brutefir-checkfilters
 
 [Install]
