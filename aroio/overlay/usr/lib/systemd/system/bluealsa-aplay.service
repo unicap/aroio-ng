@@ -3,10 +3,9 @@
 Description=BlueAlsa-Aplay
 Requires=bluetooth.service bluealsa.service
 After=bluealsa.service sys-subsystem-bluetooth-devices-hci0.device sound.target checkuserconfig.service
-BindsTo=sys-subsystem-bluetooth-devices-hci0.device
 
 [Service]
 Type=simple
 EnvironmentFile=/boot/userconfig.txt
-ExecStart=/usr/bin/bluealsa-aplay 00:00:00:00:00:00 -d $AUDIO_OUTPUT
+ExecStart=/usr/bin/bluealsa-aplay 00:00:00:00:00:00 -d $AUDIO_OUTPUT --profile-a2dp -v
 Restart=always

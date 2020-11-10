@@ -430,6 +430,14 @@ endif # BR2_LINUX_KERNEL_APPENDED_DTB
 endif # BR2_LINUX_KERNEL_DTB_IS_SELF_BUILT
 endif # BR2_LINUX_KERNEL_DTS_SUPPORT
 
+ifeq ($(BR2_LINUX_KERNEL_DTS_OVERLAYS_SUPPORT),y)
+define LINUX_INSTALL_DTB_OVERLAYS
+	mkdir -p $(1)
+	#cp $(LINUX_ARCH_PATH)/boot/dts/overlays/*.dts $(1)
+	cp $(LINUX_ARCH_PATH)/boot/dts/overlays/*.dtbo $(1)
+endef
+endif # BR2_LINUX_KERNEL_DTS_OVERLAYS
+
 ifeq ($(BR2_LINUX_KERNEL_APPENDED_DTB),y)
 # dtbs moved from arch/$ARCH/boot to arch/$ARCH/boot/dts since 3.8-rc1
 define LINUX_APPEND_DTB
@@ -508,6 +516,7 @@ endef
 define LINUX_INSTALL_IMAGES_CMDS
 	$(call LINUX_INSTALL_IMAGE,$(BINARIES_DIR))
 	$(call LINUX_INSTALL_DTB,$(BINARIES_DIR))
+	$(call LINUX_INSTALL_DTB_OVERLAYS,$(BINARIES_DIR)/rpi-firmware/overlays)
 endef
 
 ifeq ($(BR2_STRIP_strip),y)

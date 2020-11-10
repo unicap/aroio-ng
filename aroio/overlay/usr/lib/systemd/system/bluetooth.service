@@ -1,9 +1,10 @@
 [Unit]
 Description=Bluetooth service
 Documentation=man:bluetoothd(8)
-ConditionPathIsDirectory=/sys/class/bluetooth
-Before=bluetooth-simpleagent.service bluetooth-broadcastname.service
-After=bluetooth-dbbackup.service
+After=sys-subsystem-bluetooth-devices-hci0.device
+ConditionPathIsDirectory=/sys/class/bluetooth/
+Before=bluetooth-simpleagent.service
+
 
 [Service]
 Type=dbus

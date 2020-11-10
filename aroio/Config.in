@@ -80,6 +80,7 @@ menu "Perl CPAN Packages"
     source "$BR2_EXTERNAL_aroio_PATH/package/perl-yaml-libyaml/Config.in"
 endmenu
 
+source "$BR2_EXTERNAL_aroio_PATH/package/alac-decoder/Config.in"
 source "$BR2_EXTERNAL_aroio_PATH/package/librespot/Config.in"
 source "$BR2_EXTERNAL_aroio_PATH/package/spotifyd/Config.in"
 source "$BR2_EXTERNAL_aroio_PATH/package/logsweep/Config.in"
@@ -95,6 +96,7 @@ source "$BR2_EXTERNAL_aroio_PATH/package/fftw3f/Config.in"
 source "$BR2_EXTERNAL_aroio_PATH/package/brutefir/Config.in"
 source "$BR2_EXTERNAL_aroio_PATH/package/jack-connect-persistent/Config.in"
 source "$BR2_EXTERNAL_aroio_PATH/package/jack_minimix/Config.in"
+<<<<<<< HEAD
 source "$BR2_EXTERNAL_aroio_PATH/package/rtl8812au/Config.in" 
 
 source "$BR2_EXTERNAL_aroio_PATH/package/python-dataclasses/Config.in"
@@ -104,4 +106,8 @@ source "$BR2_EXTERNAL_aroio_PATH/package/python-httptools/Config.in"
 source "$BR2_EXTERNAL_aroio_PATH/package/python-starlette/Config.in"
 source "$BR2_EXTERNAL_aroio_PATH/package/python-uvicorn/Config.in"
 
+=======
+source "$BR2_EXTERNAL_aroio_PATH/package/rtl8812au/Config.in"
+source "$BR2_EXTERNAL_aroio_PATH/package/aroio-ui/Config.in"
+>>>>>>> upstream/aroio-ng-2020.02
 source "$BR2_EXTERNAL_aroio_PATH/package/webinterface/Config.in"

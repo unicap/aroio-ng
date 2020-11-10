@@ -1,0 +1,10 @@
+#!/bin/sh
+
+echo "Deleting Bluetooth trust database..."
+systemctl stop bluetooth-dbbackup
+cardmount rw
+rm /boot/btdb.tar
+cardmount ro
+rm -rf /var/lib/bluetooth/*
+systemctl start bluetooth-dbbackup
+exit 0
