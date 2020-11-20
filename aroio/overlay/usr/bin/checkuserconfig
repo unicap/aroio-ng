@@ -41,7 +41,7 @@ fi
 [ "$PLATFORM" = "" ] &&					PLATFORM="RaspberryPi"
 [ "$VOLUME_START" = "" ] &&				VOLUME_START="-15"
 [ "$ADVANCED" = "" ] &&					ADVANCED="OFF"
-[ "$DISPLAY_ROTATE" = "" ] &&			DISPLAY_ROTATE="ON"
+[ "$DISPLAY_ROTATE" = "" ] &&			DISPLAY_ROTATE="OFF"
 [ "$SOUNDCARD" = "" ] &&				SOUNDCARD="AroioDAC"
 [ "$USEBETA" = ""  ] &&					USEBETA="OFF"
 [ "$KNOWN_VERSION" = ""  ] &&			KNOWN_VERSION=""
