@@ -9,7 +9,7 @@ Before=bluetooth-simpleagent.service
 [Service]
 Type=dbus
 BusName=org.bluez
-ExecStart=/usr/libexec/bluetooth/bluetoothd -d
+ExecStart=/usr/libexec/bluetooth/bluetoothd
 NotifyAccess=main
 #WatchdogSec=10
 #Restart=on-failure

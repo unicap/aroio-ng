@@ -7,5 +7,5 @@ After=bluealsa.service sys-subsystem-bluetooth-devices-hci0.device sound.target 
 [Service]
 Type=simple
 EnvironmentFile=/boot/userconfig.txt
-ExecStart=/usr/bin/bluealsa-aplay 00:00:00:00:00:00 -d $AUDIO_OUTPUT --profile-a2dp -v
+ExecStart=/usr/bin/bluealsa-aplay -vv 00:00:00:00:00:00 -d $AUDIO_OUTPUT --profile-a2dp
 Restart=always
