@@ -1,0 +1,8 @@
+config BR2_PACKAGE_PYTHON_PYBLUEZ
+	bool "python-pybluez"
+	#select BR2_PACKAGE_PYTHON_SIX # runtime
+	#select BR2_PACKAGE_PYTHON_SERIAL # runtime
+	help
+	  Pybluez allows Python code to access the hosts BT-resources.
+
+	  https://github.com/pybluez/pybluez
