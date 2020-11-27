@@ -441,7 +441,8 @@ function wrtToUserconfig($varName,$value)
 //	echo $varName.'="'.$value.'"';
 //	$shell_exec_ret=exec('cardmount rw');
 	$file="/boot/userconfig.txt";
-	$pattern='/'.$varName.'=\".*\"/';
+	//$pattern='/'.$varName.'=\".*\"/';
+    $pattern='/\b'.$varName.'\b=\".*\"/';
 	$content=file_get_contents($file);
 	$content=preg_replace($pattern, $varName.'="'.$value.'"', $content);
 	file_put_contents($file, $content);

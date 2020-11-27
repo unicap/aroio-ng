@@ -8,7 +8,7 @@ BindsTo=bluetooth.service
 
 [Service]
 Type=exec
-#ExecStartPre=/bin/sleep 3
+ExecStartPre=/bin/sleep 3
 ExecStartPre=/usr/bin/bluetooth-simpleagent-starter
 ExecStart=/usr/bin/bluetooth-simpleagent
 Restart=always

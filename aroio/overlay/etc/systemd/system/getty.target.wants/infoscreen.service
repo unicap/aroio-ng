@@ -1,1 +1,13 @@
-../../../../usr/lib/systemd/system/infoscreen.service
+[Unit]
+Description=system information on HDMI output
+#After=multi-user.target
+
+[Service]
+Type=simple
+StandardInput=tty
+StandardOutput=tty
+TTYPath=/dev/tty1
+ExecStart=/bin/sh -c /usr/bin/infoscreen
+
+[Install]
+WantedBy=getty.target

@@ -5,7 +5,6 @@ After=syslog.target sound.target jackd.service network-online.target checkuserco
 [Service]
 Type=simple
 EnvironmentFile=/boot/userconfig.txt
-ExecStart=/bin/taskset -c 2,3 /bin/shairport-sync -v -a $HOSTNAME -o alsa -- -d $AUDIO_OUTPUT
+ExecStart=/bin/taskset -c 2,3 /bin/shairport-sync -v -a "$HOSTNAME" -o alsa -- -d $AUDIO_OUTPUT
 Restart=always
 RestartSec=2
-

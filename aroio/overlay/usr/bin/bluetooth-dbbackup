@@ -5,7 +5,7 @@ RAMDIR='/var/lib/bluetooth'
 
 mkdir -p "$RAMDIR"
 cd /
-[ -e "$SDFILE" ] && echo "Stored BT-trust-database found, writing it back to system..." && tar -xvf "$SDFILE"
+[ -e "$SDFILE" ] && echo "Stored BT-trust-database found, writing it back to system..." && tar --warning=no-timestamp -xf "$SDFILE"
 
 while (true)
 do
@@ -14,8 +14,7 @@ do
     cardmount rw
     sleep 0.5
     cd "$RAMDIR"
-    tar -cvf "$SDFILE" /var/lib/bluetooth/*
+    tar --warning=no-timestamp -cf "$SDFILE" /var/lib/bluetooth/*
     sleep 0.5
     cardmount ro
 done
-

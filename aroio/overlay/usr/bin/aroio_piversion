@@ -24,6 +24,9 @@ case "$VERSION" in
 	a02082)
 	MODEL="Pi 3 Model B from SONY, UK"
 	;;
+	a52082)
+	MODEL="Pi 3 Model B from STADIUM"
+	;;
 	a22082)
 	MODEL="Pi 3 Model B from Embest, China"
 	;;

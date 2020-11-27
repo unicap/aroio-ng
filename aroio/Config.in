@@ -80,6 +80,8 @@ menu "Perl CPAN Packages"
     source "$BR2_EXTERNAL_aroio_PATH/package/perl-yaml-libyaml/Config.in"
 endmenu
 
+source "$BR2_EXTERNAL_aroio_PATH/package/python-prctl/Config.in"
+source "$BR2_EXTERNAL_aroio_PATH/package/python-pybluez/Config.in"
 source "$BR2_EXTERNAL_aroio_PATH/package/alac-decoder/Config.in"
 source "$BR2_EXTERNAL_aroio_PATH/package/librespot/Config.in"
 source "$BR2_EXTERNAL_aroio_PATH/package/spotifyd/Config.in"
