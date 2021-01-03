@@ -17,10 +17,11 @@ serial1="`cat /proc/device-tree/aliases/serial1`"
 if [ "$uart0" = "$serial1" ] ; then
 	uart0_pins="`wc -c /proc/device-tree/soc/gpio@7e200000/uart0_pins/brcm\,pins | cut -f 1 -d ' '`"
 	if [ "$uart0_pins" = "16" ] ; then
-		$HCIATTACH /dev/serial1 bcm43xx 3000000 flow - $BDADDR
+		#$HCIATTACH /dev/serial1 bcm43xx 3000000 flow - $BDADDR
+        $HCIATTACH /dev/serial1 bcm43xx 460800 flow - $BDADDR
 	else
-		#$HCIATTACH /dev/serial1 bcm43xx 921600 noflow - $BDADDR
-        $HCIATTACH /dev/serial1 bcm43xx 460800 noflow - $BDADDR
+		$HCIATTACH /dev/serial1 bcm43xx 921600 noflow - $BDADDR
+        #$HCIATTACH /dev/serial1 bcm43xx 460800 noflow - $BDADDR
 	fi
 else
 	$HCIATTACH /dev/serial1 bcm43xx 460800 noflow - $BDADDR

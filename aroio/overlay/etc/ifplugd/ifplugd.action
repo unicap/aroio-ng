@@ -22,6 +22,7 @@ function checkinterfaces()
 		echo "eth0 setup:  "$ETH0_SETUP
 		echo "wlan0 state: "$WLAN0_STATE
 		echo "wlan0 setup: "$WLAN0_SETUP
+		sleep 0.5
 	done
 }
 

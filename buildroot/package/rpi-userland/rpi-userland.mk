@@ -4,7 +4,8 @@
 #
 ################################################################################
 
-RPI_USERLAND_VERSION = 3e59217bd93b8024fb8fc1c6530b00cbae64bc73
+RPI_USERLAND_VERSION = f73fca015d421b763936667a0b58fe5024d59921
+#3e59217bd93b8024fb8fc1c6530b00cbae64bc73
 #188d3bfe4a0ac36b119a2cee35a6be8d0c68e09e
 #06bc6daa02137ca72b7a2104afad81e82a44de17
 RPI_USERLAND_SITE = $(call github,raspberrypi,userland,$(RPI_USERLAND_VERSION))

@@ -19,6 +19,8 @@ define USBUTILS_REMOVE_PYTHON
 	rm -f $(TARGET_DIR)/usr/bin/lsusb.py
 endef
 
+USBUTILS_CONF_OPTS += --datarootdir=/usr/share/hwdata
+
 USBUTILS_POST_INSTALL_TARGET_HOOKS += USBUTILS_REMOVE_PYTHON
 endif
 

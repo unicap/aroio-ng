@@ -14,29 +14,48 @@ ALSACONFIG="/etc/modprobe.d/alsa-base.conf"
 [ "$DISPLAY_ROTATE" = "ON" ] && DISPLAY_ROTATE="display_rotate=1" || DISPLAY_ROTATE="display_rotate=0"
 
 
-[ "$ONBOARD_WIFI" = "ON" ] && [ $(grep -c 'pi3-disable-wifi' /boot/config.txt ) -gt 0 ] \
-	&& cardmount rw && sed -i '/pi3-disable-wifi/d' "$CONFIG" && REBOOT=1
+[ "$ONBOARD_WIFI" = "ON" ] && [ $(grep -c 'disable-wifi' /boot/config.txt ) -gt 0 ] \
+	&& cardmount rw && sed -i '/disable-wifi/d' "$CONFIG" && REBOOT=1
 
-[ "$ONBOARD_WIFI" = "OFF" ] && [ $(grep -c 'pi3-disable-wifi' /boot/config.txt ) -eq 0 ] \
-	&& cardmount rw && echo 'dtoverlay=pi3-disable-wifi' >> "$CONFIG" && REBOOT=1
+[ "$ONBOARD_WIFI" = "OFF" ] && [ $(grep -c 'disable-wifi' /boot/config.txt ) -eq 0 ] \
+	&& cardmount rw && echo 'dtoverlay=disable-wifi' >> "$CONFIG" && REBOOT=1
 
-[ "$ONBOARD_WIFI" = "OFF" ] && WIFI="dtoverlay=pi3-disable-wifi" || WIFI=""
+[ "$ONBOARD_WIFI" = "OFF" ] && WIFI="dtoverlay=disable-wifi" || WIFI=""
 
 
-[ "$ONBOARD_BLUETOOTH" = "ON" ] && [ $(grep -c 'pi3-disable-bt' /boot/config.txt ) -gt 0 ] \
-	&& cardmount rw && sed -i '/pi3-disable-bt/d' "$CONFIG" && REBOOT=1
+[ "$ONBOARD_BLUETOOTH" = "ON" ] && [ $(grep -c 'disable-bt' /boot/config.txt ) -gt 0 ] \
+	&& cardmount rw && sed -i '/disable-bt/d' "$CONFIG" && REBOOT=1
 
-[ "$ONBOARD_BLUETOOTH" = "OFF" ] && [ $(grep -c 'pi3-disable-bt' /boot/config.txt ) -eq 0 ] \
-	&& cardmount rw && echo 'dtoverlay=pi3-disable-bt' >> "$CONFIG" && REBOOT=1
+[ "$ONBOARD_BLUETOOTH" = "OFF" ] && [ $(grep -c 'disable-bt' /boot/config.txt ) -eq 0 ] \
+	&& cardmount rw && echo 'dtoverlay=disable-bt' >> "$CONFIG" && REBOOT=1
 
-[ "$ONBOARD_BLUETOOTH" = "OFF" ] && BLUETOOTH="dtoverlay=pi3-disable-bt" || BLUETOOTH=""
+[ "$ONBOARD_BLUETOOTH" = "OFF" ] && BLUETOOTH="dtoverlay=disable-bt" || BLUETOOTH=""
 
+if grep -q 'pi3-disable-wifi' "$CONFIG"
+then	echo "Found old syntax in config.txt, fixing it."
+		cardmount rw
+		sed -i '/dtoverlay=pi3-disable-wifi/c\dtoverlay=disable-wifi' boot/config.txt
+		REBOOT=1
+fi
+
+if grep -q 'pi3-disable-bt' "$CONFIG"
+then	echo "Found old syntax in config.txt, fixing it."
+		cardmount rw
+		sed -i '/dtoverlay=pi3-disable-bt/c\dtoverlay=disable-bt' boot/config.txt
+		REBOOT=1
+fi
+
+if grep -q 'pi3-act-led' "$CONFIG"
+then	echo "Found old syntax in config.txt, fixing it."
+		cardmount rw
+		sed -i '/dtoverlay=pi3-act-led,gpio=22/c\dtoverlay=act-led,gpio=22' boot/config.txt
+		REBOOT=1
+fi
 
 if grep -q 'dtoverlay=lirc-rpi' "$CONFIG"
 then    echo "Found old lirc configuration in config.txt, writing a new one with gpio-ir."
         cardmount rw
         sed -i '/dtoverlay=lirc-rpi/c\dtoverlay=gpio-ir,gpio_pin=25' /boot/config.txt
-        cardmount ro
         REBOOT=1
 fi
 
@@ -44,16 +63,14 @@ if ! grep -q 'dtoverlay=gpio-ir' "$CONFIG"
 then    echo "Missing gpio-ir overlay in config.txt, writing a new one."
         cardmount rw
         echo 'dtoverlay=gpio-ir,gpio_pin=25' >> /boot/config.txt
-        cardmount ro
         REBOOT=1
 fi
 
-if ! grep -q 'dtoverlay=pi3-act-led,gpio=22' "$CONFIG"
+if ! grep -q 'dtoverlay=act-led,gpio=22' "$CONFIG"
 then    echo "Missing gpio-LED overlay in config.txt, writing a new one."
         cardmount rw
-        echo 'dtoverlay=pi3-act-led,gpio=22' >> /boot/config.txt
+        echo 'dtoverlay=act-led,gpio=22' >> /boot/config.txt
         echo 'dtparam=act_led_trigger=heartbeat' >> /boot/config.txt
-        cardmount ro
         REBOOT=1
 fi
 
@@ -61,7 +78,6 @@ if grep -q 'initramfs rootfs.cpio' "$CONFIG"
 then    echo "Found old intramfs entry in config.txt, deleting it."
         cardmount rw
         sed -i '/initramfs rootfs.cpio/d' /boot/config.txt
-        cardmount ro
         REBOOT=1
 fi
 
@@ -92,7 +108,6 @@ case $SOUNDCARD in
 			dtparam=act_led_trigger=heartbeat
 		EOF
 
-		cardmount ro
 		REBOOT=1
 	fi
 	# Taking care of correct soundcard order
@@ -126,7 +141,6 @@ case $SOUNDCARD in
 			dtparam=act_led_trigger=heartbeat
 		EOF
 
-		cardmount ro
 		REBOOT=1
 	fi
 	# Taking care of correct soundcard order
@@ -158,7 +172,6 @@ case $SOUNDCARD in
 			dtparam=act_led_trigger=heartbeat
 		EOF
 
-		cardmount ro
 		REBOOT=1
 	fi
 	# Taking care of correct soundcard order
@@ -190,7 +203,6 @@ case $SOUNDCARD in
 			dtparam=act_led_trigger=heartbeat
 		EOF
 
-		cardmount ro
 		REBOOT=1
 	fi
 	# Taking care of correct soundcard order
@@ -222,7 +234,6 @@ case $SOUNDCARD in
 			dtparam=act_led_trigger=heartbeat
 		EOF
 
-		cardmount ro
 		REBOOT=1
 	fi
 	# Taking care of correct soundcard order
@@ -256,7 +267,6 @@ case $SOUNDCARD in
 			dtparam=act_led_trigger=heartbeat
 		EOF
 
-		cardmount ro
 		REBOOT=1
 	fi
 	# Taking care of correct soundcard order
@@ -291,7 +301,6 @@ case $SOUNDCARD in
 			dtparam=act_led_trigger=heartbeat
 		EOF
 
-		cardmount ro
 		REBOOT=1
 	fi
 	# Taking care of correct soundcard order
@@ -326,7 +335,6 @@ case $SOUNDCARD in
 			dtparam=act_led_trigger=heartbeat
 		EOF
 
-		cardmount ro
 		REBOOT=1
 	fi
 	# Taking care of correct soundcard order
@@ -361,7 +369,6 @@ case $SOUNDCARD in
 			dtparam=act_led_trigger=heartbeat
 		EOF
 
-		cardmount ro
 		REBOOT=1
 	fi
 	# Taking care of correct soundcard order
@@ -394,7 +401,6 @@ case $SOUNDCARD in
 			dtparam=act_led_trigger=heartbeat
 		EOF
 
-	cardmount ro
 	REBOOT=1
 	fi
 	# Taking care of correct soundcard order
@@ -426,7 +432,6 @@ case $SOUNDCARD in
 			dtparam=act_led_trigger=heartbeat
 		EOF
 
-		cardmount ro
 		REBOOT=1
 	fi
 	# Taking care of correct soundcard order
@@ -458,7 +463,6 @@ case $SOUNDCARD in
 			dtparam=act_led_trigger=heartbeat
 		EOF
 
-		cardmount ro
 		REBOOT=1
 	fi
 	# Taking care of correct soundcard order
@@ -490,7 +494,6 @@ case $SOUNDCARD in
 			dtparam=act_led_trigger=heartbeat
 		EOF
 
-		cardmount ro
 		REBOOT=1
 	fi
 	# Taking care of correct soundcard order
@@ -522,7 +525,6 @@ case $SOUNDCARD in
 			dtparam=act_led_trigger=heartbeat
 		EOF
 
-		cardmount ro
 		REBOOT=1
 	fi
 	# Taking care of correct soundcard order
@@ -553,7 +555,6 @@ case $SOUNDCARD in
 			dtparam=act_led_trigger=heartbeat
 		EOF
 
-		cardmount ro
 		REBOOT=1
 	fi
 	# Taking care of correct soundcard order
@@ -584,7 +585,6 @@ case $SOUNDCARD in
 			dtparam=act_led_trigger=heartbeat
 		EOF
 
-		cardmount ro
 		REBOOT=1
 	fi
 	# Taking care of correct soundcard order
@@ -615,7 +615,6 @@ case $SOUNDCARD in
 			dtparam=act_led_trigger=heartbeat
 		EOF
 
-		cardmount ro
 		REBOOT=1
 	fi
 	# Taking care of correct soundcard order
@@ -646,7 +645,6 @@ case $SOUNDCARD in
 			dtparam=act_led_trigger=heartbeat
 		EOF
 
-		cardmount ro
 		REBOOT=1
 	fi
 	# Taking care of correct soundcard order
@@ -676,7 +674,6 @@ case $SOUNDCARD in
 			dtparam=act_led_trigger=heartbeat
 		EOF
 
-		cardmount ro
 		REBOOT=1
 	fi
 	# Taking care of correct soundcard order
@@ -706,7 +703,6 @@ case $SOUNDCARD in
 			dtparam=act_led_trigger=heartbeat
 		EOF
 
-		cardmount ro
 		REBOOT=1
 	fi
 	# Taking care of correct soundcard order
@@ -736,7 +732,6 @@ case $SOUNDCARD in
 			dtparam=act_led_trigger=heartbeat
 		EOF
 
-		cardmount ro
 		REBOOT=1
 	fi
 	# Taking care of correct soundcard order
@@ -771,13 +766,12 @@ case $SOUNDCARD in
 			dtparam=act_led_trigger=heartbeat
 		EOF
 
-		cardmount ro
 		REBOOT=1
 	fi
 	;;
 
 esac
 
-[ "$REBOOT" = "1" ] && echo "Had to make changes to config.txt, rebooting..." && reboot
+[ "$REBOOT" = "1" ] && echo "Had to make changes to config.txt, rebooting..." && cardmount ro && reboot
 
 exit 0

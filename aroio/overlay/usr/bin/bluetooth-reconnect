@@ -24,7 +24,7 @@ do
 			fi
 		else
 			[ "$DEBUG" != "" ] && echo "Yes, it is connected, doing nothing."
-			sleep 5
+			sleep 20
 		fi
 	done
 done

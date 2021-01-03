@@ -1,4 +1,3 @@
-
 KERNEL=="ttyAMA[01]", PROGRAM="/bin/sh -c '\
 	ALIASES=/proc/device-tree/aliases; \
 	if cmp -s $ALIASES/uart0 $ALIASES/serial0; then \

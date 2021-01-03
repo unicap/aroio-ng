@@ -5,6 +5,7 @@
 ################################################################################
 
 #RPI_BT_FIRMWARE_VERSION = 688531da4bcf802a814d9cb0c8b6d62e3b8a3327
+#RPI_BT_FIRMWARE_VERSION = 39f45e47c480f46b334770b88a738f12cc00010c
 RPI_BT_FIRMWARE_VERSION = 39f45e47c480f46b334770b88a738f12cc00010c
 RPI_BT_FIRMWARE_SITE = $(call github,LibreELEC,brcmfmac_sdio-firmware-rpi,$(RPI_BT_FIRMWARE_VERSION))
 RPI_BT_FIRMWARE_LICENSE = PROPRIETARY

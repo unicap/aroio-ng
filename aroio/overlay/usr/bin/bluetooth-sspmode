@@ -2,8 +2,10 @@
 
 echo "Setting Bluetooth into SSPMode for 45 Seconds..."
 hciconfig hci0 sspmode 1
+systemctl stop bluetooth-reconnect
 sleep 45
 echo "Setting Bluetooth back to secure mode..."
+systemctl start bluetooth-reconnect
 hciconfig hci0 sspmode 0
 
 exit 0

@@ -26,9 +26,14 @@ echo lf | nc -q0 localhost 3000 > /tmp/aroio_logs/logs/brutefir_lf.txt
 # Collect version information
 echo -e "Aroio version: $(head -n1 /boot/version)\nRaspberry $(aroio_piversion)" > /tmp/aroio_logs/config/versions.txt
 cat /boot/version | tail -2 >> /tmp/aroio_logs/config/versions.txt
+echo -e "\nFirmware-version: $(vcgencmd version)" >> /tmp/aroio_logs/config/versions.txt
+echo -e "\nLinux-kernel-version: $(uname -r)" >> /tmp/aroio_logs/config/versions.txt
 
 # Collect module information
 lsmod > /tmp/aroio_logs/config/loaded_modules.txt
+
+# Collect USB information
+lsusb.py -i >> /tmp/aroio_logs/config/usb_hw.txt
 
 # Save output of ifconfig
 echo -e "ifconfig -a output:" > /tmp/aroio_logs/config/network.txt
