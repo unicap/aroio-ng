@@ -4,7 +4,6 @@ Description=WPA supplicant daemon (interface-specific version)
 After=sys-subsystem-net-devices-%i.device
 Before=systemd-networkd.service
 Wants=network.target
-ConditionFileNotEmpty=/etc/wpa_supplicant/wpa_supplicant-%I.conf
 ConditionPathExists=/etc/systemd/network/25-wireless.network
 
 # NetworkManager users will probably want the dbus version instead.
@@ -12,6 +11,10 @@ ConditionPathExists=/etc/systemd/network/25-wireless.network
 [Service]
 Type=simple
 ExecStart=/usr/sbin/wpa_supplicant -c/etc/wpa_supplicant/wpa_supplicant-%I.conf -i%I
+Restart=on-failure
+StartLimitBurst=5
+StartLimitIntervalSec=10
+
 
 [Install]
 Alias=multi-user.target.wants/wpa_supplicant@%i.service
