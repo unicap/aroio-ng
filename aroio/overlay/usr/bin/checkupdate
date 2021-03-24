@@ -4,7 +4,21 @@
 
 #killall aroio_control_led
 
-until networkctl | grep configured; do sleep 1 ; done
+#until networkctl | grep configured; do sleep 1 ; done
+
+while ! (networkctl | grep -q dconfigured)
+do	echo "Waiting for network..."
+	COUNTER=$((COUNTER+1))
+	echo $COUNTER
+	[ "$COUNTER" = "15" ] && exit 1
+	sleep 1
+done
+
+
+
+
+
+
 
 sleep 3
 
