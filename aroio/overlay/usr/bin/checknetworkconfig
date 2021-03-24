@@ -43,7 +43,8 @@ echo "DEBUG!"
 echo "WLANSSID = "$WLANSSID""
 echo $(ls /sys/class/net/wlan0)
 
-if [[ "$WLANSSID" != "" && "$WLANSSID" != "WIFI-OFF!" ]] && [ -e /sys/class/net/wlan0 ]
+if [[ "$WLANSSID" != "" && "$WLANSSID" != "WIFI-OFF!" ]]
+#&& [ -e /sys/class/net/wlan0 ]
 then
 	echo "WLAN SSID is neither empty nor \"WIFI-OFF\"."
 	if [ "WLAN_DHCP" = "OFF" ]
