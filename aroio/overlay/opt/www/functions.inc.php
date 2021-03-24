@@ -10,7 +10,14 @@ function deliver_logs()
 
 function scanwifi()
 {
-	$wifiscan=exec('ifconfig wlan0 up && iwlist scan 2>/dev/null | sed \'s/\"//g\' | awk -F":" \'/ESSID/{print $2}\' | sort -f  ',$wifilist);
+    $wlan_ip=get_ipaddr_wlan();
+	if( $wlan_ip[0] == '192.168.99.1' ){
+        $wifiscan=exec('iw dev wlan0 scan ap-force 2>/dev/null | sed \'s/\"//g\' | awk -F":" \'/SSID/{if ($2) print $2}\' | sort -u  ',$wifilist);
+	}
+    else {
+        $wifiscan=exec('ip link set wlan0 up && iw dev wlan0 scan 2>/dev/null | sed \'s/\"//g\' | awk -F":" \'/SSID/{if ($2) print $2}\' | sort -u ',$wifilist);
+    }
+    array_unshift($wifilist, "");
 	return $wifilist;
 }
 
@@ -91,7 +98,7 @@ function echo_ps()
 function echo_iwlist()
 {
 	echo '<pre>';
-	passthru('iwlist wlan0 scanning');
+	passthru('iw dev wlan0 2>/dev/null');
 	echo '</pre>';
 }
 
@@ -127,14 +134,14 @@ function ping_squeezeserver()
 // IP-Adresse von eth0 rausfinden
 function get_ipaddr_lan()
 {
-	exec("ifconfig eth0 | grep inet | grep -v 127 | awk -F: '{ print $2 }' | awk '{ print $1 }'" , $output);
+	exec("ifconfig eth0 | grep inet | grep 'inet addr' | awk -F: '{ print $2 }' | awk '{ print $1 }'" , $output);
 	return $output;
 }
 
 // IP-Adresse von wlan0 rausfinden
 function get_ipaddr_wlan()
 {
-	exec("ifconfig wlan0 | grep inet | grep -v 127 | awk -F: '{ print $2 }' | awk '{ print $1 }'" , $output);
+	exec("ifconfig wlan0 | grep inet | grep 'inet addr' | awk -F: '{ print $2 }' | awk '{ print $1 }'" , $output);
 	return $output;
 }
 

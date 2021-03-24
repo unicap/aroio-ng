@@ -248,7 +248,7 @@ else $carrierstate=${"infotext_carrierstate_1_"."$lang"};
   <tr>
 
     <? $test_wlan=test_wlan();
-if ($test_wlan == "0"){?>
+    if ($test_wlan == "enabled"){?>
     <td>
         <? print ${"infotext_macaddr_wlan_"."$lang"};?>
     </td>
