@@ -1,6 +1,5 @@
 <?php
     ob_start();
-    include('header.php');
     include('strings.php');
     include('functions.inc.php');
     include('style.css');
@@ -70,6 +69,7 @@
     {
         shell_exec ( "/usr/bin/bluetooth-dbpurge > /dev/null" );
     }
+    include('header.php');
 ?>
 
 <!-- Navigation -->
