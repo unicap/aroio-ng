@@ -129,6 +129,59 @@
       }
     }
 
+    // Adjust AUDIO_OUTPUT with Cleaner checkbox
+    if ($_POST['CLEANER'] == 'ON')
+    {
+      switch ($_POST['AUDIO_OUTPUT'])
+      {
+        case 'vol-plug':
+          $_POST['AUDIO_OUTPUT'] = 'vol-plug-ms';
+        break;
+
+        case 'jack':
+          $_POST['AUDIO_OUTPUT'] = 'jack-ms';
+        break;
+
+        case 'jack-bf':
+          $_POST['AUDIO_OUTPUT'] = 'jack-bfms';
+        break;
+      }
+    }
+
+    // Unify all player config values (temporary solution)
+    $_POST['RAW_PLAYERMS'] = $_POST['RAW_PLAYER'];
+
+    $_POST['JACKMS_SQUEEZELITE'] = $_POST['JACK_SQUEEZELITE'];
+    $_POST['JACKMS_SPOTIFYD'] = $_POST['JACK_SPOTIFYD'];
+    $_POST['JACKMS_GMEDIARENDER'] = $_POST['JACK_GMEDIARENDER'];
+    $_POST['JACKMS_SHAIRPORTSYNC'] = $_POST['JACK_SHAIRPORTSYNC'];
+    $_POST['JACKMS_NETJACK'] = $_POST['JACK_NETJACK'];
+
+    $_POST['JACKBF_SQUEEZELITE'] = $_POST['JACK_SQUEEZELITE'];
+    $_POST['JACKBF_SPOTIFYD'] = $_POST['JACK_SPOTIFYD'];
+    $_POST['JACKBF_GMEDIARENDER'] = $_POST['JACK_GMEDIARENDER'];
+    $_POST['JACKBF_SHAIRPORTSYNC'] = $_POST['JACK_SHAIRPORTSYNC'];
+    $_POST['JACKBF_NETJACK'] = $_POST['JACK_NETJACK'];
+
+    $_POST['JACKBFMS_SQUEEZELITE'] = $_POST['JACK_SQUEEZELITE'];
+    $_POST['JACKBFMS_SPOTIFYD'] = $_POST['JACK_SPOTIFYD'];
+    $_POST['JACKBFMS_GMEDIARENDER'] = $_POST['JACK_GMEDIARENDER'];
+    $_POST['JACKBFMS_SHAIRPORTSYNC'] = $_POST['JACK_SHAIRPORTSYNC'];
+    $_POST['JACKBFMS_NETJACK'] = $_POST['JACK_NETJACK'];
+
+    if ($_POST['JACK_INPUT'] == "")
+    {
+      $_POST['JACKMS_INPUT'] = "OFF";
+      $_POST['JACKBF_INPUT'] = "OFF";
+      $_POST['JACKBFMS_INPUT'] = "OFF";
+    }
+    if ($_POST['JACK_BLUEALSAAPLAY'] == "")
+    {
+      $_POST['JACKMS_BLUEALSAAPLAY'] = "OFF";
+      $_POST['JACKBF_BLUEALSAAPLAY'] = "OFF";
+      $_POST['JACKBFMS_BLUEALSAAPLAY'] = "OFF";
+    }
+
     if ( !$error )
     {
       $shell_exec_ret=shell_exec('cardmount rw');
@@ -191,19 +244,3 @@ include('update_check.php');
 include "footer.php";
 
 ?>
-<script>
-  $(document).ready(function () {
-    $('input[id="raw"]').prop('checked', false);
-    $('input[id="raw"]:first').prop('checked', true)
-
-    $('input[id="raw"]').click(function (event) {
-      $('input[id="raw"]').prop('checked', false);
-      $(this).prop('checked', true);
-    }) ;
-
-    $('input[id="raw"]').click(function (event) {
-      $('input[id="output"]').prop('checked', false);
-      $(this).prop('checked', true);
-    }) ;
-  }) ;
-</script>

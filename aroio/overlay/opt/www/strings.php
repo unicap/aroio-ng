@@ -337,20 +337,21 @@
     $helptext_audio_out_direct_en='Direct output mode: The samplingrate of the DAC follows the Audio-Stream. If the DAC does not support the rate, the signal will be resampled.';
     $helptext_audio_out_direct_de='Direkter Ausgabemodus: Die Samplingfrequenz der Wandler folgt dem zugespielten Musiksignal, es sei denn, die Wandler beherrschen diese nicht, dann wird geresampelt.';
 
-    $helptext_audio_out_direct_ms_en='Same as \'Direct\' but with MS-coding.';
-    $helptext_audio_out_direct_ms_de='Wie \'Direct\', zus&auml;tzlich mit MS-Kodierung.';
 
     $helptext_audio_out_bus_en='Bus mode: All audio signal are being routed to a bus (jackd). Multiple players can be used simultaniously. Fixed sampling rate. If other rates than the selected target rate are played, the signal will be resampled';
     $helptext_audio_out_bus_de='Bus-Modus: S&auml;mtliche Audio-Signale laufen auf einem Bus (jackd) zusammen. Es k&ouml;nnen mehrere Player gleichzeitig aktiv sein. Feste Samplingfrequenz mit Resampling, wenn andere Raten als die eingestellte zugespielt werden.';
 
-    $helptext_audio_out_bus_ms_en='Same as \'Bus\' but with MS-coding.';
-    $helptext_audio_out_bus_ms_de='Wie \'Bus\', zus&auml;tzlich mit MS-Kodierung.';
-
     $helptext_audio_out_convol_en='Convolution mode: Bus mode with convolution.';
     $helptext_audio_out_convol_de='Convolution Modus: Bus-Modus mit anschlie&szlig;ender Convolution.';
 
-    $helptext_audio_out_convol_ms_en='Same as \'Convolution\', but with MS-coding.';
-    $helptext_audio_out_convol_ms_de='Wie \'Convolution\', zus&auml;tzlich mit MS-Kodierung.';
+    $helptext_audio_cleaner_en='Apply MS-coding.';
+    $helptext_audio_cleaner_de='MS-Codierung anwenden.';
+
+    $cleaner_off_en='Off';
+    $cleaner_off_de='Aus';
+
+    $cleaner_on_en='On';
+    $cleaner_on_de='An';
 
     $helptext_audio_out_en='';
     $helptext_audio_out_de='';

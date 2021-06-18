@@ -612,4 +612,9 @@ select.filter
 {
     clear:both;
 }
+
+.d-none {
+    display: none;
+}
+
 </style>

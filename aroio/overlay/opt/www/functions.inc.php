@@ -213,6 +213,38 @@ function print_optgroup2D($name,$arr_values,$sel_value)
 	echo $out;
 }
 
+function get_audio_output($value)
+{
+	switch($value)
+	{
+		case "vol-plug-ms":
+			return "vol-plug";
+		case "jack-ms":
+			return "jack";
+		case "jack-bfms":
+			return "jack-bf";
+		default:
+			return $value;
+	}
+}
+
+// Adds "checked" if a setting is enabled
+function check_if_on($setting)
+{
+	if ($setting == "ON") {
+		echo "checked";
+	}
+}
+
+function get_cleaner_enabled($output)
+{
+	$cleaner_players = array("vol-plug-ms", "jack-ms", "jack-bfms");
+	if (in_array($output, $cleaner_players))
+	{
+		return true;
+	}
+	return false;
+}
 
 //liest die Filter aus Pfad aus und
 function fltrSelect($id,$ini_array)
