@@ -1,7 +1,6 @@
 <?php
   include('strings.php');
   include('functions.inc.php');
-  include('style.css');
 
 //print_r($_POST);
 

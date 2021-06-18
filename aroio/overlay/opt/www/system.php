@@ -2,7 +2,6 @@
     ob_start();
     include('strings.php');
     include('functions.inc.php');
-    include('style.css');
 //    print_r($_POST);
 
     if($_GET["lang"] === "en") $lang='en'; else $lang='de';

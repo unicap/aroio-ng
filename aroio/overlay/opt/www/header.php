@@ -4,6 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=0.5">
     <script type='text/javascript' src='http://code.jquery.com/jquery-1.8.2.js'></script>
     <script type='text/javascript' src='js/main.js'></script>
+    <link rel="stylesheet" href="css/style.css">
 
     <!-- VIEWPORT SETTINGS FOR DIFFERENT DEVICES -->
     <script>

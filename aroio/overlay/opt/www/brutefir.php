@@ -1,7 +1,6 @@
 <?php
 		include('strings.php');
     include('functions.inc.php');
-    include('style.css');
 
     if($_GET["lang"] === "en" || $_POST["lang"]=="en")
 		{

@@ -1,7 +1,6 @@
 <?php
     include('strings.php');
     include('functions.inc.php');
-    include('style.css');
 
     if($_GET["lang"] === "en") $lang='en'; else $lang='de';
     $ini_array = parse_ini_file("/boot/userconfig.txt", 1);
