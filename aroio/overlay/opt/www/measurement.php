@@ -143,7 +143,7 @@
       <legend>
         <? print ${"measurement_analysis_form_"."$lang"} ; ?>
       </legend>
-      <a href="http://www.audiovero.de" target="_blank"> <img class="link" src="audiovero.png" border="0" style="float: right;"> 	</a>
+      <a href="http://www.audiovero.de" target="_blank"> <img class="link" src="img/audiovero.png" border="0" style="float: right;"> 	</a>
       <? print ${"measurement_analysis_text_"."$lang"} ; ?>
     </div>
   </form>

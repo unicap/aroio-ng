@@ -46,8 +46,8 @@
     <div id="content">
         <div class="header">
         <!-- Headerbild mit Verlinkung -->
-        <a href="http://www.abacus-electronics.de" title="ABACUS Website" target="_blank"><img class="top" src="abacus_logo_wide.png" border="0"></a>
+        <a href="http://www.abacus-electronics.de" title="ABACUS Website" target="_blank"><img class="top" src="img/abacus_logo_wide.png" border="0"></a>
 
         <!-- Fahnen -->
-        <a style="float: right" href="<?php echo $PHP_SELF?>?lang=en" target=""><img src="english.png" border="0"></a>
-        <a style="float: right" href="<?php echo $PHP_SELF?>?lang=de" target=""><img src="german.png" border="0"></a>
+        <a style="float: right" href="<?php echo $PHP_SELF?>?lang=en" target=""><img src="img/english.png" border="0"></a>
+        <a style="float: right" href="<?php echo $PHP_SELF?>?lang=de" target=""><img src="img/german.png" border="0"></a>

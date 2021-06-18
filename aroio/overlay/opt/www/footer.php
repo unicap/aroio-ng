@@ -6,7 +6,7 @@
             <thead class="footer">
                 <tr>
                     <td>
-                        <img src="abacus_logo_wide.png" style="height: 30px; padding-bottom=40px;">
+                        <img src="img/abacus_logo_wide.png" style="height: 30px; padding-bottom=40px;">
                     </td>
                     <td>
                         <h1>Infos</h1>
