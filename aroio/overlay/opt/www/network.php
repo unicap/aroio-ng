@@ -127,7 +127,6 @@
                   <span title=""><label for="Wireless passphrase"> <? print ${"wlanpwd_"."$lang"} ; ?> </label></span></a>
                 </td>
                 <td>
-                  <script src="showpswd.js"></script>
                   <input type="password" id="newpass" name="WLANPWD" onkeyup="runPassword(this.value, 'newpass');" value="<? print $ini_array["WLANPWD"] ?>"/>
                   <a title="<? print ${"helptext_showpwd_"."$lang"} ?>"class="tooltip_check">
                   <span title=""></span>
