@@ -247,7 +247,7 @@ function get_cleaner_enabled($output)
 }
 
 //liest die Filter aus Pfad aus und
-function fltrSelect($id,$ini_array)
+function fltrSelect($id, $ini_array)
 {
 	//$directory = '/home/sftparoio'; //evtl als konstante bzw in config-file
 	$directory = '/run/filter'; //evtl als konstante bzw in config-file
@@ -258,24 +258,37 @@ function fltrSelect($id,$ini_array)
 	    }
 	    closedir($handle);*/
 
-		$rate=(int)($ini_array["RATE"] / 1000);
+		$rate = (int)($ini_array["RATE"] / 1000);
 		//$pattern = "/(\\w*)L|R(\\d*).dbl/";
 		$pattern = "/(\\w*)(L|R)".$rate.".dbl/";
 
 		//check if surround
-		if ($ini_array["CHANNELS"]==4) {
+		if ($ini_array["CHANNELS"] == 4)
+		{
 			$pattern = "/(\\w*)S(L|R)".$rate.".dbl/";
 		}
 
-		preg_match_all($pattern, $regexString,$banks); // in $banks[1] Coeffset-Name
+		preg_match_all($pattern, $regexString, $banks); // in $banks[1] Coeffset-Name
 		$result = array_unique($banks[1]);
-		$out='<select class="filter" name="coeff'.$id.'">';
-		if($ini_array["COEFF_NAME"."$id"]!="" || !empty($ini_array["COEFF_NAME"."$id"]))$out .= '<option selected>'.$ini_array["COEFF_NAME"."$id"].'</option>';
-		else $out.= '<option selected>BypassFilter</option>';
-		foreach ($result as &$option) {
-			$out.='<option>'.$option.'</option>';
+
+		$out = '<select class="filter" name="coeff'.$id.'">';
+		if ($ini_array["COEFF_NAME"."$id"] == "" || empty($ini_array["COEFF_NAME"."$id"]))
+		{
+			$out .= '<option selected>BypassFilter</option>';
 		}
-		$out.='</select>';
+
+		foreach ($result as &$option) {
+			if ($ini_array["COEFF_NAME"."$id"] == $option)
+			{
+				$out .= '<option selected>'.$option.'</option>';
+			}
+			else
+			{
+				$out .= '<option>'.$option.'</option>';
+			}
+		}
+
+		$out .= '</select>';
 		return $out;
 	}
 
