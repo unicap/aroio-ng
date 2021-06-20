@@ -442,7 +442,7 @@ function print_filterset($count,$ini_array)
         //}
         $out.='</td>';
         $out.='<td class="convolve">';
-        $out.='<input type="text" style="margin: 2px, width: 80%" name=vol'.$i.' class="volume" value="'.$att.'"> dB</br>';
+        $out.='<input type="text" name=vol'.$i.' class="volume" value="'.$att.'"> dB</br>';
         $out.='</td>';
         $out.='</tr>';
     }
