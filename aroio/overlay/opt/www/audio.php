@@ -6,16 +6,8 @@
           <td>
             <a title="<? print ${"helptext_advancedsettings_"."$lang"} ?>"class="tooltip">
             <span title=""><label for="Advanced settings"> <? print ${"advancedsettings_"."$lang"} ; ?> </label></span></a>
-            <input type="hidden" name="ADVANCED" value="OFF"> <?
-
-            if ($ini_array["ADVANCED"] == "ON")
-            { ?>
-              <input type="checkbox" id="advanced" name="ADVANCED" value="ON" checked> <?
-            }
-            else
-            { ?>
-              <input type="checkbox" id="advanced"name="ADVANCED" value="ON"> <?
-            } ?>
+            <input type="hidden" name="ADVANCED" value="OFF">
+            <input type="checkbox" id="advanced" name="ADVANCED" value="ON" <? check_if_on($ini_array["ADVANCED"]) ?>>
           </td>
         </tr>
 

@@ -6,15 +6,8 @@
             <td>
               <a title="<? print ${"helptext_display_rotate_"."$lang"} ?>"class="tooltip">
               <span title=""><label for="display_rotate"> <? print ${"display_rotate_"."$lang"} ; ?> </label></span></a>
-              <input type="hidden" name="DISPLAY_ROTATE" value="OFF"> <?
-              if ($ini_array["DISPLAY_ROTATE"] == "ON")
-              { ?>
-                <input type="checkbox" id="display_rotate" name="DISPLAY_ROTATE" value="ON" checked> <?
-              }
-              else
-              { ?>
-                <input type="checkbox" id="display_rotate"name="DISPLAY_ROTATE" value="ON"> <?
-              } ?>
+              <input type="hidden" name="DISPLAY_ROTATE" value="OFF">
+              <input type="checkbox" id="display_rotate" name="DISPLAY_ROTATE" value="ON" <? check_if_on($ini_array["DISPLAY_ROTATE"]) ?>>
             </td>
           </tr>
           <td>
