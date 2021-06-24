@@ -347,6 +347,9 @@
     $helptext_audio_cleaner_en='Apply MS-coding.';
     $helptext_audio_cleaner_de='MS-Codierung anwenden.';
 
+    $glossary_text_en='What\'s that?';
+    $glossary_text_de='Was ist das?';
+
     $cleaner_off_en='Off';
     $cleaner_off_de='Aus';
 

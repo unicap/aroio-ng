@@ -50,6 +50,11 @@ a.footer
 {
     color: #888;
 }
+a.glossary {
+    text-decoration: underline dotted #000 !important;
+    color: #888;
+    cursor: help;
+}
 
 /* Navigation */
 ul {

@@ -16,6 +16,7 @@ $arr_raw_players = array
   );
 ?>
 
+<!-- Audio Matrix -->
 <div class="content">
   <fieldset>
     <legend><? print ${"audio_matrix_form_"."$lang"};?></legend>
@@ -43,7 +44,7 @@ $arr_raw_players = array
     <tr>
       <td>
         <a title="<? print ${"helptext_audio_cleaner_"."$lang"} ?>"class="tooltip">
-          <span>Cleaner</span>
+          <span>Cleaner&nbsp;<a href="https://www.abacus-electronics.de/infothek-cleaner" target="_blank" class="glossary"><? print ${"glossary_text_"."$lang"} ?></a></span>
         </a>
       </td>
       <td>
