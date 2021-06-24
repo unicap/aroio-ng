@@ -4,6 +4,14 @@ $(document).ready(function() {
         audio_select.addEventListener("change", adjust_audio_matrix);
         adjust_audio_matrix();
     }
+    if (window.location.pathname == "/brutefir.php") {
+        var current_output = document.getElementById("convolver_settings").dataset.output;
+        if (current_output == "jack-bf" || current_output == "jack-bfms") {
+            $("#convolver_settings *").prop("disabled", false);
+        } else {
+            $("#convolver_settings *").prop("disabled", true);
+        }
+    }
 });
 
 function adjust_audio_matrix() {
