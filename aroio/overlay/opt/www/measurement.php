@@ -54,13 +54,22 @@
       <?
       print ${"measurement_warning_"."$lang"};
       if (isset($_POST['PLAY_NOISE']))
-        {
-          if($_POST['MEASURE_MS'] == "ON")
+      {
+          if(isset($_POST['MEASURE_MS']))
             {
+              $shell_exec_ret=shell_exec('cardmount rw');
+              wrtToUserconfig("MEASUREMENT_OUTPUT","vol-plug-ms");
+              $shell_exec_ret=shell_exec('cardmount ro');
               $ms="ms_on";
             }
+          else
+            {
+              $shell_exec_ret=shell_exec('cardmount rw');
+              wrtToUserconfig("MEASUREMENT_OUTPUT","vol-plug");
+              $shell_exec_ret=shell_exec('cardmount ro');
+            }
           play_noise($ms);
-        }
+      }
       if (isset($_POST['STOP_NOISE'])) stop_noise();
       if (isset($_POST['CANCEL_MEASUREMENT'])) cancel_measurement();
       if (isset($_POST['MEASUREMENT']) || file_exists('/tmp/measurement'))

@@ -48,6 +48,6 @@ mv "$OUTFILE".0 $OUTFILE
 echo "Restarting audio processing  ..."
 rm /tmp/measurement
 sleep 1
-#controlaudio stop &> /dev/null
-#controlaudio start &> /dev/null
+controlaudio stop &> /dev/null
+controlaudio start &> /dev/null
 echo "Done!"
