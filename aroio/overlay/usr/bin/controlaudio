@@ -44,7 +44,7 @@ function Start()
 				;;
 
 				bluealsaaplay)
-					[ -e /sys/class/bluetooth/hci0 ] && systemctl "$ACTION" bluetooth-reconnect.service && systemctl "$ACTION" bluealsa-aplay.service
+					[ -e /sys/class/bluetooth/hci0 ] && systemctl  "$ACTION" bluealsa-aplay.service
 				;;
 			esac
 		;;
@@ -72,7 +72,7 @@ function Start()
 				;;
 
 				bluealsaaplay)
-					[ -e /sys/class/bluetooth/hci0 ] && systemctl "$ACTION" bluetooth-reconnect.service && systemctl "$ACTION" bluealsa-aplay.service
+					[ -e /sys/class/bluetooth/hci0 ] && systemctl "$ACTION" bluealsa-aplay.service
 				;;
 			esac
 		;;
@@ -83,7 +83,7 @@ function Start()
 			[ "$DMIX_LIBRESPOT"   = "ON" ] && systemctl "$ACTION" librespot.service
 			[ "$DMIX_GMEDIARENDER"  = "ON" ] && systemctl "$ACTION" gmediarender.service
 			[ "$DMIX_SHAIRPORTSYNC" = "ON" ] && systemctl "$ACTION" shairport-sync.service
-			[[ "$DMIX_BLUEALSAAPLAY" = "ON" && -e /sys/class/bluetooth/hci0 ]] && systemctl "$ACTION" bluetooth-reconnect.service && systemctl "$ACTION" bluealsa-aplay.service
+			[[ "$DMIX_BLUEALSAAPLAY" = "ON" && -e /sys/class/bluetooth/hci0 ]] && systemctl "$ACTION" bluealsa-aplay.service
 		;;
 
 		vol-plug-dmix-ms)
@@ -92,7 +92,7 @@ function Start()
 			[ "$DMIXMS_LIBRESPOT"   = "ON" ] && systemctl "$ACTION" librespot.service
 			[ "$DMIXMS_GMEDIARENDER"  = "ON" ] && systemctl "$ACTION" gmediarender.service
 			[ "$DMIXMS_SHAIRPORTSYNC" = "ON" ] && systemctl "$ACTION" shairport-sync.service
-			[[ "$DMIXMS_BLUEALSAAPLAY" = "ON" && -e /sys/class/bluetooth/hci0 ]] && systemctl "$ACTION" bluetooth-reconnect.service && systemctl "$ACTION" bluealsa-aplay.service
+			[[ "$DMIXMS_BLUEALSAAPLAY" = "ON" && -e /sys/class/bluetooth/hci0 ]] && systemctl "$ACTION" bluealsa-aplay.service
 		;;
 
 		jack)
@@ -105,7 +105,7 @@ function Start()
 			[ "$JACK_LIBRESPOT"   = "ON" ] && systemctl "$ACTION" librespot.service
 			[ "$JACK_GMEDIARENDER"  = "ON" ] && systemctl "$ACTION" gmediarender.service
 			[ "$JACK_SHAIRPORTSYNC" = "ON" ] && systemctl "$ACTION" shairport-sync.service
-			[[ "$JACK_BLUEALSAAPLAY" = "ON" && -e /sys/class/bluetooth/hci0 ]] && systemctl "$ACTION" bluetooth-reconnect.service && systemctl "$ACTION" bluealsa-aplay.service
+			[[ "$JACK_BLUEALSAAPLAY" = "ON" && -e /sys/class/bluetooth/hci0 ]] && systemctl "$ACTION" bluealsa-aplay.service
 			[ "$JACK_INPUT" = "ON" ] && sleep 0.2 && jack_connect system:capture_1 jackmixer:in1_left && jack_connect system:capture_2 jackmixer:in1_right
 		;;
 
@@ -118,7 +118,7 @@ function Start()
 			[ "$JACKMS_LIBRESPOT"   = "ON" ] && systemctl "$ACTION" librespot.service
 			[ "$JACKMS_GMEDIARENDER"  = "ON" ] && systemctl "$ACTION" gmediarender.service
 			[ "$JACKMS_SHAIRPORTSYNC" = "ON" ] && systemctl "$ACTION" shairport-sync.service
-			[[ "$JACKMS_BLUEALSAAPLAY" = "ON" && -e /sys/class/bluetooth/hci0 ]] && systemctl "$ACTION" bluetooth-reconnect.service && systemctl "$ACTION" bluealsa-aplay.service
+			[[ "$JACKMS_BLUEALSAAPLAY" = "ON" && -e /sys/class/bluetooth/hci0 ]] && systemctl "$ACTION" bluealsa-aplay.service
 			[ "$JACKMS_INPUT" = "ON" ] && sleep 0.2 && jack_connect system:capture_1 jackmixer:in1_left && jack_connect system:capture_2 jackmixer:in1_right
 		;;
 
@@ -133,7 +133,7 @@ function Start()
 			[ "$JACKBF_LIBRESPOT"   = "ON" ] && systemctl "$ACTION" librespot.service
 			[ "$JACKBF_GMEDIARENDER"  = "ON" ] && systemctl "$ACTION" gmediarender.service
 			[ "$JACKBF_SHAIRPORTSYNC" = "ON" ] && systemctl "$ACTION" shairport-sync.service
-			[[ "$JACKBF_BLUEALSAAPLAY" = "ON" && -e /sys/class/bluetooth/hci0 ]] && systemctl "$ACTION" bluetooth-reconnect.service && systemctl "$ACTION" bluealsa-aplay.service
+			[[ "$JACKBF_BLUEALSAAPLAY" = "ON" && -e /sys/class/bluetooth/hci0 ]] && systemctl "$ACTION" bluealsa-aplay.service
 			[ "$JACKBF_INPUT" = "ON" ] && sleep 0.2 && jack_connect system:capture_1 brutefir:input-0 && jack_connect system:capture_2 brutefir:input-1
 		;;
 
@@ -148,7 +148,7 @@ function Start()
 			[ "$JACKBFMS_LIBRESPOT"   = "ON" ] && systemctl "$ACTION" librespot.service
 			[ "$JACKBFMS_GMEDIARENDER"  = "ON" ] && systemctl "$ACTION" gmediarender.service
 			[ "$JACKBFMS_SHAIRPORTSYNC" = "ON" ] && systemctl "$ACTION" shairport-sync.service
-			[[ "$JACKBF_BLUEALSAAPLAY" = "ON" && -e /sys/class/bluetooth/hci0 ]] && systemctl "$ACTION" bluetooth-reconnect.service && systemctl "$ACTION" bluealsa-aplay.service
+			[[ "$JACKBFMS_BLUEALSAAPLAY" = "ON" && -e /sys/class/bluetooth/hci0 ]] && systemctl "$ACTION" bluealsa-aplay.service
 			[ "$JACKBFMS_INPUT" = "ON" ] && jack_connect system:capture_1 brutefir:input-0 && jack_connect system:capture_2 brutefir:input-1
 		;;
 	esac
@@ -157,7 +157,7 @@ function Start()
 function StopStatus()
 {
 	[ "$1" = "stop" ] && volumecontrol -120 && sleep 0.5 && killall jack_persistent_client
-	for SERVICE in squeezelite spotifyd librespot gmediarender shairport-sync bluealsa-aplay brutefir jackd bluetooth-reconnect
+	for SERVICE in squeezelite spotifyd librespot gmediarender shairport-sync brutefir jackd bluealsa-aplay
 	do
 		systemctl "$1" "$SERVICE".service
 	done
@@ -165,7 +165,7 @@ function StopStatus()
 
 function Brutefir()
 {
-	for SERVICE in squeezelite spotifyd librespot gmediarender shairport-sync bluealsa-aplay bluetooth-reconnect
+	for SERVICE in squeezelite spotifyd librespot gmediarender shairport-sync bluetooth
 	do
 		systemctl stop "$SERVICE".service
 	done
@@ -177,7 +177,7 @@ function Brutefir()
 
 function Jack()
 {
-	for SERVICE in squeezelite spotifyd librespot gmediarender shairport-sync bluealsa-aplay bluetooth-reconnect
+	for SERVICE in squeezelite spotifyd librespot gmediarender shairport-sync bluealsa-aplay
 	do
 		systemctl stop "$SERVICE".service
 	done
