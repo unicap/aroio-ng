@@ -1,0 +1,12 @@
+#!/bin/sh
+
+for i in $(echo "paired-devices" | bluetoothctl | awk /Device/'{ print $2 }')
+do	echo disconnect "$i" | bluetoothctl
+	sleep 0.5
+done
+
+
+
+
+echo connect $DEVICE | bluetoothctl &> /dev/null
+
