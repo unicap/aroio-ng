@@ -2,12 +2,15 @@
 Description=Bluetooth reconnect service
 ConditionPathIsDirectory=/sys/class/bluetooth
 After=bluetooth-simpleagent.service
-Before=bluealsa.service
+BindsTo=bluealsa-aplay.service
+
+
 
 [Service]
 Type=simple
 ExecStart=/usr/bin/bluetooth-reconnect
 Restart=always
+ExecStopPost=/usr/bin/bluetooth-disconnect
 
 [Install]
 WantedBy=bluetooth.target

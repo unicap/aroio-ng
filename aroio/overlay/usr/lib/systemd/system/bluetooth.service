@@ -3,13 +3,13 @@ Description=Bluetooth service
 Documentation=man:bluetoothd(8)
 After=sys-subsystem-bluetooth-devices-hci0.device
 ConditionPathIsDirectory=/sys/class/bluetooth/
-Before=bluetooth-simpleagent.service
+Wants=bluetooth-simpleagent.service bluealsa.service
 
 
 [Service]
 Type=dbus
 BusName=org.bluez
-ExecStart=/usr/libexec/bluetooth/bluetoothd -d
+ExecStart=/usr/libexec/bluetooth/bluetoothd
 NotifyAccess=main
 #WatchdogSec=10
 #Restart=on-failure

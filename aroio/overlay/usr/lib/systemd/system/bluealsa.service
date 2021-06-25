@@ -2,15 +2,15 @@
 Description=BluezAlsa proxy
 ConditionPathIsDirectory=/sys/class/bluetooth/hci0
 Requires=bluetooth.target
+BindsTo=bluetooth.service
 After=bluetooth.target sys-subsystem-bluetooth-devices-hci0.device
+Before=bluealsa-aplay.service
 
 [Service]
 Type=simple
 EnvironmentFile=/boot/userconfig.txt
 ExecStartPre=/bin/rm -rf /var/run/bluealsa/
-
-ExecStart=/usr/bin/bluealsa
-
+ExecStart=/usr/bin/bluealsa -p a2dp-sink
 Restart=always
 
 [Install]
