@@ -46,4 +46,6 @@
     </a>
 
   </fieldset>
+  <hr class="top">
+  <br>
 </div>

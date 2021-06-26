@@ -1,3 +1,7 @@
+<?
+include "audio_matrix.php";
+?>
+  <!-- Audio -->
   <div class="content">
     <fieldset>
       <legend><? print ${"audio_form_"."$lang"};?></legend>
@@ -64,8 +68,6 @@
         </tr>
       </table>
 
-      </-- Audio Output Auswahl-->
-      <div class="content">
         <table>
           <tr>
             <td>
@@ -112,17 +114,14 @@
           </tr> <?
           include "audio_adv.php"; ?>
         </table>
-      </div>
     </fieldset>
-  </div> <?
-
-  include "audio_matrix.php"; ?>
-
-  <br>
-  <input class="button" type="submit" value=" <? print ${"button_submit_audiosettings_"."$lang"} ?> " name="audiosettings_submit">
-  <br>
-
-  <div class="content">
-    <input class="button" type="submit" value=" <? print ${"button_submit_"."$lang"} ?> " name="submit">
-    <input class="button" type="submit" value=" <? print ${"button_reboot_"."$lang"} ?> " name="reboot">
   </div>
+
+<div class="content">
+  <input class="button" type="submit" value=" <? print ${"button_submit_audiosettings_"."$lang"} ?> " name="audiosettings_submit">
+  <div>
+  <br>
+  <hr class="top">
+  <br>
+  </div>
+</div>

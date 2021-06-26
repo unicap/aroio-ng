@@ -1,3 +1,4 @@
+  <!-- Hardware -->
   <div class="content">
     <fieldset>
       <legend>

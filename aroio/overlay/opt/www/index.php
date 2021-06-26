@@ -227,19 +227,22 @@
 
   include "header.php";
   include "nav.php";
-?><form id="Audio settings" Name="Audio settings" action="" method="post"><?
+?>
+<form id="Audio settings" Name="Audio settings" action="" method="post">
+<?
+  include "audio.php";
+  include "lms.php";
   include "network.php";
   include "webui.php";
   include "hardware.php";
-  include "lms.php";
-  include "audio.php";
-?></form><?
+  include "buttons.php";
+?>
+</form>
 
-
-
+<?
 unset($_POST['submit']);
 
 include('update_check.php');
-include "footer.php";
 
+include "footer.php";
 ?>

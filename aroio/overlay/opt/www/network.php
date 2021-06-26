@@ -1,4 +1,4 @@
-<!-- Einstellungen Netzwerk -->
+<!-- Network -->
   <div class="content">
     <fieldset>
       <legend>
