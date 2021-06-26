@@ -1,5 +1,5 @@
 <!-- Logitech Media Server -->
-<div class="content">
+<div class="content" id="lms_settings">
   <fieldset>
     <legend><? print ${"squeeze_serv_form_"."$lang"};?></legend>
     <table>
