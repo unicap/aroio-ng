@@ -364,8 +364,8 @@
     $helptext_audio_out_de='';
 
     //Button
-    $button_submit_audiosettings_de='Anwenden';
-    $button_submit_audiosettings_en='Apply';
+    $button_submit_apply_en='Apply';
+    $button_submit_apply_de='Anwenden';
 
     $button_submit_en='Save';
     $button_submit_de='Speichern';

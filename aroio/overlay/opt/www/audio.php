@@ -116,13 +116,12 @@ include "audio_matrix.php";
           include "audio_adv.php"; ?>
         </table>
     </fieldset>
-  </div>
 
-<div class="content">
-  <input class="button" type="submit" value=" <? print ${"button_submit_audiosettings_"."$lang"} ?> " name="audiosettings_submit">
-  <div>
-  <br>
-  <hr class="top">
-  <br>
+    <input class="button" type="submit" value=" <? print ${"button_submit_apply_"."$lang"} ?> " name="audiosettings_submit">
+    <div>
+      <br>
+      <hr class="top">
+      <br>
+    </div>
+
   </div>
-</div>

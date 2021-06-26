@@ -46,6 +46,12 @@
     </a>
 
   </fieldset>
-  <hr class="top">
-  <br>
+
+  <input class="button" type="submit" value=" <? print ${"button_submit_apply_"."$lang"} ?> " name="lms_submit">
+  <div>
+    <br>
+    <hr class="top">
+    <br>
+  </div>
+
 </div>
