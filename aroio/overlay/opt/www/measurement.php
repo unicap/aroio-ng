@@ -85,9 +85,11 @@
          wrtToUserconfig("MEASUREMENT_OUTPUT","vol-plug");
          $shell_exec_ret=shell_exec('cardmount ro');
         } ?>
-        <pre> <?
+        <div>
+        <pre class="output-stream"> <?
           print ${"measurement_runs_"."$lang"}; ?>
         </pre>
+        </div>
         <input type="submit" class="button" value=" <? print ${"cancel_measurement_"."$lang"} ?> " name="CANCEL_MEASUREMENT"> <?
         if (!file_exists('/tmp/measurement')) measurement();
         $measurement_done="true";
@@ -106,9 +108,11 @@
          wrtToUserconfig("MEASUREMENT_OUTPUT","jack-bf");
          $shell_exec_ret=shell_exec('cardmount ro');
         } ?>
-        <pre> <?
+        <div>
+        <pre class="output-stream"> <?
           print ${"measurement_runs_"."$lang"}; ?>
         </pre>
+        </div>
         <input type="submit" class="button" value=" <? print ${"cancel_measurement_"."$lang"} ?> " name="CANCEL_MEASUREMENT"> <?
         measurement();
         $measurement_done="true";

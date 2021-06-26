@@ -338,6 +338,11 @@ input[type=text], input[type=password] {
     box-sizing: border-box !important;
 }
 
+/* Preformatted text */
+pre.output-stream {
+    overflow: auto;
+}
+
 /* Select Menus */
 select{
     border: 0;  /*Removes border*/
