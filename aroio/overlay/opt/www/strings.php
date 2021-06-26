@@ -248,7 +248,11 @@
 
     $samplerate_en='Samplerate';
     $samplerate_de='Sampling-Frequenz';
-        //HELPTEXT
+
+    $samplerate_direct_en='Direct Mode';
+    $samplerate_direct_de='Direct-Modus';
+
+    //HELPTEXT
     $helptext_advancedsettings_en='Advanced settings. Only use when needed or asked to do so by ABACUS!';
     $helptext_advancedsettings_de='Erweiterte Einstellungen. Nur benutzen, wenn ben&ouml;tigt oder von ABACUS dazu aufgefordert!';
 

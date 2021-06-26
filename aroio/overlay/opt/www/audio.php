@@ -110,6 +110,7 @@ include "audio_matrix.php";
                   break;
               }
               print_optgroup("RATE",$arr_rate,$ini_array["RATE"]); ?>
+              <span id="rate_direct"><? print ${"samplerate_direct_"."$lang"} ?></span>
             </td>
           </tr> <?
           include "audio_adv.php"; ?>
