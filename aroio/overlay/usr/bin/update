@@ -94,6 +94,7 @@ test(){
 
 update(){
 	echo heartbeat >/sys/class/leds/led0/trigger
+	touch /tmp/update_running
 	echo "Update started..."
 
 	# Stop daemons that might write to the SDcard before updating
@@ -109,6 +110,7 @@ update(){
 			echo "There is more than one image in the update folder! Please specify one with the version option."
 			ls aroio*  -lh
 			echo none >/sys/class/leds/led0/trigger
+			rm /tmp/update_running
 			exit 2
 	fi
 
