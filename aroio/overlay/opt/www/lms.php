@@ -18,7 +18,7 @@
           <span title=""><label for="Username (if set)"> <? print ${"squeeze_serv_user_"."$lang"} ; ?> </label></span></a>
         </td>
         <td>
-          <input class="actiongroup" type="text" name="SQUEEZEUSER" value="<? print $ini_array["SQUEEZEUSER"] ?>">
+          <input class="actiongroup" type="text" autocomplete="off" name="SQUEEZEUSER" value="<? print $ini_array["SQUEEZEUSER"] ?>">
         </td>
       </tr>
       <tr>
@@ -27,7 +27,7 @@
           <span title=""><label for="Password (if set)"> <? print ${"squeeze_serv_passwd_"."$lang"} ; ?> </label></span></a>
         </td>
         <td>
-          <input class="actiongroup" type="password" name="SQUEEZEPWD" value="<? print $ini_array["SQUEEZEPWD"] ?>">
+          <input class="actiongroup" type="password" autocomplete="off" name="SQUEEZEPWD" value="<? print $ini_array["SQUEEZEPWD"] ?>">
         </td>
       </tr>
       <tr>
