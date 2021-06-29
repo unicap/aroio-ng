@@ -54,7 +54,7 @@
       print ${"measurement_warning_"."$lang"};
       if (isset($_POST['PLAY_NOISE']))
       {
-          if(isset($_POST['MEASURE_MS']))
+          if(isset($_POST['MEASURE_MS']) && $_POST['MEASURE_MS'] == "ON")
             {
               $shell_exec_ret=shell_exec('cardmount rw');
               wrtToUserconfig("MEASUREMENT_OUTPUT","vol-plug-ms");
@@ -73,7 +73,7 @@
       if (isset($_POST['CANCEL_MEASUREMENT'])) cancel_measurement();
       if (isset($_POST['MEASUREMENT']) || file_exists('/tmp/measurement'))
       {
-        if (!file_exists('/tmp/measurement') && isset($_POST['MEASURE_MS']))
+        if (!file_exists('/tmp/measurement') && (isset($_POST['MEASURE_MS']) && $_POST['MEASURE_MS'] == "ON"))
         {
           $shell_exec_ret=shell_exec('cardmount rw');
           wrtToUserconfig("MEASUREMENT_OUTPUT","vol-plug-ms");
@@ -96,7 +96,7 @@
       }
       elseif (isset($_POST['MEASUREMENT_CONTROL']))
       {
-        if (isset($_POST['MEASURE_MS']))
+        if (isset($_POST['MEASURE_MS']) && $_POST['MEASURE_MS'] == "ON")
         {
           $shell_exec_ret=shell_exec('cardmount rw');
           wrtToUserconfig("MEASUREMENT_OUTPUT","jack-bfms");
@@ -125,18 +125,29 @@
         }
         else
         { ?>
-          <input type="submit" class="button" value=" <? print ${"play_noise_"."$lang"} ?> " name="PLAY_NOISE">
-          <input type="submit" class="button" value=" <? print ${"start_measurement_"."$lang"} ?> " name="MEASUREMENT">
-          <input type="submit" class="button" value=" <? print ${"start_measurement_control_"."$lang"} ?> " name="MEASUREMENT_CONTROL"> <?
-
-          if (preg_match("/.*(ms).*$/", $ini_array['MEASUREMENT_OUTPUT']))
+          <hr>
+          <a title="<? print ${"helptext_audio_cleaner_"."$lang"} ?>"class="tooltip">
+            <span>Cleaner&nbsp;<a href="https://www.abacus-electronics.de/infothek-cleaner" target="_blank" class="glossary">Was ist das?</a></span>
+          </a>
+          <?
+          if (get_cleaner_enabled($ini_array['MEASUREMENT_OUTPUT']))
           { ?>
-            <input type="checkbox" id="measure_ms" name="MEASURE_MS" value="ON" checked> Clean! <?
-          }
+            <input class="actiongroup" type="radio" name="MEASURE_MS" value="OFF"> <?print ${"cleaner_off_"."$lang"}?>
+            <input class="actiongroup" type="radio" name="MEASURE_MS" value="ON" checked> <?print ${"cleaner_on_"."$lang"}?>
+          <? }
           else
           { ?>
-            <input type="checkbox" id="measure_ms" name="MEASURE_MS" value=""> Clean! <?
+            <input class="actiongroup" type="radio" name="MEASURE_MS" value="OFF" checked> <?print ${"cleaner_off_"."$lang"}?>
+            <input class="actiongroup" type="radio" name="MEASURE_MS" value="ON"> <?print ${"cleaner_on_"."$lang"}?>
+          <?
           }
+          ?>
+          <br>
+          <br>
+          <input type="submit" class="button" value=" <? print ${"play_noise_"."$lang"} ?> " name="PLAY_NOISE">
+          <input type="submit" class="button" value=" <? print ${"start_measurement_"."$lang"} ?> " name="MEASUREMENT">
+          <input type="submit" class="button" value=" <? print ${"start_measurement_control_"."$lang"} ?> " name="MEASUREMENT_CONTROL">
+        <?
         }
       } ?>
     </div> <!-- Ende Raumkorrekturmessung -->
