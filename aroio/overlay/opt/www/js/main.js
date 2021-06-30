@@ -9,9 +9,16 @@ $(document).ready(function() {
         squeezelite_checkbox = document.getElementsByName("JACK_SQUEEZELITE")[1];
         squeezelite_checkbox.addEventListener("change", adjust_lms);
 
+        lan_dhcp_on = document.getElementsByName("LAN_DHCP")[0];
+        lan_dhcp_on.addEventListener("click", adjust_dhcp);
+        lan_dhcp_off = document.getElementsByName("LAN_DHCP")[1];
+        lan_dhcp_off.addEventListener("click", adjust_dhcp);
+
         adjust_audio_matrix();
         adjust_sample_rate_select();
         adjust_lms();
+        adjust_dhcp();
+        adjust_wifi();
     }
 
     if (window.location.pathname == "/brutefir.php") {
@@ -100,6 +107,47 @@ function adjust_lms() {
         } else {
             $("#lms_settings *").prop("disabled", true);
         }
+    }
+}
+
+function adjust_dhcp() {
+    let lan_dhcp = document.querySelector('input[name=LAN_DHCP]:checked').value;
+    let lan_ipaddr = document.getElementById("lan_ipaddr");
+    let lan_netmask = document.getElementById("lan_netmask");
+    let lan_dnsserv = document.getElementById("lan_dnsserv");
+    let lan_gateway = document.getElementById("lan_gateway");
+    let wifi_scan = document.getElementById("wifi_scan");
+    let wifi_ssid = document.getElementById("wifi_ssid");
+    let wifi_pass = document.getElementById("wifi_pass");
+    if (lan_dhcp == "ON") {
+        lan_ipaddr.classList.add("d-none");
+        lan_netmask.classList.add("d-none");
+        lan_dnsserv.classList.add("d-none");
+        lan_gateway.classList.add("d-none");
+        wifi_scan.classList.remove("d-none");
+        wifi_ssid.classList.remove("d-none");
+        wifi_pass.classList.remove("d-none");
+    } else {
+        lan_ipaddr.classList.remove("d-none");
+        lan_netmask.classList.remove("d-none");
+        lan_dnsserv.classList.remove("d-none");
+        lan_gateway.classList.remove("d-none");
+        wifi_scan.classList.add("d-none");
+        wifi_ssid.classList.add("d-none");
+        wifi_pass.classList.add("d-none");
+    }
+}
+
+function adjust_wifi() {
+    let wifi_state = document.getElementById("network_table").dataset.wifi_enabled;
+    if (wifi_state == "enabled") {
+        $("#wifi_scan *").prop("disabled", false);
+        $("#wifi_ssid *").prop("disabled", false);
+        $("#wifi_pass *").prop("disabled", false);
+    } else {
+        $("#wifi_scan *").prop("disabled", true);
+        $("#wifi_ssid *").prop("disabled", true);
+        $("#wifi_pass *").prop("disabled", true);
     }
 }
 
