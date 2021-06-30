@@ -288,6 +288,11 @@ input[type='radio']:checked:after
     visibility: visible;
     border: 1px solid #0aa;
 }
+input[type=radio]:disabled:after {
+    background-color: #eee;
+    border-color: #eee;
+    cursor: not-allowed;
+}
 /* Radio Inputs vom 16.01.16
 input[type="radio"]:after {
     background-color: #444;

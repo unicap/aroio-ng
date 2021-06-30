@@ -14,11 +14,15 @@ $(document).ready(function() {
         lan_dhcp_off = document.getElementsByName("LAN_DHCP")[1];
         lan_dhcp_off.addEventListener("click", adjust_dhcp);
 
+        platform_select = document.getElementsByName("PLATFORM")[0];
+        platform_select.addEventListener("change", adjust_onboard_wifi);
+
         adjust_audio_matrix();
         adjust_sample_rate_select();
         adjust_lms();
         adjust_dhcp();
         adjust_wifi();
+        adjust_onboard_wifi();
     }
 
     if (window.location.pathname == "/brutefir.php") {
@@ -148,6 +152,14 @@ function adjust_wifi() {
         $("#wifi_scan *").prop("disabled", true);
         $("#wifi_ssid *").prop("disabled", true);
         $("#wifi_pass *").prop("disabled", true);
+    }
+}
+
+function adjust_onboard_wifi() {
+    if (platform_select.value == "RaspberryPi") {
+        $("#onboard_wifi *").prop("disabled", false);
+    } else {
+        $("#onboard_wifi *").prop("disabled", true);
     }
 }
 

@@ -104,8 +104,8 @@
     $helptext_userpwd_en='Here you enter the password for the configuration web-gui. The username always stays aroio.';
     $helptext_userpwd_de='Eingabefeld f&uuml;r das Passwort der Weboberfl&auml;che. Der Benutzername ist stets aroio.';
 
-	 //Hardware-Plattform
-	  $hardware_form_en='Hardware settings';
+	//Hardware-Plattform
+	$hardware_form_en='Hardware settings';
     $hardware_form_de='Einstellungen Hardware';
 
     $platform_form_en='Hardware platform';
@@ -115,10 +115,10 @@
     $helptext_platform_de='Auswahl der Hardware-Plattform. Erfordert Neustart. Eine falsche Auswahl kann zu Fehlfunktionen f&uuml;hren.';
 
     $helptext_onboard_wifi_en='Enable or disable the onboard WIFI';
-    $helptext_onboard_wifi_de='Aktivierung des eingebauten W-Lan';
+    $helptext_onboard_wifi_de='Aktivierung des eingebauten WLAN';
 
     $onboard_wifi_form_en='Onboard WIFI';
-    $onboard_wifi_form_de='Eingebautes W-Lan';
+    $onboard_wifi_form_de='Eingebautes WLAN';
 
     $helptext_onboard_bluetooth_en='Enable or disable the onboard Bluetooth module';
     $helptext_onboard_bluetooth_de='Aktivierung des eingebauten Bluetooth Moduls';
@@ -127,7 +127,6 @@
     $onboard_bluetooth_form_de='Eingebautes Bluetooth';
 
     //LMS
-        //
     $squeeze_serv_form_en='Logitech Media server';
     $squeeze_serv_form_de='Logitech Media Server';
 
