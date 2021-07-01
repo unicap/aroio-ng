@@ -19,4 +19,6 @@ endif
 
 RUSTC_HOST_NAME = $(RUSTC_HOST_ARCH)-unknown-linux-gnu
 
+RUSTC_DEPENDENCIES = rust
+
 $(eval $(host-virtual-package))

@@ -5,7 +5,7 @@
 ################################################################################
 
 #CARGO_VERSION = 0.26.0
-CARGO_VERSION = 0.44.1
+CARGO_VERSION = 0.54.0
 CARGO_SITE = $(call github,rust-lang,cargo,$(CARGO_VERSION))
 CARGO_LICENSE = Apache-2.0 or MIT
 CARGO_LICENSE_FILES = LICENSE-APACHE LICENSE-MIT

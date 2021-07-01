@@ -50,3 +50,8 @@ sha256 23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3  LICENSE
 sha256 a18b89572ff2e55eb9e0428efcdb60eacd82fe28c4d825d169b0ffc9e3c55ceb rustc-1.43.1-x86_64-unknown-linux-gnu.tar.xz
 sha256 dabc62db53c2e7ffeba2824d4c52a938486b04c01a93ecba00c5d529868f6cfc  rust-std-1.43.1-x86_64-unknown-linux-gnu.tar.xz
 sha256 2ef055772ca34aed42f8130b3cfaacac064aa156c563d09d45142f0994ac69d5  rust-std-1.43.1-arm-unknown-linux-gnueabihf.tar.xz
+
+sha256 9c2f0443a546dd18f1f020c7711a7b9864432545ceb812e79315c1e76508b193 rustc-1.53.0-x86_64-unknown-linux-gnu.tar.xz
+sha256 66d5257bbd194db08e67ca63a74cc80cdc4a36eaa30bf7dfe65861d9deaff7f7 rust-std-1.53.0-x86_64-unknown-linux-gnu.tar.xz 
+sha256 7b68fb27f29da03ec2d24009f2a3c4b1d4ca73887f4635f4b12b034f90166f3e rust-std-1.53.0-arm-unknown-linux-gnueabihf.tar.xz
+
