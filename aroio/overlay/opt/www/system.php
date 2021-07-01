@@ -157,9 +157,16 @@ if ($update == false){ ?>
 }
 else
 {
-  print ${"infotext_update_running_"."$lang"}; ?>
-  <br>
-  <fieldset style="border-style: dotted"> <?
+?>
+<div id="update_modal" class="update-modal">
+  <div class="modal-content">
+    <header><? print ${"infotext_updating_"."$lang"}; ?></header>
+    <div id="update_finished" class="d-none">
+      <span><? print ${"infotext_update_finished_"."$lang"}; ?></span>
+    </div>
+    <div id="update_progress" class="system">
+<?
+  print ${"infotext_update_running_"."$lang"};
     echo '<pre>';
       if ($_POST['USEBETA'] == "ON")
       {
@@ -185,11 +192,14 @@ else
             }
           echo '</pre>' ;
       }
-    echo '</pre>'; ?>
-  </fieldset>
-  <br>  <?
+    echo '</pre><br>';
   print_r($update_output);
-} ?>
+  ?>
+    </div>
+  </div>
+</div>
+<? } ?>
+
 
 
 

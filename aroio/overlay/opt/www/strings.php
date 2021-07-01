@@ -440,6 +440,13 @@
 
     $infotext_update_running_en='Update in progress, please stand by until you see a new message here, this may take a while...';
     $infotext_update_running_de='Update l&auml;uft, bitte warten bis in diesem Ausgabefenster eine neue Meldung erscheint. Dies kann einige Minuten dauern...';
+
+    $infotext_updating_en='System is updating';
+    $infotext_updating_de='System wird aktualisiert';
+
+    $infotext_update_finished_en='Update finished successfully. This page will reload automatically in a few seconds.';
+    $infotext_update_finished_de='Update erfolgreich abgeschlossen. Die Seite wird in ein paar Sekunden automatisch aktualisiert.';
+
     //System-Informationen
     $sysinfo_form_en='System Information';
     $sysinfo_form_de='System-Informationen';

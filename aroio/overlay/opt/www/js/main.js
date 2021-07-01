@@ -25,6 +25,14 @@ $(document).ready(function() {
         adjust_onboard_wifi();
     }
 
+    if (window.location.pathname == "/system.php") {
+        var update_modal = document.getElementById("update_modal");
+        if (update_modal != null) {
+            // This gets called as soon as the page is ready (i.e. update is finished)
+            finish_update();
+        }
+    }
+
     if (window.location.pathname == "/brutefir.php") {
         var current_output = document.getElementById("convolver_settings").dataset.output;
         if (current_output == "jack-bf" || current_output == "jack-bfms") {
@@ -161,6 +169,14 @@ function adjust_onboard_wifi() {
     } else {
         $("#onboard_wifi *").prop("disabled", true);
     }
+}
+
+function finish_update() {
+    document.getElementById("update_progress").classList.add("d-none");
+    document.getElementById("update_finished").classList.remove("d-none");
+    setTimeout(function() {
+        window.location = "/index.php";
+    }, 10000);
 }
 
 // Checkbox zum Passwort anzeigen
