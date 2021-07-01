@@ -86,6 +86,7 @@
          $shell_exec_ret=shell_exec('cardmount ro');
         } ?>
         <div>
+        <hr>
         <pre class="output-stream"> <?
           print ${"measurement_runs_"."$lang"}; ?>
         </pre>
@@ -109,6 +110,7 @@
          $shell_exec_ret=shell_exec('cardmount ro');
         } ?>
         <div>
+        <hr>
         <pre class="output-stream"> <?
           print ${"measurement_runs_"."$lang"}; ?>
         </pre>
@@ -121,6 +123,7 @@
       {
         if (isset($_POST['PLAY_NOISE']))
         { ?>
+          <hr>
           <input type="submit" class="button" value=" <? print ${"stop_noise_"."$lang"} ?> " name="STOP_NOISE"> <br> <?
         }
         else
