@@ -545,7 +545,13 @@ select.filter
     font-size: 75%;
     height: 15em;
     margin-top: 1em;
-    overflow:auto;
+    overflow: auto;
+}
+.update-log {
+    font-size: 90%;
+    height: 100%;
+    margin-top: 1em;
+    overflow: auto;
 }
 
 /* Tooltip für linke td's */
@@ -635,7 +641,7 @@ select.filter
 .update-modal {
     display: block;
     position: fixed;
-    z-index: 1;
+    z-index: 1000;
     left: 0;
     top: 0;
     width: 100%;
@@ -647,9 +653,20 @@ select.filter
 
 /* Modal Content/Box */
 .modal-content {
-    background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
     width: 80%;
+    margin: auto;
+    top: 10%;
+    position: relative;
+    box-shadow: 0px 0px 25px -4px rgba(51,51,51,0.7);
+}
+.modal-header {
+    background-color:#00aaaa;
+    color: #fff;
+    font-size: 1.4em;
+    padding: 20px;
+}
+.modal-container {
+    background-color: #fefefe;
+    padding: 20px;
+    height: 50%;
 }

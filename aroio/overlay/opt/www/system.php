@@ -160,11 +160,12 @@ else
 ?>
 <div id="update_modal" class="update-modal">
   <div class="modal-content">
-    <header><? print ${"infotext_updating_"."$lang"}; ?></header>
-    <div id="update_finished" class="d-none">
-      <span><? print ${"infotext_update_finished_"."$lang"}; ?></span>
-    </div>
-    <div id="update_progress" class="system">
+    <header class="modal-header"><? print ${"infotext_updating_"."$lang"}; ?></header>
+    <div class="modal-container">
+      <div id="update_finished" class="d-none update-log">
+        <span><? print ${"infotext_update_finished_"."$lang"}; ?></span>
+      </div>
+      <div id="update_progress" class="update-log">
 <?
   print ${"infotext_update_running_"."$lang"};
     echo '<pre>';
@@ -195,6 +196,7 @@ else
     echo '</pre><br>';
   print_r($update_output);
   ?>
+      </div>
     </div>
   </div>
 </div>
