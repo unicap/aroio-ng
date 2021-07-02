@@ -547,9 +547,8 @@ select.filter
     margin-top: 1em;
     overflow: auto;
 }
-.update-log {
+.general-log {
     font-size: 90%;
-    height: 100%;
     margin-top: 1em;
     overflow: auto;
 }
@@ -638,7 +637,7 @@ select.filter
 
 /* Modal styling */
 /* Background */
-.update-modal {
+.fixed-modal {
     display: block;
     position: fixed;
     z-index: 1000;
@@ -665,8 +664,12 @@ select.filter
     font-size: 1.4em;
     padding: 20px;
 }
-.modal-container {
+.update-modal-container {
     background-color: #fefefe;
     padding: 20px;
     height: 50%;
+}
+.measurement-modal-container {
+    background-color: #fefefe;
+    padding: 20px;
 }

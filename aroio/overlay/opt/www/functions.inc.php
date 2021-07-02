@@ -631,7 +631,7 @@ function measurement()
 	while (@ ob_end_flush()); // end all output buffers if any
 
 	$proc = popen($cmd, 'r');
-	echo '<div class="system"><pre>' ;
+	echo '<div class="general-log"><pre>' ;
 	while (!feof($proc))
 	{
 	    echo fread($proc, 4096);

@@ -372,6 +372,9 @@
     $button_reboot_en='Reboot';
     $button_reboot_de='Neustart';
 
+    $button_close_en="Close";
+    $button_close_de="Schließen";
+
     //System
     $page_title_system_en='System';
     $page_title_system_de='System';
@@ -550,6 +553,9 @@
 
     $start_measurement_en='Measurement';
     $start_measurement_de='Messung';
+
+    $measurement_finished_en='Measurement finished';
+    $measurement_finished_de='Messung abgeschlossen';
 
     $start_measurement_control_en='Control measurement';
     $start_measurement_control_de='Kontroll-Messung';

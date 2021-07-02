@@ -33,6 +33,26 @@ $(document).ready(function() {
         }
     }
 
+    if (window.location.pathname == "/measurement.php") {
+        var noise_modal = document.getElementById("noise_modal");
+        var measurement_modal = document.getElementById("measurement_modal");
+        if (noise_modal != null) {
+            setTimeout(function() {
+                window.location = "/measurement.php";
+            }, 15000);
+        }
+        if (measurement_modal != null) {
+            var measurement_finished = document.getElementById("measurement_finished");
+            measurement_finished.classList.remove("d-none");
+            var measurement_runs = document.getElementById("measurement_runs");
+            measurement_runs.classList.add("d-none");
+            var close_button = document.getElementById("measurement_close");
+            close_button.addEventListener("click", function() {
+                window.location = "/measurement.php";
+            })
+        }
+    }
+
     if (window.location.pathname == "/brutefir.php") {
         var current_output = document.getElementById("convolver_settings").dataset.output;
         if (current_output == "jack-bf" || current_output == "jack-bfms") {

@@ -85,16 +85,30 @@
          wrtToUserconfig("MEASUREMENT_OUTPUT","vol-plug");
          $shell_exec_ret=shell_exec('cardmount ro');
         } ?>
-        <div>
-        <hr>
-        <pre class="output-stream"> <?
-          print ${"measurement_runs_"."$lang"}; ?>
-        </pre>
+
+        <div id="measurement_modal" class="fixed-modal">
+          <div class="modal-content">
+            <header class="modal-header"><? print ${"start_measurement_"."$lang"}; ?></header>
+            <div class="measurement-modal-container">
+              <div id="measurement_finished" class="d-none">
+                <p><? print ${"measurement_finished_"."$lang"} ?></p>
+                <br>
+                <button id="measurement_close"><? print ${"button_close_"."$lang"} ?></button>
+              </div>
+              <div id="measurement_runs">
+                <? print ${"measurement_runs_"."$lang"}; ?>
+                <br>
+                <br>
+                <input type="submit" class="button" value=" <? print ${"cancel_measurement_"."$lang"} ?> " name="CANCEL_MEASUREMENT">
+                <?
+                if (!file_exists('/tmp/measurement')) measurement();
+                $measurement_done="true";
+                ?>
+              </div>
+            </div>
+          </div>
         </div>
-        <input type="submit" class="button" value=" <? print ${"cancel_measurement_"."$lang"} ?> " name="CANCEL_MEASUREMENT"> <?
-        if (!file_exists('/tmp/measurement')) measurement();
-        $measurement_done="true";
-      }
+      <? }
       elseif (isset($_POST['MEASUREMENT_CONTROL']))
       {
         if (isset($_POST['MEASURE_MS']) && $_POST['MEASURE_MS'] == "ON")
@@ -109,22 +123,42 @@
          wrtToUserconfig("MEASUREMENT_OUTPUT","jack-bf");
          $shell_exec_ret=shell_exec('cardmount ro');
         } ?>
-        <div>
-        <hr>
-        <pre class="output-stream"> <?
-          print ${"measurement_runs_"."$lang"}; ?>
-        </pre>
+
+        <div id="measurement_modal" class="fixed-modal">
+          <div class="modal-content">
+            <header class="modal-header"><? print ${"start_measurement_control_"."$lang"}; ?></header>
+            <div class="measurement-modal-container">
+              <div id="measurement_finished" class="d-none">
+                <p><? print ${"measurement_finished_"."$lang"} ?></p>
+                <br>
+                <button id="measurement_close"><? print ${"button_close_"."$lang"} ?></button>
+              </div>
+              <div id="measurement_runs">
+                <? print ${"measurement_runs_"."$lang"}; ?>
+                <br>
+                <br>
+                <input type="submit" class="button" value=" <? print ${"cancel_measurement_"."$lang"} ?> " name="CANCEL_MEASUREMENT">
+                <? measurement();
+                $measurement_done="true";
+                ?>
+              </div>
+            </div>
+          </div>
         </div>
-        <input type="submit" class="button" value=" <? print ${"cancel_measurement_"."$lang"} ?> " name="CANCEL_MEASUREMENT"> <?
-        measurement();
-        $measurement_done="true";
-      }
+      <? }
       else
       {
         if (isset($_POST['PLAY_NOISE']))
         { ?>
-          <hr>
-          <input type="submit" class="button" value=" <? print ${"stop_noise_"."$lang"} ?> " name="STOP_NOISE"> <br> <?
+          <div id="noise_modal" class="fixed-modal">
+            <div class="modal-content">
+              <header class="modal-header"><? print ${"play_noise_"."$lang"}; ?></header>
+              <div class="measurement-modal-container">
+                <input type="submit" class="button" value=" <? print ${"stop_noise_"."$lang"} ?> " name="STOP_NOISE">
+              </div>
+            </div>
+          </div>
+        <?
         }
         else
         { ?>
