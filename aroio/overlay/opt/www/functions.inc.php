@@ -696,4 +696,13 @@ function upload_measurement()
 	shell_exec($cmd) ;
 }
 
+function restart_required()
+{
+	if (file_exists('/tmp/restart_required'))
+	{
+		return true;
+	}
+	return false;
+}
+
 ?>

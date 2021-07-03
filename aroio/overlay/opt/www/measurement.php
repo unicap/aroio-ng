@@ -89,7 +89,7 @@
         <div id="measurement_modal" class="fixed-modal">
           <div class="modal-content">
             <header class="modal-header"><? print ${"start_measurement_"."$lang"}; ?></header>
-            <div class="measurement-modal-container">
+            <div class="modal-container">
               <div>
                 <? print ${"measurement_runs_"."$lang"}; ?>
                 <br>
@@ -126,7 +126,7 @@
         <div id="measurement_modal" class="fixed-modal">
           <div class="modal-content">
             <header class="modal-header"><? print ${"start_measurement_control_"."$lang"}; ?></header>
-            <div class="measurement-modal-container">
+            <div class="modal-container">
               <div>
                 <? print ${"measurement_runs_"."$lang"}; ?>
                 <br>
@@ -151,7 +151,7 @@
           <div id="noise_modal" class="fixed-modal">
             <div class="modal-content">
               <header class="modal-header"><? print ${"play_noise_"."$lang"}; ?></header>
-              <div class="measurement-modal-container">
+              <div class="modal-container">
                 <input type="submit" class="button" value=" <? print ${"stop_noise_"."$lang"} ?> " name="STOP_NOISE">
               </div>
             </div>

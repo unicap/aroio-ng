@@ -375,6 +375,10 @@
     $button_close_en="Close";
     $button_close_de="Schließen";
 
+    // Notifications
+    $restart_notification_en='A restart is required in order to apply all settings.';
+    $restart_notification_de='Es ist ein Neustart notwendig, um die Einstellungen zu übernehmen.';
+
     //System
     $page_title_system_en='System';
     $page_title_system_de='System';
@@ -449,6 +453,9 @@
 
     $infotext_update_finished_en='Update finished successfully. This page will reload automatically in a few seconds.';
     $infotext_update_finished_de='Update erfolgreich abgeschlossen. Die Seite wird in ein paar Sekunden automatisch aktualisiert.';
+
+    $infotext_rebooting_en='The system will now restart.<br>This page will reload automatically.';
+    $infotext_rebooting_de='Das System wird jetzt neugestartet.<br>Die Seite wird danach automatisch aktualisiert.';
 
     //System-Informationen
     $sysinfo_form_en='System Information';

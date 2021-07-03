@@ -198,12 +198,13 @@
     write_config();
     $shell_exec_ret=shell_exec('cardmount ro');
     unset($_POST['submit']);
-    print '<h1>Configuration saved, will reboot now and redirect you here...</h1>';
-    sleep(3);
+
+    include "rebooting.php";
+    flush();
+
     shell_exec('checksoundcard &');
     shell_exec('echo heartbeat >/sys/class/leds/led0/trigger');
     shell_exec('reboot -d 1 &');
-    echo '<meta http-equiv="refresh" content="15">';
   }
 
   if ( isset($_POST['scan']) )
@@ -229,7 +230,15 @@
   include "nav.php";
 ?>
 <form id="Audio settings" Name="Audio settings" action="" method="post">
-<?
+
+<? if (restart_required())
+{ ?>
+  <div class="notification">
+    <span><? print ${"restart_notification_"."$lang"}; ?></span>
+    <input class="button" type="submit" value="<? print ${"button_reboot_"."$lang"} ?>" name="reboot">
+  </div>
+<? }
+
   include "audio.php";
   include "lms.php";
   include "network.php";
