@@ -42,12 +42,9 @@ $(document).ready(function() {
             }, 15000);
         }
         if (measurement_modal != null) {
-            var measurement_finished = document.getElementById("measurement_finished");
-            measurement_finished.classList.remove("d-none");
-            var measurement_runs = document.getElementById("measurement_runs");
-            measurement_runs.classList.add("d-none");
-            var close_button = document.getElementById("measurement_close");
-            close_button.addEventListener("click", function() {
+            document.getElementsByName("CANCEL_MEASUREMENT")[0].classList.add("d-none")
+            document.getElementById("measurement_finished").classList.remove("d-none");
+            document.getElementById("measurement_close").addEventListener("click", function() {
                 window.location = "/measurement.php";
             })
         }

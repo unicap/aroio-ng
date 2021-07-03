@@ -551,6 +551,7 @@ select.filter
     font-size: 90%;
     margin-top: 1em;
     overflow: auto;
+    height: 50%;
 }
 
 /* Tooltip für linke td's */
@@ -632,7 +633,7 @@ select.filter
 }
 
 .d-none {
-    display: none;
+    display: none !important;
 }
 
 /* Modal styling */

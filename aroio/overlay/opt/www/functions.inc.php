@@ -653,9 +653,6 @@ function cancel_measurement()
 	}
 	exec('controlaudio stop');
 	exec('controlaudio start');
-	echo '<pre>';
-	echo 'Measurement cancelled.';
-	echo '</pre>';
 }
 
 

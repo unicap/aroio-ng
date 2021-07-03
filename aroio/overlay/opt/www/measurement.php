@@ -90,12 +90,7 @@
           <div class="modal-content">
             <header class="modal-header"><? print ${"start_measurement_"."$lang"}; ?></header>
             <div class="measurement-modal-container">
-              <div id="measurement_finished" class="d-none">
-                <p><? print ${"measurement_finished_"."$lang"} ?></p>
-                <br>
-                <button id="measurement_close"><? print ${"button_close_"."$lang"} ?></button>
-              </div>
-              <div id="measurement_runs">
+              <div>
                 <? print ${"measurement_runs_"."$lang"}; ?>
                 <br>
                 <br>
@@ -104,6 +99,10 @@
                 if (!file_exists('/tmp/measurement')) measurement();
                 $measurement_done="true";
                 ?>
+              </div>
+              <div id="measurement_finished" class="d-none">
+                <br>
+                <button id="measurement_close"><? print ${"button_close_"."$lang"} ?></button>
               </div>
             </div>
           </div>
@@ -128,12 +127,7 @@
           <div class="modal-content">
             <header class="modal-header"><? print ${"start_measurement_control_"."$lang"}; ?></header>
             <div class="measurement-modal-container">
-              <div id="measurement_finished" class="d-none">
-                <p><? print ${"measurement_finished_"."$lang"} ?></p>
-                <br>
-                <button id="measurement_close"><? print ${"button_close_"."$lang"} ?></button>
-              </div>
-              <div id="measurement_runs">
+              <div>
                 <? print ${"measurement_runs_"."$lang"}; ?>
                 <br>
                 <br>
@@ -141,6 +135,10 @@
                 <? measurement();
                 $measurement_done="true";
                 ?>
+              </div>
+              <div id="measurement_finished" class="d-none">
+                <br>
+                <button id="measurement_close"><? print ${"button_close_"."$lang"} ?></button>
               </div>
             </div>
           </div>
