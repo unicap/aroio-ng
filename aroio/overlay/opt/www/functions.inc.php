@@ -494,8 +494,33 @@ function wrtToUserconfig($varName,$value)
 //	$shell_exec_ret=exec('cardmount rw');
 	$file="/boot/userconfig.txt";
 	//$pattern='/'.$varName.'=\".*\"/';
-    $pattern='/\b'.$varName.'\b=\".*\"/';
+    $pattern='/\b'.$varName.'\b=\"(.*)\"/';
 	$content=file_get_contents($file);
+
+	// Check if setting would require a restart
+	$requires_restart = array(
+		"SOUNDCARD",
+		"VOLUME_START",
+		"HOSTNAME",
+		"LAN_DHCP",
+		"LAN_IPADDR",
+		"LAN_NETMASK",
+		"LAN_DNSSERV",
+		"LAN_GATEWAY",
+	);
+	if(in_array($varName, $requires_restart))
+	{
+		// Check if the setting’s value has changed
+		if(preg_match($pattern, $content, $matches))
+		{
+			if($value != $matches[1])
+			{
+				touch("/tmp/restart_required");
+			}
+		}
+	}
+
+	// Save setting
 	$content=preg_replace($pattern, $varName.'="'.$value.'"', $content);
 	file_put_contents($file, $content);
 //	$shell_exec_ret=exec('cardmount ro');
