@@ -1,10 +1,26 @@
 <?php
-    ob_start();
     include('strings.php');
     include('functions.inc.php');
 //    print_r($_POST);
 
     if($_GET["lang"] === "en") $lang='en'; else $lang='de';
+
+    if ( isset($_POST['reboot']) )
+    {
+      $shell_exec_ret=shell_exec('cardmount rw');
+      write_config();
+      $shell_exec_ret=shell_exec('cardmount ro');
+      unset($_POST['submit']);
+
+      include "rebooting.php";
+      flush();
+
+      shell_exec('checksoundcard &');
+      shell_exec('echo heartbeat >/sys/class/leds/led0/trigger');
+      shell_exec('reboot -d 1 &');
+    }
+
+    ob_start();
 
     if ( isset($_POST['check_update']) )
     {
@@ -96,9 +112,17 @@
 
 
 <form id="Network settings" Name="Network settings" action="" method="post">
-<div class="content">
 
-<h1> <? print $ini_array["HOSTNAME"] ?> - <? print ${"page_title_system_"."$lang"} ?></h1>
+<div class="content">
+  <h1> <? print $ini_array["HOSTNAME"] ?> - <? print ${"page_title_system_"."$lang"} ?></h1>
+
+  <? if (restart_required())
+  { ?>
+  <div class="notification">
+    <span><? print ${"restart_notification_"."$lang"}; ?></span>
+    <input class="button" type="submit" value="<? print ${"button_reboot_"."$lang"} ?>" name="reboot">
+  </div>
+  <? } ?>
 
 <fieldset> <!-- Afang Update -->
   <legend><? print ${"update_form_"."$lang"};?></legend>
