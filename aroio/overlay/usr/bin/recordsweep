@@ -2,8 +2,8 @@
 
 . /boot/userconfig.txt
 
-MSG_NO_MIC='<br><img src="/no_mic.png" border="0" style="float: left; width: 32px; margin-right: 4px;"/>No Microphone connected, please connect a <a class="forward" href="https://www.abacus-electronics.de/produkte/streaming/raumkorrektur/minidsp-umik-1.html" title="UMIK-1 ABACUS-Shop" target="_blank">miniDSP UMIK-1</a>.'
-MSG_MIC='<br><img src="/mic.gif" border="0" style="float: left; width: 32px; margin-right: 4px;"/>Microphone found, continuing with 200 sec measurement...<br>'
+MSG_NO_MIC='<br><img src="/img/no_mic.png" border="0" style="float: left; width: 32px; margin-right: 4px;"/>No Microphone connected, please connect a <a class="forward" href="https://www.abacus-electronics.de/produkte/streaming/raumkorrektur/minidsp-umik-1.html" title="UMIK-1 ABACUS-Shop" target="_blank">miniDSP UMIK-1</a>.'
+MSG_MIC='<br><img src="/img/mic.gif" border="0" style="float: left; width: 32px; margin-right: 4px;"/>Microphone found, continuing with 200 sec measurement...<br>'
 
 MSG_CLEAN_OFF='<br><b>AudioVero Clean!: Off - Please disable Audiovero Clean! on the device!</b>'
 MSG_CLEAN_ON='<br><b>AudioVero Clean!: On - Please enable Audiovero Clean! on the device!</b>'

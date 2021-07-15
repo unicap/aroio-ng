@@ -1,8 +1,8 @@
 <html>
   <head>
     <link rel="stylesheet" href="css/style.css"/>
-    <link rel="icon" href="/favicon_aroio.png" type="image/x-icon"/>
-    <link rel="shortcut icon" href="/favicon_aroio.png" type="image/x-icon"/>
+    <link rel="icon" href="img/favicon_aroio.png" type="image/x-icon"/>
+    <link rel="shortcut icon" href="img/favicon_aroio.png" type="image/x-icon"/>
     <title><? print $ini_array["HOSTNAME"] ?></title>
   </head>
   <body>

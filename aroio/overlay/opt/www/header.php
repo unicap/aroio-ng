@@ -36,8 +36,8 @@
       } ?>
     </title>
 
-    <link rel="icon" href="/favicon_aroio.png" type="image/x-icon" />
-    <link rel="shortcut icon" href="/favicon_aroio.png" type="image/x-icon" />
+    <link rel="icon" href="img/favicon_aroio.png" type="image/x-icon" />
+    <link rel="shortcut icon" href="img/favicon_aroio.png" type="image/x-icon" />
   </head>
 
   <body>
