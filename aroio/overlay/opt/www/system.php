@@ -66,6 +66,9 @@
 
     if ( isset($_POST['bluetooth_dbpurge']) )
     {
+        $shell_exec_ret=exec('cardmount rw');
+        wrtToUserconfig("BTPURGE", "YES");
+        $shell_exec_ret=exec('cardmount ro');
         shell_exec ( "/usr/bin/bluetooth-dbpurge > /dev/null" );
     }
     include('header.php');

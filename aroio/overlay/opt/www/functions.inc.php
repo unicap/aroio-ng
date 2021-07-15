@@ -507,6 +507,7 @@ function wrtToUserconfig($varName,$value)
 		"LAN_NETMASK",
 		"LAN_DNSSERV",
 		"LAN_GATEWAY",
+		"BTPURGE",
 	);
 	if(in_array($varName, $requires_restart))
 	{
