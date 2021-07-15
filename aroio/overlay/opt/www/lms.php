@@ -1,5 +1,5 @@
 <!-- Logitech Media Server -->
-<div class="content">
+<div class="content" id="lms_settings">
   <fieldset>
     <legend><? print ${"squeeze_serv_form_"."$lang"};?></legend>
     <table>
@@ -18,7 +18,7 @@
           <span title=""><label for="Username (if set)"> <? print ${"squeeze_serv_user_"."$lang"} ; ?> </label></span></a>
         </td>
         <td>
-          <input class="actiongroup" type="text" name="SQUEEZEUSER" value="<? print $ini_array["SQUEEZEUSER"] ?>">
+          <input class="actiongroup" type="text" autocomplete="off" name="SQUEEZEUSER" value="<? print $ini_array["SQUEEZEUSER"] ?>">
         </td>
       </tr>
       <tr>
@@ -27,7 +27,7 @@
           <span title=""><label for="Password (if set)"> <? print ${"squeeze_serv_passwd_"."$lang"} ; ?> </label></span></a>
         </td>
         <td>
-          <input class="actiongroup" type="password" name="SQUEEZEPWD" value="<? print $ini_array["SQUEEZEPWD"] ?>">
+          <input class="actiongroup" type="password" autocomplete="off" name="SQUEEZEPWD" value="<? print $ini_array["SQUEEZEPWD"] ?>">
         </td>
       </tr>
       <tr>
@@ -46,4 +46,12 @@
     </a>
 
   </fieldset>
+
+  <input class="button" type="submit" value=" <? print ${"button_submit_apply_"."$lang"} ?> " name="lms_submit">
+  <div>
+    <br>
+    <hr class="top">
+    <br>
+  </div>
+
 </div>

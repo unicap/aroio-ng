@@ -104,8 +104,8 @@
     $helptext_userpwd_en='Here you enter the password for the configuration web-gui. The username always stays aroio.';
     $helptext_userpwd_de='Eingabefeld f&uuml;r das Passwort der Weboberfl&auml;che. Der Benutzername ist stets aroio.';
 
-	 //Hardware-Plattform
-	  $hardware_form_en='Hardware settings';
+	//Hardware-Plattform
+	$hardware_form_en='Hardware settings';
     $hardware_form_de='Einstellungen Hardware';
 
     $platform_form_en='Hardware platform';
@@ -115,10 +115,10 @@
     $helptext_platform_de='Auswahl der Hardware-Plattform. Erfordert Neustart. Eine falsche Auswahl kann zu Fehlfunktionen f&uuml;hren.';
 
     $helptext_onboard_wifi_en='Enable or disable the onboard WIFI';
-    $helptext_onboard_wifi_de='Aktivierung des eingebauten W-Lan';
+    $helptext_onboard_wifi_de='Aktivierung des eingebauten WLAN';
 
     $onboard_wifi_form_en='Onboard WIFI';
-    $onboard_wifi_form_de='Eingebautes W-Lan';
+    $onboard_wifi_form_de='Eingebautes WLAN';
 
     $helptext_onboard_bluetooth_en='Enable or disable the onboard Bluetooth module';
     $helptext_onboard_bluetooth_de='Aktivierung des eingebauten Bluetooth Moduls';
@@ -127,7 +127,6 @@
     $onboard_bluetooth_form_de='Eingebautes Bluetooth';
 
     //LMS
-        //
     $squeeze_serv_form_en='Logitech Media server';
     $squeeze_serv_form_de='Logitech Media Server';
 
@@ -248,7 +247,11 @@
 
     $samplerate_en='Samplerate';
     $samplerate_de='Sampling-Frequenz';
-        //HELPTEXT
+
+    $samplerate_direct_en='Direct Mode';
+    $samplerate_direct_de='Direct-Modus';
+
+    //HELPTEXT
     $helptext_advancedsettings_en='Advanced settings. Only use when needed or asked to do so by ABACUS!';
     $helptext_advancedsettings_de='Erweiterte Einstellungen. Nur benutzen, wenn ben&ouml;tigt oder von ABACUS dazu aufgefordert!';
 
@@ -337,33 +340,44 @@
     $helptext_audio_out_direct_en='Direct output mode: The samplingrate of the DAC follows the Audio-Stream. If the DAC does not support the rate, the signal will be resampled.';
     $helptext_audio_out_direct_de='Direkter Ausgabemodus: Die Samplingfrequenz der Wandler folgt dem zugespielten Musiksignal, es sei denn, die Wandler beherrschen diese nicht, dann wird geresampelt.';
 
-    $helptext_audio_out_direct_ms_en='Same as \'Direct\' but with MS-coding.';
-    $helptext_audio_out_direct_ms_de='Wie \'Direct\', zus&auml;tzlich mit MS-Kodierung.';
 
     $helptext_audio_out_bus_en='Bus mode: All audio signal are being routed to a bus (jackd). Multiple players can be used simultaniously. Fixed sampling rate. If other rates than the selected target rate are played, the signal will be resampled';
     $helptext_audio_out_bus_de='Bus-Modus: S&auml;mtliche Audio-Signale laufen auf einem Bus (jackd) zusammen. Es k&ouml;nnen mehrere Player gleichzeitig aktiv sein. Feste Samplingfrequenz mit Resampling, wenn andere Raten als die eingestellte zugespielt werden.';
 
-    $helptext_audio_out_bus_ms_en='Same as \'Bus\' but with MS-coding.';
-    $helptext_audio_out_bus_ms_de='Wie \'Bus\', zus&auml;tzlich mit MS-Kodierung.';
-
     $helptext_audio_out_convol_en='Convolution mode: Bus mode with convolution.';
     $helptext_audio_out_convol_de='Convolution Modus: Bus-Modus mit anschlie&szlig;ender Convolution.';
 
-    $helptext_audio_out_convol_ms_en='Same as \'Convolution\', but with MS-coding.';
-    $helptext_audio_out_convol_ms_de='Wie \'Convolution\', zus&auml;tzlich mit MS-Kodierung.';
+    $helptext_audio_cleaner_en='Apply MS-coding.';
+    $helptext_audio_cleaner_de='MS-Codierung anwenden.';
+
+    $glossary_text_en='What\'s that?';
+    $glossary_text_de='Was ist das?';
+
+    $cleaner_off_en='Off';
+    $cleaner_off_de='Aus';
+
+    $cleaner_on_en='On';
+    $cleaner_on_de='An';
 
     $helptext_audio_out_en='';
     $helptext_audio_out_de='';
 
     //Button
-    $button_submit_audiosettings_de='Anwenden';
-    $button_submit_audiosettings_en='Apply';
+    $button_submit_apply_en='Apply';
+    $button_submit_apply_de='Anwenden';
 
     $button_submit_en='Save';
     $button_submit_de='Speichern';
 
     $button_reboot_en='Reboot';
     $button_reboot_de='Neustart';
+
+    $button_close_en="Close";
+    $button_close_de="Schließen";
+
+    // Notifications
+    $restart_notification_en='A restart is required in order to apply all settings.';
+    $restart_notification_de='Es ist ein Neustart notwendig, um die Einstellungen zu übernehmen.';
 
     //System
     $page_title_system_en='System';
@@ -432,7 +446,17 @@
     $infotext_update_unchanged_de='Es ist derzeit keine neuere Version verf&uuml;gbar. <br>Es kann aber die letzte verf&uuml;gbare Version erneut installiert werden.';
 
     $infotext_update_running_en='Update in progress, please stand by until you see a new message here, this may take a while...';
-    $infotext_update_running_de='Update l&auml;uft, bitte warten bis in diesem Ausgabefenster eine neue Meldung erscheint. Dies kann einige Minuten dauern...';
+    $infotext_update_running_de='Update l&auml;uft, bitte warten bis in diesem Ausgabefenster eine neue Meldung erscheint. <br>Dies kann einige Minuten dauern...';
+
+    $infotext_updating_en='System is updating';
+    $infotext_updating_de='System wird aktualisiert';
+
+    $infotext_update_finished_en='Update finished successfully. This page will reload automatically in a few seconds.';
+    $infotext_update_finished_de='Update erfolgreich abgeschlossen. Die Seite wird in ein paar Sekunden automatisch aktualisiert.';
+
+    $infotext_rebooting_en='The system will now restart.<br>This page will reload automatically.';
+    $infotext_rebooting_de='Das System wird jetzt neugestartet.<br>Die Seite wird danach automatisch aktualisiert.';
+
     //System-Informationen
     $sysinfo_form_en='System Information';
     $sysinfo_form_de='System-Informationen';
@@ -536,6 +560,9 @@
 
     $start_measurement_en='Measurement';
     $start_measurement_de='Messung';
+
+    $measurement_finished_en='Measurement finished';
+    $measurement_finished_de='Messung abgeschlossen';
 
     $start_measurement_control_en='Control measurement';
     $start_measurement_control_de='Kontroll-Messung';

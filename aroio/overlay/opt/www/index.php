@@ -6,7 +6,6 @@
 
   include('strings.php');
   include('functions.inc.php');
-  include('style.css');
 
   if($_GET["lang"] === "en") $lang='en';
   else $lang='de';
@@ -129,6 +128,59 @@
       }
     }
 
+    // Adjust AUDIO_OUTPUT with Cleaner checkbox
+    if ($_POST['CLEANER'] == 'ON')
+    {
+      switch ($_POST['AUDIO_OUTPUT'])
+      {
+        case 'vol-plug':
+          $_POST['AUDIO_OUTPUT'] = 'vol-plug-ms';
+        break;
+
+        case 'jack':
+          $_POST['AUDIO_OUTPUT'] = 'jack-ms';
+        break;
+
+        case 'jack-bf':
+          $_POST['AUDIO_OUTPUT'] = 'jack-bfms';
+        break;
+      }
+    }
+
+    // Unify all player config values (temporary solution)
+    $_POST['RAW_PLAYERMS'] = $_POST['RAW_PLAYER'];
+
+    $_POST['JACKMS_SQUEEZELITE'] = $_POST['JACK_SQUEEZELITE'];
+    $_POST['JACKMS_SPOTIFYD'] = $_POST['JACK_SPOTIFYD'];
+    $_POST['JACKMS_GMEDIARENDER'] = $_POST['JACK_GMEDIARENDER'];
+    $_POST['JACKMS_SHAIRPORTSYNC'] = $_POST['JACK_SHAIRPORTSYNC'];
+    $_POST['JACKMS_NETJACK'] = $_POST['JACK_NETJACK'];
+
+    $_POST['JACKBF_SQUEEZELITE'] = $_POST['JACK_SQUEEZELITE'];
+    $_POST['JACKBF_SPOTIFYD'] = $_POST['JACK_SPOTIFYD'];
+    $_POST['JACKBF_GMEDIARENDER'] = $_POST['JACK_GMEDIARENDER'];
+    $_POST['JACKBF_SHAIRPORTSYNC'] = $_POST['JACK_SHAIRPORTSYNC'];
+    $_POST['JACKBF_NETJACK'] = $_POST['JACK_NETJACK'];
+
+    $_POST['JACKBFMS_SQUEEZELITE'] = $_POST['JACK_SQUEEZELITE'];
+    $_POST['JACKBFMS_SPOTIFYD'] = $_POST['JACK_SPOTIFYD'];
+    $_POST['JACKBFMS_GMEDIARENDER'] = $_POST['JACK_GMEDIARENDER'];
+    $_POST['JACKBFMS_SHAIRPORTSYNC'] = $_POST['JACK_SHAIRPORTSYNC'];
+    $_POST['JACKBFMS_NETJACK'] = $_POST['JACK_NETJACK'];
+
+    if ($_POST['JACK_INPUT'] == "")
+    {
+      $_POST['JACKMS_INPUT'] = "OFF";
+      $_POST['JACKBF_INPUT'] = "OFF";
+      $_POST['JACKBFMS_INPUT'] = "OFF";
+    }
+    if ($_POST['JACK_BLUEALSAAPLAY'] == "")
+    {
+      $_POST['JACKMS_BLUEALSAAPLAY'] = "OFF";
+      $_POST['JACKBF_BLUEALSAAPLAY'] = "OFF";
+      $_POST['JACKBFMS_BLUEALSAAPLAY'] = "OFF";
+    }
+
     if ( !$error )
     {
       $shell_exec_ret=shell_exec('cardmount rw');
@@ -146,12 +198,13 @@
     write_config();
     $shell_exec_ret=shell_exec('cardmount ro');
     unset($_POST['submit']);
-    print '<h1>Configuration saved, will reboot now and redirect you here...</h1>';
-    sleep(3);
+
+    include "rebooting.php";
+    flush();
+
     shell_exec('checksoundcard &');
     shell_exec('echo heartbeat >/sys/class/leds/led0/trigger');
     shell_exec('reboot -d 1 &');
-    echo '<meta http-equiv="refresh" content="15">';
   }
 
   if ( isset($_POST['scan']) )
@@ -175,35 +228,30 @@
 
   include "header.php";
   include "nav.php";
-?><form id="Audio settings" Name="Audio settings" action="" method="post"><?
+?>
+<form id="Audio settings" Name="Audio settings" action="" method="post">
+
+<? if (restart_required())
+{ ?>
+  <div class="notification">
+    <span><? print ${"restart_notification_"."$lang"}; ?></span>
+    <input class="button" type="submit" value="<? print ${"button_reboot_"."$lang"} ?>" name="reboot">
+  </div>
+<? }
+
+  include "audio.php";
+  include "lms.php";
   include "network.php";
   include "webui.php";
   include "hardware.php";
-  include "lms.php";
-  include "audio.php";
-?></form><?
+  include "buttons.php";
+?>
+</form>
 
-
-
+<?
 unset($_POST['submit']);
 
 include('update_check.php');
+
 include "footer.php";
-
 ?>
-<script>
-  $(document).ready(function () {
-    $('input[id="raw"]').prop('checked', false);
-    $('input[id="raw"]:first').prop('checked', true)
-
-    $('input[id="raw"]').click(function (event) {
-      $('input[id="raw"]').prop('checked', false);
-      $(this).prop('checked', true);
-    }) ;
-
-    $('input[id="raw"]').click(function (event) {
-      $('input[id="output"]').prop('checked', false);
-      $(this).prop('checked', true);
-    }) ;
-  }) ;
-</script>

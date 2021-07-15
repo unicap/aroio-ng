@@ -1,562 +1,146 @@
+<?
+$arr_audio_output = array
+(
+  array("vol-plug", "Direct"),
+  array("jack", "Bus"),
+  array("jack-bf", "Convolver"),
+);
+
+$arr_raw_players = array
+  (
+    array("squeezelite", "Squeeze"),
+    array("spotifyd", "Spotifyd"),
+    array("gmediarender", "UPnP"),
+    array("shairportsync", "ShAirPlay"),
+    array("bluealsaaplay", "Bluetooth")
+  );
+?>
+
+<!-- Audio Matrix -->
 <div class="content">
   <fieldset>
     <legend><? print ${"audio_matrix_form_"."$lang"};?></legend>
 
     <table>
-      <tr><td><b>Output</b></td><td><b>Player</td></b></tr>
-      <tr><td></td></tr>
-      <tr> <!-- Headline with playernames ---------------------------------->
-        <td></td>
-        <td>
-          Squeeze
-        </td>
-        <td>
-          Spotifyd
-        </td>
-        <td>
-          UPnP
-        </td>
-        <td>
-          ShAirPlay
-        </td>
-        <td>
-          Bluetooth
-        </td>
-        <td>
-          Line In
-        </td>
-        <td>
-          NetJack
-        </td>
-      </tr> <?
+    <tr>
+      <td>
+        <a class="tooltip"
+           id="help_audio_output"
+           title=""
+           data-direct="<? print ${"helptext_audio_out_direct_"."$lang"} ?>"
+           data-bus="<? print ${"helptext_audio_out_bus_"."$lang"} ?>"
+           data-convol="<? print ${"helptext_audio_out_convol_"."$lang"} ?>">
+          <span>Output</span>
+        </a>
+      </td>
+      <td id="audio_output">
+      <?
+      $output_value = get_audio_output($ini_array["AUDIO_OUTPUT"]);
+      print_optgroup2D("AUDIO_OUTPUT", $arr_audio_output, $output_value);
+      ?>
+      </td>
+    </tr>
 
-      ?> <!-- Output DIRECT ---------------------------------------------------------------------------------------------> <?
-      if ($ini_array["SOUNDCARD"] != "Focusrite Scarlett")
-      {
-        if ($ini_array["AUDIO_OUTPUT"] == "vol-plug")
-        { ?>
-          <tr>
-            <td>
-              <input class="actiongroup" type="radio" name="AUDIO_OUTPUT" value="vol-plug" checked>
-              <a title="<? print ${"helptext_audio_out_direct_"."$lang"} ?>"class="tooltip"> Direct <?
-        }
-        else
-        { ?>
-          <tr>
-            <td>
-                <input class="actiongroup" type="radio" name="AUDIO_OUTPUT" value="vol-plug">
-                <a title="<? print ${"helptext_audio_out_direct_"."$lang"} ?>"class="tooltip"> Direct <?
-        }
+    <tr>
+      <td>
+        <a title="<? print ${"helptext_audio_cleaner_"."$lang"} ?>"class="tooltip">
+          <span>Cleaner&nbsp;<a href="https://www.abacus-electronics.de/infothek-cleaner" target="_blank" class="glossary"><? print ${"glossary_text_"."$lang"} ?></a></span>
+        </a>
+      </td>
+      <td>
+      <?
+      if (!get_cleaner_enabled($ini_array["AUDIO_OUTPUT"]) || $_POST["CLEANER"] == "OFF")
+      { ?>
+          <input class="actiongroup" type="radio" name="CLEANER" value="OFF" checked> <?print ${"cleaner_off_"."$lang"}?>
+          <input class="actiongroup" type="radio" name="CLEANER" value="ON"> <?print ${"cleaner_on_"."$lang"}?>
+      <? }
+      else
+      { ?>
+          <input class="actiongroup" type="radio" name="CLEANER" value="OFF"> <?print ${"cleaner_off_"."$lang"}?>
+          <input class="actiongroup" type="radio" name="CLEANER" value="ON" checked> <?print ${"cleaner_on_"."$lang"}?>
+      <? }
+      ?>
+      </td>
+    </tr>
 
-        switch ($ini_array["RAW_PLAYER"])
-        {
-          case "squeezelite": ?>
-                <td> <input class="actiongroup" type="radio" name="RAW_PLAYER" value="squeezelite" checked> </td>
-                <td> <input class="actiongroup" type="radio" name="RAW_PLAYER" value="spotifyd" > </td>
-                <td> <input class="actiongroup" type="radio" name="RAW_PLAYER" value="gmediarender" > </td>
-                <td> <input class="actiongroup" type="radio" name="RAW_PLAYER" value="shairportsync" > </td>
-                <td> <input class="actiongroup" type="radio" name="RAW_PLAYER" value="bluealsaaplay"  <? test_bt() ?> > </td>
-                <td></td>
-              </tr> <?
-              break;
-
-          case "spotifyd": ?>
-                <td> <input class="actiongroup" type="radio" name="RAW_PLAYER" value="squeezelite" > </td>
-                <td> <input class="actiongroup" type="radio" name="RAW_PLAYER" value="spotifyd" checked> </td>
-                <td> <input class="actiongroup" type="radio" name="RAW_PLAYER" value="gmediarender" > </td>
-                <td> <input class="actiongroup" type="radio" name="RAW_PLAYER" value="shairportsync" > </td>
-                <td> <input class="actiongroup" type="radio" name="RAW_PLAYER" value="bluealsaaplay"  <? test_bt() ?> > </td>
-                <td></td>
-              </tr> <?
-              break;
-
-            case "gmediarender": ?>
-                <td> <input class="actiongroup" type="radio" name="RAW_PLAYER" value="squeezelite" > </td>
-                <td> <input class="actiongroup" type="radio" name="RAW_PLAYER" value="spotifyd" > </td>
-                <td> <input class="actiongroup" type="radio" name="RAW_PLAYER" value="gmediarender" checked> </td>
-                <td> <input class="actiongroup" type="radio" name="RAW_PLAYER" value="shairportsync" > </td>
-                <td> <input class="actiongroup" type="radio" name="RAW_PLAYER" value="bluealsaaplay"  <? test_bt() ?> > </td>
-                <td></td>
-              </tr> <?
-              break;
-
-            case "shairportsync": ?>
-                <td> <input class="actiongroup" type="radio" name="RAW_PLAYER" value="squeezelite" > </td>
-                <td> <input class="actiongroup" type="radio" name="RAW_PLAYER" value="spotifyd" > </td>
-                <td> <input class="actiongroup" type="radio" name="RAW_PLAYER" value="gmediarender" > </td>
-                <td> <input class="actiongroup" type="radio" name="RAW_PLAYER" value="shairportsync" checked> </td>
-                <td> <input class="actiongroup" type="radio" name="RAW_PLAYER" value="bluealsaaplay"  <? test_bt() ?> > </td>
-                <td></td>
-              </tr> <?
-              break;
-
-            case "bluealsaaplay": ?>
-                <td> <input class="actiongroup" type="radio" name="RAW_PLAYER" value="squeezelite" > </td>
-                <td> <input class="actiongroup" type="radio" name="RAW_PLAYER" value="spotifyd" > </td>
-                <td> <input class="actiongroup" type="radio" name="RAW_PLAYER" value="gmediarender" > </td>
-                <td> <input class="actiongroup" type="radio" name="RAW_PLAYER" value="shairportsync" > </td>
-                <td> <input class="actiongroup" type="radio" name="RAW_PLAYER" value="bluealsaaplay" checked <? test_bt() ?> > </td>
-                <td></td>
-              </tr> <?
-              break;
+    <tr id="player_raw">
+      <td>Player</td>
+      <td>
+          <select name="RAW_PLAYER" class="actiongroup">
+          <?
+          foreach ($arr_raw_players as $option)
+          {
+            $out = "<option ";
+            if ($option[0] == $ini_array["RAW_PLAYER"])
+              { $out .= "selected "; }
+            if ($option[0] == "bluealsaaplay")
+              {
+                ob_start();
+                test_bt();
+                $out .= ob_get_clean();
+              }
+            $out .= " value=".$option[0].">".$option[1]."</option>";
+            echo $out;
           }
+          ?>
+          </select>
+        </td>
+      </tr>
+    </table>
 
-          ?> <!-- Output DIRECT MS---------------------------------------------------------------------------------------> <?
-          if ($ini_array["AUDIO_OUTPUT"] == "vol-plug-ms") { ?>
-            <tr>
-              <td> <input class="actiongroup" type="radio" name="AUDIO_OUTPUT" value="vol-plug-ms" checked>
-              <a title="<? print ${"helptext_audio_out_direct_ms_"."$lang"} ?>"class="tooltip"> 	&boxur;Cln <?
-          }
-          else { ?>
-            <tr>
-              <td> <input class="actiongroup" type="radio" name="AUDIO_OUTPUT" value="vol-plug-ms">
-              <a title="<? print ${"helptext_audio_out_direct_ms_"."$lang"} ?>"class="tooltip"> 	&boxur;Cln <?
-          }
-
-          switch ($ini_array["RAW_PLAYERMS"]){
-            case "squeezelite": ?>
-              <td> <input class="actiongroup" type="radio" name="RAW_PLAYERMS" value="squeezelite" checked> </td>
-              <td> <input class="actiongroup" type="radio" name="RAW_PLAYERMS" value="spotifyd" > </td>
-              <td> <input class="actiongroup" type="radio" name="RAW_PLAYERMS" value="gmediarender" > </td>
-              <td> <input class="actiongroup" type="radio" name="RAW_PLAYERMS" value="shairportsync" > </td>
-              <td> <input class="actiongroup" type="radio" name="RAW_PLAYERMS" value="bluealsaaplay"  <? test_bt() ?> > </td>
-              <td></td>
-            </tr> <?
-            break;
-
-            case "spotifyd": ?>
-              <td> <input class="actiongroup" type="radio" name="RAW_PLAYERMS" value="squeezelite" > </td>
-              <td> <input class="actiongroup" type="radio" name="RAW_PLAYERMS" value="spotifyd" checked> </td>
-              <td> <input class="actiongroup" type="radio" name="RAW_PLAYERMS" value="gmediarender" > </td>
-              <td> <input class="actiongroup" type="radio" name="RAW_PLAYERMS" value="shairportsync" > </td>
-              <td> <input class="actiongroup" type="radio" name="RAW_PLAYERMS" value="bluealsaaplay"  <? test_bt() ?> > </td>
-              <td></td>
-            </tr> <?
-            break;
-
-            case "gmediarender": ?>
-              <td> <input class="actiongroup" type="radio" name="RAW_PLAYERMS" value="squeezelite" > </td>
-              <td> <input class="actiongroup" type="radio" name="RAW_PLAYERMS" value="spotifyd" > </td>
-              <td> <input class="actiongroup" type="radio" name="RAW_PLAYERMS" value="gmediarender" checked> </td>
-              <td> <input class="actiongroup" type="radio" name="RAW_PLAYERMS" value="shairportsync" > </td>
-              <td> <input class="actiongroup" type="radio" name="RAW_PLAYERMS" value="bluealsaaplay"  <? test_bt() ?> > </td>
-              <td></td>
-            </tr> <?
-            break;
-
-            case "shairportsync": ?>
-              <td> <input class="actiongroup" type="radio" name="RAW_PLAYERMS" value="squeezelite" > </td>
-              <td> <input class="actiongroup" type="radio" name="RAW_PLAYERMS" value="spotifyd" > </td>
-              <td> <input class="actiongroup" type="radio" name="RAW_PLAYERMS" value="gmediarender" > </td>
-              <td> <input class="actiongroup" type="radio" name="RAW_PLAYERMS" value="shairportsync" checked> </td>
-              <td> <input class="actiongroup" type="radio" name="RAW_PLAYERMS" value="bluealsaaplay"  <? test_bt() ?> > </td><td>
-            </td></tr> <?
-            break;
-
-            case "bluealsaaplay": ?>
-              <td> <input class="actiongroup" type="radio" name="RAW_PLAYERMS" value="squeezelite" > </td>
-              <td> <input class="actiongroup" type="radio" name="RAW_PLAYERMS" value="spotifyd" > </td>
-              <td> <input class="actiongroup" type="radio" name="RAW_PLAYERMS" value="gmediarender" > </td>
-              <td> <input class="actiongroup" type="radio" name="RAW_PLAYERMS" value="shairportsync" > </td>
-              <td> <input class="actiongroup" type="radio" name="RAW_PLAYERmS" value="bluealsaaplay" checked <? test_bt() ?> > </td>
-              <td></td>
-            </tr> <?
-            break;
-          }
-        } ?>
-
-        <td></td>
+    <table>
+      <tr id="output_headline_title">
+        <td><b>Players</b></td>
+      </tr>
+      <tr id="output_headline">
+        <!-- Headline with playernames ---------------------------------->
+        <td>Squeeze</td>
+        <td>Spotifyd</td>
+        <td>UPnP</td>
+        <td>ShAirPlay</td>
+        <td>Bluetooth</td>
+        <td>Line In</td>
+        <td>NetJack</td>
       </tr>
 
-    <tr> <!-- Output JACK (BUS)---------------------------------------------------------------------------------------->
-      <td> <?
-        if ($ini_array["AUDIO_OUTPUT"] == "jack")
-        { ?>
-          <input class="actiongroup" type="radio" id="output" name="AUDIO_OUTPUT" value="jack" checked>
-          <a title="<? print ${"helptext_audio_out_bus_"."$lang"} ?>"class="tooltip"> Bus <?
-        }
-        else
-        { ?>
-          <input class="actiongroup" type="radio" id="output" name="AUDIO_OUTPUT" value="jack">
-          <a title="<? print ${"helptext_audio_out_bus_"."$lang"} ?>"class="tooltip"> Bus <?
-        } ?>
-      </td>
-
-      <td>
-        <input type="hidden" name="JACK_SQUEEZELITE" value="OFF"> <?
-        if ($ini_array["JACK_SQUEEZELITE"] == "ON")
-        { ?>
-          <input type="checkbox" id="jack" name="JACK_SQUEEZELITE" value="ON" checked> <?
-        }
-        else
-        { ?>
-          <input type="checkbox" id="jack" name="JACK_SQUEEZELITE" value="ON"> <?
-        } ?>
-      </td>
-
-      <td>
-        <input type="hidden" name="JACK_SPOTIFYD" value="OFF"> <?
-        if ($ini_array["JACK_SPOTIFYD"] == "ON")
-        { ?>
-          <input type="checkbox" id="jack" name="JACK_SPOTIFYD" value="ON" checked> <?
-        }
-        else
-        { ?>
-          <input type="checkbox" id="jack" name="JACK_SPOTIFYD" value="ON"> <?
-        } ?>
-      </td>
-
-      <td>
-        <input type="hidden" name="JACK_GMEDIARENDER" value="OFF"> <?
-        if ($ini_array["JACK_GMEDIARENDER"] == "ON")
-        { ?>
-          <input type="checkbox" id="jack" name="JACK_GMEDIARENDER" value="ON" checked> <?
-        }
-        else
-        { ?>
-          <input type="checkbox" id="jack" name="JACK_GMEDIARENDER" value="ON"> <?
-        }?>
-      </td>
-
-      <td>
-        <input type="hidden" name="JACK_SHAIRPORTSYNC" value="OFF"> <?
-        if ($ini_array["JACK_SHAIRPORTSYNC"] == "ON")
-        { ?>
-          <input type="checkbox" id="jack"  name="JACK_SHAIRPORTSYNC" value="ON" checked> <?
-        }
-        else
-        { ?>
-          <input type="checkbox" id="jack" name="JACK_SHAIRPORTSYNC" value="ON"> <?
-        } ?>
-      </td>
-
-      <td>
-        <input type="hidden" name="JACK_BLUEALSAAPLAY" value="OFF" <? test_bt() ?> > <?
-        if ($ini_array["JACK_BLUEALSAAPLAY"] == "ON")
-        { ?>
-          <input type="checkbox" id="jack" name="JACK_BLUEALSAAPLAY" value="ON" checked <? test_bt() ?> > <?
-        }
-        else
-        { ?>
-          <input type="checkbox" id="jack" name="JACK_BLUEALSAAPLAY" value="ON" <? test_bt() ?> > <?
-        } ?>
-      </td>
-
-      <td>
-        <input type="hidden" name="JACK_INPUT" value="OFF" <? test_input() ?> > <?
-        if ($ini_array["JACK_INPUT"] == "ON")
-        { ?>
-          <input type="checkbox" id="jack" name="JACK_INPUT" value="ON" checked <? test_input() ?> > <?
-        }
-        else
-        { ?>
-          <input type="checkbox" id="jack" name="JACK_INPUT" value="ON" <? test_input() ?> > <?
-        } ?>
-      </td>
-      <td>
-        <input type="hidden" name="JACK_NETJACK" value="OFF"> <?
-        if ($ini_array["JACK_NETJACK"] == "ON")
-        { ?>
-          <input type="checkbox" id="jack" name="JACK_NETJACK" value="ON" checked> <?
-          }
-          else
-          { ?>
-            <input type="checkbox" id="jack" name="JACK_NETJACK" value="ON"> <?
-          } ?>
+      <tr id="output_mixer">
+        <td>
+          <input type="hidden" name="JACK_SQUEEZELITE" value="OFF">
+          <input type="checkbox" name="JACK_SQUEEZELITE" value="ON" <? check_if_on($ini_array["JACK_SQUEEZELITE"]) ?> >
         </td>
-    </tr>
 
-    <td> <?
-      ?> <!-- Output JACK MS (BUS MS) -----------------------------------------------------------------------------------> <?
-      if ($ini_array["AUDIO_OUTPUT"] == "jack-ms")
-      { ?>
-        <input class="actiongroup" type="radio" id="output" name="AUDIO_OUTPUT" value="jack-ms" checked>
-        <a title="<? print ${"helptext_audio_out_bus_ms_"."$lang"} ?>"class="tooltip">  &boxur;Cln <?
-      }
-      else
-      { ?>
-        <input class="actiongroup" type="radio" id="output" name="AUDIO_OUTPUT" value="jack-ms">
-        <a title="<? print ${"helptext_audio_out_bus_ms_"."$lang"} ?>"class="tooltip"> 	&boxur;Cln <?
-      } ?>
-    </td>
+        <td>
+          <input type="hidden" name="JACK_SPOTIFYD" value="OFF">
+          <input type="checkbox" name="JACK_SPOTIFYD" value="ON" <? check_if_on($ini_array["JACK_SPOTIFYD"]) ?> >
+        </td>
 
-    <td>
-      <input type="hidden" name="JACKMS_SQUEEZELITE" value="OFF"> <?
-      if ($ini_array["JACKMS_SQUEEZELITE"] == "ON")
-      { ?>
-        <input type="checkbox" id="jack-ms" name="JACKMS_SQUEEZELITE" value="ON" checked> <?
-      }
-      else { ?>
-        <input type="checkbox" id="jack" name="JACKMS_SQUEEZELITE" value="ON"> <?
-      } ?>
-    </td>
+        <td>
+          <input type="hidden" name="JACK_GMEDIARENDER" value="OFF">
+          <input type="checkbox" name="JACK_GMEDIARENDER" value="ON" <? check_if_on($ini_array["JACK_GMEDIARENDER"]) ?> >
+        </td>
 
-    <td>
-      <input type="hidden" name="JACKMS_SSPOTIFYD" value="OFF"> <?
-      if ($ini_array["JACKMS_SPOTIFYD"] == "ON")
-      { ?>
-        <input type="checkbox" id="jack-ms" name="JACKMS_SPOTIFYD" value="ON" checked> <?
-      }
-      else { ?>
-        <input type="checkbox" id="jack" name="JACKMS_SPOTIFYD" value="ON"> <?
-      } ?>
-    </td>
+        <td>
+          <input type="hidden" name="JACK_SHAIRPORTSYNC" value="OFF">
+          <input type="checkbox"  name="JACK_SHAIRPORTSYNC" value="ON" <? check_if_on($ini_array["JACK_SHAIRPORTSYNC"]) ?> >
+        </td>
 
-    <td>
-      <input type="hidden" name="JACKMS_GMEDIARENDER" value="OFF"> <?
-      if ($ini_array["JACKMS_GMEDIARENDER"] == "ON")
-      { ?>
-        <input type="checkbox" id="jack-ms" name="JACKMS_GMEDIARENDER" value="ON" checked> <?
-      }
-      else
-      { ?>
-        <input type="checkbox" id="jack-ms" name="JACKMS_GMEDIARENDER" value="ON"> <?
-      } ?>
-    </td>
+        <td>
+          <input type="hidden" name="JACK_BLUEALSAAPLAY" value="OFF" <? test_bt() ?> >
+          <input type="checkbox" name="JACK_BLUEALSAAPLAY" value="ON" <? check_if_on($ini_array["JACK_BLUEALSAAPLAY"]); test_bt() ?> >
+        </td>
 
-    <td>
-      <input type="hidden" name="JACKMS_SHAIRPORTSYNC" value="OFF"> <?
-      if ($ini_array["JACKMS_SHAIRPORTSYNC"] == "ON")
-      { ?>
-        <input type="checkbox" id="jack-ms"  name="JACKMS_SHAIRPORTSYNC" value="ON" checked> <?
-      }
-      else
-      { ?>
-        <input type="checkbox" id="jack-ms" name="JACKMS_SHAIRPORTSYNC" value="ON"> <?
-      } ?>
-    </td>
+        <td>
+          <input type="hidden" name="JACK_INPUT" value="OFF" <? test_input() ?> >
+          <input type="checkbox" name="JACK_INPUT" value="ON" <? check_if_on($ini_array["JACK_INPUT"]); test_input() ?> >
+        </td>
 
-    <td>
-      <input type="hidden" name="JACKMS_BLUEALSAAPLAY" value="OFF" <? test_bt() ?> > <?
-      if ($ini_array["JACKMS_BLUEALSAAPLAY"] == "ON")
-      { ?>
-        <input type="checkbox" id="jack-ms" name="JACKMS_BLUEALSAAPLAY" value="ON" checked <? test_bt() ?> > <?
-      }
-      else
-      { ?>
-        <input type="checkbox" id="jack-ms" name="JACKMS_BLUEALSAAPLAY" value="ON" <? test_bt() ?> > <?
-      } ?>
-    </td>
+        <td>
+          <input type="hidden" name="JACK_NETJACK" value="OFF">
+          <input type="checkbox" name="JACK_NETJACK" value="ON" <? check_if_on($ini_array["JACK_NETJACK"]) ?> >
+        </td>
+      </tr>
 
-    <td>
-      <input type="hidden" name="JACKMS_INPUT" value="OFF" <? test_input() ?> > <?
-      if ($ini_array["JACKMS_INPUT"] == "ON")
-      { ?>
-        <input type="checkbox" id="jack-ms" name="JACKMS_INPUT" value="ON" checked <? test_input() ?> > <?
-      }
-      else
-      { ?>
-        <input type="checkbox" id="jack-ms" name="JACKMS_INPUT" value="ON" <? test_input() ?> > <?
-      } ?>
-    </td>
-    <td>
-      <input type="hidden" name="JACKMS_NETJACK" value="OFF"> <?
-      if ($ini_array["JACKMS_NETJACK"] == "ON")
-      { ?>
-        <input type="checkbox" id="jack-ms" name="JACKMS_NETJACK" value="ON" checked> <?
-      }
-      else
-      { ?>
-        <input type="checkbox" id="jack-ms" name="JACKMS_NETJACK" value="ON"> <?
-      } ?>
-    </td>
-
-    <tr>
-      <td> <?
-        ?> <!-- Output BRUTEFIR (CONVOL.) -------------------------------------------------------------------------------> <?
-        if ($ini_array["AUDIO_OUTPUT"] == "jack-bf")
-        { ?>
-          <input class="actiongroup" type="radio" name="AUDIO_OUTPUT" value="jack-bf" checked>
-          <a title="<? print ${"helptext_audio_out_convol_"."$lang"} ?>"class="tooltip"> Conv. <?
-        }
-        else
-        { ?>
-          <input class="actiongroup" type="radio" name="AUDIO_OUTPUT" value="jack-bf">
-          <a title="<? print ${"helptext_audio_out_convol_"."$lang"} ?>"class="tooltip"> Conv. <? } ?>
-      </td>
-
-      <td>
-        <input type="hidden" name="JACKBF_SQUEEZELITE" value="OFF"><?
-        if ($ini_array["JACKBF_SQUEEZELITE"] == "ON")
-        { ?>
-          <input type="checkbox" id="jackbf" name="JACKBF_SQUEEZELITE" value="ON" checked> <?
-        }
-        else
-        { ?>
-          <input type="checkbox" id="jackbf" name="JACKBF_SQUEEZELITE" value="ON"> <?
-        } ?>
-      </td>
-
-      <td>
-        <input type="hidden" name="JACKBF_SPOTIFYD" value="OFF"><?
-        if ($ini_array["JACKBF_SPOTIFYD"] == "ON")
-        { ?>
-          <input type="checkbox" id="jackbf" name="JACKBF_SPOTIFYD" value="ON" checked> <?
-        }
-        else
-        { ?>
-          <input type="checkbox" id="jackbf" name="JACKBF_SPOTIFYD" value="ON"> <?
-        } ?>
-      </td>
-
-      <td>
-        <input type="hidden" name="JACKBF_GMEDIARENDER" value="OFF"><?
-        if ($ini_array["JACKBF_GMEDIARENDER"] == "ON")
-        { ?>
-          <input type="checkbox" id="jackbf" name="JACKBF_GMEDIARENDER" value="ON" checked> <?
-        }
-        else
-        { ?>
-          <input type="checkbox" id="jackbf"name="JACKBF_GMEDIARENDER" value="ON"> <?
-        } ?>
-      </td>
-
-      <td>
-        <input type="hidden" name="JACKBF_SHAIRPORTSYNC" value="OFF"> <?
-        if ($ini_array["JACKBF_SHAIRPORTSYNC"] == "ON")
-        { ?>
-          <input type="checkbox" id="jackbf" name="JACKBF_SHAIRPORTSYNC" value="ON" checked> <?
-        }
-        else
-        { ?>
-          <input type="checkbox" id="jackbf" name="JACKBF_SHAIRPORTSYNC" value="ON"> <?
-        } ?>
-      </td>
-
-      <td>
-        <input type="hidden" name="JACKBF_BLUEALSAAPLAY" value="OFF" <? test_bt() ?> > <?
-        if ($ini_array["JACKBF_BLUEALSAAPLAY"] == "ON")
-        { ?>
-          <input type="checkbox" id="jackbf" name="JACKBF_BLUEALSAAPLAY" value="ON" checked <? test_bt() ?> > <?
-        }
-        else
-        { ?>
-          <input type="checkbox" id="jackbf" name="JACKBF_BLUEALSAAPLAY" value="ON" <? test_bt() ?> > <?
-        } ?>
-      </td>
-
-      <td>
-        <input type="hidden" name="JACKBF_INPUT" value="OFF" <? test_input() ?> > <?
-          if ($ini_array["JACKBF_INPUT"] == "ON")
-          { ?>
-            <input type="checkbox" id="jackbf" name="JACKBF_INPUT" value="ON" checked <? test_input() ?> > <?
-          }
-          else
-          { ?>
-            <input type="checkbox" id="jackbf" name="JACKBF_INPUT" value="ON" <? test_input() ?> > <?
-          } ?>
-      </td>
-      <td>
-        <input type="hidden" name="JACKBF_NETJACK" value="OFF"> <?
-        if ($ini_array["JACKBF_NETJACK"] == "ON")
-        { ?>
-          <input type="checkbox" id="jack" name="JACKBF_NETJACK" value="ON" checked> <?
-        }
-        else
-        { ?>
-          <input type="checkbox" id="jack" name="JACKBF_NETJACK" value="ON"> <?
-        } ?>
-      </td>
-    </tr>
-
-    <tr>
-      <td> <?
-        ?> <!-- Output BRUTEFIR MS (CONVOL. MS) -------------------------------------------------------------------------> <?
-        if ($ini_array["AUDIO_OUTPUT"] == "jack-bfms")
-        { ?>
-          <input class="actiongroup" type="radio" name="AUDIO_OUTPUT" value="jack-bfms" checked>
-          <a title="<? print ${"helptext_audio_out_convol_ms_"."$lang"} ?>"class="tooltip"> 	&boxur;Cln <?
-        }
-        else
-        { ?>
-          <input class="actiongroup" type="radio" name="AUDIO_OUTPUT" value="jack-bfms">
-          <a title="<? print ${"helptext_audio_out_convol_ms_"."$lang"} ?>"class="tooltip"> 	&boxur;Cln <?
-        } ?>
-      </td>
-
-    <td>
-      <input type="hidden" name="JACKBFMS_SQUEEZELITE" value="OFF"><?
-      if ($ini_array["JACKBFMS_SQUEEZELITE"] == "ON")
-      { ?>
-        <input type="checkbox" id="jackbfms" name="JACKBFMS_SQUEEZELITE" value="ON" checked> <?
-      }
-      else
-      { ?>
-        <input type="checkbox" id="jackbfms" name="JACKBFMS_SQUEEZELITE" value="ON"> <?
-      } ?>
-    </td>
-
-    <td>
-      <input type="hidden" name="JACKBFMS_SPOTIFYD" value="OFF"><?
-      if ($ini_array["JACKBFMS_SPOTIFYD"] == "ON")
-      { ?>
-        <input type="checkbox" id="jackbfms" name="JACKBFMS_SPOTIFYD" value="ON" checked> <?
-      }
-      else
-      { ?>
-        <input type="checkbox" id="jackbfms" name="JACKBFMS_SPOTIFYD" value="ON"> <?
-      } ?>
-    </td>
-
-    <td>
-      <input type="hidden" name="JACKBFMS_GMEDIARENDER" value="OFF"><?
-      if ($ini_array["JACKBFMS_GMEDIARENDER"] == "ON")
-      { ?>
-        <input type="checkbox" id="jackbfms" name="JACKBFMS_GMEDIARENDER" value="ON" checked> <?
-      }
-      else
-      { ?>
-        <input type="checkbox" id="jackbfms"name="JACKBFMS_GMEDIARENDER" value="ON"> <?
-      } ?>
-    </td>
-
-    <td>
-      <input type="hidden" name="JACKBFMS_SHAIRPORTSYNC" value="OFF"> <?
-      if ($ini_array["JACKBFMS_SHAIRPORTSYNC"] == "ON")
-      { ?>
-        <input type="checkbox" id="jackbfms" name="JACKBFMS_SHAIRPORTSYNC" value="ON" checked> <?
-      }
-      else
-      { ?>
-        <input type="checkbox" id="jackbfms" name="JACKBFMS_SHAIRPORTSYNC" value="ON"> <?
-      } ?>
-    </td>
-
-    <td>
-      <input type="hidden" name="JACKBFMS_BLUEALSAAPLAY" value="OFF" <? test_bt() ?> > <?
-      if ($ini_array["JACKBFMS_BLUEALSAAPLAY"] == "ON")
-      { ?>
-        <input type="checkbox" id="jackbfms" name="JACKBFMS_BLUEALSAAPLAY" value="ON" checked <? test_bt() ?> > <?
-      }
-      else
-      { ?>
-        <input type="checkbox" id="jackbfms" name="JACKBFMS_BLUEALSAAPLAY" value="ON" <? test_bt() ?> > <?
-      } ?>
-    </td>
-
-    <td>
-      <input type="hidden" name="JACKBFMS_INPUT" value="OFF" <? test_input() ?> > <?
-      if ($ini_array["JACKBFMS_INPUT"] == "ON")
-      { ?>
-        <input type="checkbox" id="jackbfms" name="JACKBFMS_INPUT" value="ON" checked <? test_input() ?> > <?
-      }
-      else
-      { ?>
-        <input type="checkbox" id="jackbfms" name="JACKBFMS_INPUT" value="ON" <? test_input() ?> > <?
-      }?>
-    </td>
-    <td>
-      <input type="hidden" name="JACKBFMS_NETJACK" value="OFF"> <?
-      if ($ini_array["JACKBFMS_NETJACK"] == "ON")
-      { ?>
-        <input type="checkbox" id="jack" name="JACKBFMS_NETJACK" value="ON" checked> <?
-      }
-      else
-      { ?>
-        <input type="checkbox" id="jack" name="JACKBFMS_NETJACK" value="ON"> <?
-      } ?>
-    </td>
-    </tr>
     </table>
+
   </fieldset>
 </div>

@@ -213,9 +213,41 @@ function print_optgroup2D($name,$arr_values,$sel_value)
 	echo $out;
 }
 
+function get_audio_output($value)
+{
+	switch($value)
+	{
+		case "vol-plug-ms":
+			return "vol-plug";
+		case "jack-ms":
+			return "jack";
+		case "jack-bfms":
+			return "jack-bf";
+		default:
+			return $value;
+	}
+}
+
+// Adds "checked" if a setting is enabled
+function check_if_on($setting)
+{
+	if ($setting == "ON") {
+		echo "checked";
+	}
+}
+
+function get_cleaner_enabled($output)
+{
+	$cleaner_players = array("vol-plug-ms", "jack-ms", "jack-bfms");
+	if (in_array($output, $cleaner_players))
+	{
+		return true;
+	}
+	return false;
+}
 
 //liest die Filter aus Pfad aus und
-function fltrSelect($id,$ini_array)
+function fltrSelect($id, $ini_array)
 {
 	//$directory = '/home/sftparoio'; //evtl als konstante bzw in config-file
 	$directory = '/run/filter'; //evtl als konstante bzw in config-file
@@ -226,24 +258,37 @@ function fltrSelect($id,$ini_array)
 	    }
 	    closedir($handle);*/
 
-		$rate=(int)($ini_array["RATE"] / 1000);
+		$rate = (int)($ini_array["RATE"] / 1000);
 		//$pattern = "/(\\w*)L|R(\\d*).dbl/";
 		$pattern = "/(\\w*)(L|R)".$rate.".dbl/";
 
 		//check if surround
-		if ($ini_array["CHANNELS"]==4) {
+		if ($ini_array["CHANNELS"] == 4)
+		{
 			$pattern = "/(\\w*)S(L|R)".$rate.".dbl/";
 		}
 
-		preg_match_all($pattern, $regexString,$banks); // in $banks[1] Coeffset-Name
+		preg_match_all($pattern, $regexString, $banks); // in $banks[1] Coeffset-Name
 		$result = array_unique($banks[1]);
-		$out='<select class="filter" name="coeff'.$id.'">';
-		if($ini_array["COEFF_NAME"."$id"]!="" || !empty($ini_array["COEFF_NAME"."$id"]))$out .= '<option selected>'.$ini_array["COEFF_NAME"."$id"].'</option>';
-		else $out.= '<option selected>BypassFilter</option>';
-		foreach ($result as &$option) {
-			$out.='<option>'.$option.'</option>';
+
+		$out = '<select class="filter" name="coeff'.$id.'">';
+		if ($ini_array["COEFF_NAME"."$id"] == "" || empty($ini_array["COEFF_NAME"."$id"]))
+		{
+			$out .= '<option selected>BypassFilter</option>';
 		}
-		$out.='</select>';
+
+		foreach ($result as &$option) {
+			if ($ini_array["COEFF_NAME"."$id"] == $option)
+			{
+				$out .= '<option selected>'.$option.'</option>';
+			}
+			else
+			{
+				$out .= '<option>'.$option.'</option>';
+			}
+		}
+
+		$out .= '</select>';
 		return $out;
 	}
 
@@ -410,7 +455,7 @@ function print_filterset($count,$ini_array)
         //}
         $out.='</td>';
         $out.='<td class="convolve">';
-        $out.='<input type="text" style="margin: 2px, width: 80%" name=vol'.$i.' class="volume" value="'.$att.'"> dB</br>';
+        $out.='<input type="text" name=vol'.$i.' class="volume" value="'.$att.'"> dB</br>';
         $out.='</td>';
         $out.='</tr>';
     }
@@ -449,8 +494,33 @@ function wrtToUserconfig($varName,$value)
 //	$shell_exec_ret=exec('cardmount rw');
 	$file="/boot/userconfig.txt";
 	//$pattern='/'.$varName.'=\".*\"/';
-    $pattern='/\b'.$varName.'\b=\".*\"/';
+    $pattern='/\b'.$varName.'\b=\"(.*)\"/';
 	$content=file_get_contents($file);
+
+	// Check if setting would require a restart
+	$requires_restart = array(
+		"SOUNDCARD",
+		"VOLUME_START",
+		"HOSTNAME",
+		"LAN_DHCP",
+		"LAN_IPADDR",
+		"LAN_NETMASK",
+		"LAN_DNSSERV",
+		"LAN_GATEWAY",
+	);
+	if(in_array($varName, $requires_restart))
+	{
+		// Check if the setting’s value has changed
+		if(preg_match($pattern, $content, $matches))
+		{
+			if($value != $matches[1])
+			{
+				touch("/tmp/restart_required");
+			}
+		}
+	}
+
+	// Save setting
 	$content=preg_replace($pattern, $varName.'="'.$value.'"', $content);
 	file_put_contents($file, $content);
 //	$shell_exec_ret=exec('cardmount ro');
@@ -586,13 +656,13 @@ function measurement()
 	while (@ ob_end_flush()); // end all output buffers if any
 
 	$proc = popen($cmd, 'r');
-	echo '<pre>' ;
+	echo '<div class="general-log"><pre>' ;
 	while (!feof($proc))
 	{
 	    echo fread($proc, 4096);
 	    @ flush();
 	}
-    echo '</pre>' ;
+    echo '</pre></div>' ;
 }
 
 
@@ -608,9 +678,6 @@ function cancel_measurement()
 	}
 	exec('controlaudio stop');
 	exec('controlaudio start');
-	echo '<pre>';
-	echo 'Measurement cancelled.';
-	echo '</pre>';
 }
 
 
@@ -652,6 +719,15 @@ function upload_measurement()
 {
 	$cmd='/usr/bin/scp /root/measurement.wav root:toor@127.0.0.1:/tmp/measurement.wav';
 	shell_exec($cmd) ;
+}
+
+function restart_required()
+{
+	if (file_exists('/tmp/restart_required'))
+	{
+		return true;
+	}
+	return false;
 }
 
 ?>

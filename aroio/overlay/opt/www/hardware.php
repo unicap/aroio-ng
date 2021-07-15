@@ -1,3 +1,4 @@
+  <!-- Hardware -->
   <div class="content">
     <fieldset>
       <legend>
@@ -15,14 +16,23 @@
           </td>
         </tr>
 
-        <tr>
+        <tr id="onboard_wifi">
           <td>
             <a title="<? print ${"helptext_onboard_wifi_"."$lang"} ?>"class="tooltip">
             <span title=""><label for="onboard_wifi"> <? print ${"onboard_wifi_form_"."$lang"} ; ?> </label></span></a>
           </td>
           <td>
-            <? $arr_onboard_wifi=array('ON','OFF');
-            print_optgroup("ONBOARD_WIFI",$arr_onboard_wifi,$ini_array["ONBOARD_WIFI"]); ?>
+          <?
+          if ($ini_array["ONBOARD_WIFI"] == "ON")
+          { ?>
+              <input class="actiongroup" type="radio" name="ONBOARD_WIFI" value="ON" checked> <?print ${"on_"."$lang"}?>
+              <input class="actiongroup" type="radio" name="ONBOARD_WIFI" value="OFF"> <?print ${"off_"."$lang"}?> <?
+          }
+          else
+          { ?>
+              <input class="actiongroup" type="radio" name="ONBOARD_WIFI" value="ON"> <?print ${"on_"."$lang"}?>
+              <input class="actiongroup" type="radio" name="ONBOARD_WIFI" value="OFF" checked> <?print ${"off_"."$lang"}?> <?
+          } ?>
           </td>
         </tr>
 

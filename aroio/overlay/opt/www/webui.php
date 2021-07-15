@@ -1,5 +1,6 @@
+<!-- Webinterface -->
 <div class="content">
-  <fieldset> <!-- Einstellungen Webinterface -->
+  <fieldset>
     <legend>
       <? print ${"webinterface_form_"."$lang"};?>
     </legend>

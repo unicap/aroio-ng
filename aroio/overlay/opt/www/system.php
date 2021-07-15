@@ -1,9 +1,7 @@
 <?php
     ob_start();
-    include('header.php');
     include('strings.php');
     include('functions.inc.php');
-    include('style.css');
 //    print_r($_POST);
 
     if($_GET["lang"] === "en") $lang='en'; else $lang='de';
@@ -70,6 +68,7 @@
     {
         shell_exec ( "/usr/bin/bluetooth-dbpurge > /dev/null" );
     }
+    include('header.php');
 ?>
 
 <!-- Navigation -->
@@ -158,9 +157,17 @@ if ($update == false){ ?>
 }
 else
 {
-  print ${"infotext_update_running_"."$lang"}; ?>
-  <br>
-  <fieldset style="border-style: dotted"> <?
+?>
+<div id="update_modal" class="fixed-modal">
+  <div class="modal-content">
+    <header class="modal-header"><? print ${"infotext_updating_"."$lang"}; ?></header>
+    <div class="update-modal-container">
+      <div id="update_finished" class="d-none general-log">
+        <span><? print ${"infotext_update_finished_"."$lang"}; ?></span>
+      </div>
+      <div id="update_progress" class="general-log">
+<?
+  print ${"infotext_update_running_"."$lang"};
     echo '<pre>';
       if ($_POST['USEBETA'] == "ON")
       {
@@ -186,11 +193,15 @@ else
             }
           echo '</pre>' ;
       }
-    echo '</pre>'; ?>
-  </fieldset>
-  <br>  <?
+    echo '</pre><br>';
   print_r($update_output);
-} ?>
+  ?>
+      </div>
+    </div>
+  </div>
+</div>
+<? } ?>
+
 
 
 

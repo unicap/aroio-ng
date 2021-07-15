@@ -1,3 +1,7 @@
+<?
+include "audio_matrix.php";
+?>
+  <!-- Audio -->
   <div class="content">
     <fieldset>
       <legend><? print ${"audio_form_"."$lang"};?></legend>
@@ -6,16 +10,8 @@
           <td>
             <a title="<? print ${"helptext_advancedsettings_"."$lang"} ?>"class="tooltip">
             <span title=""><label for="Advanced settings"> <? print ${"advancedsettings_"."$lang"} ; ?> </label></span></a>
-            <input type="hidden" name="ADVANCED" value="OFF"> <?
-
-            if ($ini_array["ADVANCED"] == "ON")
-            { ?>
-              <input type="checkbox" id="advanced" name="ADVANCED" value="ON" checked> <?
-            }
-            else
-            { ?>
-              <input type="checkbox" id="advanced"name="ADVANCED" value="ON"> <?
-            } ?>
+            <input type="hidden" name="ADVANCED" value="OFF">
+            <input type="checkbox" id="advanced" name="ADVANCED" value="ON" <? check_if_on($ini_array["ADVANCED"]) ?>>
           </td>
         </tr>
 
@@ -72,8 +68,6 @@
         </tr>
       </table>
 
-      </-- Audio Output Auswahl-->
-      <div class="content">
         <table>
           <tr>
             <td>
@@ -116,21 +110,18 @@
                   break;
               }
               print_optgroup("RATE",$arr_rate,$ini_array["RATE"]); ?>
+              <span id="rate_direct"><? print ${"samplerate_direct_"."$lang"} ?></span>
             </td>
           </tr> <?
           include "audio_adv.php"; ?>
         </table>
-      </div>
     </fieldset>
-  </div> <?
 
-  include "audio_matrix.php"; ?>
+    <input class="button" type="submit" value=" <? print ${"button_submit_apply_"."$lang"} ?> " name="audiosettings_submit">
+    <div>
+      <br>
+      <hr class="top">
+      <br>
+    </div>
 
-  <br>
-  <input class="button" type="submit" value=" <? print ${"button_submit_audiosettings_"."$lang"} ?> " name="audiosettings_submit">
-  <br>
-
-  <div class="content">
-    <input class="button" type="submit" value=" <? print ${"button_submit_"."$lang"} ?> " name="submit">
-    <input class="button" type="submit" value=" <? print ${"button_reboot_"."$lang"} ?> " name="reboot">
   </div>

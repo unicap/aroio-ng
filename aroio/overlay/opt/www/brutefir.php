@@ -1,7 +1,6 @@
 <?php
 		include('strings.php');
     include('functions.inc.php');
-    include('style.css');
 
     if($_GET["lang"] === "en" || $_POST["lang"]=="en")
 		{
@@ -166,6 +165,7 @@
 
 <h1><? print $ini_array["HOSTNAME"] ?> - <? print ${"page_title_convolver_"."$lang"}?></h1>
 
+<div id="convolver_settings" data-output="<? print $ini_array["AUDIO_OUTPUT"] ?>">
 <form action="<?echo $_SERVER['PHP_SELF'] ?>" method="post">
 
 <!-- Filterauswahl -->
@@ -182,6 +182,7 @@
 <button type="submit" name="set" title="<? print ${"helptext_bf_button_setcoeffs_"."$lang"} ?>"><? print ${"button_setcoeffs_"."$lang"}?></button>
 <button type="submit" <?if(isMuted()) echo 'style="background-color:#a00; "'; else echo 'style="color:white"';?> name="mute" value="1"><? print ${"button_mute_"."$lang"}?></button>
 </form>
+</div>
 </div>
 
 <div class="content">

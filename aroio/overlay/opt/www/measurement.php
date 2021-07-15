@@ -1,7 +1,6 @@
 <?php
   include('strings.php');
   include('functions.inc.php');
-  include('style.css');
 
 //print_r($_POST);
 
@@ -55,7 +54,7 @@
       print ${"measurement_warning_"."$lang"};
       if (isset($_POST['PLAY_NOISE']))
       {
-          if(isset($_POST['MEASURE_MS']))
+          if(isset($_POST['MEASURE_MS']) && $_POST['MEASURE_MS'] == "ON")
             {
               $shell_exec_ret=shell_exec('cardmount rw');
               wrtToUserconfig("MEASUREMENT_OUTPUT","vol-plug-ms");
@@ -74,7 +73,7 @@
       if (isset($_POST['CANCEL_MEASUREMENT'])) cancel_measurement();
       if (isset($_POST['MEASUREMENT']) || file_exists('/tmp/measurement'))
       {
-        if (!file_exists('/tmp/measurement') && isset($_POST['MEASURE_MS']))
+        if (!file_exists('/tmp/measurement') && (isset($_POST['MEASURE_MS']) && $_POST['MEASURE_MS'] == "ON"))
         {
           $shell_exec_ret=shell_exec('cardmount rw');
           wrtToUserconfig("MEASUREMENT_OUTPUT","vol-plug-ms");
@@ -86,16 +85,32 @@
          wrtToUserconfig("MEASUREMENT_OUTPUT","vol-plug");
          $shell_exec_ret=shell_exec('cardmount ro');
         } ?>
-        <pre> <?
-          print ${"measurement_runs_"."$lang"}; ?>
-        </pre>
-        <input type="submit" class="button" value=" <? print ${"cancel_measurement_"."$lang"} ?> " name="CANCEL_MEASUREMENT"> <?
-        if (!file_exists('/tmp/measurement')) measurement();
-        $measurement_done="true";
-      }
+
+        <div id="measurement_modal" class="fixed-modal">
+          <div class="modal-content">
+            <header class="modal-header"><? print ${"start_measurement_"."$lang"}; ?></header>
+            <div class="modal-container">
+              <div>
+                <? print ${"measurement_runs_"."$lang"}; ?>
+                <br>
+                <br>
+                <input type="submit" class="button" value=" <? print ${"cancel_measurement_"."$lang"} ?> " name="CANCEL_MEASUREMENT">
+                <?
+                if (!file_exists('/tmp/measurement')) measurement();
+                $measurement_done="true";
+                ?>
+              </div>
+              <div id="measurement_finished" class="d-none">
+                <br>
+                <button id="measurement_close"><? print ${"button_close_"."$lang"} ?></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      <? }
       elseif (isset($_POST['MEASUREMENT_CONTROL']))
       {
-        if (isset($_POST['MEASURE_MS']))
+        if (isset($_POST['MEASURE_MS']) && $_POST['MEASURE_MS'] == "ON")
         {
           $shell_exec_ret=shell_exec('cardmount rw');
           wrtToUserconfig("MEASUREMENT_OUTPUT","jack-bfms");
@@ -107,33 +122,67 @@
          wrtToUserconfig("MEASUREMENT_OUTPUT","jack-bf");
          $shell_exec_ret=shell_exec('cardmount ro');
         } ?>
-        <pre> <?
-          print ${"measurement_runs_"."$lang"}; ?>
-        </pre>
-        <input type="submit" class="button" value=" <? print ${"cancel_measurement_"."$lang"} ?> " name="CANCEL_MEASUREMENT"> <?
-        measurement();
-        $measurement_done="true";
-      }
+
+        <div id="measurement_modal" class="fixed-modal">
+          <div class="modal-content">
+            <header class="modal-header"><? print ${"start_measurement_control_"."$lang"}; ?></header>
+            <div class="modal-container">
+              <div>
+                <? print ${"measurement_runs_"."$lang"}; ?>
+                <br>
+                <br>
+                <input type="submit" class="button" value=" <? print ${"cancel_measurement_"."$lang"} ?> " name="CANCEL_MEASUREMENT">
+                <? measurement();
+                $measurement_done="true";
+                ?>
+              </div>
+              <div id="measurement_finished" class="d-none">
+                <br>
+                <button id="measurement_close"><? print ${"button_close_"."$lang"} ?></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      <? }
       else
       {
         if (isset($_POST['PLAY_NOISE']))
         { ?>
-          <input type="submit" class="button" value=" <? print ${"stop_noise_"."$lang"} ?> " name="STOP_NOISE"> <br> <?
+          <div id="noise_modal" class="fixed-modal">
+            <div class="modal-content">
+              <header class="modal-header"><? print ${"play_noise_"."$lang"}; ?></header>
+              <div class="modal-container">
+                <input type="submit" class="button" value=" <? print ${"stop_noise_"."$lang"} ?> " name="STOP_NOISE">
+              </div>
+            </div>
+          </div>
+        <?
         }
         else
         { ?>
-          <input type="submit" class="button" value=" <? print ${"play_noise_"."$lang"} ?> " name="PLAY_NOISE">
-          <input type="submit" class="button" value=" <? print ${"start_measurement_"."$lang"} ?> " name="MEASUREMENT">
-          <input type="submit" class="button" value=" <? print ${"start_measurement_control_"."$lang"} ?> " name="MEASUREMENT_CONTROL"> <?
-
-          if (preg_match("/.*(ms).*$/", $ini_array['MEASUREMENT_OUTPUT']))
+          <hr>
+          <a title="<? print ${"helptext_audio_cleaner_"."$lang"} ?>"class="tooltip">
+            <span>Cleaner&nbsp;<a href="https://www.abacus-electronics.de/infothek-cleaner" target="_blank" class="glossary">Was ist das?</a></span>
+          </a>
+          <?
+          if (get_cleaner_enabled($ini_array['MEASUREMENT_OUTPUT']))
           { ?>
-            <input type="checkbox" id="measure_ms" name="MEASURE_MS" value="ON" checked> Clean! <?
-          }
+            <input class="actiongroup" type="radio" name="MEASURE_MS" value="OFF"> <?print ${"cleaner_off_"."$lang"}?>
+            <input class="actiongroup" type="radio" name="MEASURE_MS" value="ON" checked> <?print ${"cleaner_on_"."$lang"}?>
+          <? }
           else
           { ?>
-            <input type="checkbox" id="measure_ms" name="MEASURE_MS" value=""> Clean! <?
+            <input class="actiongroup" type="radio" name="MEASURE_MS" value="OFF" checked> <?print ${"cleaner_off_"."$lang"}?>
+            <input class="actiongroup" type="radio" name="MEASURE_MS" value="ON"> <?print ${"cleaner_on_"."$lang"}?>
+          <?
           }
+          ?>
+          <br>
+          <br>
+          <input type="submit" class="button" value=" <? print ${"play_noise_"."$lang"} ?> " name="PLAY_NOISE">
+          <input type="submit" class="button" value=" <? print ${"start_measurement_"."$lang"} ?> " name="MEASUREMENT">
+          <input type="submit" class="button" value=" <? print ${"start_measurement_control_"."$lang"} ?> " name="MEASUREMENT_CONTROL">
+        <?
         }
       } ?>
     </div> <!-- Ende Raumkorrekturmessung -->
@@ -144,7 +193,7 @@
       <legend>
         <? print ${"measurement_analysis_form_"."$lang"} ; ?>
       </legend>
-      <a href="http://www.audiovero.de" target="_blank"> <img class="link" src="audiovero.png" border="0" style="float: right;"> 	</a>
+      <a href="http://www.audiovero.de" target="_blank"> <img class="link" src="img/audiovero.png" border="0" style="float: right;"> 	</a>
       <? print ${"measurement_analysis_text_"."$lang"} ; ?>
     </div>
   </form>

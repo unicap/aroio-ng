@@ -1,7 +1,6 @@
 <?php
 	include('strings.php');
         include('functions.inc.php');
-        include('style.css');
 
 	if($_GET["lang"] === "en" || $_POST[lang]=='en') 
 	{
@@ -24,11 +23,11 @@
 		<title> <? print ${title_measurement._.$lang}; ?> </title>
 	</head>
 
-	<a href="http://www.abacus-electronics.de" target="_blank"><img src="abacus_logo_wide.png" border="0"></a>
+	<a href="http://www.abacus-electronics.de" target="_blank"><img src="img/abacus_logo_wide.png" border="0"></a>
 
 	<body>
-		<br><a href="<?php echo $PHP_SELF?>?lang=en" target=""><img src="english.png" border="0"></a>
-		<a href="<?php echo $PHP_SELF?>?lang=de" target=""><img src="german.png" border="0"></a>
+		<br><a href="<?php echo $PHP_SELF?>?lang=en" target=""><img src="img/english.png" border="0"></a>
+		<a href="<?php echo $PHP_SELF?>?lang=de" target=""><img src="img/german.png" border="0"></a>
 		<a href="index.php" target=""><? print ${linktext_configuration._.$lang} ?></a>
 		<a href="system.php" target=""><? print ${linktext_system._.$lang} ?></a>
 		<a href="measurement.php" target=""><? print ${linktext_measurement._.$lang} ?></a>

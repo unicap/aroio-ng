@@ -2,7 +2,9 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=0.5">
-    <script type='text/javascript' src='http://code.jquery.com/jquery-1.8.2.js'></script>
+    <script type='text/javascript' src='js/jquery-1.8.2.min.js'></script>
+    <script type='text/javascript' src='js/main.js'></script>
+    <link rel="stylesheet" href="css/style.css">
 
     <!-- VIEWPORT SETTINGS FOR DIFFERENT DEVICES -->
     <script>
@@ -44,8 +46,8 @@
     <div id="content">
         <div class="header">
         <!-- Headerbild mit Verlinkung -->
-        <a href="http://www.abacus-electronics.de" title="ABACUS Website" target="_blank"><img class="top" src="abacus_logo_wide.png" border="0"></a>
+        <a href="http://www.abacus-electronics.de" title="ABACUS Website" target="_blank"><img class="top" src="img/abacus_logo_wide.png" border="0"></a>
 
         <!-- Fahnen -->
-        <a style="float: right" href="<?php echo $PHP_SELF?>?lang=en" target=""><img src="english.png" border="0"></a>
-        <a style="float: right" href="<?php echo $PHP_SELF?>?lang=de" target=""><img src="german.png" border="0"></a>
+        <a style="float: right" href="<?php echo $PHP_SELF?>?lang=en" target=""><img src="img/english.png" border="0"></a>
+        <a style="float: right" href="<?php echo $PHP_SELF?>?lang=de" target=""><img src="img/german.png" border="0"></a>
