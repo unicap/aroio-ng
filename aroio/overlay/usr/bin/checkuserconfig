@@ -56,6 +56,7 @@ fi
 [ "$DHCP" = "ON" ] &&					IPADDR="" && NETMASK="" && DNSSERV="" && GATEWAY=""
 [ "$PLAYERNAME" = "" ] &&				PLAYERNAME="$HOSTNAME"
 [ "$BTKEY" = "" ] &&					BTKEY="2107"
+[ "$BTPURGE" = "" ] &&					BTPURGE="NO"
 [ "$USERPASSWD" = "" ] &&				USERPASSWD="abacus"
 [ "$CHANNELS" = "" ] &&					CHANNELS="2"
 [ "$DEF_COEFF" = "" ] &&				DEF_COEFF="0"

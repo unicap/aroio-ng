@@ -1,7 +1,11 @@
 #!/bin/sh
 
+. /boot/userconfig.txt
+
 SDFILE='/boot/btdb.tar'
 RAMDIR='/var/lib/bluetooth'
+
+[ "$BTPURGE" = "YES" ] && cardmount rw && rm $SDFILE && cardmount ro
 
 mkdir -p "$RAMDIR"
 cd /
