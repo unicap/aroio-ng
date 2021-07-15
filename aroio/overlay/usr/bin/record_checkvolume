@@ -9,7 +9,7 @@ echo $AUDIO_OUTPUT
 
 [ -e /tmp/checkvolume ] && controlaudio stop
 
-[ -e /tmp/checkvolume ] && aplay -D $AUDIO_OUTPUT /opt/www/brown_noise.wav
+[ -e /tmp/checkvolume ] && aplay -D $AUDIO_OUTPUT /opt/www/assets/brown_noise.wav
 
 rm /tmp/checkvolume
 controlaudio start
