@@ -1,6 +1,6 @@
 [Unit]
 Description=Bluetooth database backup
-After=sys-subsystem-bluetooth-devices-hci0.device
+After=sys-subsystem-bluetooth-devices-hci0.device checkuserconfig.service
 Before=bluetooth.service
 
 [Service]

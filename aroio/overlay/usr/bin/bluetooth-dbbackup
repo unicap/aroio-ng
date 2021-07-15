@@ -6,9 +6,10 @@ SDFILE='/boot/btdb.tar'
 RAMDIR='/var/lib/bluetooth'
 
 if [ "$BTPURGE" = "YES" ]
-then    echo "Deleting stored BT-trust database upon request from userconfig.txt"
-        cardmount rw
+then    cardmount rw
+        echo "Deleting stored BT-trust database upon request from userconfig.txt"
         rm $SDFILE
+        echo "Setting variable BTPURGE from YES to NO again."
         sed -i '/BTPURGE="YES"/c\BTPURGE="NO"' /boot/userconfig.txt
         cardmount ro
     fi
