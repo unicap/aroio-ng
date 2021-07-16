@@ -502,6 +502,7 @@ function wrtToUserconfig($varName,$value)
 		"SOUNDCARD",
 		"VOLUME_START",
 		"HOSTNAME",
+		"PLATFORM",
 		"LAN_DHCP",
 		"LAN_IPADDR",
 		"LAN_NETMASK",
