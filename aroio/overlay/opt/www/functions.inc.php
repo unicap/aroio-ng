@@ -502,11 +502,13 @@ function wrtToUserconfig($varName,$value)
 		"SOUNDCARD",
 		"VOLUME_START",
 		"HOSTNAME",
+		"PLATFORM",
 		"LAN_DHCP",
 		"LAN_IPADDR",
 		"LAN_NETMASK",
 		"LAN_DNSSERV",
 		"LAN_GATEWAY",
+		"BTPURGE",
 	);
 	if(in_array($varName, $requires_restart))
 	{
