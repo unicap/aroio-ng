@@ -8,23 +8,29 @@ echo "Starting bluetooth auto-reconnect daemon using controller $CONTROLLER"
 
 while true
 do
-	for DEVICE in $(ls /var/lib/bluetooth/"$CONTROLLER" | grep -E '([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2}')
-	do
-		[ "$DEBUG" != "" ] && echo "Checking, if $DEVICE is already connected ..."
-		CONDEVS=$(hcitool con | grep -E '([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2}.*ENCRYPT')
-		if ! echo $CONDEVS | grep -Eq $DEVICE.*ENCRYPT
-		then
-			[ "$DEBUG" != "" ] && echo "No, it is not, trying to connect to $DEVICE"
-			echo connect $DEVICE | bluetoothctl &> /dev/null
-			sleep 5
+	. /boot/userconfig.txt
+	if [ "$BTRECONNECT" = "YES" ]
+	then
+		for DEVICE in $(ls /var/lib/bluetooth/"$CONTROLLER" | grep -E '([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2}')
+		do
+			[ "$DEBUG" != "" ] && echo "Checking, if $DEVICE is already connected ..."
 			CONDEVS=$(hcitool con | grep -E '([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2}.*ENCRYPT')
-			if echo $CONDEVS | grep -qE $DEVICE.*ENCRYPT
+			if ! echo $CONDEVS | grep -Eq $DEVICE.*ENCRYPT
 			then
-				echo "Successfully connected $DEVICE!"
+				[ "$DEBUG" != "" ] && echo "No, it is not, trying to connect to $DEVICE"
+				echo connect $DEVICE | bluetoothctl &> /dev/null
+				sleep 5
+				CONDEVS=$(hcitool con | grep -E '([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2}.*ENCRYPT')
+				if echo $CONDEVS | grep -qE $DEVICE.*ENCRYPT
+				then
+					echo "Successfully connected $DEVICE!"
+				fi
+			else
+				[ "$DEBUG" != "" ] && echo "Yes, it is connected, doing nothing."
+				sleep 20
 			fi
-		else
-			[ "$DEBUG" != "" ] && echo "Yes, it is connected, doing nothing."
-			sleep 20
-		fi
-	done
+		done
+	else
+		sleep 3
+	fi
 done
