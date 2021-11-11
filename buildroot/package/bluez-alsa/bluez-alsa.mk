@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-BLUEZ_ALSA_VERSION = 3.0.0
+BLUEZ_ALSA_VERSION = 3.1.0
 #BLUEZ_ALSA_VERSION = 9045edb436ea755f395a2e09e4525b5defad286a
 BLUEZ_ALSA_SITE = $(call github,Arkq,bluez-alsa,v$(BLUEZ_ALSA_VERSION))
 BLUEZ_ALSA_LICENSE = MIT

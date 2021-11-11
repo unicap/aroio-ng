@@ -4,8 +4,6 @@ ConditionPathIsDirectory=/sys/class/bluetooth
 After=bluetooth-simpleagent.service
 BindsTo=bluealsa-aplay.service
 
-
-
 [Service]
 Type=simple
 ExecStart=/usr/bin/bluetooth-reconnect
