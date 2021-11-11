@@ -4,7 +4,8 @@
 #
 ################################################################################
 
-SPOTIFYD_VERSION = v0.2.24
+#SPOTIFYD_VERSION = v0.2.24
+SPOTIFYD_VERSION = v0.3.2
 #SPOTIFYD_SOURCE = spotifyd-$(SPOTIFYD_VERSION).tar.gz
 SPOTIFYD_SITE = $(call github,Spotifyd,spotifyd,$(SPOTIFYD_VERSION))
 SPOTIFYD_LICENSE = GPL-3.0+
