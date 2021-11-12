@@ -9,7 +9,7 @@ echo "Starting bluetooth auto-reconnect daemon using controller $CONTROLLER"
 while true
 do
 	. /boot/userconfig.txt
-	if [ "$BTRECONNECT" = "YES" ]
+	if [ "$BTRECONNECT" = "ON" ]
 	then
 		for DEVICE in $(ls /var/lib/bluetooth/"$CONTROLLER" | grep -E '([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2}')
 		do
