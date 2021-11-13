@@ -74,6 +74,14 @@
         $update=true;
     }
 
+    if ( isset($_POST['bluetooth_reconnect']) )
+    {
+        $shell_exec_ret=exec('cardmount rw');
+        wrtToUserconfig("BTRECONNECT", $_POST['BTRECONNECT']);
+        $shell_exec_ret=exec('cardmount ro');
+        $ini_array = parse_ini_file("/boot/userconfig.txt", 1);
+    }
+
     if ( isset($_POST['bluetooth_pairing']) )
     {
         shell_exec ( "killall bluetooth-sspmode > /dev/null" );

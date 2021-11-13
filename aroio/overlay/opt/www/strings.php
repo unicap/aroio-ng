@@ -396,6 +396,12 @@
     $bluetooth_en='Bluetooth';
     $bluetooth_de='Bluetooth';
 
+    $bluetooth_reconnect_en='BT-Auto-Reconnect';
+    $bluetooth_reconnect_de='BT-Auto-Reconnect';
+
+    $helptext_bluetooth_reconnect_en='Automatically connects your device as soon as it\'s in range';
+    $helptext_bluetooth_reconnect_de='Stellt automatisch eine Bluetooth-Verbindung her, sobald das Ger&auml;t in Reichweite ist';
+
     $button_bluetooth_pairing_en='BT-Pairing';
     $button_bluetooth_pairing_de='BT-Pairing';
 
