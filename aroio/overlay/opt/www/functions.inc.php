@@ -154,12 +154,12 @@ function test_wlan()
 
 function test_bt()
 {
-  if (!file_exists("/sys/class/bluetooth/hci0")) print "disabled";
+  if (!file_exists("/sys/class/bluetooth/hci0")) print " disabled";
 }
 
 function test_input()
 {
-  if (!file_exists("/proc/asound/card0/pcm0c")) print "disabled";
+  if (!file_exists("/proc/asound/card0/pcm0c")) print " disabled";
 }
 
 function restart_lms()
