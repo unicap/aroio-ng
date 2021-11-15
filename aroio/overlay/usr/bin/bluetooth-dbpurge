@@ -1,0 +1,27 @@
+#!/bin/sh
+
+. /boot/userconfig.txt
+
+systemctl stop bluetooth-dbbackup
+
+# Find our controller
+CONTROLLER=$(echo list | bluetoothctl 2&>/dev/null | grep -E '^Controller'.'([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2}' | awk '{print $2}')
+rm -rf /var/lib/bluetooth/$CONTROLLER/cache
+
+# Iterate through devices an delete configuration folders
+for DEVICE in $(ls /var/lib/bluetooth/$CONTROLLER | grep -E '([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2}')
+do
+	hcitool dc $DEVICE
+	rm -rf /var/lib/bluetooth/$CONTROLLER/$DEVICE
+done
+
+echo "Deleting Bluetooth device $DEVICE from BT-controller $CONTROLLER ..." 
+
+# Delete the bluetooth backup database
+cardmount rw &> /dev/null
+rm /boot/btdb.tar &> /dev/null
+cardmount ro &> /dev/null
+
+systemctl start bluetooth-dbbackup
+
+exit 0
