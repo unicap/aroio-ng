@@ -144,8 +144,7 @@
                 <td>
                   <input type="password" id="newpass" name="WLANPWD" onkeyup="runPassword(this.value, 'newpass');" value="<? print $ini_array["WLANPWD"] ?>"/>
                   <a title="<? print ${"helptext_showpwd_"."$lang"} ?>"class="tooltip_check">
-                  <span title=""></span>
-                  <input type="checkbox" id="showpwd" onclick="machText(this.checked,this.form)"><label></label>
+                  <img src="/img/eye.png" class="showpwd" id="show_password_icon">
                   </a>
                 </td>
               </tr>

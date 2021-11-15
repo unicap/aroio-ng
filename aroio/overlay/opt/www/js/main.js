@@ -17,6 +17,8 @@ $(document).ready(function() {
         platform_select = document.getElementsByName("PLATFORM")[0];
         platform_select.addEventListener("change", adjust_onboard_wifi);
 
+        document.getElementById("show_password_icon").addEventListener("click", show_password);
+
         adjust_audio_matrix();
         adjust_sample_rate_select();
         adjust_lms();
@@ -199,18 +201,11 @@ function finish_update() {
 }
 
 // Checkbox zum Passwort anzeigen
-function machText(chk, frm) {
-    var p = frm.newpass;
-    try {
-        var val = p.value;
-        p.type = chk ? 'text':'password';
-        p.value = val; //benötigt z. B. in Opera
-    }
-    catch (e) {
-        var neuInp=document.createElement('input');
-        neuInp.type = chk ? 'text':'password';
-        neuInp.value = p.value;
-        neuInp.name = neuInp.id = 'newpass';
-        p.parentNode.replaceChild(neuInp,p);
+function show_password() {
+    var input = document.getElementById("newpass");
+    if (input.type == "password") {
+        input.type = "text";
+    } else {
+        input.type = "password";
     }
 }
