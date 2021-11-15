@@ -144,6 +144,11 @@
 		shell_exec('/usr/bin/controlaudio restart &> /dev/null' );
     }
 
+    if ( isset($_POST['redirect_to_config']) )
+    { ?>
+        <meta http-equiv="refresh" content="0;url=/index.php">
+    <?
+    }
     include "header.php";?>
 
 <!-- Navigation -->
@@ -164,6 +169,13 @@
 <div class="content">
 
 <h1><? print $ini_array["HOSTNAME"] ?> - <? print ${"page_title_convolver_"."$lang"}?></h1>
+
+<form action="<?echo $_SERVER['PHP_SELF'] ?>" method="post">
+  <div class="notification" id="convolver_notification">
+    <span><? print ${"convolution_disabled_notification_"."$lang"}; ?></span>
+    <input class="button" type="submit" value="<? print ${"button_config_"."$lang"} ?>" name="redirect_to_config">
+  </div>
+</form>
 
 <div id="convolver_settings" data-output="<? print $ini_array["AUDIO_OUTPUT"] ?>">
 <form action="<?echo $_SERVER['PHP_SELF'] ?>" method="post">

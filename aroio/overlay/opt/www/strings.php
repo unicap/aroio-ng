@@ -372,6 +372,9 @@
     $button_reboot_en='Reboot';
     $button_reboot_de='Neustart';
 
+    $button_config_en='Config';
+    $button_config_de='Konfiguration';
+
     $button_close_en="Close";
     $button_close_de="Schließen";
 
@@ -603,6 +606,9 @@
 
     $title_brutefir_en=$page_title_convolver_en;
     $title_brutefir_de=$page_title_convolver_de;
+
+    $convolution_disabled_notification_en='Convolution disabled. To enable the Convolver, set player Output to Convolver.';
+    $convolution_disabled_notification_de='Convolution deaktiviert. Um den Convolver zu aktivieren, muss der Output auf "Convolver" geschaltet werden.';
 
     $convolution_legend_en='Convolver Module';
     $convolution_legend_de='Convolver Modul';

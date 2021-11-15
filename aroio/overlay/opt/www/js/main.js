@@ -42,7 +42,7 @@ $(document).ready(function() {
             }, 15000);
         }
         if (measurement_modal != null) {
-            document.getElementsByName("CANCEL_MEASUREMENT")[0].classList.add("d-none")
+            document.getElementsByName("CANCEL_MEASUREMENT")[0].classList.add("d-none");
             document.getElementById("measurement_finished").classList.remove("d-none");
             document.getElementById("measurement_close").addEventListener("click", function() {
                 window.location = "/measurement.php";
@@ -54,8 +54,10 @@ $(document).ready(function() {
         var current_output = document.getElementById("convolver_settings").dataset.output;
         if (current_output == "jack-bf" || current_output == "jack-bfms") {
             $("#convolver_settings *").prop("disabled", false);
+            document.getElementById("convolver_notification").classList.add("d-none");
         } else {
             $("#convolver_settings *").prop("disabled", true);
+            document.getElementById("convolver_notification").classList.remove("d-none");
         }
     }
 });
