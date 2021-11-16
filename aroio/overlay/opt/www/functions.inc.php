@@ -179,9 +179,13 @@ function restart_lms()
 //$name : Name der Opt-Group
 //$arr_values: auswählbare Optionen in Array
 
-function print_optgroup($name,$arr_values,$sel_value)
+function print_optgroup($name, $arr_values, $sel_value, $width = null)
 {
-	$out = '<select name="'.$name.'"class="actiongroup" > \n';
+	if($width != null) {
+		$out = '<select name="'.$name.'"class="actiongroup" style="width: '.$width.';"> \n';
+	} else {
+		$out = '<select name="'.$name.'"class="actiongroup"> \n';
+	}
 	foreach ($arr_values as $option)
 	{
 		if ($option != $sel_value)
@@ -195,9 +199,13 @@ function print_optgroup($name,$arr_values,$sel_value)
 }
 
 
-function print_optgroup2D($name,$arr_values,$sel_value)
+function print_optgroup2D($name, $arr_values, $sel_value, $width = null)
 {
-	$out = '<select name="'.$name.'"class="actiongroup" > \n';
+	if($width != null) {
+		$out = '<select name="'.$name.'"class="actiongroup" style="width: '.$width.';"> \n';
+	} else {
+		$out = '<select name="'.$name.'"class="actiongroup"> \n';
+	}
 	foreach ($arr_values as $option)
 	{
 		if($option[0] != $sel_value)
