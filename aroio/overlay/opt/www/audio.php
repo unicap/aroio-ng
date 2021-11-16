@@ -51,7 +51,6 @@ include "audio_matrix.php";
                 array(-60,"-60 dB")
               );
               print_optgroup2D("VOLUME_START",$arr_volume,$ini_array["VOLUME_START"]); ?>
-            </select>
             </td>
           </tr> <?
         } ?>
