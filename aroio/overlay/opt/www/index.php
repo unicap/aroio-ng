@@ -46,6 +46,11 @@
      $_POST['VOLUME_START']=0;
     }
 
+    // Automatically disable Onboard WIFI for non-RASPI devices
+    if ($_POST["PLATFORM"] != "RaspberryPi")
+    {
+      $_POST["ONBOARD_WIFI"] = "OFF";
+    }
 
     if ($_POST["ADVANCED"] == "OFF")
     {
