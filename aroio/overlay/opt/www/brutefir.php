@@ -168,9 +168,7 @@
 
 <div class="content">
 
-<h1><? print $ini_array["HOSTNAME"] ?> - <? print ${"page_title_convolver_"."$lang"}?></h1>
-
-<form action="<?echo $_SERVER['PHP_SELF'] ?>" method="post">
+<form action="<?echo $_SERVER['PHP_SELF'] ?>" method="post" style="margin: 10px 0;">
   <div class="notification" id="convolver_notification">
     <span><? print ${"convolution_disabled_notification_"."$lang"}; ?></span>
     <input class="button" type="submit" value="<? print ${"button_config_"."$lang"} ?>" name="redirect_to_config">

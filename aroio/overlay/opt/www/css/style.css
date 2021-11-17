@@ -101,6 +101,11 @@ li a:hover:not(.active) {
     margin-left: auto;
     position:relative;
 }
+.header-hostname {
+    display: inline;
+    margin-top: 38px;
+    margin-left: 12px;
+}
 
 /* Body */
 html, body

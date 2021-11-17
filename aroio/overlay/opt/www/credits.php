@@ -26,11 +26,8 @@
         </div> <!-- Ende vom Head -->
 
         <div class="content">
-
-            <h1><? print "AroioOS" ?> - <? print ${"page_title_credits_"."$lang"}?></h1>
-
             <form id="AroioOS infos" Name="AroioOS infos" action="" method="post">
-            <fieldset>
+            <fieldset style="margin: 10px 0;">
                 <legend><? print ${"aroioos_form_"."$lang"} ; ?></legend> <!-- Aroio Info-Kasten-->
                 <? print ${"aroio_infos_text_"."$lang"} ; ?>
             </fieldset>

@@ -22,5 +22,3 @@
   </ul><!-- Ende Navigation -->
   <hr class="top">
 </div> <!-- Ende vom Head -->
-
-<h1> <? print $ini_array["HOSTNAME"]?> - <? print ${"page_title_main_"."$lang"} ?></h1>

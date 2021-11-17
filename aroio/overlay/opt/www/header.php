@@ -31,8 +31,8 @@
         case "/index.php": echo ${"title_main_"."$lang"}; break;
         case "/system.php": echo ${"title_system_"."$lang"}; break;
         case "/measurement.php": echo ${"title_measurement_"."$lang"}; break;
-        case "/credits.php": echo ${"title_credits_"."$lang"}; break;
         case "/brutefir.php": echo ${"title_brutefir_"."$lang"}; break;
+        case "/credits.php": echo ${"title_credits_"."$lang"}; break;
       } ?>
     </title>
 
@@ -44,10 +44,23 @@
   <div id="wrapper">
     <hr class="top">
     <div id="content">
-        <div class="header">
+      <div class="header">
         <!-- Headerbild mit Verlinkung -->
-        <a href="http://www.abacus-electronics.de" title="ABACUS Website" target="_blank"><img class="top" src="img/abacus_logo_wide.png" border="0"></a>
-
+        <div style="display: inline-flex;">
+        <a href="http://www.abacus-electronics.de" title="ABACUS Website" target="_blank">
+          <img class="top" src="img/abacus_logo_wide.png" border="0">
+        </a>
+        <? $path = $_SERVER['REQUEST_URI'];
+        switch($path)
+        {
+          case "/index.php": $title = ${"page_title_main_"."$lang"}; break;
+          case "/system.php": $title = ${"page_title_system_"."$lang"}; break;
+          case "/measurement.php": $title = ${"page_title_measurement_"."$lang"}; break;
+          case "/brutefir.php": $title = ${"page_title_convolver_"."$lang"}; break;
+          case "/credits.php": $title = ${"page_title_credits_"."$lang"}; break;
+        } ?>
+        <h1 class="header-hostname"> <? print $ini_array["HOSTNAME"]?> - <? print $title ?></h1>
+        </div>
         <!-- Fahnen -->
         <a style="float: right" href="<?php echo $PHP_SELF?>?lang=en" target=""><img src="img/english.png" border="0"></a>
         <a style="float: right" href="<?php echo $PHP_SELF?>?lang=de" target=""><img src="img/german.png" border="0"></a>

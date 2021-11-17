@@ -43,9 +43,8 @@
 
   <form id="Network settings" Name="Network settings" action="" method="post">
     <div class="content">
-      <h1><? print $ini_array["HOSTNAME"] ?> - <? print ${"page_title_measurement_"."$lang"}?></h1>
       <!-- Raumkorrekturmessung -->
-      <fieldset>
+      <fieldset style="margin: 10px 0;">
         <legend>
           <? print ${"measurement_form_"."$lang"} ; ?>
         </legend>
