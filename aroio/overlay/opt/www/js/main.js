@@ -18,10 +18,12 @@ $(document).ready(function() {
         platform_select.addEventListener("change", adjust_onboard_wifi);
 
         document.getElementById("show_password_icon").addEventListener("click", show_password);
+        document.getElementById("lms_credentials_checkbox").addEventListener("change", toggle_lms_credentials);
 
         adjust_audio_matrix();
         adjust_sample_rate_select();
         adjust_lms();
+        adjust_lms_credential_fields();
         adjust_dhcp();
         adjust_wifi();
         adjust_onboard_wifi();
@@ -200,7 +202,29 @@ function finish_update() {
     }, 10000);
 }
 
-// Checkbox zum Passwort anzeigen
+// Show/hide LMS credential fields
+function adjust_lms_credential_fields() {
+    let lms_credentials_checkbox = document.getElementById("lms_credentials_checkbox");
+    let lms_usr_input = document.getElementById("lms_usr_input");
+    let lms_usr_row = document.getElementById("lms_usr_row");
+    let lms_pwd_row = document.getElementById("lms_pwd_row");
+    if (lms_usr_input.value == "" ) {
+        lms_credentials_checkbox.checked = false;
+        lms_usr_row.classList.add("d-none");
+        lms_pwd_row.classList.add("d-none");
+    } else {
+        lms_credentials_checkbox.checked = true;
+        lms_usr_row.classList.remove("d-none");
+        lms_pwd_row.classList.remove("d-none");
+    }
+}
+
+function toggle_lms_credentials() {
+    document.getElementById("lms_usr_row").classList.toggle("d-none");
+    document.getElementById("lms_pwd_row").classList.toggle("d-none");
+}
+
+// Display/hide password (used for WIFI)
 function show_password() {
     var input = document.getElementById("newpass");
     if (input.type == "password") {

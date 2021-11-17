@@ -133,6 +133,9 @@
     $squeeze_serv_hostname_en='Address or hostname';
     $squeeze_serv_hostname_de='Adresse oder Hostname';
 
+    $squeeze_credentials_check_en='LMS with password protection (unusual)';
+    $squeeze_credentials_check_de='LMS mit Kennwortschutz (unüblich)';
+
     $squeeze_serv_user_en='Username (if set)';
     $squeeze_serv_user_de='Benutzer (falls gesetzt)';
 

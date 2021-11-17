@@ -14,29 +14,37 @@
       </tr>
       <tr>
         <td>
-          <a title="<? print ${"helptext_squeezeuser_"."$lang"} ?>"class="tooltip">
-          <span title=""><label for="Username (if set)"> <? print ${"squeeze_serv_user_"."$lang"} ; ?> </label></span></a>
-        </td>
-        <td>
-          <input class="actiongroup" type="text" autocomplete="off" name="SQUEEZEUSER" value="<? print $ini_array["SQUEEZEUSER"] ?>">
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <a title="<? print ${"helptext_squeezepwd_"."$lang"} ?>"class="tooltip">
-          <span title=""><label for="Password (if set)"> <? print ${"squeeze_serv_passwd_"."$lang"} ; ?> </label></span></a>
-        </td>
-        <td>
-          <input class="actiongroup" type="password" autocomplete="off" name="SQUEEZEPWD" value="<? print $ini_array["SQUEEZEPWD"] ?>">
-        </td>
-      </tr>
-      <tr>
-        <td>
           <a title="<? print ${"helptext_serverport_"."$lang"} ?>"class="tooltip">
           <span title=""><label for="Port (default 9000)"> <? print ${"squeeze_serv_port_"."$lang"} ; ?> </label></span></a>
         </td>
         <td>
           <input class="actiongroup" <?if ( isset($_POST['submit']) && !validate_input("SERVERPORT",$_POST['SERVERPORT']) ){echo 'style="border:2px solid #ff0000"';};?> type="text" name="SERVERPORT" value="<? if (isset($_POST['submit']))print $_POST['SERVERPORT']; else print $ini_array["SERVERPORT"] ?>">
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <span title=""><label for="LMS Login"> <? print ${"squeeze_credentials_check_"."$lang"} ; ?> </label></span></a>
+        </td>
+        <td>
+          <input type="checkbox" id="lms_credentials_checkbox">
+        </td>
+      </tr>
+      <tr id="lms_usr_row">
+        <td>
+          <a title="<? print ${"helptext_squeezeuser_"."$lang"} ?>"class="tooltip">
+          <span title=""><label for="Username (if set)"> <? print ${"squeeze_serv_user_"."$lang"} ; ?> </label></span></a>
+        </td>
+        <td>
+          <input id="lms_usr_input" class="actiongroup" type="text" autocomplete="off" name="SQUEEZEUSER" value="<? print $ini_array["SQUEEZEUSER"] ?>">
+        </td>
+      </tr>
+      <tr id="lms_pwd_row">
+        <td>
+          <a title="<? print ${"helptext_squeezepwd_"."$lang"} ?>"class="tooltip">
+          <span title=""><label for="Password (if set)"> <? print ${"squeeze_serv_passwd_"."$lang"} ; ?> </label></span></a>
+        </td>
+        <td>
+          <input id="lms_pwd_input" class="actiongroup" type="password" autocomplete="off" name="SQUEEZEPWD" value="<? print $ini_array["SQUEEZEPWD"] ?>">
         </td>
       </tr>
     </table>
