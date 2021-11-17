@@ -88,7 +88,7 @@
                 </td>
                 <td>
                 <?
-                echo'<select name="WLANSSID" class="actiongroup" style="width: 290px;">';
+                echo'<select name="WLANSSID" class="actiongroup" style="width: 240px;">';
                 if (isset($_POST['scan']))
                 {
                   foreach($wifilist as $ssid) {
@@ -142,7 +142,7 @@
                   <span title=""><label for="Wireless passphrase"> <? print ${"wlanpwd_"."$lang"} ; ?> </label></span></a>
                 </td>
                 <td>
-                  <input type="password" id="newpass" name="WLANPWD" onkeyup="runPassword(this.value, 'newpass');" value="<? print $ini_array["WLANPWD"] ?>" style="width: 290px;"/>
+                  <input class="actiongroup" type="password" id="newpass" name="WLANPWD" onkeyup="runPassword(this.value, 'newpass');" value="<? print $ini_array["WLANPWD"] ?>"/>
                   <a title="<? print ${"helptext_showpwd_"."$lang"} ?>"class="tooltip_check">
                   <img src="/img/eye.png" class="showpwd" id="show_password_icon">
                   </a>

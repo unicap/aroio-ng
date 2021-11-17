@@ -629,11 +629,10 @@ select.filter
     z-index: 99;
 }
 
-/*.actiongroup
+.actiongroup
 {
-    margin: 0px 0;
-    width: 12em;
-}*/
+    width: 240px;
+}
 
 .clearfix
 {

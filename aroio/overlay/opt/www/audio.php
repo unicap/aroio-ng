@@ -50,7 +50,7 @@ include "audio_matrix.php";
                 array(-55,"-55 dB"),
                 array(-60,"-60 dB")
               );
-              print_optgroup2D("VOLUME_START", $arr_volume, $ini_array["VOLUME_START"], 200); ?>
+              print_optgroup2D("VOLUME_START", $arr_volume, $ini_array["VOLUME_START"]); ?>
             </td>
           </tr> <?
         } ?>
@@ -62,7 +62,7 @@ include "audio_matrix.php";
           </td>
           <td>
             <?$arr_soundcard= array('Internal HDMI audio','Internal audio jack','AroioDAC','AroioDAC-SRC','JustBoom DAC','HiFiBerry DAC','HiFiBerry DAC+','HiFiBerry DAC+ ADC','HiFiBerry Digi','IQAudIO DAC','Allo Piano DAC','Allo Piano 2.1 DAC','Allo Boss DAC','Allo DigiOne','Dr. DAC prime','Focusrite Scarlett','M-Audio Fast Track Pro','RME Fireface UCX','USB Class Compliant','I-Sabre Q2M');
-              print_optgroup("SOUNDCARD", $arr_soundcard, $ini_array["SOUNDCARD"], 200); ?>
+              print_optgroup("SOUNDCARD", $arr_soundcard, $ini_array["SOUNDCARD"]); ?>
           </td>
         </tr>
       </table>
@@ -108,7 +108,7 @@ include "audio_matrix.php";
                   $arr_rate= array('44100','48000','96000','176400','192000');
                   break;
               }
-              print_optgroup("RATE", $arr_rate, $ini_array["RATE"], 200); ?>
+              print_optgroup("RATE", $arr_rate, $ini_array["RATE"]); ?>
               <span id="rate_direct"><? print ${"samplerate_direct_"."$lang"} ?></span>
             </td>
           </tr> <?
