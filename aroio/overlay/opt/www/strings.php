@@ -653,31 +653,37 @@
     $aroioos_form_de='Aroio - Infos und Links';
 
     $aroio_infos_text_en='
+    <p><a class="forward" title="ABACUS-Aroio-Forum" href="https://www.abacus-electronics.de/forum/index.php" target="_blank">ABACUS-Aroio-Forum</a> - Anleitungssammlung, Information und Diskussion</p>
     <p><a class="forward" title="Aroio Streaming allgemein" href="https://www.abacus-electronics.de/produkte/streaming.html" target="_blank">Allgemeine Informationen</a> zum Thema Aroio-Streaming</p>
     <p><a class="forward" title="AroioOS - Betriebssystem" href="https://www.abacus-electronics.de/produkte/streaming/aroioos.html" target="_blank">AroioOS</a> - das Betriebssystem auf den Aroio-Produkten</p>
-    <p><a class="forward" title="TeamViewer QuickSupport" href="https://get.teamviewer.com/abacus-electronics" target="_blank">TeamViewer QuickSupport</a> - schnelle Hilfe bei Problemen mit der Einrichtung</p>
-    <p><a class="forward" title="ABACUS-Aroio-Forum" href="https://www.abacus-electronics.de/forum/index.php" target="_blank">ABACUS-Aroio-Forum</a> - Information und Diskussion</p>';
+    <p><a class="forward" title="TeamViewer QuickSupport" href="https://get.teamviewer.com/abacus-electronics" target="_blank">TeamViewer QuickSupport</a> - schnelle Hilfe bei Problemen mit der Einrichtung</p>';
     $aroio_infos_text_de='
+    <p><a class="forward" title="ABACUS-Aroio-Forum" href="https://www.abacus-electronics.de/forum/index.php" target="_blank">ABACUS-Aroio-Forum</a> - Anleitungssammlung, Information und Diskussion</p>
     <p><a class="forward" title="Aroio Streaming allgemein" href="https://www.abacus-electronics.de/produkte/streaming.html" target="_blank">Allgemeine Informationen</a> zum Thema Aroio-Streaming</p>
     <p><a class="forward" title="AroioOS - Betriebssystem" href="https://www.abacus-electronics.de/produkte/streaming/aroioos.html" target="_blank">AroioOS</a> - das Betriebssystem auf den Aroio-Produkten</p>
-    <p><a class="forward" title="TeamViewer QuickSupport" href="https://get.teamviewer.com/abacus-electronics" target="_blank">TeamViewer QuickSupport</a> - schnelle Hilfe bei Problemen mit der Einrichtung</p>
-    <p><a class="forward" title="ABACUS-Aroio-Forum" href="https://www.abacus-electronics.de/forum/index.php" target="_blank">ABACUS-Aroio-Forum</a> - Information und Diskussion</p>';
+    <p><a class="forward" title="TeamViewer QuickSupport" href="https://get.teamviewer.com/abacus-electronics" target="_blank">TeamViewer QuickSupport</a> - schnelle Hilfe bei Problemen mit der Einrichtung</p>';
     //Open Source Module
     $opensource_modules_form_en='Open Source Modules used by Aroio';
     $opensource_modules_form_de='Verwendete Open Source Module';
 
     $opensource_moduls_infos_text_en='
-    <p><a class="forward" href="https://www.ludd.ltu.se/~torger/brutefir.html" target="_blank">BruteFIR</a> &ndash; Software Convolution engine</p>
+    <p><a class="forward" href="https://buildroot.org" target="_blank">Buildroot</a> &ndash; A simple, efficient and easy-to-use tool to generate embedded Linux systems through cross-compilation</p>
+    <p><a class="forward" href="https://jackaudio.org" target="_blank">JACK</a> &ndash; JACK Audio Connection Kit</p>
+    <p><a class="forward" href="https://torger.se/anders/brutefir.html" target="_blank">BruteFIR</a> &ndash; Software Convolution engine</p>
+    <p><a class="forward" href="https://code.google.com/archive/p/squeezelite/" target="_blank">Squeezelite</a> &ndash; Headless squeezebox emulator for linux/osx/windows</p>
     <p><a class="forward" href="https://github.com/hzeller/gmrender-resurrect" target="_blank">GMediaRenderer Resurrect</a> &ndash; Resource efficient UPnP/DLNA renderer</p>
-    <p><a class="forward" href="http://wiki.slimdevices.com/index.php/Logitech_Media_Server" target="_blank">Logitech Media Server</a> &ndash; Flexible Multimedia Server Software</p>
     <p><a class="forward" href="https://github.com/mikebrady/shairport-sync" target="_blank">Shairport Sync</a> &ndash; AirPlay audio player</p>
-    <p><a class="forward" href="https://code.google.com/archive/p/squeezelite/" target="_blank">Squeezelite</a> &ndash; Headless squeezebox emulator for linux/osx/windows</p>';
+    <p><a class="forward" href="https://github.com/Spotifyd/spotifyd" target="_blank">spotifyd</a> &ndash; An open source Spotify client running as a UNIX daemon</p>
+    <p><a class="forward" href="https://github.com/Arkq/bluez-alsa" target="_blank">bluez-alsa</a> &ndash; Bluetooth Audio ALSA Backend</p>';
     $opensource_moduls_infos_text_de='
-    <p><a class="forward" href="https://www.ludd.ltu.se/~torger/brutefir.html" target="_blank">BruteFIR</a> &ndash; Software Convolution engine</p>
+    <p><a class="forward" href="https://buildroot.org" target="_blank">Buildroot</a> &ndash; A simple, efficient and easy-to-use tool to generate embedded Linux systems through cross-compilation</p>
+    <p><a class="forward" href="https://jackaudio.org" target="_blank">JACK</a> &ndash; JACK Audio Connection Kit</p>
+    <p><a class="forward" href="https://torger.se/anders/brutefir.html" target="_blank">BruteFIR</a> &ndash; Software Convolution engine</p>
+    <p><a class="forward" href="https://code.google.com/archive/p/squeezelite/" target="_blank">Squeezelite</a> &ndash; Headless squeezebox emulator for linux/osx/windows</p>
     <p><a class="forward" href="https://github.com/hzeller/gmrender-resurrect" target="_blank">GMediaRenderer Resurrect</a> &ndash; Resource efficient UPnP/DLNA renderer</p>
-    <p><a class="forward" href="http://wiki.slimdevices.com/index.php/Logitech_Media_Server" target="_blank">Logitech Media Server</a> &ndash; Flexible Multimedia Server Software</p>
     <p><a class="forward" href="https://github.com/mikebrady/shairport-sync" target="_blank">Shairport Sync</a> &ndash; AirPlay audio player</p>
-    <p><a class="forward" href="https://code.google.com/archive/p/squeezelite/" target="_blank">Squeezelite</a> &ndash; Headless squeezebox emulator for linux/osx/windows</p>';
+    <p><a class="forward" href="https://github.com/Spotifyd/spotifyd" target="_blank">spotifyd</a> &ndash; An open source Spotify client running as a UNIX daemon</p>
+    <p><a class="forward" href="https://github.com/Arkq/bluez-alsa" target="_blank">bluez-alsa</a> &ndash; Bluetooth Audio ALSA Backend</p>';
 
     // Strings f&uumlr Seitenelemente
     $arr_volume = array('0 dB','-1 dB','-2 dB','-3 dB','-4 dB','-5 dB','-6 dB','-12 dB');
