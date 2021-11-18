@@ -15,7 +15,7 @@
 
 
 
-  if ( isset($_POST['submit']) || isset($_POST['audiosettings_submit']) )
+  if ( isset($_POST['submit']) || isset($_POST['audiosettings_submit']) || isset($_POST['reboot']))
   {
     if ($_POST['DHCP'] == "OFF")
     {
@@ -197,7 +197,7 @@
       $_POST['JACKBFMS_BLUEALSAAPLAY'] = "OFF";
     }
 
-    if ( !$error )
+    if ( !$error and !isset($_POST['reboot']))
     {
       $shell_exec_ret=shell_exec('cardmount rw');
       write_config();
@@ -213,7 +213,6 @@
     $shell_exec_ret=shell_exec('cardmount rw');
     write_config();
     $shell_exec_ret=shell_exec('cardmount ro');
-    unset($_POST['submit']);
 
     include "rebooting.php";
     flush();
