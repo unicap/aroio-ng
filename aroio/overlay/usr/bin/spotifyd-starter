@@ -11,6 +11,6 @@ SPOTIFYD_NORMALISATION='' #--volume-normalisation
 
 /bin/spotifyd \
 		-B "$SPOTIFYD_BITRATE" \
-		-d "$HOSTNAME"	\
+		-d "$PLAYERNAME"	\
 		--device "$AUDIO_OUTPUT" \
 		--no-daemon
