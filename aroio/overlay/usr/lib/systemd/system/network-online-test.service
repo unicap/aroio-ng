@@ -1,0 +1,11 @@
+[Unit]
+Description=check for network connectivity
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/bin/echo "Network is online!"
+
+[Install]
+WantedBy=multi-user.target
