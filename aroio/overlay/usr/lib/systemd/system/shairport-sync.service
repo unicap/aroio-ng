@@ -1,10 +1,13 @@
 [Unit]
 Description=Shairport-sync Audio Player
 After=syslog.target sound.target jackd.service network-online.target checkuserconfig.service nss-lookup.target
+After=network-online.target
+Wants=network-online.target
 
 [Service]
 Type=simple
 EnvironmentFile=/boot/userconfig.txt
 ExecStart=/bin/taskset -c 2,3 /bin/shairport-sync -v -a "$HOSTNAME" -o alsa -- -d $AUDIO_OUTPUT
 Restart=always
-RestartSec=2
+RestartSec=3
+Startlimitburst=15

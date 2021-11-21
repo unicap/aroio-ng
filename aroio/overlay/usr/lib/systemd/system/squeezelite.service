@@ -1,10 +1,12 @@
 [Unit]
 Description=Squeezelite Audio Player
 After=syslog.target sound.target audioplayers.target brutefir-filters.service brutefir-checkfilters.service jackd.service jackminimix.service network.target checkuserconfig.service
-Requires=network.target
+After=network-online.target
+Wants=network-online.target
 
 [Service]
 Type=simple
 ExecStart=/usr/bin/squeezelite-starter
 Restart=always
-
+RestartSec=3
+Startlimitburst=15
