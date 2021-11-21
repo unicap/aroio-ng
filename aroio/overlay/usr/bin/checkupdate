@@ -6,21 +6,15 @@
 
 #until networkctl | grep configured; do sleep 1 ; done
 
-while ! (networkctl | grep -q dconfigured)
-do	echo "Waiting for network..."
-	COUNTER=$((COUNTER+1))
-	echo $COUNTER
-	[ "$COUNTER" = "15" ] && exit 1
-	sleep 1
-done
+#while ! (networkctl | grep -q configured)
+#do	echo "Waiting for network..."
+#	COUNTER=$((COUNTER+1))
+#	echo $COUNTER
+#	[ "$COUNTER" = "15" ] && exit 1
+#	sleep 1
+#done
 
-
-
-
-
-
-
-sleep 3
+#sleep 3
 
 [ "$USEBETA" = "ON" ] && REM=$(update -u beta -c | awk -F": " '/Remote/{print $2}') || REM=$(update -c | awk -F": " '/Remote/{print $2}')
 	REM1=$(echo $REM | awk -F. '{print $1}')
