@@ -59,7 +59,10 @@
           case "/brutefir.php": $title = ${"page_title_convolver_"."$lang"}; break;
           case "/credits.php": $title = ${"page_title_credits_"."$lang"}; break;
         } ?>
-        <h1 class="header-hostname"> <? print $ini_array["HOSTNAME"]?> - <? print $title ?></h1>
+        <div class="header-hostname">
+          <h1 title="<? print $ini_array["HOSTNAME"]?>"><? print $ini_array["HOSTNAME"]?></h1>
+          <b><? print $title ?></b>
+        </div>
         </div>
         <!-- Fahnen -->
         <a style="float: right" href="<?php echo $PHP_SELF?>?lang=en" target=""><img src="img/english.png" border="0"></a>
